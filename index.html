@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Jenna Zawaski | Digital Designer</title>
+	<title>Jenna Zawaski | Frontend Developer</title>
 
 	<!-- Fonts -->
 	<link
@@ -15,10 +15,7 @@
 	<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 	<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
 
-	<!-- Lenis -->
-	<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-
-	<!-- Three.js -->
+	<!-- Three.js (non-module version) -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 	<link rel="stylesheet" href="styles.css" />
@@ -27,15 +24,6 @@
 <body>
 
 	<canvas id="webgl"></canvas>
-
-	<div class="intro">
-		<div class="intro-text">
-			<span>Jenna</span>
-			<span>Zawaski</span>
-		</div>
-	</div>
-
-	<div class="grain"></div>
 
 	<header class="nav">
 		<div class="nav-inner">
@@ -49,69 +37,47 @@
 	</header>
 
 	<main>
+<!-- INTRO SCREEN -->
+<div class="intro">
+	<div class="intro-text">
+		<span>Jenna</span>
+		<span>Zawaski</span>
+	</div>
+</div>
 
 		<section class="hero">
-			<div class="hero-bg"></div>
-			<div class="hero-inner">
-				<h1 class="hero-title">
-					Designing digital experiences<br>
-					that feel intentional.
-				</h1>
-				<p class="hero-sub">
-					I craft refined interfaces with thoughtful interaction and modern system architecture.
-				</p>
-			</div>
+			<h1 class="hero-title">
+				Designing digital experiences<br />
+				that feel intentional.
+			</h1>
+			<p class="hero-sub">
+				Junior Frontend Developer crafting responsive, elegant interfaces.
+			</p>
 		</section>
 
-		<section class="work" id="work" data-theme="#14141a">
+		<section class="work" id="work">
 			<h2>Selected Work</h2>
-
 			<div class="work-grid">
-
-				<div class="work-card">
-					<div class="work-card-inner">
-						<div class="card-overlay"><span>View</span></div>
-						<h3>Luxury E-Commerce</h3>
-						<p>Premium Shopify build with refined UX.</p>
-					</div>
-				</div>
-
-				<div class="work-card">
-					<div class="work-card-inner">
-						<div class="card-overlay"><span>View</span></div>
-						<h3>Creative Agency</h3>
-						<p>Minimal brand-forward experience.</p>
-					</div>
-				</div>
-
-				<div class="work-card">
-					<div class="work-card-inner">
-						<div class="card-overlay"><span>View</span></div>
-						<h3>Tech Startup</h3>
-						<p>High-converting product landing.</p>
-					</div>
-				</div>
-
+				<div class="work-card">Project One</div>
+				<div class="work-card">Project Two</div>
+				<div class="work-card">Project Three</div>
 			</div>
 		</section>
 
-		<section class="about" id="about" data-theme="#1a1324">
+		<section class="about" id="about">
 			<h2>About</h2>
-			<p>I blend aesthetic precision with technical clarity. My work focuses on refined systems, intentional motion, and
-				modern digital craft.</p>
+			<p>
+				I focus on clean structure, refined motion, and responsive layouts.
+			</p>
 		</section>
 
-		<section class="contact" id="contact" data-theme="#0d1b22">
+		<section class="contact" id="contact">
 			<h2>Let’s build something exceptional.</h2>
 		</section>
 
-		<footer>
-			<p>© 2026 Jenna Zawaski</p>
-		</footer>
-
 	</main>
 
-	<script defer src="app.js"></script>
+	<script src="app.js"></script>
 
 </body>
 

@@ -142,7 +142,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			card.addEventListener("mouseenter", () => {
 				ring.classList.add("active");
-				ring.textContent = "View";
+				el.addEventListener("mouseenter", () => {
+					ring.classList.add("active");
+				});
 			});
 
 			card.addEventListener("mouseleave", () => {

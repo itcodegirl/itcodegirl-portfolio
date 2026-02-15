@@ -12,7 +12,23 @@ body {
 }
 
 /* INTRO OVERLAY */
-.intro {
+
+.intro-video {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	overflow: hidden;
+}
+
+.intro-video video {
+	width: 80%;
+	height: 70%;
+	object-fit: cover;
+	/* keeps video filling the screen */
+}
+
+
+/* .intro {
 	position: fixed;
 	inset: 0;
 	background: #0e0e12;
@@ -31,8 +47,8 @@ body {
 	letter-spacing: 2px;
 	opacity: 0;
 	filter: blur(8px);
-	transform: translateY(20px);
-}
+	transform: translateY(20px); */
+
 
 /* WebGL background */
 #webgl {

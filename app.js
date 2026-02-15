@@ -35,6 +35,18 @@ window.addEventListener("load", () => {
 	});
 });
 
+introVideo.onended = () => {
+	gsap.to(".intro-video", {
+		opacity: 0,
+		duration: 1.2,
+		ease: "power2.out",
+		onComplete: () => {
+			document.querySelector(".intro-video").remove();
+		}
+	});
+};
+
+
 
 /* =========================
 	 Hero And Section Animations (GSAP)

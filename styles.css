@@ -104,6 +104,33 @@ section {
 	background: #1c1c24;
 }
 
+/* Cursor */
+.cursor-dot {
+	width: 6px;
+	height: 6px;
+	background: white;
+	border-radius: 50%;
+	position: fixed;
+	pointer-events: none;
+	z-index: 9999;
+}
+
+.cursor-ring {
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	position: fixed;
+	pointer-events: none;
+	z-index: 9999;
+	transition: transform 0.2s ease;
+}
+
+.cursor-ring.active {
+	transform: scale(1.6);
+	border-color: white;
+}
+
 /* FOOTER */
 footer {
 	padding: 60px;

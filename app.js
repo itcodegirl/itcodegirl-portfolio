@@ -1,69 +1,51 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// =======================
-// INTRO ANIMATION (GSAP)
-// =======================
+// INTRO VIDEO LOGIC
+const introVideo = document.getElementById("introVideo");
+const introContainer = document.querySelector(".intro-video");
 
-window.addEventListener("load", () => {
-	const intro = document.querySelector(".intro");
-	const spans = document.querySelectorAll(".intro-text span");
+// Disable scrolling initially
+document.body.classList.add("no-scroll");
 
-	const tl = gsap.timeline({
-		defaults: { ease: "power3.out" },
-		onComplete: () => intro.style.display = "none"
-	});
+introVideo.addEventListener("ended", () => {
 
-	// Cinematic name reveal
-	tl.fromTo(
-		spans,
-		{ autoAlpha: 0, y: 40, filter: "blur(10px)" },
-		{
-			autoAlpha: 1,
-			y: 0,
-			filter: "blur(0px)",
-			duration: 1.3,
-			stagger: 0.22
-		}
-	);
-
-	// Smooth upward reveal of the entire overlay
-	tl.to(intro, {
-		y: "-100%",
-		duration: 1.45,
-		ease: "power4.inOut",
-		delay: 0.25
-	});
-});
-
-introVideo.onended = () => {
-	gsap.to(".intro-video", {
+	gsap.to(introContainer, {
 		opacity: 0,
 		duration: 1.2,
 		ease: "power2.out",
 		onComplete: () => {
-			document.querySelector(".intro-video").remove();
+
+			introContainer.remove();
+
+			// Re-enable scroll
+			document.body.classList.remove("no-scroll");
+			document.body.style.overflow = "auto";
+
+			// Reveal WebGL
+			gsap.to("#webgl", {
+				opacity: 1,
+				duration: 1.2,
+				ease: "power2.out"
+			});
+
+			// Reveal hero AFTER intro
+			gsap.fromTo(".hero-inner > *",
+				{ opacity: 0, y: 60 },
+				{
+					opacity: 1,
+					y: 0,
+					duration: 1.2,
+					stagger: 0.18,
+					ease: "power4.out",
+					delay: 0.3
+				}
+			);
 		}
 	});
-};
-
-
-
-/* =========================
-	 Hero And Section Animations (GSAP)
-========================= */
-gsap.from(".hero-inner > *", {
-	y: 60,
-	autoAlpha: 0,
-	duration: 1.2,
-	stagger: 0.18,
-	ease: "power4.out"
 });
 
 
-/* =========================
-	 Subtle WebGL Background
-========================= */
-
+// WEBGL BACKGROUND
 const canvas = document.getElementById("webgl");
 const scene = new THREE.Scene();
 
@@ -87,9 +69,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
 
 const material = new THREE.ShaderMaterial({
-	uniforms: {
-		uTime: { value: 0 }
-	},
+	uniforms: { uTime: { value: 0 } },
 	vertexShader: `
     varying vec2 vUv;
     void main(){
@@ -121,25 +101,8 @@ function animate() {
 }
 animate();
 
-/* =========================
-	 GSAP Motion
-========================= */
 
-gsap.from(".hero-title", {
-	y: 80,
-	opacity: 0,
-	duration: 1.2,
-	ease: "power4.out"
-});
-
-gsap.from(".hero-sub", {
-	y: 40,
-	opacity: 0,
-	duration: 1.2,
-	delay: 0.4,
-	ease: "power4.out"
-});
-
+// SCROLL ANIMATIONS
 gsap.utils.toArray("section").forEach(section => {
 	gsap.from(section, {
 		opacity: 0,
@@ -158,5 +121,40 @@ window.addEventListener("resize", () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
+// =========================
+// GSAP Project Card Animations
+// =========================
 
+gsap.utils.toArray(".glass-card").forEach((card, i) => {
+	gsap.from(card, {
+		opacity: 0,
+		y: 50,
+		duration: 1,
+		delay: i * 0.1, // stagger on load
+		ease: "power3.out",
+		scrollTrigger: {
+			trigger: card,
+			start: "top 85%"
+		}
+	});
+});
+
+// Hover animation with GSAP
+document.querySelectorAll(".glass-card").forEach(card => {
+	card.addEventListener("mouseenter", () => {
+		gsap.to(card, {
+			y: -12,
+			duration: 0.3,
+			ease: "power2.out"
+		});
+	});
+
+	card.addEventListener("mouseleave", () => {
+		gsap.to(card, {
+			y: 0,
+			duration: 0.3,
+			ease: "power2.inOut"
+		});
+	});
+});
 

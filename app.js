@@ -37,16 +37,25 @@ gsap.registerPlugin(ScrollTrigger);
 
 /* ================= LENIS ================= */
 
-const lenis = new Lenis({
-	smooth: true,
-	lerp: 0.08
-});
+let lenis;
 
-function raf(time) {
-	lenis.raf(time);
+if (typeof Lenis !== "undefined") {
+
+	lenis = new Lenis({
+		smooth: true,
+		lerp: 0.08
+	});
+
+	function raf(time) {
+		lenis.raf(time);
+		requestAnimationFrame(raf);
+	}
+
 	requestAnimationFrame(raf);
+
+} else {
+	console.warn("Lenis not loaded — smooth scroll disabled.");
 }
-requestAnimationFrame(raf);
 
 /* ================= FINAL BOSS CURSOR ================= */
 
@@ -105,6 +114,44 @@ gsap.ticker.add(() => {
 	lastX = mouse.x;
 	lastY = mouse.y;
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+	const dot = document.createElement("div");
+	dot.classList.add("cursor-dot");
+
+	const ring = document.createElement("div");
+	ring.classList.add("cursor-ring");
+
+	document.body.appendChild(dot);
+	document.body.appendChild(ring);
+
+	let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+	let pos = { ...mouse };
+
+	document.addEventListener("mousemove", e => {
+		mouse.x = e.clientX;
+		mouse.y = e.clientY;
+	});
+
+	gsap.ticker.add(() => {
+
+		pos.x += (mouse.x - pos.x) * 0.15;
+		pos.y += (mouse.y - pos.y) * 0.15;
+
+		gsap.set(dot, {
+			x: mouse.x - 3,
+			y: mouse.y - 3
+		});
+
+		gsap.set(ring, {
+			x: pos.x - 30,
+			y: pos.y - 30
+		});
+	});
+
+});
+
 
 /* ================= MAGNETIC BUTTONS ================= */
 

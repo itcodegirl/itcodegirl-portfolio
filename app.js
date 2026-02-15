@@ -43,9 +43,10 @@ gsap.from(".hero-inner > *", {
 	y: 60,
 	autoAlpha: 0,
 	duration: 1.2,
-	stagger: 0.2,
+	stagger: 0.18,
 	ease: "power4.out"
 });
+
 
 /* =========================
 	 Subtle WebGL Background

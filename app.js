@@ -5,41 +5,35 @@ gsap.registerPlugin(ScrollTrigger);
 // =======================
 
 window.addEventListener("load", () => {
-
 	const intro = document.querySelector(".intro");
 	const spans = document.querySelectorAll(".intro-text span");
 
-	if (!intro) return; // Safety check
-
 	const tl = gsap.timeline({
-		onComplete: () => {
-			intro.style.display = "none"; // Remove intro after animation
+		defaults: { ease: "power3.out" },
+		onComplete: () => intro.style.display = "none"
+	});
+
+	tl.fromTo(
+		spans,
+		{ autoAlpha: 0, y: 40, filter: "blur(6px)" },
+		{
+			autoAlpha: 1,
+			y: 0,
+			filter: "blur(0px)",
+			duration: 1.2,
+			stagger: 0.25
 		}
-	});
+	);
 
-	// Fade text in gently
-	tl.to(spans, {
-		opacity: 1,
-		y: -20,
-		stagger: 0.25,
-		duration: 1.2,
-		ease: "power3.out"
-	});
-
-	// Slide intro upward
+	// Slide the overlay up
 	tl.to(intro, {
 		y: "-100%",
-		duration: 1.3,
+		duration: 1.4,
 		ease: "power4.inOut",
 		delay: 0.3
 	});
-
-	// Backup failsafe: if animation fails, hide intro anyway
-	setTimeout(() => {
-		intro.style.display = "none";
-	}, 4000);
-
 });
+
 
 
 /* =========================

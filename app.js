@@ -1,20 +1,23 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.152/build/three.module.js";
-import gsap from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/+esm";
-import ScrollTrigger from "https://cdn.jsdelivr.net/npm/gsap@3.12.5/ScrollTrigger/+esm";
-
 gsap.registerPlugin(ScrollTrigger);
 
-/* =====================================================
-	 INTRO ANIMATION
-===================================================== */
+// =======================
+// INTRO ANIMATION (GSAP)
+// =======================
+
 window.addEventListener("load", () => {
+
 	const intro = document.querySelector(".intro");
 	const spans = document.querySelectorAll(".intro-text span");
 
+	if (!intro) return; // Safety check
+
 	const tl = gsap.timeline({
-		onComplete: () => intro.style.display = "none"
+		onComplete: () => {
+			intro.style.display = "none"; // Remove intro after animation
+		}
 	});
 
+	// Fade text in gently
 	tl.to(spans, {
 		opacity: 1,
 		y: -20,
@@ -23,6 +26,7 @@ window.addEventListener("load", () => {
 		ease: "power3.out"
 	});
 
+	// Slide intro upward
 	tl.to(intro, {
 		y: "-100%",
 		duration: 1.3,
@@ -30,149 +34,111 @@ window.addEventListener("load", () => {
 		delay: 0.3
 	});
 
-	setTimeout(() => intro.style.display = "none", 4000);
+	// Backup failsafe: if animation fails, hide intro anyway
+	setTimeout(() => {
+		intro.style.display = "none";
+	}, 4000);
+
 });
 
 
-/* =====================================================
-	 WEBGL DISTORTION BACKGROUND
-===================================================== */
+/* =========================
+	 Subtle WebGL Background
+========================= */
 
-class DistortionBackground {
-	constructor() {
-		this.canvas = document.getElementById("webgl");
-		this.scene = new THREE.Scene();
-		this.clock = new THREE.Clock();
+const canvas = document.getElementById("webgl");
+const scene = new THREE.Scene();
 
-		this.camera = new THREE.PerspectiveCamera(
-			60,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			100
-		);
-		this.camera.position.z = 3;
+const camera = new THREE.PerspectiveCamera(
+	75,
+	window.innerWidth / window.innerHeight,
+	0.1,
+	100
+);
+camera.position.z = 2;
 
-		this.renderer = new THREE.WebGLRenderer({
-			canvas: this.canvas,
-			antialias: true,
-			alpha: true
-		});
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+const renderer = new THREE.WebGLRenderer({
+	canvas,
+	alpha: true,
+	antialias: true
+});
 
-		this.initPlane();
-		this.addEvents();
-		this.animate();
-	}
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-	initPlane() {
-		const geo = new THREE.PlaneGeometry(5, 3, 64, 64);
+const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
 
-		this.material = new THREE.ShaderMaterial({
-			uniforms: { uTime: { value: 0 } },
-			vertexShader: `
-				varying vec2 vUv;
-				void main() {
-					vUv = uv;
-					vec3 pos = position;
-					pos.z += sin(uv.x * 5.0 + uv.y * 5.0 + uTime * 0.8) * 0.05;
-					gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-				}
-			`,
-			fragmentShader: `
-				varying vec2 vUv;
-				void main() {
-					vec3 color = vec3(0.07, 0.08, 0.12);
-					gl_FragColor = vec4(color, 1.0);
-				}
-			`
-		});
+const material = new THREE.ShaderMaterial({
+	uniforms: {
+		uTime: { value: 0 }
+	},
+	vertexShader: `
+    varying vec2 vUv;
+    void main(){
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+    }
+  `,
+	fragmentShader: `
+    uniform float uTime;
+    varying vec2 vUv;
 
-		this.mesh = new THREE.Mesh(geo, this.material);
-		this.mesh.position.z = -2;
-		this.scene.add(this.mesh);
-	}
+    void main(){
+      float wave = sin(vUv.x * 8.0 + uTime) * 0.01;
+      vec3 base = vec3(0.06, 0.07, 0.1);
+      vec3 color = base + wave;
+      gl_FragColor = vec4(color, 0.9);
+    }
+  `
+});
 
-	addEvents() {
-		window.addEventListener("resize", () => {
-			this.camera.aspect = window.innerWidth / window.innerHeight;
-			this.camera.updateProjectionMatrix();
-			this.renderer.setSize(window.innerWidth, window.innerHeight);
-		});
-	}
+const mesh = new THREE.Mesh(geometry, material);
+mesh.position.z = -1;
+scene.add(mesh);
 
-	animate() {
-		this.material.uniforms.uTime.value = this.clock.getElapsedTime();
-		this.renderer.render(this.scene, this.camera);
-		requestAnimationFrame(() => this.animate());
-	}
+function animate() {
+	material.uniforms.uTime.value += 0.01;
+	renderer.render(scene, camera);
+	requestAnimationFrame(animate);
 }
+animate();
 
-new DistortionBackground();
+/* =========================
+	 GSAP Motion
+========================= */
 
-/* =====================================================
-	 GSAP SCROLL FADE-UP ANIMATIONS
-===================================================== */
+gsap.from(".hero-title", {
+	y: 80,
+	opacity: 0,
+	duration: 1.2,
+	ease: "power4.out"
+});
 
-gsap.utils.toArray("section").forEach((sec) => {
-	gsap.from(sec, {
+gsap.from(".hero-sub", {
+	y: 40,
+	opacity: 0,
+	duration: 1.2,
+	delay: 0.4,
+	ease: "power4.out"
+});
+
+gsap.utils.toArray("section").forEach(section => {
+	gsap.from(section, {
 		opacity: 0,
 		y: 80,
-		duration: 1.2,
-		ease: "power3.out",
+		duration: 1,
 		scrollTrigger: {
-			trigger: sec,
-			start: "top 85%",
+			trigger: section,
+			start: "top 80%"
 		}
 	});
 });
 
-
-/* =====================================================
-	 MAGNETIC CURSOR
-===================================================== */
-
-const cursor = document.createElement("div");
-cursor.className = "cursor-ring";
-document.body.appendChild(cursor);
-
-const dot = document.createElement("div");
-dot.className = "cursor-dot";
-document.body.appendChild(dot);
-
-let mouse = { x: 0, y: 0 };
-let pos = { x: 0, y: 0 };
-
-window.addEventListener("mousemove", (e) => {
-	mouse.x = e.clientX;
-	mouse.y = e.clientY;
+window.addEventListener("resize", () => {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-gsap.ticker.add(() => {
-	pos.x += (mouse.x - pos.x) * 0.15;
-	pos.y += (mouse.y - pos.y) * 0.15;
-
-	gsap.set(dot, { x: mouse.x - 3, y: mouse.y - 3 });
-	gsap.set(cursor, { x: pos.x - 21, y: pos.y - 21 });
-});
-
-// magnetic elements
-document.querySelectorAll(".work-card").forEach((card) => {
-	card.addEventListener("mouseenter", () => {
-		cursor.classList.add("active");
-	});
-
-	card.addEventListener("mouseleave", () => {
-		cursor.classList.remove("active");
-		gsap.to(card, { x: 0, y: 0, duration: 0.4 });
-	});
-
-	card.addEventListener("mousemove", (e) => {
-		const rect = card.getBoundingClientRect();
-		const x = e.clientX - rect.left - rect.width / 2;
-		const y = e.clientY - rect.top - rect.height / 2;
-
-		gsap.to(card, { x: x * 0.1, y: y * 0.1, duration: 0.3 });
-	});
-});
 
 

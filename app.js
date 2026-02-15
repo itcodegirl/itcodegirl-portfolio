@@ -163,10 +163,10 @@ document.addEventListener("DOMContentLoaded", () => {
 			gsap.set(ring, { x: pos.x - 30, y: pos.y - 30 });
 		});
 
-		document.querySelectorAll("a,.work-card").forEach(el => {
+		document.querySelectorAll(".work-card").forEach(el => {
 			el.addEventListener("mouseenter", () => {
 				ring.classList.add("active");
-				ring.innerHTML = "View";
+				ring.textContent = "View";
 			});
 			el.addEventListener("mouseleave", () => {
 				ring.classList.remove("active");
@@ -177,7 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				const rect = el.getBoundingClientRect();
 				const x = e.clientX - rect.left - rect.width / 2;
 				const y = e.clientY - rect.top - rect.height / 2;
-				gsap.to(el, { x: x * 0.15, y: y * 0.15, duration: 0.3 });
+				const inner = el.querySelector(".work-card-inner");
+
+				gsap.to(inner, {
+					x: x * 0.15,
+					y: y * 0.15,
+					duration: 0.3
 			});
 		});
 	}

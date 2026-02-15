@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Jenna Zawaski | Digital Designer</title>
 
-	<!-- Typography -->
+	<!-- Fonts -->
 	<link
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
@@ -18,13 +18,15 @@
 	<!-- Lenis -->
 	<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
+	<!-- Three.js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js"></script>
 
 	<link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-<canvas id="webgl"></canvas>
+
+	<canvas id="webgl"></canvas>
 
 	<div class="intro">
 		<div class="intro-text">
@@ -41,80 +43,72 @@
 			<nav>
 				<a href="#work">Work</a>
 				<a href="#about">About</a>
-				<a href="#contact" class="nav-cta magnetic">Contact</a>
+				<a href="#contact">Contact</a>
 			</nav>
 		</div>
 	</header>
 
 	<main>
+
 		<section class="hero">
 			<div class="hero-bg"></div>
-
 			<div class="hero-inner">
-				<h1 class="hero-title split">
-					Designing digital experiences<br />
+				<h1 class="hero-title">
+					Designing digital experiences<br>
 					that feel intentional.
 				</h1>
-
-				<p class="hero-sub fade-up">
+				<p class="hero-sub">
 					I craft refined interfaces with thoughtful interaction and modern system architecture.
 				</p>
-
-				<div class="hero-buttons fade-up">
-					<a href="#work" class="btn-primary magnetic">View Work</a>
-					<a href="#contact" class="btn-secondary magnetic">Let’s Collaborate</a>
-				</div>
 			</div>
 		</section>
 
 		<section class="work" id="work" data-theme="#14141a">
-			<h2 class="fade-up">Selected Work</h2>
+			<h2>Selected Work</h2>
 
 			<div class="work-grid">
-				<div class="work-card tilt fade-up">
-					<div class="card-overlay">
-						<span>View Case Study →</span>
+
+				<div class="work-card">
+					<div class="work-card-inner">
+						<div class="card-overlay"><span>View</span></div>
+						<h3>Luxury E-Commerce</h3>
+						<p>Premium Shopify build with refined UX.</p>
 					</div>
-					<h3>Luxury E-Commerce</h3>
-					<p>Premium Shopify build with refined UX.</p>
 				</div>
 
-				<div class="work-card tilt fade-up">
-					<div class="card-overlay">
-						<span>View Case Study →</span>
+				<div class="work-card">
+					<div class="work-card-inner">
+						<div class="card-overlay"><span>View</span></div>
+						<h3>Creative Agency</h3>
+						<p>Minimal brand-forward experience.</p>
 					</div>
-					<h3>Creative Agency</h3>
-					<p>Minimal brand-forward experience.</p>
 				</div>
 
-				<div class="work-card tilt fade-up">
-					<div class="card-overlay">
-						<span>View Case Study →</span>
+				<div class="work-card">
+					<div class="work-card-inner">
+						<div class="card-overlay"><span>View</span></div>
+						<h3>Tech Startup</h3>
+						<p>High-converting product landing.</p>
 					</div>
-					<h3>Tech Startup</h3>
-					<p>High-converting product landing.</p>
 				</div>
+
 			</div>
 		</section>
 
 		<section class="about" id="about" data-theme="#1a1324">
-			<div class="about-inner fade-up">
-				<h2>About</h2>
-				<p>
-					I blend aesthetic precision with technical clarity.
-					My work focuses on refined systems, intentional motion, and modern digital craft.
-				</p>
-			</div>
+			<h2>About</h2>
+			<p>I blend aesthetic precision with technical clarity. My work focuses on refined systems, intentional motion, and
+				modern digital craft.</p>
 		</section>
 
 		<section class="contact" id="contact" data-theme="#0d1b22">
-			<h2 class="fade-up">Let’s build something exceptional.</h2>
-			<a href="#" class="btn-primary magnetic fade-up">Start a Project</a>
+			<h2>Let’s build something exceptional.</h2>
 		</section>
 
 		<footer>
 			<p>© 2026 Jenna Zawaski</p>
 		</footer>
+
 	</main>
 
 	<script defer src="app.js"></script>

@@ -140,7 +140,12 @@ body {
 	text-align: center;
 }
 
-/* Cursor */
+/* ================= PREMIUM CURSOR FIX ================= */
+
+body {
+	cursor: none;
+}
+
 .cursor-dot,
 .cursor-ring {
 	position: fixed;
@@ -158,21 +163,28 @@ body {
 }
 
 .cursor-ring {
-	width: 48px;
-	height: 48px;
-	border: 1px solid rgba(255, 255, 255, 0.3);
+	width: 42px;
+	height: 42px;
+	border: 1px solid rgba(255, 255, 255, 0.4);
 	border-radius: 50%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 11px;
+	font-size: 10px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	color: white;
-	transition: transform 0.3s ease;
+	background: rgba(255, 255, 255, 0.05);
+	backdrop-filter: blur(6px);
+	transition:
+		transform 0.3s ease,
+		background 0.3s ease,
+		opacity 0.3s ease;
+	opacity: 0;
 }
 
+/* Active state */
 .cursor-ring.active {
-	transform: scale(1.4);
-	border-color: white;
+	opacity: 1;
+	transform: scale(1.2);
 }

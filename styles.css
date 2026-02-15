@@ -23,15 +23,16 @@ body {
 	pointer-events: none;
 }
 
+
 .intro-text span {
 	display: block;
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
 	letter-spacing: 2px;
 	opacity: 0;
+	filter: blur(8px);
+	transform: translateY(20px);
 }
-
-
 
 /* WebGL background */
 #webgl {

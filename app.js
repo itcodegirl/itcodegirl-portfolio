@@ -13,28 +13,39 @@ window.addEventListener("load", () => {
 		onComplete: () => intro.style.display = "none"
 	});
 
+	// Cinematic name reveal
 	tl.fromTo(
 		spans,
-		{ autoAlpha: 0, y: 40, filter: "blur(6px)" },
+		{ autoAlpha: 0, y: 40, filter: "blur(10px)" },
 		{
 			autoAlpha: 1,
 			y: 0,
 			filter: "blur(0px)",
-			duration: 1.2,
-			stagger: 0.25
+			duration: 1.3,
+			stagger: 0.22
 		}
 	);
 
-	// Slide the overlay up
+	// Smooth upward reveal of the entire overlay
 	tl.to(intro, {
 		y: "-100%",
-		duration: 1.4,
+		duration: 1.45,
 		ease: "power4.inOut",
-		delay: 0.3
+		delay: 0.25
 	});
 });
 
 
+/* =========================
+	 Hero And Section Animations (GSAP)
+========================= */
+gsap.from(".hero-inner > *", {
+	y: 60,
+	autoAlpha: 0,
+	duration: 1.2,
+	stagger: 0.2,
+	ease: "power4.out"
+});
 
 /* =========================
 	 Subtle WebGL Background

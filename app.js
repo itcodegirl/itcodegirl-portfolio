@@ -30,7 +30,7 @@ introVideo.addEventListener("ended", () => {
 			document.body.classList.remove("no-scroll");
 			document.body.style.overflow = "auto";
 
-			ScrollTrigger.refresh(); 
+			ScrollTrigger.refresh();
 
 			// Reveal WebGL
 			gsap.to("#webgl", {
@@ -317,3 +317,5 @@ window.addEventListener("scroll", () => {
 	const progress = (scrollTop / docHeight) * 100;
 	progressBar.style.height = progress + "%";
 });
+
+ScrollTrigger.refresh();

@@ -268,7 +268,7 @@ section h2::after {
 }
 
 /* =========================
-   SKILLS — GLOWING TIMELINE (A2)
+   SKILLS — PREMIUM GLOW TIMELINE (UPGRADE)
 ========================= */
 
 .skills {
@@ -276,36 +276,45 @@ section h2::after {
 }
 
 .skills-timeline {
-	margin-top: 50px;
-	border-left: 2px solid rgba(255, 255, 255, 0.16);
-	padding-left: 50px;
+	margin-top: 70px;
+	border-left: 2px solid rgba(157, 0, 255, 0.25);
+	padding-left: 60px;
 	position: relative;
 }
 
-.timeline-line {
+/* Animated glowing vertical line */
+.skills-timeline::before {
+	content: "";
 	position: absolute;
-	left: 50px;
-	top: 120px;
+	left: 0;
+	top: 0;
 	width: 2px;
-	height: calc(100% - 120px);
+	height: 100%;
 	background: linear-gradient(to bottom,
 			transparent,
-			rgba(255, 255, 255, 0.4),
+			rgba(157, 0, 255, 0.7),
 			transparent);
-	opacity: 0.4;
+	box-shadow: 0 0 20px rgba(157, 0, 255, 0.4);
+	opacity: 0.6;
 }
 
 /* Each item */
 .skill-item {
-	margin-bottom: 60px;
+	margin-bottom: 70px;
 	position: relative;
 	opacity: 0;
-	/* GSAP animates */
-	transform: translateY(30px);
+	transform: translateY(40px);
+	transition: transform 0.4s ease, background 0.4s ease;
+	padding: 25px 30px;
+	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(10px);
 }
 
-.skill-item:last-child {
-	margin-bottom: 0;
+.skill-item:hover {
+	transform: translateY(-6px);
+	background: rgba(255, 255, 255, 0.06);
+	box-shadow: 0 0 25px rgba(157, 0, 255, 0.25);
 }
 
 /* Glowing dot */
@@ -313,27 +322,30 @@ section h2::after {
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background: #ffffffdd;
-
+	background: #9D00FF;
 	position: absolute;
-	left: -58px;
-	top: 4px;
-
-	box-shadow: 0 0 12px #ffffff88;
+	left: -69px;
+	top: 30px;
+	box-shadow:
+		0 0 12px rgba(157, 0, 255, 0.9),
+		0 0 25px rgba(157, 0, 255, 0.6);
 }
 
+/* Titles */
 .skill-item h3 {
-	font-size: 1.5rem;
-	margin-bottom: 6px;
+	font-size: 1.6rem;
+	margin-bottom: 8px;
 	font-family: "Playfair Display", serif;
+	letter-spacing: 0.5px;
 }
 
+/* Description */
 .skill-item p {
-	color: #cccccc;
+	color: #d6d6d6;
 	max-width: 650px;
-	line-height: 1.6;
+	line-height: 1.7;
+	font-size: 1rem;
 }
-
 /* =========================
    ABOUT SECTION
 ========================= */

@@ -275,31 +275,122 @@ section h2::after {
 }
 
 /* =========================
-   SKILLS TIMELINE
+   SKILLS — GLOWING TIMELINE
 ========================= */
 
 .skills {
-	padding-top: 140px;
-}
-
-.skills h2 {
-	font-size: 2.7rem;
-	margin-bottom: 40px;
-	font-family: "Playfair Display", serif;
+	padding: 160px 60px;
+	max-width: 1200px;
+	margin: auto;
 }
 
 .skills-timeline {
 	position: relative;
+	margin-left: 40px;
 	padding-left: 40px;
 	border-left: 2px solid rgba(255, 255, 255, 0.15);
-	margin-left: 10px;
 }
 
+/* Vertical glow line */
+.skills-timeline::before {
+	content: "";
+	position: absolute;
+	left: -1px;
+	top: 0;
+	width: 2px;
+	height: 0%;
+	background: linear-gradient(#ffffffaa, #ffffff33);
+	box-shadow: 0 0 15px #ffffff55;
+	transition: height 1s ease;
+}
+
+/* Each skill item */
 .skill-item {
-	margin-bottom: 50px;
 	position: relative;
+	margin-bottom: 50px;
 	opacity: 0;
-	/* GSAP animates this */
+	transform: translateY(40px);
+}
+
+/* Glowing dot */
+.skill-dot {
+	position: absolute;
+	left: -48px;
+	top: 4px;
+	width: 16px;
+	height: 16px;
+	background: #ffffffdd;
+	border-radius: 50%;
+	box-shadow:
+		0 0 8px #ffffffaa,
+		0 0 18px #ffffff88,
+		0 0 28px #ffffff55;
+}
+
+/* Titles */
+.skill-item h3 {
+	font-family: "Playfair Display", serif;
+	font-size: 1.6rem;
+	margin-bottom: 8px;
+}
+
+/* Description */
+.skill-item p {
+	font-size: 1.05rem;
+	color: #cccccc;
+	line-height: 1.65;
+	max-width: 700px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+	.skills-timeline {
+		margin-left: 20px;
+		padding-left: 30px;
+	}
+
+	.skill-dot {
+		left: -36px;
+	}
+}
+
+/* Hover floating effect */
+.skill-card:hover {
+	transform: translateY(-14px) scale(1.03);
+	background: rgba(255, 255, 255, 0.12);
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+.skill-card h3 {
+	font-family: 'Playfair Display', serif;
+	font-size: 1.4rem;
+	margin-bottom: 8px;
+}
+
+.skill-card p {
+	font-size: 1rem;
+	color: #d4d4d4;
+	line-height: 1.55;
+}
+
+/* Responsive for Skills */
+@media (max-width: 900px) {
+	.skills-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.skills-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+
+/* GSAP animates this */
+.skill-item {
+	position: relative;
+	margin-bottom: 20px;
 	transform: translateY(30px);
 }
 
@@ -328,4 +419,34 @@ section h2::after {
 	color: #cccccc;
 	max-width: 600px;
 	line-height: 1.6;
+}
+
+/* =========================
+   SECTION DIVIDERS
+========================= */
+.section-divider {
+	width: 100%;
+	height: 2px;
+	margin: 100px 0;
+	background: linear-gradient(90deg,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.25) 50%,
+			rgba(255, 255, 255, 0) 100%);
+	opacity: 0;
+	transform: translateY(20px);
+}
+
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
+.scroll-progress {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 4px;
+	height: 0;
+	background: linear-gradient(180deg, #ffffff, #bbbbbb);
+	border-radius: 0 0 4px 4px;
+	z-index: 9999;
+	transition: height 0.1s linear;
 }

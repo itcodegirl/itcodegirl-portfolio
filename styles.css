@@ -280,6 +280,8 @@ section h2::after {
 ========================= */
 
 .skills {
+	position: relative;
+	z-index: 5;
 	padding: 160px 60px;
 	max-width: 1200px;
 	margin: auto;
@@ -310,6 +312,7 @@ section h2::after {
 	position: relative;
 	margin-bottom: 50px;
 	transform: translateY(40px);
+	z-index: 6;
 }
 
 /* Glowing dot */

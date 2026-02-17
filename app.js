@@ -169,30 +169,6 @@ gsap.from(".about-text", {
 	 SKILLS — GLOWING TIMELINE (A2)
 ===================================================== */
 
-gsap.to(".skill-item", {
-	scrollTrigger: {
-		trigger: ".skills",
-		start: "top 75%",
-	},
-	opacity: 1,
-	y: 0,
-	stagger: 0.2,
-	duration: 1,
-	ease: "power3.out"
-});
-
-
-// Timeline glowing line grows
-gsap.from(".timeline-line", {
-	scaleY: 0,
-	transformOrigin: "top",
-	duration: 1.4,
-	ease: "power3.out",
-	scrollTrigger: {
-		trigger: ".skills",
-		start: "top 80%"
-	}
-});
 
 // Each skill item reveals sequentially
 gsap.utils.toArray(".skill-item").forEach((item, i) => {

@@ -169,16 +169,18 @@ gsap.from(".about-text", {
 	 SKILLS — GLOWING TIMELINE (A2)
 ===================================================== */
 
-gsap.from(".skills h2", {
-	opacity: 0,
-	y: 30,
-	duration: 1,
-	ease: "power3.out",
+gsap.to(".skill-item", {
 	scrollTrigger: {
 		trigger: ".skills",
-		start: "top 85%"
-	}
+		start: "top 75%",
+	},
+	opacity: 1,
+	y: 0,
+	stagger: 0.2,
+	duration: 1,
+	ease: "power3.out"
 });
+
 
 // Timeline glowing line grows
 gsap.from(".timeline-line", {

@@ -21,8 +21,10 @@
 	<link rel="stylesheet" href="styles.css" />
 </head>
 
-<div class="scroll-progress"></div>
 <body>
+
+	<!-- GLOBAL SCROLL PROGRESS BAR -->
+	<div class="scroll-progress"></div>
 
 	<!-- INTRO VIDEO -->
 	<div class="intro-video">
@@ -34,7 +36,7 @@
 	<!-- WEBGL BACKGROUND -->
 	<canvas id="webgl" class="webgl-hidden"></canvas>
 
-	<!-- NAV -->
+	<!-- NAVIGATION -->
 	<header class="nav">
 		<div class="nav-inner">
 			<div class="logo">JZ</div>
@@ -49,7 +51,7 @@
 
 	<main>
 
-		<!-- HERO -->
+		<!-- HERO SECTION -->
 		<section class="hero">
 			<div class="hero-inner">
 				<h1 class="hero-title">
@@ -110,79 +112,95 @@
 
 			</div>
 		</section>
+
 		<div class="section-divider"></div>
 
+		<!-- ===================================== -->
+		<!-- SKILLS — GLOWING TIMELINE (A2) -->
+		<!-- ===================================== -->
 
-<!-- ========================= -->
-<!-- SKILLS — GLOWING TIMELINE -->
-<!-- ========================= -->
+		<section class="skills" id="skills">
+			<h2>Skills</h2>
 
-<section class="skills" id="skills">
-	<h2>Skills</h2>
+			<!-- TIMELINE LINE -->
+			<div class="timeline-line"></div>
 
-	<div class="skills-timeline">
+			<div class="skills-timeline">
 
-		<div class="skill-item">
-			<div class="skill-dot"></div>
-			<h3>HTML & CSS</h3>
-			<p>Strong understanding of layout, responsive design, accessibility, and clean component structure.</p>
-		</div>
+				<div class="skill-item">
+					<div class="skill-dot"></div>
+					<h3>HTML & CSS</h3>
+					<p>Strong understanding of layout, responsive design, accessibility, and clean component structure.</p>
+				</div>
 
-		<div class="skill-item">
-			<div class="skill-dot"></div>
-			<h3>JavaScript Fundamentals</h3>
-			<p>Deep focus on core concepts — variables, logic, state, debugging, DOM control, problem-solving.</p>
-		</div>
+				<div class="skill-item">
+					<div class="skill-dot"></div>
+					<h3>JavaScript Fundamentals</h3>
+					<p>Deep focus on core concepts — variables, logic, state, debugging, DOM control, problem-solving.</p>
+				</div>
 
-		<div class="skill-item">
-			<div class="skill-dot"></div>
-			<h3>Frontend Architecture</h3>
-			<p>Building scalable UI systems using reusable patterns and modular code thinking.</p>
-		</div>
+				<div class="skill-item">
+					<div class="skill-dot"></div>
+					<h3>Frontend Architecture</h3>
+					<p>Building scalable UI systems using reusable patterns and modular code thinking.</p>
+				</div>
 
-		<div class="skill-item">
-			<div class="skill-dot"></div>
-			<h3>UI / UX Principles</h3>
-			<p>Applying psychology, clarity, visual hierarchy, and user empathy into each decision.</p>
-		</div>
+				<div class="skill-item">
+					<div class="skill-dot"></div>
+					<h3>UI / UX Principles</h3>
+					<p>Applying psychology, clarity, visual hierarchy, and user empathy into each decision.</p>
+				</div>
 
-		<div class="skill-item">
-			<div class="skill-dot"></div>
-			<h3>React (Learning)</h3>
-			<p>Expanding into component-driven architecture, hooks, state, and UI logic flows.</p>
-		</div>
+				<div class="skill-item">
+					<div class="skill-dot"></div>
+					<h3>React (Learning)</h3>
+					<p>Expanding into component-driven architecture, hooks, state, and UI logic flows.</p>
+				</div>
 
-	</div>
-</section>
+			</div>
+		</section>
 
+		<div class="section-divider"></div>
 
 		<!-- ABOUT SECTION -->
 		<section class="about" id="about">
 			<h2>About</h2>
 
 			<p class="about-text">
-				My path into development has been intentional. My background in Information System Security trained me…
+				My path into development has been intentional. My background in Information System Security taught me to think
+				in systems and structure. Psychology shaped how I understand people — how they interact and experience
+				technology.
+			</p>
 
-				<br><br>
-				I’m confident in HTML and CSS, and I’m actively deepening my understanding of JavaScript. I focus on strong
-				fundamentals…
-				<br><br>
-				I’m also the founder of <strong>CodeHerWay</strong>…
-				<br><br>
-				I’m building my career deliberately — with discipline, curiosity, and purpose.
+			<p class="about-text">
+				I’m confident in HTML and CSS and actively deepening my understanding of JavaScript. I focus on strong
+				fundamentals,
+				debugging, problem-solving, and writing clean, maintainable UI code.
+			</p>
+
+			<p class="about-text">
+				I’m also the founder of <strong>CodeHerWay</strong>, where I document my journey and support women entering
+				tech.
+			</p>
+
+			<p class="about-text">
+				I’m building my career with discipline, curiosity, and purpose.
 			</p>
 		</section>
+
 		<div class="section-divider"></div>
 
-
-		<!-- CONTACT -->
+		<!-- CONTACT SECTION -->
 		<section class="contact" id="contact">
 			<h2>Let’s build something exceptional.</h2>
 		</section>
 
 	</main>
 
-	<!-- MODALS -->
+	<!-- ===================================== -->
+	<!-- PROJECT MODALS -->
+	<!-- ===================================== -->
+
 	<div class="modal-overlay" id="modalOverlay"></div>
 
 	<div class="modal" id="modal1">

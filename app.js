@@ -1,16 +1,15 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// =========================
-// INTRO VIDEO LOGIC
-// =========================
+/* =====================================================
+	 INTRO VIDEO LOGIC
+===================================================== */
 
 const introVideo = document.getElementById("introVideo");
 const introContainer = document.querySelector(".intro-video");
 
-// Disable scrolling during intro
 document.body.classList.add("no-scroll");
 
-// Fallback if video doesn’t load
+// Fallback
 introVideo.addEventListener("error", skipIntro);
 introVideo.addEventListener("abort", skipIntro);
 
@@ -20,7 +19,7 @@ function skipIntro() {
 	document.body.style.overflow = "auto";
 }
 
-// When intro video ends
+// Fade-out animation after intro video
 introVideo.addEventListener("ended", () => {
 	gsap.to(introContainer, {
 		opacity: 0,
@@ -38,7 +37,7 @@ introVideo.addEventListener("ended", () => {
 				ease: "power2.out"
 			});
 
-			// Reveal hero text
+			// Hero text animation
 			gsap.fromTo(".hero-inner > *",
 				{ opacity: 0, y: 60 },
 				{
@@ -55,9 +54,9 @@ introVideo.addEventListener("ended", () => {
 });
 
 
-// =========================
-// WEBGL BACKGROUND
-// =========================
+/* =====================================================
+	 WEBGL BACKGROUND
+===================================================== */
 
 const canvas = document.getElementById("webgl");
 const scene = new THREE.Scene();
@@ -121,15 +120,16 @@ window.addEventListener("resize", () => {
 });
 
 
-// =========================
-// SECTION FADE-IN (GLOBAL)
-// =========================
+/* =====================================================
+	 GLOBAL SECTION ANIMATION
+===================================================== */
 
 gsap.utils.toArray("main section:not(#about):not(#skills)").forEach(section => {
 	gsap.from(section, {
 		opacity: 0,
 		y: 70,
 		duration: 1,
+		ease: "power3.out",
 		scrollTrigger: {
 			trigger: section,
 			start: "top 80%"
@@ -138,9 +138,9 @@ gsap.utils.toArray("main section:not(#about):not(#skills)").forEach(section => {
 });
 
 
-// =========================
-// ABOUT TEXT ANIMATION
-// =========================
+/* =====================================================
+	 ABOUT SECTION
+===================================================== */
 
 gsap.from("#about h2", {
 	opacity: 0,
@@ -165,9 +165,9 @@ gsap.from(".about-text", {
 });
 
 
-// =========================
-// SKILLS SECTION (reveal only)
-// =========================
+/* =====================================================
+	 SKILLS — GLOWING TIMELINE (A2)
+===================================================== */
 
 gsap.from(".skills h2", {
 	opacity: 0,
@@ -180,22 +180,37 @@ gsap.from(".skills h2", {
 	}
 });
 
-gsap.from(".skill-card", {
-	opacity: 0,
-	y: 40,
-	duration: 1,
-	stagger: 0.15,
+// Timeline glowing line grows
+gsap.from(".timeline-line", {
+	scaleY: 0,
+	transformOrigin: "top",
+	duration: 1.4,
 	ease: "power3.out",
 	scrollTrigger: {
-		trigger: ".skills-grid",
+		trigger: ".skills",
 		start: "top 80%"
 	}
 });
 
+// Each skill item reveals sequentially
+gsap.utils.toArray(".skill-item").forEach((item, i) => {
+	gsap.from(item, {
+		opacity: 0,
+		y: 50,
+		duration: 1,
+		delay: i * 0.15,
+		ease: "power3.out",
+		scrollTrigger: {
+			trigger: item,
+			start: "top 85%"
+		}
+	});
+});
 
-// =========================
-// PROJECT CARD ANIMATIONS
-// =========================
+
+/* =====================================================
+	 WORK CARD ANIMATIONS
+===================================================== */
 
 gsap.utils.toArray(".glass-card").forEach((card, i) => {
 	gsap.from(card, {
@@ -211,7 +226,7 @@ gsap.utils.toArray(".glass-card").forEach((card, i) => {
 	});
 });
 
-// Hover lift
+// Hover float
 document.querySelectorAll(".glass-card").forEach(card => {
 	card.addEventListener("mouseenter", () => {
 		gsap.to(card, { y: -12, duration: 0.3, ease: "power2.out" });
@@ -222,9 +237,9 @@ document.querySelectorAll(".glass-card").forEach(card => {
 });
 
 
-// =========================
-// MODAL SYSTEM
-// =========================
+/* =====================================================
+	 MODAL SYSTEM
+===================================================== */
 
 const overlay = document.getElementById("modalOverlay");
 const modalButtons = document.querySelectorAll(".view-btn");
@@ -237,6 +252,7 @@ function openModal(id) {
 	const modal = document.getElementById(`modal${id}`);
 
 	document.body.classList.add("no-scroll");
+
 	gsap.set(modal.querySelector(".modal-content"), { opacity: 0, y: 40 });
 
 	gsap.to(overlay, { opacity: 1, pointerEvents: "all", duration: 0.35 });
@@ -250,6 +266,27 @@ function openModal(id) {
 	});
 }
 
+document.querySelectorAll(".close-modal").forEach(btn =>
+	btn.addEventListener("click", closeModal)
+);
+overlay.addEventListener("click", closeModal);
+document.addEventListener("keydown", e => {
+	if (e.key === "Escape") closeModal();
+});
+
+function closeModal() {
+	document.body.classList.remove("no-scroll");
+
+	gsap.to(".modal-overlay", { opacity: 0, pointerEvents: "none", duration: 0.3 });
+	gsap.to(".modal", { opacity: 0, pointerEvents: "none", duration: 0.3 });
+	gsap.to(".modal-content", { opacity: 0, y: 40, duration: 0.4 });
+}
+
+
+/* =====================================================
+	 SECTION DIVIDER ANIMATION
+===================================================== */
+
 gsap.utils.toArray(".section-divider").forEach(div => {
 	gsap.from(div, {
 		opacity: 0,
@@ -262,6 +299,11 @@ gsap.utils.toArray(".section-divider").forEach(div => {
 		}
 	});
 });
+
+
+/* =====================================================
+	 HERO PARALLAX
+===================================================== */
 
 gsap.to(".hero-title", {
 	yPercent: 10,
@@ -285,29 +327,16 @@ gsap.to(".hero-sub", {
 	}
 });
 
+
+/* =====================================================
+	 SCROLL PROGRESS BAR
+===================================================== */
+
 const progressBar = document.querySelector(".scroll-progress");
 
 window.addEventListener("scroll", () => {
 	const scrollTop = window.scrollY;
 	const docHeight = document.body.scrollHeight - innerHeight;
 	const progress = (scrollTop / docHeight) * 100;
-
 	progressBar.style.height = progress + "%";
 });
-
-
-document.querySelectorAll(".close-modal").forEach(btn => {
-	btn.addEventListener("click", closeModal);
-});
-overlay.addEventListener("click", closeModal);
-document.addEventListener("keydown", (e) => {
-	if (e.key === "Escape") closeModal();
-});
-
-function closeModal() {
-	document.body.classList.remove("no-scroll");
-
-	gsap.to(".modal-overlay", { opacity: 0, pointerEvents: "none", duration: 0.3 });
-	gsap.to(".modal", { opacity: 0, pointerEvents: "none", duration: 0.3 });
-	gsap.to(".modal-content", { opacity: 0, y: 40, duration: 0.4 });
-}

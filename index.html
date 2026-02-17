@@ -25,7 +25,7 @@
 
 	<!-- INTRO VIDEO -->
 	<div class="intro-video">
-		<video autoplay muted playsinline id="introVideo">
+		<video autoplay muted playsinline id="introVideo" aria-label="Intro animation video">
 			<source src="assets/intro.mp4" type="video/mp4">
 		</video>
 	</div>
@@ -46,6 +46,7 @@
 
 	<main>
 
+		<!-- HERO -->
 		<section class="hero">
 			<div class="hero-inner">
 				<h1 class="hero-title">
@@ -58,73 +59,142 @@
 			</div>
 		</section>
 
+		<!-- WORK SECTION -->
 		<section class="work" id="work">
 			<h2>Selected Work</h2>
-		
+
 			<div class="work-grid">
-		
-				<!-- CARD 1 -->
+
 				<div class="work-card glass-card">
 					<h3>Project One</h3>
 					<p>A clean placeholder project with sample description.</p>
 					<span class="tech">HTML • CSS • JS</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
-				<!-- CARD 2 -->
+
 				<div class="work-card glass-card">
 					<h3>Project Two</h3>
 					<p>Placeholder case study content for a frontend project.</p>
 					<span class="tech">React • Firebase</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
-				<!-- CARD 3 -->
+
 				<div class="work-card glass-card">
 					<h3>Project Three</h3>
 					<p>A placeholder UI/UX focused project showcase.</p>
 					<span class="tech">Figma • HTML • CSS</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
-				<!-- CARD 4 -->
+
 				<div class="work-card glass-card">
 					<h3>Project Four</h3>
 					<p>Example ecommerce frontend placeholder project.</p>
 					<span class="tech">Next.js • Stripe</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
-				<!-- CARD 5 -->
+
 				<div class="work-card glass-card">
 					<h3>Project Five</h3>
 					<p>A placeholder project for animation and interaction design.</p>
 					<span class="tech">GSAP • Three.js</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
-				<!-- CARD 6 -->
+
 				<div class="work-card glass-card">
 					<h3>Project Six</h3>
 					<p>Placeholder portfolio case study for recruitment.</p>
 					<span class="tech">React • Tailwind</span>
 					<button class="view-btn">View Project</button>
 				</div>
-		
+
 			</div>
 		</section>
 
-
+		<!-- ABOUT SECTION -->
 		<section class="about" id="about">
 			<h2>About</h2>
-			<p>I focus on clean structure, refined motion, and responsive layouts.</p>
+
+			<p class="about-text">
+				My path into development has been intentional. My background in Information System Security trained me to think
+				in systems and structure. Psychology shaped how I think about people — how they interact, how they learn, and
+				how they experience technology. Frontend development is where those two perspectives meet.
+				<br><br>
+				I’m confident in HTML and CSS, and I’m actively deepening my understanding of JavaScript. I focus on building
+				strong fundamentals — variables, conditionals, state, debugging — because I care about understanding how things
+				work, not just making them work. When I encounter something I don’t understand, I slow down, break it apart, and
+				learn from it. That steady approach matters to me.
+				<br><br>
+				I’m also the founder of <strong>CodeHerWay</strong>, a platform where I document my journey into tech and create
+				beginner-friendly resources for women who want to enter the field but feel intimidated by it. I believe
+				development becomes empowering once you understand it — and I want to help make that shift easier for others.
+				<br><br>
+				Right now, I’m focused on contributing as a frontend developer in a growth-oriented environment, continuing to
+				strengthen my JavaScript expertise, and expanding into React and UI/UX over time.
+				<br><br>
+				I’m building my career deliberately — with discipline, curiosity, and purpose.
+			</p>
 		</section>
 
+		<!-- CONTACT -->
 		<section class="contact" id="contact">
 			<h2>Let’s build something exceptional.</h2>
 		</section>
 
 	</main>
+
+	<!-- ========================= -->
+	<!-- PROJECT MODALS (Moved Outside <main>) -->
+	<!-- ========================= -->
+
+	<div class="modal-overlay" id="modalOverlay"></div>
+
+	<div class="modal" id="modal1">
+		<div class="modal-content glass-modal">
+			<h3>Project One</h3>
+			<p>This is a placeholder description for Project One. Replace with real details later.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
+
+	<div class="modal" id="modal2">
+		<div class="modal-content glass-modal">
+			<h3>Project Two</h3>
+			<p>This is a placeholder description for Project Two.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
+
+	<div class="modal" id="modal3">
+		<div class="modal-content glass-modal">
+			<h3>Project Three</h3>
+			<p>This is a placeholder description for Project Three.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
+
+	<div class="modal" id="modal4">
+		<div class="modal-content glass-modal">
+			<h3>Project Four</h3>
+			<p>This is a placeholder description for Project Four.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
+
+	<div class="modal" id="modal5">
+		<div class="modal-content glass-modal">
+			<h3>Project Five</h3>
+			<p>This is a placeholder description for Project Five.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
+
+	<div class="modal" id="modal6">
+		<div class="modal-content glass-modal">
+			<h3>Project Six</h3>
+			<p>This is a placeholder description for Project Six.</p>
+			<button class="close-modal">Close</button>
+		</div>
+	</div>
 
 	<script src="app.js"></script>
 

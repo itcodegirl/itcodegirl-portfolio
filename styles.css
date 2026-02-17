@@ -78,7 +78,6 @@ section {
 
 .hero-inner>* {
 	opacity: 0;
-	/* GSAP controls fade-in */
 }
 
 .hero-title {
@@ -102,19 +101,7 @@ section {
 	margin-top: 60px;
 }
 
-.work-card {
-	background: #14141a;
-	padding: 60px;
-	transition: 0.4s ease;
-}
-
-.work-card:hover {
-	transform: translateY(-8px);
-	background: #1c1c24;
-}
-
 /* Glassmorphism Project Cards */
-
 .glass-card {
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 18px;
@@ -122,28 +109,26 @@ section {
 	backdrop-filter: blur(18px) saturate(180%);
 	-webkit-backdrop-filter: blur(18px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.15);
-	transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+	transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .glass-card:hover {
-	transform: translateY(-10px) scale(1.02);
 	background: rgba(255, 255, 255, 0.12);
 	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
 }
 
 .glass-card h3 {
-	font-family: "Playfair Display", serif;
+	font-family: 'Playfair Display', serif;
 	margin-bottom: 12px;
 	font-size: 1.6rem;
 }
 
 .glass-card p {
 	color: #c8c8c8;
-	font-size: 1rem;
 	margin-bottom: 12px;
 }
 
-.glass-card .tech {
+.tech {
 	display: inline-block;
 	font-size: 0.9rem;
 	opacity: 0.8;
@@ -163,4 +148,79 @@ section {
 
 .view-btn:hover {
 	background: #ffffff25;
+}
+
+/* MODALS */
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.45);
+	backdrop-filter: blur(6px);
+	opacity: 0;
+	pointer-events: none;
+	transition: 0.3s ease;
+	z-index: 999;
+}
+
+.modal {
+	position: fixed;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	pointer-events: none;
+	z-index: 1000;
+}
+
+.glass-modal {
+	background: rgba(255, 255, 255, 0.10);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	border-radius: 20px;
+	padding: 40px;
+	width: min(500px, 90%);
+	backdrop-filter: blur(18px);
+	transform: translateY(40px);
+	opacity: 0;
+}
+
+.close-modal {
+	margin-top: 20px;
+	padding: 10px 20px;
+	border: none;
+	background: #ffffff22;
+	color: white;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.3s ease;
+}
+
+.close-modal:hover {
+	background: #ffffff33;
+}
+
+/* ABOUT */
+.about {
+	padding-top: 120px;
+}
+
+.about-text {
+	font-size: 1.1rem;
+	line-height: 1.7;
+	color: #d1d1d1;
+	max-width: 750px;
+	margin-top: 20px;
+}
+
+/* RESPONSIVE GRID */
+@media (max-width: 900px) {
+	.work-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.work-grid {
+		grid-template-columns: 1fr;
+	}
 }

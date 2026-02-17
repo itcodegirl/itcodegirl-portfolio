@@ -7,6 +7,17 @@ const introContainer = document.querySelector(".intro-video");
 // Disable scrolling initially
 document.body.classList.add("no-scroll");
 
+// Fallback if video fails
+introVideo.addEventListener("error", skipIntro);
+introVideo.addEventListener("abort", skipIntro);
+
+function skipIntro() {
+	introContainer.remove();
+	document.body.classList.remove("no-scroll");
+	document.body.style.overflow = "auto";
+}
+
+// On video end
 introVideo.addEventListener("ended", () => {
 
 	gsap.to(introContainer, {
@@ -16,8 +27,6 @@ introVideo.addEventListener("ended", () => {
 		onComplete: () => {
 
 			introContainer.remove();
-
-			// Re-enable scroll
 			document.body.classList.remove("no-scroll");
 			document.body.style.overflow = "auto";
 
@@ -28,7 +37,7 @@ introVideo.addEventListener("ended", () => {
 				ease: "power2.out"
 			});
 
-			// Reveal hero AFTER intro
+			// Hero animation
 			gsap.fromTo(".hero-inner > *",
 				{ opacity: 0, y: 60 },
 				{
@@ -44,8 +53,10 @@ introVideo.addEventListener("ended", () => {
 	});
 });
 
-
+// =========================
 // WEBGL BACKGROUND
+// =========================
+
 const canvas = document.getElementById("webgl");
 const scene = new THREE.Scene();
 
@@ -66,7 +77,8 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
+// Optimized performance geometry
+const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
 
 const material = new THREE.ShaderMaterial({
 	uniforms: { uTime: { value: 0 } },
@@ -101,9 +113,18 @@ function animate() {
 }
 animate();
 
+// Resize handler
+window.addEventListener("resize", () => {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize(window.innerWidth, window.innerHeight);
+});
 
+// =========================
 // SCROLL ANIMATIONS
-gsap.utils.toArray("section").forEach(section => {
+// =========================
+
+gsap.utils.toArray("main section").forEach(section => {
 	gsap.from(section, {
 		opacity: 0,
 		y: 80,
@@ -115,14 +136,32 @@ gsap.utils.toArray("section").forEach(section => {
 	});
 });
 
-window.addEventListener("resize", () => {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize(window.innerWidth, window.innerHeight);
+// ABOUT SECTION
+gsap.from("#about h2", {
+	opacity: 0,
+	y: 30,
+	duration: 1,
+	ease: "power3.out",
+	scrollTrigger: {
+		trigger: "#about",
+		start: "top 85%"
+	}
+});
+
+gsap.from(".about-text", {
+	opacity: 0,
+	y: 40,
+	duration: 1.2,
+	delay: 0.1,
+	ease: "power3.out",
+	scrollTrigger: {
+		trigger: ".about-text",
+		start: "top 80%"
+	}
 });
 
 // =========================
-// GSAP Project Card Animations
+// PROJECT CARD ANIMATIONS
 // =========================
 
 gsap.utils.toArray(".glass-card").forEach((card, i) => {
@@ -130,7 +169,7 @@ gsap.utils.toArray(".glass-card").forEach((card, i) => {
 		opacity: 0,
 		y: 50,
 		duration: 1,
-		delay: i * 0.1, // stagger on load
+		delay: i * 0.1,
 		ease: "power3.out",
 		scrollTrigger: {
 			trigger: card,
@@ -139,7 +178,7 @@ gsap.utils.toArray(".glass-card").forEach((card, i) => {
 	});
 });
 
-// Hover animation with GSAP
+// GSAP Hover Effects
 document.querySelectorAll(".glass-card").forEach(card => {
 	card.addEventListener("mouseenter", () => {
 		gsap.to(card, {
@@ -158,3 +197,52 @@ document.querySelectorAll(".glass-card").forEach(card => {
 	});
 });
 
+// =========================
+// MODAL SYSTEM
+// =========================
+
+const overlay = document.getElementById("modalOverlay");
+const modalButtons = document.querySelectorAll(".view-btn");
+
+// Open modal
+modalButtons.forEach((btn, index) => {
+	btn.addEventListener("click", () => openModal(index + 1));
+});
+
+function openModal(id) {
+	const modal = document.getElementById(`modal${id}`);
+
+	// Lock scroll
+	document.body.classList.add("no-scroll");
+
+	gsap.set(modal.querySelector(".modal-content"), { opacity: 0, y: 40 });
+
+	gsap.to(overlay, { opacity: 1, pointerEvents: "all", duration: 0.35 });
+	gsap.to(modal, { opacity: 1, pointerEvents: "all", duration: 0.35 });
+
+	gsap.to(modal.querySelector(".modal-content"), {
+		opacity: 1,
+		y: 0,
+		duration: 0.6,
+		ease: "power3.out"
+	});
+}
+
+// Close modal
+document.querySelectorAll(".close-modal").forEach(btn => {
+	btn.addEventListener("click", closeModal);
+});
+
+overlay.addEventListener("click", closeModal);
+
+document.addEventListener("keydown", (e) => {
+	if (e.key === "Escape") closeModal();
+});
+
+function closeModal() {
+	document.body.classList.remove("no-scroll");
+
+	gsap.to(".modal-overlay", { opacity: 0, pointerEvents: "none", duration: 0.3 });
+	gsap.to(".modal", { opacity: 0, pointerEvents: "none", duration: 0.3 });
+	gsap.to(".modal-content", { opacity: 0, y: 40, duration: 0.4 });
+}

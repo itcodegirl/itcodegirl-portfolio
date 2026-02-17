@@ -1,3 +1,7 @@
+/* =========================
+   BASE + GLOBAL RESET
+========================= */
+
 * {
 	margin: 0;
 	padding: 0;
@@ -16,7 +20,10 @@ body.no-scroll {
 	overflow: hidden;
 }
 
-/* INTRO VIDEO */
+/* =========================
+   INTRO VIDEO
+========================= */
+
 .intro-video {
 	position: fixed;
 	inset: 0;
@@ -30,7 +37,7 @@ body.no-scroll {
 	object-fit: cover;
 }
 
-/* WEBGL Hidden until intro ends */
+/* WebGL hidden until intro ends */
 .webgl-hidden {
 	opacity: 0;
 	pointer-events: none;
@@ -44,11 +51,15 @@ body.no-scroll {
 	pointer-events: none;
 }
 
-/* Navigation */
+/* =========================
+   NAVIGATION
+========================= */
+
 .nav {
 	position: fixed;
 	width: 100%;
 	top: 0;
+	z-index: 999;
 	backdrop-filter: blur(12px);
 	background: rgba(10, 10, 14, 0.6);
 	padding: 20px 60px;
@@ -62,27 +73,44 @@ body.no-scroll {
 	align-items: center;
 }
 
-/* Section Layout */
+.nav-inner nav a {
+	margin-left: 22px;
+	color: #e5e5e5;
+	text-decoration: none;
+	font-size: 0.95rem;
+	transition: 0.3s ease;
+}
+
+.nav-inner nav a:hover {
+	color: white;
+}
+
+/* =========================
+   SECTION LAYOUT
+========================= */
+
 section {
 	padding: 160px 60px;
 	max-width: 1200px;
 	margin: auto;
 }
 
-/* SECTION HEADERS — UPGRADED */
+/* Premium section headers */
 section h2 {
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
 	font-weight: 600;
 	margin-bottom: 40px;
 	letter-spacing: 0.5px;
+
 	background: linear-gradient(90deg, #fff 0%, #dcdcdc 100%);
 	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
+
 	position: relative;
 }
 
-/* Editorial underline accent */
 section h2::after {
 	content: "";
 	position: absolute;
@@ -94,7 +122,10 @@ section h2::after {
 	border-radius: 4px;
 }
 
-/* HERO */
+/* =========================
+   HERO SECTION
+========================= */
+
 .hero {
 	min-height: 100vh;
 	display: flex;
@@ -104,7 +135,7 @@ section h2::after {
 
 .hero-inner>* {
 	opacity: 0;
-	/* GSAP fade-in */
+	/* GSAP animates this */
 }
 
 .hero-title {
@@ -120,7 +151,10 @@ section h2::after {
 	max-width: 600px;
 }
 
-/* WORK GRID */
+/* =========================
+   WORK GRID
+========================= */
+
 .work-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -128,16 +162,17 @@ section h2::after {
 	margin-top: 60px;
 }
 
-/* GLASS CARD — PREMIUM STYLE */
+/* Premium Glass Cards */
 .glass-card {
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 18px;
 	padding: 40px;
+
 	backdrop-filter: blur(18px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.15);
-	transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+
 	transform: translateY(0);
-	/* Required for hover smoothness */
+	transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .glass-card:hover {
@@ -165,7 +200,6 @@ section h2::after {
 	margin-bottom: 20px;
 }
 
-/* Buttons */
 .view-btn {
 	margin-top: 10px;
 	padding: 10px 22px;
@@ -181,7 +215,10 @@ section h2::after {
 	background: #ffffff25;
 }
 
-/* MODALS */
+/* =========================
+   MODALS
+========================= */
+
 .modal-overlay {
 	position: fixed;
 	inset: 0;
@@ -230,7 +267,77 @@ section h2::after {
 	background: #ffffff33;
 }
 
-/* ABOUT SECTION — UPGRADED */
+/* =========================
+   SKILLS — GLOWING TIMELINE (A2)
+========================= */
+
+.skills {
+	position: relative;
+}
+
+.skills-timeline {
+	margin-top: 50px;
+	border-left: 2px solid rgba(255, 255, 255, 0.16);
+	padding-left: 50px;
+	position: relative;
+}
+
+.timeline-line {
+	position: absolute;
+	left: 50px;
+	top: 120px;
+	width: 2px;
+	height: calc(100% - 120px);
+	background: linear-gradient(to bottom,
+			transparent,
+			rgba(255, 255, 255, 0.4),
+			transparent);
+	opacity: 0.4;
+}
+
+/* Each item */
+.skill-item {
+	margin-bottom: 60px;
+	position: relative;
+	opacity: 0;
+	/* GSAP animates */
+	transform: translateY(30px);
+}
+
+.skill-item:last-child {
+	margin-bottom: 0;
+}
+
+/* Glowing dot */
+.skill-dot {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #ffffffdd;
+
+	position: absolute;
+	left: -58px;
+	top: 4px;
+
+	box-shadow: 0 0 12px #ffffff88;
+}
+
+.skill-item h3 {
+	font-size: 1.5rem;
+	margin-bottom: 6px;
+	font-family: "Playfair Display", serif;
+}
+
+.skill-item p {
+	color: #cccccc;
+	max-width: 650px;
+	line-height: 1.6;
+}
+
+/* =========================
+   ABOUT SECTION
+========================= */
+
 .about {
 	padding-top: 120px;
 	border-left: 2px solid rgba(255, 255, 255, 0.12);
@@ -242,17 +349,56 @@ section h2::after {
 	line-height: 1.75;
 	color: #d1d1d1;
 	max-width: 750px;
+	margin-bottom: 20px;
 }
 
-/* AUTOMATIC PARAGRAPH SPACING (NO MORE <br><br>) */
-.about-text p+p {
-	margin-top: 22px;
+/* =========================
+   SECTION DIVIDER
+========================= */
+
+.section-divider {
+	width: 100%;
+	height: 2px;
+	margin: 100px 0;
+	background: linear-gradient(90deg,
+			transparent,
+			rgba(255, 255, 255, 0.25),
+			transparent);
+	opacity: 0;
+	transform: scaleX(0.4);
 }
 
-/* RESPONSIVE GRID */
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
+
+.scroll-progress {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 4px;
+	height: 0;
+	background: linear-gradient(180deg, #ffffff, #bbbbbb);
+	border-radius: 0 0 4px 4px;
+	z-index: 9999;
+	transition: height 0.1s linear;
+}
+
+/* =========================
+   RESPONSIVE LAYOUT
+========================= */
+
 @media (max-width: 900px) {
 	.work-grid {
 		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.skills-timeline {
+		padding-left: 40px;
+	}
+
+	.skill-dot {
+		left: -48px;
 	}
 }
 
@@ -272,181 +418,12 @@ section h2::after {
 	.about-text {
 		font-size: 1rem;
 	}
-}
 
-/* =========================
-   SKILLS — GLOWING TIMELINE
-========================= */
-
-.skills {
-	padding: 160px 60px;
-	max-width: 1200px;
-	margin: auto;
-}
-
-.skills-timeline {
-	position: relative;
-	margin-left: 40px;
-	padding-left: 40px;
-	border-left: 2px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Vertical glow line */
-.skills-timeline::before {
-	content: "";
-	position: absolute;
-	left: -1px;
-	top: 0;
-	width: 2px;
-	height: 0%;
-	background: linear-gradient(#ffffffaa, #ffffff33);
-	box-shadow: 0 0 15px #ffffff55;
-	transition: height 1s ease;
-}
-
-/* Each skill item */
-.skill-item {
-	position: relative;
-	margin-bottom: 50px;
-	opacity: 0;
-	transform: translateY(40px);
-}
-
-/* Glowing dot */
-.skill-dot {
-	position: absolute;
-	left: -48px;
-	top: 4px;
-	width: 16px;
-	height: 16px;
-	background: #ffffffdd;
-	border-radius: 50%;
-	box-shadow:
-		0 0 8px #ffffffaa,
-		0 0 18px #ffffff88,
-		0 0 28px #ffffff55;
-}
-
-/* Titles */
-.skill-item h3 {
-	font-family: "Playfair Display", serif;
-	font-size: 1.6rem;
-	margin-bottom: 8px;
-}
-
-/* Description */
-.skill-item p {
-	font-size: 1.05rem;
-	color: #cccccc;
-	line-height: 1.65;
-	max-width: 700px;
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
 	.skills-timeline {
-		margin-left: 20px;
 		padding-left: 30px;
 	}
 
 	.skill-dot {
-		left: -36px;
+		left: -38px;
 	}
-}
-
-/* Hover floating effect */
-.skill-card:hover {
-	transform: translateY(-14px) scale(1.03);
-	background: rgba(255, 255, 255, 0.12);
-	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
-}
-
-.skill-card h3 {
-	font-family: 'Playfair Display', serif;
-	font-size: 1.4rem;
-	margin-bottom: 8px;
-}
-
-.skill-card p {
-	font-size: 1rem;
-	color: #d4d4d4;
-	line-height: 1.55;
-}
-
-/* Responsive for Skills */
-@media (max-width: 900px) {
-	.skills-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: 600px) {
-	.skills-grid {
-		grid-template-columns: 1fr;
-	}
-}
-
-
-/* GSAP animates this */
-.skill-item {
-	position: relative;
-	margin-bottom: 20px;
-	transform: translateY(30px);
-}
-
-.skill-item:last-child {
-	margin-bottom: 0;
-}
-
-.skill-dot {
-	width: 14px;
-	height: 14px;
-	border-radius: 50%;
-	background: #ffffffaa;
-	position: absolute;
-	left: -48px;
-	top: 5px;
-	box-shadow: 0 0 10px #ffffff55;
-}
-
-.skill-item h3 {
-	font-size: 1.5rem;
-	margin-bottom: 6px;
-	font-family: "Playfair Display", serif;
-}
-
-.skill-item p {
-	color: #cccccc;
-	max-width: 600px;
-	line-height: 1.6;
-}
-
-/* =========================
-   SECTION DIVIDERS
-========================= */
-.section-divider {
-	width: 100%;
-	height: 2px;
-	margin: 100px 0;
-	background: linear-gradient(90deg,
-			rgba(255, 255, 255, 0) 0%,
-			rgba(255, 255, 255, 0.25) 50%,
-			rgba(255, 255, 255, 0) 100%);
-	opacity: 0;
-	transform: translateY(20px);
-}
-
-/* =========================
-   SCROLL PROGRESS BAR
-========================= */
-.scroll-progress {
-	position: fixed;
-	right: 0;
-	top: 0;
-	width: 4px;
-	height: 0;
-	background: linear-gradient(180deg, #ffffff, #bbbbbb);
-	border-radius: 0 0 4px 4px;
-	z-index: 9999;
-	transition: height 0.1s linear;
 }

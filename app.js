@@ -169,14 +169,11 @@ gsap.from(".about-text", {
 	 SKILLS — GLOWING TIMELINE (A2)
 ===================================================== */
 
-
-// Each skill item reveals sequentially
-gsap.utils.toArray(".skill-item").forEach((item, i) => {
-	gsap.from(item, {
-		opacity: 0,
-		y: 50,
+gsap.utils.toArray(".skill-item").forEach((item) => {
+	gsap.to(item, {
+		opacity: 1,
+		y: 0,
 		duration: 1,
-		delay: i * 0.15,
 		ease: "power3.out",
 		scrollTrigger: {
 			trigger: item,

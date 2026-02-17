@@ -30,13 +30,13 @@ body.no-scroll {
 	object-fit: cover;
 }
 
-/* WEBGL HIDDEN UNTIL INTRO ENDS */
+/* WEBGL Hidden until intro ends */
 .webgl-hidden {
 	opacity: 0;
 	pointer-events: none;
 }
 
-/* WebGL background */
+/* WebGL Background */
 #webgl {
 	position: fixed;
 	inset: 0;
@@ -44,7 +44,7 @@ body.no-scroll {
 	pointer-events: none;
 }
 
-/* Nav */
+/* Navigation */
 .nav {
 	position: fixed;
 	width: 100%;
@@ -59,13 +59,39 @@ body.no-scroll {
 	margin: auto;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
-/* Sections */
+/* Section Layout */
 section {
 	padding: 160px 60px;
 	max-width: 1200px;
 	margin: auto;
+}
+
+/* SECTION HEADERS — UPGRADED */
+section h2 {
+	font-family: 'Playfair Display', serif;
+	font-size: 3rem;
+	font-weight: 600;
+	margin-bottom: 40px;
+	letter-spacing: 0.5px;
+	background: linear-gradient(90deg, #fff 0%, #dcdcdc 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	position: relative;
+}
+
+/* Editorial underline accent */
+section h2::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -10px;
+	width: 80px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.25);
+	border-radius: 4px;
 }
 
 /* HERO */
@@ -78,6 +104,7 @@ section {
 
 .hero-inner>* {
 	opacity: 0;
+	/* GSAP fade-in */
 }
 
 .hero-title {
@@ -101,40 +128,44 @@ section {
 	margin-top: 60px;
 }
 
-/* Glassmorphism Project Cards */
+/* GLASS CARD — PREMIUM STYLE */
 .glass-card {
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 18px;
 	padding: 40px;
 	backdrop-filter: blur(18px) saturate(180%);
-	-webkit-backdrop-filter: blur(18px) saturate(180%);
 	border: 1px solid rgba(255, 255, 255, 0.15);
-	transition: background 0.4s ease, box-shadow 0.4s ease;
+	transition: transform 0.4s ease, background 0.4s ease, box-shadow 0.4s ease;
+	transform: translateY(0);
+	/* Required for hover smoothness */
 }
 
 .glass-card:hover {
+	transform: translateY(-10px) scale(1.02);
 	background: rgba(255, 255, 255, 0.12);
 	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
 }
 
 .glass-card h3 {
 	font-family: 'Playfair Display', serif;
-	margin-bottom: 12px;
 	font-size: 1.6rem;
+	margin-bottom: 12px;
 }
 
 .glass-card p {
 	color: #c8c8c8;
+	font-size: 1rem;
 	margin-bottom: 12px;
 }
 
 .tech {
 	display: inline-block;
 	font-size: 0.9rem;
-	opacity: 0.8;
+	opacity: 0.75;
 	margin-bottom: 20px;
 }
 
+/* Buttons */
 .view-btn {
 	margin-top: 10px;
 	padding: 10px 22px;
@@ -199,17 +230,23 @@ section {
 	background: #ffffff33;
 }
 
-/* ABOUT */
+/* ABOUT SECTION — UPGRADED */
 .about {
 	padding-top: 120px;
+	border-left: 2px solid rgba(255, 255, 255, 0.12);
+	padding-left: 40px;
 }
 
 .about-text {
 	font-size: 1.1rem;
-	line-height: 1.7;
+	line-height: 1.75;
 	color: #d1d1d1;
 	max-width: 750px;
-	margin-top: 20px;
+}
+
+/* AUTOMATIC PARAGRAPH SPACING (NO MORE <br><br>) */
+.about-text p+p {
+	margin-top: 22px;
 }
 
 /* RESPONSIVE GRID */
@@ -223,4 +260,72 @@ section {
 	.work-grid {
 		grid-template-columns: 1fr;
 	}
+
+	section {
+		padding: 120px 30px;
+	}
+
+	.hero-title {
+		font-size: 3rem;
+	}
+
+	.about-text {
+		font-size: 1rem;
+	}
+}
+
+/* =========================
+   SKILLS TIMELINE
+========================= */
+
+.skills {
+	padding-top: 140px;
+}
+
+.skills h2 {
+	font-size: 2.7rem;
+	margin-bottom: 40px;
+	font-family: "Playfair Display", serif;
+}
+
+.skills-timeline {
+	position: relative;
+	padding-left: 40px;
+	border-left: 2px solid rgba(255, 255, 255, 0.15);
+	margin-left: 10px;
+}
+
+.skill-item {
+	margin-bottom: 50px;
+	position: relative;
+	opacity: 0;
+	/* GSAP animates this */
+	transform: translateY(30px);
+}
+
+.skill-item:last-child {
+	margin-bottom: 0;
+}
+
+.skill-dot {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #ffffffaa;
+	position: absolute;
+	left: -48px;
+	top: 5px;
+	box-shadow: 0 0 10px #ffffff55;
+}
+
+.skill-item h3 {
+	font-size: 1.5rem;
+	margin-bottom: 6px;
+	font-family: "Playfair Display", serif;
+}
+
+.skill-item p {
+	color: #cccccc;
+	max-width: 600px;
+	line-height: 1.6;
 }

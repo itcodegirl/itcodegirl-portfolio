@@ -30,7 +30,7 @@ introVideo.addEventListener("ended", () => {
 			document.body.classList.remove("no-scroll");
 			document.body.style.overflow = "auto";
 
-			ScrollTrigger.refresh();
+			ScrollTrigger.refresh(true);
 
 			// Reveal WebGL
 			gsap.to("#webgl", {
@@ -172,17 +172,19 @@ gsap.from(".about-text", {
 ===================================================== */
 
 gsap.utils.toArray(".skill-item").forEach((item) => {
-	gsap.to(item, {
-		opacity: 1,
-		y: 0,
+	gsap.from(item, {
+		opacity: 0,
+		y: 40,
 		duration: 1,
 		ease: "power3.out",
 		scrollTrigger: {
 			trigger: item,
-			start: "top 85%"
+			start: "top 85%",
+			toggleActions: "play none none none"
 		}
 	});
 });
+
 
 
 /* =====================================================
@@ -317,5 +319,8 @@ window.addEventListener("scroll", () => {
 	const progress = (scrollTop / docHeight) * 100;
 	progressBar.style.height = progress + "%";
 });
+
+
+ScrollTrigger.addEventListener("refreshInit", () => console.log("ScrollTrigger is refreshing"));
 
 ScrollTrigger.refresh();

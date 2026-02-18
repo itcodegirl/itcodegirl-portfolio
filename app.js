@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 /* =====================================================
-	 SAFE INTRO SYSTEM — no early removal
+	 SAFE INTRO SYSTEM
 ===================================================== */
 
 const introVideo = document.getElementById("introVideo");
@@ -18,35 +18,40 @@ function finishIntro() {
 
 	const canvas = document.getElementById("webgl");
 	canvas.classList.remove("webgl-hidden");
+	canvas.style.opacity = "1";
 
 	ScrollTrigger.refresh(true);
 
 	initWebGL();
+	initHeroCinematic();
+	initSectionReveals();
 	initSkillsAnimation();
+	initNavCinematic();
 }
 
-/* End intro ONLY when safe */
 introVideo?.addEventListener("ended", finishIntro);
 introVideo?.addEventListener("error", finishIntro);
 introVideo?.addEventListener("abort", finishIntro);
 
-/* Fallback ONLY for mobile autoplay restrictions */
 setTimeout(() => {
 	if (!introFinished) finishIntro();
 }, 5000);
 
 
 /* =====================================================
-	 WEBGL — Dual Layer Ripple Background (fixed brightness)
+	 CALM CINEMATIC WATER SHADER
 ===================================================== */
 
 function initWebGL() {
+	const canvas = document.getElementById("webgl");
+	canvas.classList.remove("webgl-hidden");
+	canvas.style.opacity = "1";
+	canvas.style.pointerEvents = "none";
+
 	if (!window.THREE) {
-		console.error("THREE.js failed to load.");
+		console.error("THREE.js missing");
 		return;
 	}
-
-	const canvas = document.getElementById("webgl");
 
 	const scene = new THREE.Scene();
 
@@ -56,31 +61,26 @@ function initWebGL() {
 		0.1,
 		100
 	);
-	camera.position.z = 1.5;
+	camera.position.z = 1.4;
 
 	const renderer = new THREE.WebGLRenderer({
 		canvas,
 		antialias: true
 	});
-
 	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
-	/* UNIFORMS */
 	const uniforms = {
 		uTime: { value: 0 },
 		uMouse: { value: new THREE.Vector2(0.5, 0.5) }
 	};
 
-	/* GEOMETRY */
-	const geometry = new THREE.PlaneGeometry(3, 3, 64, 64);
+	const geometry = new THREE.PlaneGeometry(3, 3, 128, 128);
 
-	/* SHADER — boosted color so it's not dark */
 	const material = new THREE.ShaderMaterial({
 		uniforms,
 		vertexShader: `
 			varying vec2 vUv;
-
 			void main() {
 				vUv = uv;
 				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
@@ -91,83 +91,124 @@ function initWebGL() {
 			uniform vec2 uMouse;
 			varying vec2 vUv;
 
+			float noise(vec2 p) {
+				return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+			}
+
+			float smoothNoise(vec2 p) {
+				vec2 i = floor(p);
+				vec2 f = fract(p);
+				float a = noise(i);
+				float b = noise(i + vec2(1.0, 0.0));
+				float c = noise(i + vec2(0.0, 1.0));
+				float d = noise(i + vec2(1.0, 1.0));
+				vec2 u = f * f * (3.0 - 2.0 * f);
+				return mix(a, b, u.x)
+					+ (c - a) * u.y * (1.0 - u.x)
+					+ (d - b) * u.x * u.y;
+			}
+
+			float ripple(vec2 uv, vec2 center) {
+				float d = distance(uv, center);
+				float wave = sin(d * 12.0 - uTime * 0.8);
+				return wave * 0.015 / (1.0 + d * 6.0);
+			}
+
 			void main() {
+				vec3 shallow = vec3(0.18, 0.85, 0.97);
+				vec3 deep    = vec3(0.05, 0.32, 0.45);
 
-				/* Dual-wave background */
-				float waveA = sin(vUv.x * 6.0 + uTime * 0.8) * 0.25;
-				float waveB = cos(vUv.y * 8.0 + uTime * 1.3) * 0.25;
+				float depthMix = smoothstep(0.0, 1.0, vUv.y);
+				vec3 color = mix(shallow, deep, depthMix);
 
-				vec3 magenta = vec3(1.0, 0.2, 1.0);
-				vec3 blue = vec3(0.1, 0.5, 1.0);
-				vec3 base = vec3(0.08, 0.05, 0.12);
+				float drift = smoothNoise(vUv * 2.0 + uTime * 0.05) * 0.04;
+				color += drift * 0.15;
 
-				vec3 color =
-					base +
-					magenta * (waveA + 0.5) * 0.6 +
-					blue * (waveB + 0.5) * 0.6;
+				float shimmer = smoothNoise(vUv * 4.0 + uTime * 0.1) * 0.02;
+				color += shimmer * 0.08;
 
-				/* Mouse ripple */
-				float dist = distance(vUv, uMouse);
-				float ripple = 0.06 / dist;
+				float m = ripple(vUv, uMouse);
+				color += m * vec3(0.12, 0.55, 1.0);
 
-				color += ripple * vec3(1.0, 0.2, 1.0);
+				float vign = smoothstep(0.75, 0.2, distance(vUv, vec2(0.5)));
+				color *= mix(1.0, 0.88, vign);
 
 				gl_FragColor = vec4(color, 1.0);
 			}
-		`
+		`,
 	});
 
 	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
-	/* Mouse interaction */
 	window.addEventListener("mousemove", (e) => {
 		uniforms.uMouse.value.x = e.clientX / window.innerWidth;
 		uniforms.uMouse.value.y = 1.0 - e.clientY / window.innerHeight;
 	});
 
-	/* Animation */
 	function animate() {
-		uniforms.uTime.value += 0.015;
+		uniforms.uTime.value += 0.006;
 		renderer.render(scene, camera);
 		requestAnimationFrame(animate);
 	}
 	animate();
 
-	/* Resize fix */
 	window.addEventListener("resize", () => {
-		const w = window.innerWidth;
-		const h = window.innerHeight;
-		renderer.setSize(w, h);
-		camera.aspect = w / h;
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		camera.aspect = window.innerWidth / window.innerHeight;
 		camera.updateProjectionMatrix();
 	});
 }
 
 
 /* =====================================================
-	 HERO ANIMATION
+	 CINEMATIC HERO MOTION
 ===================================================== */
 
-gsap.from(".hero-title", {
-	opacity: 0,
-	y: 40,
-	duration: 1.4,
-	ease: "power3.out",
-	delay: 0.3
-});
+function initHeroCinematic() {
+	gsap.from(".hero-title", {
+		opacity: 0,
+		y: 60,
+		filter: "blur(8px)",
+		duration: 1.6,
+		ease: "power3.out",
+		delay: 0.4
+	});
 
-gsap.from(".hero-sub", {
-	opacity: 0,
-	y: 35,
-	duration: 1.4,
-	ease: "power3.out",
-	delay: 0.5
-});
+	gsap.from(".hero-sub", {
+		opacity: 0,
+		y: 40,
+		filter: "blur(6px)",
+		duration: 1.6,
+		ease: "power3.out",
+		delay: 0.7
+	});
+}
 
 
 /* =====================================================
-	 SKILLS
+	 SECTION REVEALS (Cinematic Polish Pack)
+===================================================== */
+
+function initSectionReveals() {
+	gsap.utils.toArray("section").forEach((sec) => {
+		gsap.from(sec, {
+			opacity: 0,
+			y: 70,
+			filter: "blur(10px)",
+			duration: 1.4,
+			ease: "power3.out",
+			scrollTrigger: {
+				trigger: sec,
+				start: "top 85%",
+			}
+		});
+	});
+}
+
+
+/* =====================================================
+	 SKILLS ANIMATION
 ===================================================== */
 
 function initSkillsAnimation() {
@@ -182,6 +223,27 @@ function initSkillsAnimation() {
 				start: "top 85%"
 			}
 		});
+	});
+}
+
+
+/* =====================================================
+	 NAV CINEMATIC BEHAVIOR
+===================================================== */
+
+function initNavCinematic() {
+	const nav = document.querySelector(".nav");
+
+	ScrollTrigger.create({
+		start: "top -10",
+		end: 999999,
+		onUpdate: (self) => {
+			if (self.direction === -1) {
+				nav.classList.add("nav-show");
+			} else {
+				nav.classList.remove("nav-show");
+			}
+		}
 	});
 }
 

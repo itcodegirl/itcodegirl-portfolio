@@ -8,6 +8,11 @@
 	box-sizing: border-box;
 }
 
+html,
+body {
+	scroll-behavior: smooth;
+}
+
 body {
 	background: #0e0e12;
 	color: white;
@@ -20,7 +25,7 @@ body.no-scroll {
 }
 
 /* ======================================================
-   INTRO VIDEO LAYER
+   INTRO VIDEO
 ====================================================== */
 
 .intro-video {
@@ -38,22 +43,23 @@ body.no-scroll {
 }
 
 /* ======================================================
-   WEBGL BACKGROUND (BEHIND EVERYTHING)
+   WEBGL BACKGROUND
 ====================================================== */
 
 #webgl {
 	position: fixed;
 	inset: 0;
+	z-index: -10;
 	width: 100%;
 	height: 100%;
-	z-index: -5;
-	/* behind hero + all content */
 	display: block;
 	pointer-events: none;
+	opacity: 0;
+	transition: opacity 1s ease;
 }
 
 .webgl-hidden {
-	opacity: 0;
+	opacity: 0 !important;
 }
 
 /* ======================================================
@@ -64,10 +70,17 @@ body.no-scroll {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	padding: 20px 60px;
-	backdrop-filter: blur(12px);
+	padding: 22px 60px;
+	backdrop-filter: blur(14px);
 	background: rgba(10, 10, 14, 0.45);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 	z-index: 50;
+	transition: opacity .4s ease, transform .4s ease;
+}
+
+.nav-show {
+	opacity: 1 !important;
+	transform: translateY(0);
 }
 
 .nav-inner {
@@ -79,11 +92,11 @@ body.no-scroll {
 }
 
 nav a {
-	margin-left: 24px;
+	margin-left: 26px;
 	color: white;
-	opacity: 0.85;
+	opacity: 0.8;
 	text-decoration: none;
-	transition: opacity 0.25s ease;
+	transition: opacity 0.2s ease;
 }
 
 nav a:hover {
@@ -91,18 +104,28 @@ nav a:hover {
 }
 
 /* ======================================================
-   SECTION LAYOUT
+   LAYOUT / SECTIONS
 ====================================================== */
 
 section {
-	padding: 160px 60px;
+	padding: 170px 60px;
 	max-width: 1200px;
 	margin: auto;
 	position: relative;
-	z-index: 10;
+	z-index: 5;
 }
 
-/* Gradient Title */
+/* Cinematic fade-in baseline */
+section {
+	opacity: 1;
+	transform: translateY(0);
+	filter: blur(0);
+}
+
+/* ======================================================
+   SECTION TITLES
+====================================================== */
+
 section h2 {
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
@@ -111,9 +134,9 @@ section h2 {
 	letter-spacing: 0.6px;
 
 	background: linear-gradient(90deg, #ffffff 0%, #d7d7d7 100%);
-	background-clip: text;
 	-webkit-background-clip: text;
-	color: transparent;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 
 	position: relative;
 }
@@ -123,44 +146,41 @@ section h2::after {
 	position: absolute;
 	left: 0;
 	bottom: -12px;
-	width: 80px;
+	width: 90px;
 	height: 2px;
 	background: rgba(255, 255, 255, 0.25);
 	border-radius: 3px;
 }
 
 /* ======================================================
-   HERO
+   HERO SECTION
 ====================================================== */
 
 .hero {
-	position: relative;
-	z-index: 20;
-	/* Ensures hero sits ABOVE WebGL */
 	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	position: relative;
 }
 
-.hero-inner>* {
+.hero-inner {
 	position: relative;
-	z-index: 30;
-	/* Extra safe */
+	z-index: 10;
 }
 
 .hero-title {
 	font-family: 'Playfair Display', serif;
 	font-size: 4.5rem;
 	line-height: 1.05;
-	max-width: 800px;
+	max-width: 900px;
 	margin-bottom: 30px;
 }
 
 .hero-sub {
 	font-size: 1.25rem;
-	color: #9ca3af;
-	max-width: 600px;
+	color: #bfc4c7;
+	max-width: 650px;
 }
 
 /* ======================================================
@@ -178,38 +198,15 @@ section h2::after {
 	background: rgba(255, 255, 255, 0.08);
 	border-radius: 18px;
 	padding: 40px;
-	backdrop-filter: blur(18px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.14);
-	transition: 0.35s ease;
-	transform: translateY(0);
+	backdrop-filter: blur(18px);
+	border: 1px solid rgba(255, 255, 255, 0.13);
+	transition: transform 0.35s ease, background 0.35s ease;
 }
 
 .glass-card:hover {
 	transform: translateY(-10px) scale(1.02);
 	background: rgba(255, 255, 255, 0.12);
-	box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
-}
-
-.tech {
-	display: inline-block;
-	margin-top: 6px;
-	opacity: 0.7;
-	font-size: 0.9rem;
-}
-
-.view-btn {
-	margin-top: 14px;
-	padding: 10px 22px;
-	background: #ffffff15;
-	border-radius: 10px;
-	border: none;
-	color: white;
-	cursor: pointer;
-	transition: 0.3s ease;
-}
-
-.view-btn:hover {
-	background: #ffffff25;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* ======================================================
@@ -219,8 +216,8 @@ section h2::after {
 .modal-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.45);
-	backdrop-filter: blur(6px);
+	background: rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(5px);
 	opacity: 0;
 	pointer-events: none;
 	transition: 0.3s ease;
@@ -242,29 +239,15 @@ section h2::after {
 	background: rgba(255, 255, 255, 0.12);
 	padding: 40px;
 	border-radius: 20px;
-	border: 1px solid rgba(255, 255, 255, 0.23);
-	backdrop-filter: blur(18px);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+	backdrop-filter: blur(20px);
 	width: min(500px, 90%);
 	transform: translateY(40px);
 	opacity: 0;
 }
 
-.close-modal {
-	margin-top: 20px;
-	padding: 10px 20px;
-	background: #ffffff22;
-	border: none;
-	border-radius: 10px;
-	color: white;
-	cursor: pointer;
-}
-
-.close-modal:hover {
-	background: #ffffff33;
-}
-
 /* ======================================================
-   ABOUT
+   ABOUT SECTION
 ====================================================== */
 
 .about {
@@ -274,7 +257,7 @@ section h2::after {
 }
 
 .about-text {
-	max-width: 720px;
+	max-width: 750px;
 	line-height: 1.75;
 	color: #d1d1d1;
 	font-size: 1.1rem;
@@ -316,22 +299,15 @@ section h2::after {
 	top: 4px;
 	width: 16px;
 	height: 16px;
-	background: #ffffffdd;
+	background: white;
 	border-radius: 50%;
-	box-shadow: 0 0 16px #ffffff55;
+	box-shadow: 0 0 16px #ffffff88;
 }
 
 .skill-item h3 {
 	font-family: "Playfair Display", serif;
 	font-size: 1.6rem;
 	margin-bottom: 8px;
-}
-
-.skill-item p {
-	max-width: 650px;
-	color: #cfcfcf;
-	font-size: 1.05rem;
-	line-height: 1.6;
 }
 
 /* ======================================================
@@ -346,8 +322,6 @@ section h2::after {
 			rgba(255, 255, 255, 0) 0%,
 			rgba(255, 255, 255, 0.25) 50%,
 			rgba(255, 255, 255, 0) 100%);
-	opacity: 0;
-	transform: translateY(20px);
 }
 
 /* ======================================================
@@ -381,16 +355,11 @@ section h2::after {
 	}
 
 	section {
-		padding: 120px 30px;
+		padding: 130px 30px;
 	}
 
 	.hero-title {
 		font-size: 3rem;
-	}
-
-	.skills-timeline {
-		margin-left: 20px;
-		padding-left: 30px;
 	}
 
 	.skill-dot {

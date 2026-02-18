@@ -47,7 +47,7 @@ introVideo.addEventListener("ended", () => {
 });
 
 /* =====================================================
-	 WEBGL SHADER BACKGROUND
+	 WEBGL BACKGROUND — Dual Shader + Mouse Distortion
 ===================================================== */
 
 function initWebGL() {
@@ -65,38 +65,70 @@ function initWebGL() {
 		0.1,
 		100
 	);
-	camera.position.z = 1.4;
+	camera.position.z = 1.5;
 
 	const renderer = new THREE.WebGLRenderer({
 		canvas: canvas,
+		alpha: false,
 		antialias: true
 	});
-	renderer.setSize(window.innerWidth, window.innerHeight);
+
 	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+
+	/* ==========================
+		 SHADER MATERIAL
+	========================== */
+
+	const uniforms = {
+		uTime: { value: 0 },
+		uMouse: { value: new THREE.Vector2(0.5, 0.5) }
+	};
 
 	const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
 
 	const material = new THREE.ShaderMaterial({
-		uniforms: { uTime: { value: 0 } },
+		uniforms: uniforms,
 		vertexShader: `
 			varying vec2 vUv;
+
 			void main() {
 				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 			}
 		`,
 		fragmentShader: `
 			uniform float uTime;
+			uniform vec2 uMouse;
 			varying vec2 vUv;
 
 			void main() {
-				float wave1 = sin(vUv.x * 6.0 + uTime) * 0.15;
-				float wave2 = cos(vUv.y * 4.0 + uTime * 0.5) * 0.12;
 
-				vec3 deepBlue = vec3(0.05, 0.06, 0.12);
-				vec3 magenta = vec3(0.8, 0.0, 1.0);
+				/* ----------------------------------
+				   LAYER 1 — Magenta Wave
+				---------------------------------- */
+				float waveA = sin(vUv.x * 6.0 + uTime * 0.8) * 0.15;
 
-				vec3 color = deepBlue + (wave1 + wave2) * magenta;
+				/* ----------------------------------
+				   LAYER 2 — Electric Blue Wave
+				---------------------------------- */
+				float waveB = cos(vUv.y * 8.0 + uTime * 1.3) * 0.12;
+
+				vec3 magenta = vec3(1.0, 0.0, 1.0);
+				vec3 blue    = vec3(0.0, 0.4, 1.0);
+
+				vec3 layer1 = mix(vec3(0.05, 0.05, 0.12), magenta, waveA + 0.4);
+				vec3 layer2 = mix(vec3(0.03, 0.03, 0.08), blue, waveB + 0.4);
+
+				vec3 color = layer1 + layer2 * 0.5;
+
+				/* ----------------------------------
+				   MOUSE DISTORTION / RIPPLE
+				---------------------------------- */
+				float dist = distance(vUv, uMouse);
+				float ripple = 0.03 / dist;
+
+				color += ripple * vec3(0.8, 0.2, 1.0);
 
 				gl_FragColor = vec4(color, 1.0);
 			}
@@ -106,19 +138,41 @@ function initWebGL() {
 	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
+	/* ==========================
+		 MOUSE INTERACTION
+	========================== */
+
+	window.addEventListener("pointermove", (e) => {
+		const x = e.clientX / window.innerWidth;
+		const y = 1.0 - e.clientY / window.innerHeight;
+		uniforms.uMouse.value.set(x, y);
+	});
+
+	/* ==========================
+		 ANIMATION LOOP
+	========================== */
+
 	function animate() {
-		material.uniforms.uTime.value += 0.02;
+		uniforms.uTime.value += 0.02;
 		renderer.render(scene, camera);
 		requestAnimationFrame(animate);
 	}
 	animate();
 
+	/* ==========================
+		 RESPONSIVE RESIZE
+	========================== */
+
 	window.addEventListener("resize", () => {
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		camera.aspect = window.innerWidth / window.innerHeight;
+		const width = window.innerWidth;
+		const height = window.innerHeight;
+		renderer.setSize(width, height);
+		camera.aspect = width / height;
 		camera.updateProjectionMatrix();
 	});
 }
+
+
 
 /* =====================================================
 	 SKILLS ANIMATION

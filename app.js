@@ -267,7 +267,7 @@ gsap.utils.toArray(".glass-card").forEach((card, i) => {
 
 
 /* =====================================================
-	 MODALS
+	                      MODALS
 ===================================================== */
 
 const overlay = document.getElementById("modalOverlay");

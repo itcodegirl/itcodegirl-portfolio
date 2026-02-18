@@ -168,8 +168,12 @@ section h2::after {
 
 .hero-content {
 	position: relative;
-	z-index: 10;
-	color: white;
+	z-index: 100;
+	color: white !important;
+	background: rgba(0, 0, 0, 0.3);
+	/* Temporary debugging background */
+	padding: 20px;
+	border-radius: 10px;
 }
 
 .hero-title {
@@ -179,7 +183,9 @@ section h2::after {
 	margin-bottom: 30px;
 	position: relative;
 	overflow: hidden;
-	color: white;
+	color: white !important;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+	/* Add text shadow for visibility */
 }
 
 .hero-title::after {
@@ -194,8 +200,10 @@ section h2::after {
 
 .hero-sub {
 	font-size: 1.25rem;
-	color: #bfc4c7;
+	color: #bfc4c7 !important;
 	line-height: 1.6;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+	/* Add text shadow for visibility */
 }
 
 .hero-visual {
@@ -236,7 +244,7 @@ section h2::after {
 }
 
 .hero-visual::after {
-	content: "Move your mouse to explode the particles";
+	content: "Click and drag to control the animation";
 	position: absolute;
 	bottom: 20px;
 	left: 50%;
@@ -303,14 +311,20 @@ section h2::after {
 @media (max-width: 900px) {
 	.hero-container {
 		grid-template-columns: 1fr;
-		gap: 50px;
+		gap: 40px;
 		text-align: center;
 	}
 
+	.hero-content {
+		order: 1;
+		/* Ensure text comes first on mobile */
+	}
+
 	.hero-visual {
-		height: 400px;
-		order: -1;
-		/* Put visual above content on mobile */
+		height: 50vh;
+		min-height: 400px;
+		order: 2;
+		/* Visual comes second */
 	}
 
 	.hero-title {
@@ -320,15 +334,22 @@ section h2::after {
 
 @media (max-width: 600px) {
 	.hero {
-		padding: 80px 30px;
+		padding: 100px 30px 60px;
+		/* Ensure enough top padding */
 	}
 
 	.hero-visual {
-		height: 300px;
+		height: 40vh;
+		min-height: 300px;
 	}
 
 	.hero-title {
 		font-size: 3rem;
+	}
+
+	.hero-content {
+		margin-bottom: 30px;
+		/* Add spacing between text and visual */
 	}
 }
 

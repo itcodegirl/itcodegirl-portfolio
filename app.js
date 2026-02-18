@@ -469,7 +469,7 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
 });
 
 /* =====================================================
-	 PARTICLE DISPLACEMENT ANIMATION THREE.JS
+	 DRAG-CONTROLLED PARTICLE DISPLACEMENT
 ===================================================== */
 
 function initWebGL() {
@@ -479,7 +479,7 @@ function initWebGL() {
 		return;
 	}
 
-	console.log('Initializing particle displacement animation');
+	console.log('Initializing drag-controlled particle displacement');
 
 	// Scene setup
 	const scene = new THREE.Scene();
@@ -496,17 +496,19 @@ function initWebGL() {
 	// Load the image texture
 	const textureLoader = new THREE.TextureLoader();
 	const imageTexture = textureLoader.load('./Jenna_robot_1.jpg', function (texture) {
-		console.log('Image texture loaded successfully');
+		console.log('Portrait texture loaded successfully');
 	});
 
 	// Create particle system
-	const imageWidth = 80; // Increase density back up
-	const imageHeight = 100;
+	const imageWidth = 100;
+	const imageHeight = 120;
 	const particleCount = imageWidth * imageHeight;
 
 	const geometry = new THREE.BufferGeometry();
 	const positions = new Float32Array(particleCount * 3);
 	const originalPositions = new Float32Array(particleCount * 3);
+	const targetPositions = new Float32Array(particleCount * 3);
+	const velocities = new Float32Array(particleCount * 3);
 	const uvs = new Float32Array(particleCount * 2);
 	const sizes = new Float32Array(particleCount);
 
@@ -514,8 +516,8 @@ function initWebGL() {
 	let index = 0;
 	for (let i = 0; i < imageWidth; i++) {
 		for (let j = 0; j < imageHeight; j++) {
-			const x = (i / imageWidth) * 16 - 8; // Scale to fit screen
-			const y = (j / imageHeight) * 20 - 10;
+			const x = (i / imageWidth) * 14 - 7;
+			const y = (j / imageHeight) * 16 - 8;
 			const z = 0;
 
 			positions[index * 3] = x;
@@ -526,28 +528,30 @@ function initWebGL() {
 			originalPositions[index * 3 + 1] = y;
 			originalPositions[index * 3 + 2] = z;
 
+			targetPositions[index * 3] = x;
+			targetPositions[index * 3 + 1] = y;
+			targetPositions[index * 3 + 2] = z;
+
+			velocities[index * 3] = 0;
+			velocities[index * 3 + 1] = 0;
+			velocities[index * 3 + 2] = 0;
+
 			uvs[index * 2] = i / imageWidth;
-			uvs[index * 2 + 1] = j / imageHeight; // Remove the flip to fix upside-down issue
+			uvs[index * 2 + 1] = j / imageHeight;
 
-			sizes[index] = Math.random() * 0.5 + 0.3; // Make particles larger and more visible
-
+			sizes[index] = Math.random() * 0.4 + 0.2;
 			index++;
 		}
 	}
 
 	geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-	geometry.setAttribute('originalPosition', new THREE.BufferAttribute(originalPositions, 3));
 	geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
 	geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
 	// Custom shader material
 	const vertexShader = `
-		uniform float uTime;
-		uniform vec2 uMouse;
-		uniform float uMouseStrength;
 		uniform sampler2D uTexture;
 		
-		attribute vec3 originalPosition;
 		attribute float size;
 		
 		varying vec2 vUv;
@@ -555,32 +559,11 @@ function initWebGL() {
 		
 		void main() {
 			vUv = uv;
-			
-			vec3 pos = originalPosition;
-			
-			// Mouse interaction
-			vec2 mousePos = uMouse;
-			float mouseDistance = distance(uv, mousePos);
-			float mouseInfluence = smoothstep(0.3, 0.0, mouseDistance) * uMouseStrength;
-			
-			// Displacement direction from mouse
-			vec2 direction = normalize(uv - mousePos);
-			
-			// Apply displacement
-			pos.x += direction.x * mouseInfluence * 15.0;
-			pos.y += direction.y * mouseInfluence * 15.0;
-			pos.z += mouseInfluence * 8.0;
-			
-			// Add some wave motion
-			pos.x += sin(originalPosition.y * 0.3 + uTime * 2.0) * 0.5;
-			pos.y += cos(originalPosition.x * 0.3 + uTime * 1.5) * 0.3;
-			
-			// Sample color from texture
 			vColor = texture2D(uTexture, uv);
 			
-			vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+			vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
 			gl_Position = projectionMatrix * mvPosition;
-			gl_PointSize = size * (300.0 / -mvPosition.z) * (1.0 + mouseInfluence * 3.0);
+			gl_PointSize = size * (400.0 / -mvPosition.z);
 		}
 	`;
 
@@ -589,75 +572,149 @@ function initWebGL() {
 		varying vec4 vColor;
 		
 		void main() {
-			// Create circular particles
 			vec2 center = gl_PointCoord - vec2(0.5);
 			float dist = length(center);
 			
 			if (dist > 0.5) discard;
 			
-			float alpha = 1.0 - smoothstep(0.1, 0.5, dist); // Make particles more solid
-			gl_FragColor = vec4(vColor.rgb, alpha * 0.9); // Increase overall opacity
+			float alpha = 1.0 - smoothstep(0.2, 0.5, dist);
+			
+			// Brighten colors for better visibility
+			vec3 brightColor = vColor.rgb * 1.8;
+			brightColor = pow(brightColor, vec3(0.9));
+			
+			gl_FragColor = vec4(brightColor, alpha * 0.95);
 		}
 	`;
 
 	const material = new THREE.ShaderMaterial({
 		uniforms: {
-			uTime: { value: 0.0 },
-			uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-			uMouseStrength: { value: 0.0 },
 			uTexture: { value: imageTexture }
 		},
 		vertexShader: vertexShader,
 		fragmentShader: fragmentShader,
 		transparent: true
-		// Removed additive blending to make image clearer
 	});
 
 	const particleSystem = new THREE.Points(geometry, material);
 	scene.add(particleSystem);
 
-	camera.position.z = 25;
+	camera.position.z = 20;
 
-	// Mouse interaction variables
-	let mouseX = 0.5;
-	let mouseY = 0.5;
-	let mouseStrength = 0.0;
-	let targetMouseStrength = 0.0;
+	// Mouse/drag interaction variables
+	let isDragging = false;
+	let mouseX = 0;
+	let mouseY = 0;
+	let dragForce = 0;
+	let animationProgress = 0;
+	let isReturning = false;
 
 	// Mouse event handlers
+	function onMouseDown(event) {
+		isDragging = true;
+		isReturning = false;
+		container.style.cursor = 'grabbing';
+		updateMousePosition(event);
+	}
+
 	function onMouseMove(event) {
+		updateMousePosition(event);
+
+		if (isDragging) {
+			dragForce = Math.min(dragForce + 0.02, 1.0);
+			animationProgress = Math.min(animationProgress + 0.015, 1.0);
+
+			// Calculate displacement for particles
+			for (let i = 0; i < particleCount; i++) {
+				const originalX = originalPositions[i * 3];
+				const originalY = originalPositions[i * 3 + 1];
+				const originalZ = originalPositions[i * 3 + 2];
+
+				// Distance from mouse
+				const screenX = (originalX + 7) / 14; // Normalize to 0-1
+				const screenY = (originalY + 8) / 16; // Normalize to 0-1
+				const mouseDistance = Math.sqrt(
+					Math.pow(screenX - mouseX, 2) +
+					Math.pow(screenY - mouseY, 2)
+				);
+
+				// Explosive displacement
+				const maxDistance = 0.4;
+				if (mouseDistance < maxDistance) {
+					const force = (maxDistance - mouseDistance) / maxDistance;
+					const angle = Math.atan2(screenY - mouseY, screenX - mouseX);
+
+					const displaceX = Math.cos(angle) * force * 12 * animationProgress;
+					const displaceY = Math.sin(angle) * force * 12 * animationProgress;
+					const displaceZ = force * 6 * animationProgress;
+
+					targetPositions[i * 3] = originalX + displaceX;
+					targetPositions[i * 3 + 1] = originalY + displaceY;
+					targetPositions[i * 3 + 2] = originalZ + displaceZ;
+				}
+			}
+		}
+	}
+
+	function onMouseUp(event) {
+		isDragging = false;
+		isReturning = true;
+		container.style.cursor = 'grab';
+	}
+
+	function updateMousePosition(event) {
 		const rect = container.getBoundingClientRect();
 		mouseX = (event.clientX - rect.left) / rect.width;
 		mouseY = 1.0 - (event.clientY - rect.top) / rect.height;
-		targetMouseStrength = 1.0;
-	}
-
-	function onMouseLeave() {
-		targetMouseStrength = 0.0;
 	}
 
 	// Add event listeners
+	container.addEventListener('mousedown', onMouseDown);
 	container.addEventListener('mousemove', onMouseMove);
-	container.addEventListener('mouseleave', onMouseLeave);
+	container.addEventListener('mouseup', onMouseUp);
+	container.style.cursor = 'grab';
 
 	// Animation loop
 	function animate() {
 		requestAnimationFrame(animate);
 
-		const time = Date.now() * 0.001;
+		const positionAttribute = geometry.attributes.position;
 
-		// Smooth mouse strength transition
-		mouseStrength += (targetMouseStrength - mouseStrength) * 0.1;
+		// Return to original positions when not dragging
+		if (isReturning) {
+			animationProgress = Math.max(animationProgress - 0.03, 0);
+			dragForce = Math.max(dragForce - 0.05, 0);
 
-		// Update uniforms
-		material.uniforms.uTime.value = time;
-		material.uniforms.uMouse.value.set(mouseX, mouseY);
-		material.uniforms.uMouseStrength.value = mouseStrength;
+			if (animationProgress <= 0) {
+				isReturning = false;
+			}
+		}
 
-		// Subtle camera movement
-		camera.position.x = (mouseX - 0.5) * 2;
-		camera.position.y = (mouseY - 0.5) * 2;
-		camera.lookAt(scene.position);
+		// Update particle positions with smooth interpolation
+		for (let i = 0; i < particleCount; i++) {
+			const originalX = originalPositions[i * 3];
+			const originalY = originalPositions[i * 3 + 1];
+			const originalZ = originalPositions[i * 3 + 2];
+
+			const targetX = targetPositions[i * 3];
+			const targetY = targetPositions[i * 3 + 1];
+			const targetZ = targetPositions[i * 3 + 2];
+
+			// Smooth interpolation
+			const lerpFactor = 0.1;
+			positions[i * 3] += (targetX - positions[i * 3]) * lerpFactor;
+			positions[i * 3 + 1] += (targetY - positions[i * 3 + 1]) * lerpFactor;
+			positions[i * 3 + 2] += (targetZ - positions[i * 3 + 2]) * lerpFactor;
+
+			// Return to original when not dragging
+			if (!isDragging) {
+				targetPositions[i * 3] = originalX;
+				targetPositions[i * 3 + 1] = originalY;
+				targetPositions[i * 3 + 2] = originalZ;
+			}
+		}
+
+		positionAttribute.needsUpdate = true;
 
 		renderer.render(scene, camera);
 	}
@@ -674,14 +731,13 @@ function initWebGL() {
 	}
 
 	window.addEventListener('resize', handleResize);
-
-	// Initial resize
 	setTimeout(handleResize, 100);
 
-	// Cleanup function
+	// Cleanup
 	return function cleanup() {
+		container.removeEventListener('mousedown', onMouseDown);
 		container.removeEventListener('mousemove', onMouseMove);
-		container.removeEventListener('mouseleave', onMouseLeave);
+		container.removeEventListener('mouseup', onMouseUp);
 		window.removeEventListener('resize', handleResize);
 		if (container.contains(renderer.domElement)) {
 			container.removeChild(renderer.domElement);

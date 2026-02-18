@@ -79,8 +79,21 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.domElement.style.width = "100%";
-renderer.domElement.style.height = "100%";
+
+function handleResize() {
+	const width = window.innerWidth;
+	const height = window.innerHeight;
+
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize(width, height);
+}
+
+window.addEventListener("resize", handleResize);
+handleResize();
+
+
 
 function resizeRenderer() {
 	const width = window.innerWidth;
@@ -109,15 +122,19 @@ const material = new THREE.ShaderMaterial({
         }
     `,
 	fragmentShader: `
-        uniform float uTime;
-        varying vec2 vUv;
+      uniform float uTime;
+    varying vec2 vUv;
 
-        void main(){
-            float wave = sin(vUv.x * 8.0 + uTime) * 0.01;
-            vec3 base = vec3(0.06, 0.07, 0.1);
-            vec3 color = base + wave;
-            gl_FragColor = vec4(color, 0.9);
-        }
+    void main(){
+        float wave = sin(vUv.x * 8.0 + uTime) * 0.08;
+        float wave2 = cos(vUv.y * 6.0 + uTime * 0.6) * 0.08;
+
+        vec3 deep = vec3(0.02, 0.02, 0.05);
+        vec3 purple = vec3(0.4, 0.0, 0.8);
+
+        vec3 color = deep + (wave + wave2) * purple;
+
+        gl_FragColor = vec4(color, 1.0);
     `
 });
 

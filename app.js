@@ -1,60 +1,53 @@
 gsap.registerPlugin(ScrollTrigger);
 
 /* =====================================================
-	 INTRO VIDEO LOGIC
+	 SAFE INTRO SYSTEM — no early removal
 ===================================================== */
 
 const introVideo = document.getElementById("introVideo");
-const introContainer = document.querySelector(".intro-video");
+let introFinished = false;
 
-document.body.classList.add("no-scroll");
+function finishIntro() {
+	if (introFinished) return;
+	introFinished = true;
 
-// If video fails → skip intro
-introVideo.addEventListener("error", skipIntro);
-introVideo.addEventListener("abort", skipIntro);
+	const intro = document.querySelector(".intro-video");
+	if (intro) intro.remove();
 
-function skipIntro() {
-	if (introContainer) introContainer.remove();
 	document.body.classList.remove("no-scroll");
-	document.body.style.overflow = "auto";
+
+	const canvas = document.getElementById("webgl");
+	canvas.classList.remove("webgl-hidden");
+
+	ScrollTrigger.refresh(true);
 
 	initWebGL();
-	initHeroAnimations();
 	initSkillsAnimation();
-	ScrollTrigger.refresh(true);
 }
 
-// When video ends → fade out intro, fade in site
-introVideo.addEventListener("ended", () => {
-	gsap.to(introContainer, {
-		opacity: 0,
-		duration: 1.2,
-		ease: "power2.out",
-		onComplete: () => {
-			introContainer.remove();
-			document.body.classList.remove("no-scroll");
-			document.body.style.overflow = "auto";
+/* End intro ONLY when safe */
+introVideo?.addEventListener("ended", finishIntro);
+introVideo?.addEventListener("error", finishIntro);
+introVideo?.addEventListener("abort", finishIntro);
 
-			initWebGL();
-			initHeroAnimations();
-			initSkillsAnimation();
-			ScrollTrigger.refresh(true);
-		}
-	});
-});
+/* Fallback ONLY for mobile autoplay restrictions */
+setTimeout(() => {
+	if (!introFinished) finishIntro();
+}, 5000);
 
 
 /* =====================================================
-	 WEBGL — PEBBLE-IN-INK BACKGROUND
+	 WEBGL — Dual Layer Ripple Background (fixed brightness)
 ===================================================== */
 
 function initWebGL() {
 	if (!window.THREE) {
-		console.error("THREE.js NOT loaded.");
+		console.error("THREE.js failed to load.");
 		return;
 	}
 
 	const canvas = document.getElementById("webgl");
+
 	const scene = new THREE.Scene();
 
 	const camera = new THREE.PerspectiveCamera(
@@ -63,34 +56,28 @@ function initWebGL() {
 		0.1,
 		100
 	);
-	camera.position.z = 1.6;
+	camera.position.z = 1.5;
 
 	const renderer = new THREE.WebGLRenderer({
-		canvas: canvas,
-		alpha: false,
+		canvas,
 		antialias: true
 	});
 
+	renderer.setPixelRatio(window.devicePixelRatio);
 	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-	/* ------------------------------
-		 SHADER UNIFORMS
-	------------------------------ */
-
+	/* UNIFORMS */
 	const uniforms = {
 		uTime: { value: 0 },
 		uMouse: { value: new THREE.Vector2(0.5, 0.5) }
 	};
 
-	/* ------------------------------
-		 GEOMETRY + MATERIAL
-	------------------------------ */
+	/* GEOMETRY */
+	const geometry = new THREE.PlaneGeometry(3, 3, 64, 64);
 
-	const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
-
+	/* SHADER — boosted color so it's not dark */
 	const material = new THREE.ShaderMaterial({
-		uniforms: uniforms,
+		uniforms,
 		vertexShader: `
 			varying vec2 vUv;
 
@@ -106,25 +93,26 @@ function initWebGL() {
 
 			void main() {
 
-				/* Base deep ink background */
-				vec3 base = vec3(0.02, 0.02, 0.04);
+				/* Dual-wave background */
+				float waveA = sin(vUv.x * 6.0 + uTime * 0.8) * 0.25;
+				float waveB = cos(vUv.y * 8.0 + uTime * 1.3) * 0.25;
 
-				/* Soft wave layers */
-				float waveA = sin(vUv.x * 6.0 + uTime * 0.6) * 0.03;
-				float waveB = cos(vUv.y * 7.0 + uTime * 0.8) * 0.03;
+				vec3 magenta = vec3(1.0, 0.2, 1.0);
+				vec3 blue = vec3(0.1, 0.5, 1.0);
+				vec3 base = vec3(0.08, 0.05, 0.12);
 
-				vec3 waveTint = vec3(0.2, 0.0, 0.5);  
-				vec3 layer = base + (waveA + waveB) * waveTint;
+				vec3 color =
+					base +
+					magenta * (waveA + 0.5) * 0.6 +
+					blue * (waveB + 0.5) * 0.6;
 
-				/* Mouse ripple effect */
+				/* Mouse ripple */
 				float dist = distance(vUv, uMouse);
-				float ripple = sin(dist * 40.0 - uTime * 4.0) * 0.015;
-				ripple /= (dist * 20.0 + 1.0);
+				float ripple = 0.06 / dist;
 
-				vec3 rippleTint = vec3(0.5, 0.1, 0.9);
-				layer += ripple * rippleTint;
+				color += ripple * vec3(1.0, 0.2, 1.0);
 
-				gl_FragColor = vec4(layer, 1.0);
+				gl_FragColor = vec4(color, 1.0);
 			}
 		`
 	});
@@ -132,77 +120,66 @@ function initWebGL() {
 	const mesh = new THREE.Mesh(geometry, material);
 	scene.add(mesh);
 
-	/* ------------------------------
-		 MOUSE INTERACTION
-	------------------------------ */
-
-	window.addEventListener("mousemove", e => {
-		const x = e.clientX / window.innerWidth;
-		const y = 1.0 - e.clientY / window.innerHeight;
-		uniforms.uMouse.value.set(x, y);
+	/* Mouse interaction */
+	window.addEventListener("mousemove", (e) => {
+		uniforms.uMouse.value.x = e.clientX / window.innerWidth;
+		uniforms.uMouse.value.y = 1.0 - e.clientY / window.innerHeight;
 	});
 
-	/* ------------------------------
-		 ANIMATION LOOP
-	------------------------------ */
-
+	/* Animation */
 	function animate() {
-		uniforms.uTime.value += 0.02;
+		uniforms.uTime.value += 0.015;
 		renderer.render(scene, camera);
 		requestAnimationFrame(animate);
 	}
-
 	animate();
 
-	/* ------------------------------
-		 Resize Fix
-	------------------------------ */
-
+	/* Resize fix */
 	window.addEventListener("resize", () => {
-		renderer.setSize(window.innerWidth, window.innerHeight);
-		camera.aspect = window.innerWidth / window.innerHeight;
+		const w = window.innerWidth;
+		const h = window.innerHeight;
+		renderer.setSize(w, h);
+		camera.aspect = w / h;
 		camera.updateProjectionMatrix();
 	});
 }
 
 
 /* =====================================================
-	 HERO TEXT ANIMATION
+	 HERO ANIMATION
 ===================================================== */
 
-function initHeroAnimations() {
-	gsap.from(".hero-title", {
-		opacity: 0,
-		y: 60,
-		duration: 1.4,
-		ease: "power4.out"
-	});
+gsap.from(".hero-title", {
+	opacity: 0,
+	y: 40,
+	duration: 1.4,
+	ease: "power3.out",
+	delay: 0.3
+});
 
-	gsap.from(".hero-sub", {
-		opacity: 0,
-		y: 40,
-		duration: 1.4,
-		delay: 0.2,
-		ease: "power4.out"
-	});
-}
+gsap.from(".hero-sub", {
+	opacity: 0,
+	y: 35,
+	duration: 1.4,
+	ease: "power3.out",
+	delay: 0.5
+});
 
 
 /* =====================================================
-	 SKILLS TIMELINE ANIMATION
+	 SKILLS
 ===================================================== */
 
 function initSkillsAnimation() {
 	gsap.utils.toArray(".skill-item").forEach((item) => {
-		gsap.from(item, {
-			opacity: 0,
-			y: 40,
+		gsap.to(item, {
+			opacity: 1,
+			y: 0,
 			duration: 1.1,
 			ease: "power3.out",
 			scrollTrigger: {
 				trigger: item,
-				start: "top 85%",
-				toggleActions: "play none none none"
+				start: "top 85%"
 			}
 		});
 	});
@@ -210,16 +187,15 @@ function initSkillsAnimation() {
 
 
 /* =====================================================
-	 WORK CARD ANIMATIONS
+	 WORK CARD ANIMATION
 ===================================================== */
 
 gsap.utils.toArray(".glass-card").forEach((card, i) => {
 	gsap.from(card, {
 		opacity: 0,
-		y: 60,
+		y: 50,
 		duration: 1,
 		delay: i * 0.1,
-		ease: "power3.out",
 		scrollTrigger: {
 			trigger: card,
 			start: "top 85%"
@@ -228,42 +204,30 @@ gsap.utils.toArray(".glass-card").forEach((card, i) => {
 });
 
 
-/* Hover float */
-document.querySelectorAll(".glass-card").forEach(card => {
-	card.addEventListener("mouseenter", () => {
-		gsap.to(card, { y: -12, duration: 0.3, ease: "power2.out" });
-	});
-	card.addEventListener("mouseleave", () => {
-		gsap.to(card, { y: 0, duration: 0.3, ease: "power2.inOut" });
-	});
-});
-
-
 /* =====================================================
-	 MODAL SYSTEM
+	 MODALS
 ===================================================== */
 
 const overlay = document.getElementById("modalOverlay");
 const modalButtons = document.querySelectorAll(".view-btn");
 
-modalButtons.forEach((btn, index) => {
-	btn.addEventListener("click", () => openModal(index + 1));
-});
+modalButtons.forEach((btn, index) =>
+	btn.addEventListener("click", () => openModal(index + 1))
+);
 
 function openModal(id) {
 	const modal = document.getElementById(`modal${id}`);
-
 	document.body.classList.add("no-scroll");
 
 	gsap.set(modal.querySelector(".modal-content"), { opacity: 0, y: 40 });
 
-	gsap.to(overlay, { opacity: 1, pointerEvents: "all", duration: 0.3 });
-	gsap.to(modal, { opacity: 1, pointerEvents: "all", duration: 0.3 });
+	gsap.to(overlay, { opacity: 1, pointerEvents: "all", duration: 0.35 });
+	gsap.to(modal, { opacity: 1, pointerEvents: "all", duration: 0.35 });
 
 	gsap.to(modal.querySelector(".modal-content"), {
 		opacity: 1,
 		y: 0,
-		duration: 0.5,
+		duration: 0.6,
 		ease: "power3.out"
 	});
 }
@@ -274,34 +238,12 @@ document.querySelectorAll(".close-modal").forEach(btn =>
 
 overlay.addEventListener("click", closeModal);
 
-document.addEventListener("keydown", e => {
-	if (e.key === "Escape") closeModal();
-});
-
 function closeModal() {
 	document.body.classList.remove("no-scroll");
 
-	gsap.to(overlay, { opacity: 0, pointerEvents: "none", duration: 0.3 });
+	gsap.to(".modal-overlay", { opacity: 0, pointerEvents: "none", duration: 0.3 });
 	gsap.to(".modal", { opacity: 0, pointerEvents: "none", duration: 0.3 });
 }
-
-
-/* =====================================================
-	 SECTION DIVIDER ANIMATION
-===================================================== */
-
-gsap.utils.toArray(".section-divider").forEach(div => {
-	gsap.from(div, {
-		opacity: 0,
-		scaleX: 0.4,
-		duration: 1,
-		ease: "power3.out",
-		scrollTrigger: {
-			trigger: div,
-			start: "top 85%"
-		}
-	});
-});
 
 
 /* =====================================================
@@ -312,7 +254,7 @@ const progressBar = document.querySelector(".scroll-progress");
 
 window.addEventListener("scroll", () => {
 	const scrollTop = window.scrollY;
-	const docHeight = document.body.scrollHeight - window.innerHeight;
+	const docHeight = document.body.scrollHeight - innerHeight;
 	const progress = (scrollTop / docHeight) * 100;
 	progressBar.style.height = progress + "%";
 });

@@ -320,3 +320,71 @@ window.addEventListener("scroll", () => {
 	const progress = (scrollTop / docHeight) * 100;
 	progressBar.style.height = progress + "%";
 });
+
+
+/* =====================================================
+	 PREMIUM — MAGNETIC CURSOR
+===================================================== */
+
+const cursor = document.querySelector(".custom-cursor");
+window.addEventListener("mousemove", (e) => {
+	cursor.style.top = e.clientY + "px";
+	cursor.style.left = e.clientX + "px";
+});
+
+
+/* Magnetic attraction */
+document.querySelectorAll("a, button, .glass-card").forEach(el => {
+	el.addEventListener("mousemove", (e) => {
+		const rect = el.getBoundingClientRect();
+		const x = e.clientX - rect.left - rect.width / 2;
+		const y = e.clientY - rect.top - rect.height / 2;
+
+		el.style.transform = `translate(${x * 0.1}px, ${y * 0.1}px) scale(1.03)`;
+	});
+
+	el.addEventListener("mouseleave", () => {
+		el.style.transform = "translate(0,0) scale(1)";
+	});
+});
+
+/* =====================================================
+	 HERO — Scroll Light Sweep
+===================================================== */
+
+gsap.to(".hero-title::after", {
+	// DOES NOT DIRECTLY WORK — needs CSSRulePlugin
+	// We implement a simpler sweep below instead
+});
+
+/* Simple sweep using opacity + movement */
+gsap.to(".hero-title::after", {
+	xPercent: 180,
+	scrollTrigger: {
+		trigger: ".hero",
+		start: "top 20%",
+		end: "bottom top",
+		scrub: 1.2
+	}
+});
+
+/* =====================================================
+	 PARALLAX SECTION FLOAT
+===================================================== */
+
+gsap.utils.toArray(".parallax-section").forEach((sec, i) => {
+	gsap.fromTo(sec,
+		{ y: 0 },
+		{
+			y: 40,
+			ease: "none",
+			scrollTrigger: {
+				trigger: sec,
+				start: "top bottom",
+				end: "bottom top",
+				scrub: 1.3
+			}
+		}
+	);
+});
+

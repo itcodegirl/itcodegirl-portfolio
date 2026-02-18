@@ -87,8 +87,12 @@ function initWebGL() {
 
 	const textureLoader = new THREE.TextureLoader();
 
+	const imagePath = window.location.hostname.includes("github.io")
+		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
+		: "Jenna_robot_1.jpg";
+
 	textureLoader.load(
-		'Jenna_robot_1.jpg',
+		'/itcodegirl-portfolio/Jenna_robot_1.jpg',
 		(texture) => {
 
 			texture.minFilter = THREE.LinearFilter;

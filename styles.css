@@ -366,3 +366,85 @@ section h2::after {
 		left: -36px;
 	}
 }
+
+/* ======================================================
+   PREMIUM INTERACTION PACK — CURSOR
+====================================================== */
+
+.custom-cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 22px;
+	height: 22px;
+	border: 2px solid rgba(255, 255, 255, 0.7);
+	border-radius: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	z-index: 999999;
+	transition: width .25s ease, height .25s ease, background .25s ease, border .25s ease;
+	backdrop-filter: blur(4px);
+}
+
+/* Grow cursor on hover targets */
+[data-cursor="link"]:hover~.custom-cursor,
+a:hover~.custom-cursor,
+button:hover~.custom-cursor {
+	width: 38px;
+	height: 38px;
+	background: rgba(255, 255, 255, 0.15);
+	border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ======================================================
+   PARALLAX LIGHT SWEEP (hero)
+====================================================== */
+
+.hero-title {
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-title::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+	transform: translateX(-150%);
+	opacity: 0.45;
+	pointer-events: none;
+}
+
+/* ======================================================
+   BUTTON MICRO INTERACTIONS
+====================================================== */
+
+.view-btn,
+button,
+.glass-card {
+	transition: transform .35s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
+}
+
+.view-btn:hover,
+button:hover {
+	transform: translateY(-3px) scale(1.03);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* ======================================================
+   LINK GLOW
+====================================================== */
+
+nav a:hover {
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+/* ======================================================
+   SECTION PARALLAX DEPTH
+====================================================== */
+
+.parallax-section {
+	transform: translateY(0px);
+	will-change: transform;
+	transition: transform 0.2s ease-out;
+}

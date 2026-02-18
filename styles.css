@@ -19,6 +19,11 @@ body.no-scroll {
 	overflow: hidden;
 }
 
+body>*:not(#webgl) {
+	position: relative;
+	z-index: 10;
+}
+
 /* ======================================================
    INTRO VIDEO LAYER
 ====================================================== */
@@ -44,14 +49,14 @@ body.no-scroll {
 #webgl {
 	position: fixed;
 	inset: 0;
-	z-index: -10;
 	width: 100%;
 	height: 100%;
-	display: block;
 	pointer-events: none;
-	background: #0e0e12;
-	/* fallback color */
+
+	/* make it go behind everything */
+	z-index: -9999;
 }
+
 
 .webgl-hidden {
 	opacity: 0;

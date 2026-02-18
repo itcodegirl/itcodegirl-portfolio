@@ -40,7 +40,7 @@ body.no-scroll {
 #webgl {
 	position: fixed;
 	inset: 0;
-	z-index: -1;
+	z-index: 0;
 	pointer-events: none;
 }
 
@@ -275,13 +275,19 @@ section h2::after {
 	}
 }
 
+
 /* =========================
    SKILLS — GLOWING TIMELINE
 ========================= */
 
+main {
+	position: relative;
+	z-index: 2;
+}
+
 .skills {
 	position: relative;
-	z-index: 5;
+	z-index: 3;
 	padding: 160px 60px;
 	max-width: 1200px;
 	margin: auto;
@@ -312,7 +318,7 @@ section h2::after {
 	position: relative;
 	margin-bottom: 50px;
 	transform: translateY(40px);
-	z-index: 6;
+	z-index: 4;
 }
 
 /* Glowing dot */

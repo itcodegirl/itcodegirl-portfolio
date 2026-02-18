@@ -4,45 +4,31 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Jenna Zawaski | Frontend Developer</title>
+	<title>Jenna Zawaski | AI Frontend Developer</title>
 
-	<!-- Fonts -->
 	<link
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
 
-	<!-- Three.js -->
 	<script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
-
-	<!-- GSAP with TimelineMax -->
 	<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 	<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"></script>
 
-	<!-- Three.js BAS (Buffer Animation System) - Optional for advanced effects -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
-
-	<link rel="stylesheet" href="styles.css?v=3">
+	<link rel="stylesheet" href="styles.css">
 </head>
-
-<div class="custom-cursor"></div>
 
 <body class="no-scroll">
 
-	<!-- GLOBAL SCROLL PROGRESS BAR -->
+	<div class="custom-cursor"></div>
+
 	<div class="scroll-progress"></div>
 
-	<!-- INTRO VIDEO -->
 	<div class="intro-video">
-		<video autoplay muted playsinline id="introVideo" aria-label="Intro animation video">
+		<video autoplay muted playsinline id="introVideo">
 			<source src="assets/intro.mp4" type="video/mp4">
 		</video>
 	</div>
 
-	<!-- WEBGL BACKGROUND -->
-	<canvas id="webgl" class="webgl-hidden"></canvas>
-
-	<!-- NAVIGATION -->
 	<header class="nav nav-show">
 		<div class="nav-inner">
 			<div class="logo">JZ</div>
@@ -57,18 +43,25 @@
 
 	<main>
 
-		<!-- HERO SECTION -->
 		<section class="hero">
 			<div class="hero-container">
+
 				<div class="hero-content">
 					<h1 class="hero-title">
-						Designing digital experiences<br />
-						that feel intentional.
+						Engineering intelligent digital systems.
 					</h1>
-					<p class="hero-sub">Junior Frontend Developer crafting responsive, elegant interfaces.</p>
+					<p class="hero-sub">
+						Frontend Developer building immersive AI-driven experiences.
+					</p>
 				</div>
+
+				<div class="hero-visual">
+					<div id="three-container"></div>
+				</div>
+
 			</div>
 		</section>
+
 
 		<!-- WORK SECTION -->
 		<section class="work" id="work">

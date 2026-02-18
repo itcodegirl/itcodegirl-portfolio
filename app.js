@@ -72,13 +72,30 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 2;
 
 const renderer = new THREE.WebGLRenderer({
-	canvas,
+	canvas: canvas,
 	alpha: true,
 	antialias: true
 });
 
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.domElement.style.width = "100%";
+renderer.domElement.style.height = "100%";
+
+function resizeRenderer() {
+	const width = window.innerWidth;
+	const height = window.innerHeight;
+
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+
+	renderer.setSize(width, height, false);
+}
+
+window.addEventListener("resize", resizeRenderer);
+resizeRenderer();
+
+
 
 const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
 

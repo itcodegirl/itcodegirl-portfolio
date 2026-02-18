@@ -20,6 +20,26 @@ body.no-scroll {
 }
 
 /* ======================================================
+   WEBGL BACKGROUND (MUST COME EARLY)
+====================================================== */
+
+#webgl {
+	position: fixed;
+	inset: 0;
+	z-index: -10;
+	/* Always behind hero & content */
+	width: 100%;
+	height: 100%;
+	display: block;
+	pointer-events: none;
+	background: #000;
+}
+
+.webgl-hidden {
+	opacity: 0;
+}
+
+/* ======================================================
    INTRO VIDEO LAYER
 ====================================================== */
 
@@ -35,26 +55,6 @@ body.no-scroll {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-}
-
-/* ======================================================
-   WEBGL BACKGROUND
-====================================================== */
-
-#webgl {
-	position: fixed;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	display: block;
-	background: black;
-	pointer-events: none;
-	z-index: -1;
-	/* Always behind content */
-}
-
-.webgl-hidden {
-	opacity: 0;
 }
 
 /* ======================================================
@@ -103,7 +103,8 @@ section {
 	z-index: 10;
 }
 
-/* Title Style (Gradient Text) */
+/* Section Titles */
+
 section h2 {
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
@@ -111,10 +112,10 @@ section h2 {
 	margin-bottom: 40px;
 	letter-spacing: 0.6px;
 
-	background: linear-gradient(90deg, #ffffff 0%, #d7d7d7 100%);
-	-webkit-background-clip: text;
+	background: linear-gradient(90deg, #fff 0%, #d7d7d7 100%);
 	background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	color: transparent;
 
 	position: relative;
 }
@@ -131,19 +132,26 @@ section h2::after {
 }
 
 /* ======================================================
-   HERO
+   HERO SECTION
 ====================================================== */
 
 .hero {
+	position: relative;
+	z-index: 5;
 	min-height: 100vh;
+	/* <— THIS IS THE FIX */
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	padding-top: 120px;
+	/* ensures nav doesn’t overlap */
 }
 
 .hero-inner>* {
 	opacity: 0;
-	/* GSAP fades these in */
+	/* Required for GSAP fade-in */
+	position: relative;
+	z-index: 10;
 }
 
 .hero-title {
@@ -308,6 +316,7 @@ section h2::after {
 	opacity: 0;
 	transform: translateY(40px);
 	margin-bottom: 50px;
+	position: relative;
 }
 
 .skill-dot {

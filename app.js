@@ -1,7 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 /* =====================================================
-	 INTRO VIDEO LOGIC
+	 INTRO LOGIC
 ===================================================== */
 
 const introVideo = document.getElementById("introVideo");
@@ -9,255 +9,171 @@ const introContainer = document.querySelector(".intro-video");
 
 document.body.classList.add("no-scroll");
 
-// Fallback
+// Fix: Reveal WebGL after intro ends
+function revealWebGL() {
+	document.getElementById("webgl").classList.remove("webgl-hidden");
+}
+
+/* Fallback */
 introVideo.addEventListener("error", skipIntro);
 introVideo.addEventListener("abort", skipIntro);
 
 function skipIntro() {
+	revealWebGL();
 	introContainer.remove();
 	document.body.classList.remove("no-scroll");
 	document.body.style.overflow = "auto";
+	ScrollTrigger.refresh(true);
+	initWebGL();
+	initSkillsAnimation();
 }
 
-// Fade-out animation after intro video
+/* Fade out intro normally */
 introVideo.addEventListener("ended", () => {
 	gsap.to(introContainer, {
 		opacity: 0,
 		duration: 1.2,
 		ease: "power2.out",
 		onComplete: () => {
+			revealWebGL();
 			introContainer.remove();
 			document.body.classList.remove("no-scroll");
 			document.body.style.overflow = "auto";
-
 			ScrollTrigger.refresh(true);
-
-			// Reveal WebGL
-			gsap.to("#webgl", {
-				opacity: 1,
-				duration: 1.2,
-				ease: "power2.out"
-			});
-
-			// Hero text animation
-			gsap.fromTo(".hero-inner > *",
-				{ opacity: 0, y: 60 },
-				{
-					opacity: 1,
-					y: 0,
-					duration: 1.2,
-					stagger: 0.18,
-					ease: "power4.out",
-					delay: 0.3
-				}
-			);
+			initWebGL();
+			initSkillsAnimation();
 		}
 	});
 });
 
-
 /* =====================================================
-	 WEBGL BACKGROUND
+	 WEBGL SHADER BACKGROUND
 ===================================================== */
 
-const canvas = document.getElementById("webgl");
-const scene = new THREE.Scene();
+function initWebGL() {
+	if (!window.THREE) {
+		console.error("THREE.js not loaded!");
+		return;
+	}
 
-const camera = new THREE.PerspectiveCamera(
-	75,
-	window.innerWidth / window.innerHeight,
-	0.1,
-	100
-);
-camera.position.z = 2;
+	const canvas = document.getElementById("webgl");
+	const scene = new THREE.Scene();
 
-const renderer = new THREE.WebGLRenderer({
-	canvas: canvas,
-	alpha: true,
-	antialias: true
-});
+	const camera = new THREE.PerspectiveCamera(
+		75,
+		window.innerWidth / window.innerHeight,
+		0.1,
+		100
+	);
+	camera.position.z = 1.4;
 
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-
-function handleResize() {
-	const width = window.innerWidth;
-	const height = window.innerHeight;
-
-	camera.aspect = width / height;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize(width, height);
-}
-
-window.addEventListener("resize", handleResize);
-handleResize();
-
-
-
-function resizeRenderer() {
-	const width = window.innerWidth;
-	const height = window.innerHeight;
-
-	camera.aspect = width / height;
-	camera.updateProjectionMatrix();
-
-	renderer.setSize(width, height, false);
-}
-
-window.addEventListener("resize", resizeRenderer);
-resizeRenderer();
-
-
-
-const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
-
-const material = new THREE.ShaderMaterial({
-	uniforms: { uTime: { value: 0 } },
-	vertexShader: `
-        varying vec2 vUv;
-        void main(){
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
-        }
-    `,
-	fragmentShader: `
-      uniform float uTime;
-    varying vec2 vUv;
-
-    void main(){
-        float wave = sin(vUv.x * 8.0 + uTime) * 0.08;
-        float wave2 = cos(vUv.y * 6.0 + uTime * 0.6) * 0.08;
-
-        vec3 deep = vec3(0.02, 0.02, 0.05);
-        vec3 purple = vec3(0.4, 0.0, 0.8);
-
-        vec3 color = deep + (wave + wave2) * purple;
-
-        gl_FragColor = vec4(color, 1.0);
-    `
-});
-
-const mesh = new THREE.Mesh(geometry, material);
-mesh.position.z = -1;
-scene.add(mesh);
-
-function animate() {
-	material.uniforms.uTime.value += 0.01;
-	renderer.render(scene, camera);
-	requestAnimationFrame(animate);
-}
-animate();
-
-window.addEventListener("resize", () => {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
+	const renderer = new THREE.WebGLRenderer({
+		canvas: canvas,
+		antialias: true
+	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
-});
+	renderer.setPixelRatio(window.devicePixelRatio);
 
+	const geometry = new THREE.PlaneGeometry(3, 3, 32, 32);
 
-/* =====================================================
-	 GLOBAL SECTION ANIMATION
-===================================================== */
+	const material = new THREE.ShaderMaterial({
+		uniforms: { uTime: { value: 0 } },
+		vertexShader: `
+			varying vec2 vUv;
+			void main() {
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0);
+			}
+		`,
+		fragmentShader: `
+			uniform float uTime;
+			varying vec2 vUv;
 
-gsap.utils.toArray("main section:not(#about):not(#skills)").forEach(section => {
-	gsap.from(section, {
-		opacity: 0,
-		y: 70,
-		duration: 1,
-		ease: "power3.out",
-		scrollTrigger: {
-			trigger: section,
-			start: "top 80%"
-		}
+			void main() {
+				float wave1 = sin(vUv.x * 6.0 + uTime) * 0.15;
+				float wave2 = cos(vUv.y * 4.0 + uTime * 0.5) * 0.12;
+
+				vec3 deepBlue = vec3(0.05, 0.06, 0.12);
+				vec3 magenta = vec3(0.8, 0.0, 1.0);
+
+				vec3 color = deepBlue + (wave1 + wave2) * magenta;
+
+				gl_FragColor = vec4(color, 1.0);
+			}
+		`
 	});
-});
 
+	const mesh = new THREE.Mesh(geometry, material);
+	scene.add(mesh);
 
-/* =====================================================
-	 ABOUT SECTION
-===================================================== */
-
-gsap.from("#about h2", {
-	opacity: 0,
-	y: 30,
-	duration: 1,
-	ease: "power3.out",
-	scrollTrigger: {
-		trigger: "#about",
-		start: "top 85%"
+	function animate() {
+		material.uniforms.uTime.value += 0.02;
+		renderer.render(scene, camera);
+		requestAnimationFrame(animate);
 	}
-});
+	animate();
 
-gsap.from(".about-text", {
-	opacity: 0,
-	y: 40,
-	duration: 1.2,
-	ease: "power3.out",
-	scrollTrigger: {
-		trigger: ".about-text",
-		start: "top 80%"
-	}
-});
-
-
-/* =====================================================
-	 SKILLS — GLOWING TIMELINE (A2)
-===================================================== */
-
-gsap.utils.toArray(".skill-item").forEach((item) => {
-	gsap.from(item, {
-		opacity: 0,
-		y: 40,
-		duration: 1,
-		ease: "power3.out",
-		scrollTrigger: {
-			trigger: item,
-			start: "top 85%",
-			toggleActions: "play none none none"
-		}
+	window.addEventListener("resize", () => {
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
 	});
-});
-
-
+}
 
 /* =====================================================
-	 WORK CARD ANIMATIONS
+	 SKILLS ANIMATION
+===================================================== */
+
+function initSkillsAnimation() {
+	gsap.utils.toArray(".skill-item").forEach(item => {
+		gsap.fromTo(
+			item,
+			{ opacity: 0, y: 40 },
+			{
+				opacity: 1,
+				y: 0,
+				duration: 1.1,
+				ease: "power3.out",
+				scrollTrigger: {
+					trigger: item,
+					start: "top 85%"
+				}
+			}
+		);
+	});
+}
+
+/* =====================================================
+	 WORK CARDS
 ===================================================== */
 
 gsap.utils.toArray(".glass-card").forEach((card, i) => {
 	gsap.from(card, {
 		opacity: 0,
-		y: 50,
+		y: 60,
 		duration: 1,
-		delay: i * 0.1,
-		ease: "power3.out",
-		scrollTrigger: {
-			trigger: card,
-			start: "top 85%"
-		}
+		delay: i * 0.12,
+		scrollTrigger: { trigger: card, start: "top 85%" }
 	});
 });
 
-// Hover float
+/* Float hover */
 document.querySelectorAll(".glass-card").forEach(card => {
 	card.addEventListener("mouseenter", () => {
-		gsap.to(card, { y: -12, duration: 0.3, ease: "power2.out" });
+		gsap.to(card, { y: -12, duration: 0.3 });
 	});
 	card.addEventListener("mouseleave", () => {
-		gsap.to(card, { y: 0, duration: 0.3, ease: "power2.inOut" });
+		gsap.to(card, { y: 0, duration: 0.3 });
 	});
 });
 
-
 /* =====================================================
-	 MODAL SYSTEM
+	 MODALS
 ===================================================== */
 
 const overlay = document.getElementById("modalOverlay");
-const modalButtons = document.querySelectorAll(".view-btn");
 
-modalButtons.forEach((btn, index) => {
+document.querySelectorAll(".view-btn").forEach((btn, index) => {
 	btn.addEventListener("click", () => openModal(index + 1));
 });
 
@@ -266,38 +182,29 @@ function openModal(id) {
 
 	document.body.classList.add("no-scroll");
 
-	gsap.set(modal.querySelector(".modal-content"), { opacity: 0, y: 40 });
-
-	gsap.to(overlay, { opacity: 1, pointerEvents: "all", duration: 0.35 });
-	gsap.to(modal, { opacity: 1, pointerEvents: "all", duration: 0.35 });
-
+	gsap.to(overlay, { opacity: 1, pointerEvents: "auto", duration: 0.3 });
+	gsap.to(modal, { opacity: 1, pointerEvents: "auto", duration: 0.3 });
 	gsap.to(modal.querySelector(".modal-content"), {
 		opacity: 1,
 		y: 0,
-		duration: 0.6,
-		ease: "power3.out"
+		duration: 0.6
 	});
 }
 
 document.querySelectorAll(".close-modal").forEach(btn =>
 	btn.addEventListener("click", closeModal)
 );
+
 overlay.addEventListener("click", closeModal);
-document.addEventListener("keydown", e => {
-	if (e.key === "Escape") closeModal();
-});
 
 function closeModal() {
 	document.body.classList.remove("no-scroll");
-
 	gsap.to(".modal-overlay", { opacity: 0, pointerEvents: "none", duration: 0.3 });
 	gsap.to(".modal", { opacity: 0, pointerEvents: "none", duration: 0.3 });
-	gsap.to(".modal-content", { opacity: 0, y: 40, duration: 0.4 });
 }
 
-
 /* =====================================================
-	 SECTION DIVIDER ANIMATION
+	 SECTION DIVIDER
 ===================================================== */
 
 gsap.utils.toArray(".section-divider").forEach(div => {
@@ -305,14 +212,9 @@ gsap.utils.toArray(".section-divider").forEach(div => {
 		opacity: 0,
 		scaleX: 0.4,
 		duration: 1.2,
-		ease: "power3.out",
-		scrollTrigger: {
-			trigger: div,
-			start: "top 80%"
-		}
+		scrollTrigger: { trigger: div, start: "top 80%" }
 	});
 });
-
 
 /* =====================================================
 	 HERO PARALLAX
@@ -320,7 +222,6 @@ gsap.utils.toArray(".section-divider").forEach(div => {
 
 gsap.to(".hero-title", {
 	yPercent: 10,
-	ease: "none",
 	scrollTrigger: {
 		trigger: ".hero",
 		start: "top top",
@@ -331,7 +232,6 @@ gsap.to(".hero-title", {
 
 gsap.to(".hero-sub", {
 	yPercent: 20,
-	ease: "none",
 	scrollTrigger: {
 		trigger: ".hero",
 		start: "top top",
@@ -340,9 +240,8 @@ gsap.to(".hero-sub", {
 	}
 });
 
-
 /* =====================================================
-	 SCROLL PROGRESS BAR
+	 SCROLL PROGRESS
 ===================================================== */
 
 const progressBar = document.querySelector(".scroll-progress");
@@ -353,8 +252,3 @@ window.addEventListener("scroll", () => {
 	const progress = (scrollTop / docHeight) * 100;
 	progressBar.style.height = progress + "%";
 });
-
-
-ScrollTrigger.addEventListener("refreshInit", () => console.log("ScrollTrigger is refreshing"));
-
-ScrollTrigger.refresh();

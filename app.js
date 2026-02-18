@@ -469,7 +469,7 @@ document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
 });
 
 /* =====================================================
-	 INTERACTIVE IMAGE DISPLACEMENT THREE.JS
+	 PARTICLE DISPLACEMENT ANIMATION THREE.JS
 ===================================================== */
 
 function initWebGL() {
@@ -479,15 +479,14 @@ function initWebGL() {
 		return;
 	}
 
-	console.log('Initializing interactive image displacement effect');
+	console.log('Initializing particle displacement animation');
 
 	// Scene setup
 	const scene = new THREE.Scene();
 	const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
 	const renderer = new THREE.WebGLRenderer({
 		antialias: true,
-		alpha: true,
-		premultipliedAlpha: false
+		alpha: true
 	});
 
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -496,133 +495,149 @@ function initWebGL() {
 
 	// Load the image texture
 	const textureLoader = new THREE.TextureLoader();
-	textureLoader.setCrossOrigin('Anonymous');
-
 	const imageTexture = textureLoader.load('./Jenna_robot_1.jpg', function (texture) {
-		// Texture loaded successfully
-		console.log('Image texture loaded');
-	}, function (progress) {
-		// Loading progress
-		console.log('Loading progress:', progress);
-	}, function (error) {
-		// Loading error
-		console.log('Error loading texture:', error);
+		console.log('Image texture loaded successfully');
 	});
 
-	// Create plane geometry for the image
-	const planeWidth = 8;
-	const planeHeight = 10;
-	const planeGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight, 64, 64);
+	// Create particle system
+	const imageWidth = 80; // Increase density back up
+	const imageHeight = 100;
+	const particleCount = imageWidth * imageHeight;
 
-	// Custom shader material for interactive displacement
+	const geometry = new THREE.BufferGeometry();
+	const positions = new Float32Array(particleCount * 3);
+	const originalPositions = new Float32Array(particleCount * 3);
+	const uvs = new Float32Array(particleCount * 2);
+	const sizes = new Float32Array(particleCount);
+
+	// Initialize particle positions and UVs
+	let index = 0;
+	for (let i = 0; i < imageWidth; i++) {
+		for (let j = 0; j < imageHeight; j++) {
+			const x = (i / imageWidth) * 16 - 8; // Scale to fit screen
+			const y = (j / imageHeight) * 20 - 10;
+			const z = 0;
+
+			positions[index * 3] = x;
+			positions[index * 3 + 1] = y;
+			positions[index * 3 + 2] = z;
+
+			originalPositions[index * 3] = x;
+			originalPositions[index * 3 + 1] = y;
+			originalPositions[index * 3 + 2] = z;
+
+			uvs[index * 2] = i / imageWidth;
+			uvs[index * 2 + 1] = j / imageHeight; // Remove the flip to fix upside-down issue
+
+			sizes[index] = Math.random() * 0.5 + 0.3; // Make particles larger and more visible
+
+			index++;
+		}
+	}
+
+	geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+	geometry.setAttribute('originalPosition', new THREE.BufferAttribute(originalPositions, 3));
+	geometry.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
+	geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
+
+	// Custom shader material
 	const vertexShader = `
 		uniform float uTime;
 		uniform vec2 uMouse;
-		uniform float uMouseInfluence;
+		uniform float uMouseStrength;
+		uniform sampler2D uTexture;
+		
+		attribute vec3 originalPosition;
+		attribute float size;
 		
 		varying vec2 vUv;
-		varying float vDisplacement;
+		varying vec4 vColor;
 		
 		void main() {
 			vUv = uv;
 			
-			vec3 pos = position;
+			vec3 pos = originalPosition;
 			
-			// Calculate distance from mouse position
-			vec2 mousePos = uMouse * 2.0 - 1.0;
-			float mouseDistance = distance(uv, vec2(mousePos.x * 0.5 + 0.5, mousePos.y * 0.5 + 0.5));
+			// Mouse interaction
+			vec2 mousePos = uMouse;
+			float mouseDistance = distance(uv, mousePos);
+			float mouseInfluence = smoothstep(0.3, 0.0, mouseDistance) * uMouseStrength;
 			
-			// Create displacement based on mouse proximity and time
-			float displacement = sin(mouseDistance * 10.0 - uTime * 3.0) * 0.1 * uMouseInfluence;
-			displacement += sin(uv.x * 8.0 + uTime) * 0.05;
-			displacement += cos(uv.y * 6.0 + uTime * 0.7) * 0.03;
+			// Displacement direction from mouse
+			vec2 direction = normalize(uv - mousePos);
 			
-			// Apply displacement to Z position
-			pos.z += displacement;
+			// Apply displacement
+			pos.x += direction.x * mouseInfluence * 15.0;
+			pos.y += direction.y * mouseInfluence * 15.0;
+			pos.z += mouseInfluence * 8.0;
 			
-			vDisplacement = displacement;
+			// Add some wave motion
+			pos.x += sin(originalPosition.y * 0.3 + uTime * 2.0) * 0.5;
+			pos.y += cos(originalPosition.x * 0.3 + uTime * 1.5) * 0.3;
 			
-			gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+			// Sample color from texture
+			vColor = texture2D(uTexture, uv);
+			
+			vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+			gl_Position = projectionMatrix * mvPosition;
+			gl_PointSize = size * (300.0 / -mvPosition.z) * (1.0 + mouseInfluence * 3.0);
 		}
 	`;
 
 	const fragmentShader = `
-		uniform sampler2D uTexture;
-		uniform float uTime;
-		uniform vec2 uMouse;
-		uniform float uMouseInfluence;
-		
 		varying vec2 vUv;
-		varying float vDisplacement;
+		varying vec4 vColor;
 		
 		void main() {
-			// Sample the original texture
-			vec4 textureColor = texture2D(uTexture, vUv);
+			// Create circular particles
+			vec2 center = gl_PointCoord - vec2(0.5);
+			float dist = length(center);
 			
-			// Add some color distortion based on displacement
-			vec2 distortedUv = vUv + vDisplacement * 0.1;
-			vec4 distortedColor = texture2D(uTexture, distortedUv);
+			if (dist > 0.5) discard;
 			
-			// Mix original and distorted colors
-			vec4 finalColor = mix(textureColor, distortedColor, abs(vDisplacement) * 2.0);
-			
-			// Add some glow effect based on mouse proximity
-			vec2 mousePos = uMouse * 2.0 - 1.0;
-			float mouseDistance = distance(vUv, vec2(mousePos.x * 0.5 + 0.5, mousePos.y * 0.5 + 0.5));
-			float glow = smoothstep(0.3, 0.0, mouseDistance) * uMouseInfluence;
-			
-			// Enhance the purple/blue tones from the original image
-			finalColor.rgb += vec3(0.2, 0.1, 0.4) * glow;
-			
-			gl_FragColor = finalColor;
+			float alpha = 1.0 - smoothstep(0.1, 0.5, dist); // Make particles more solid
+			gl_FragColor = vec4(vColor.rgb, alpha * 0.9); // Increase overall opacity
 		}
 	`;
 
-	// Create shader material
 	const material = new THREE.ShaderMaterial({
 		uniforms: {
-			uTexture: { value: imageTexture },
 			uTime: { value: 0.0 },
 			uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-			uMouseInfluence: { value: 0.0 }
+			uMouseStrength: { value: 0.0 },
+			uTexture: { value: imageTexture }
 		},
 		vertexShader: vertexShader,
 		fragmentShader: fragmentShader,
 		transparent: true
+		// Removed additive blending to make image clearer
 	});
 
-	// Create mesh
-	const planeMesh = new THREE.Mesh(planeGeometry, material);
-	scene.add(planeMesh);
+	const particleSystem = new THREE.Points(geometry, material);
+	scene.add(particleSystem);
 
-	// Position camera
-	camera.position.z = 10;
+	camera.position.z = 25;
 
 	// Mouse interaction variables
 	let mouseX = 0.5;
 	let mouseY = 0.5;
-	let mouseInfluence = 0.0;
-	let targetMouseInfluence = 0.0;
+	let mouseStrength = 0.0;
+	let targetMouseStrength = 0.0;
 
 	// Mouse event handlers
 	function onMouseMove(event) {
 		const rect = container.getBoundingClientRect();
 		mouseX = (event.clientX - rect.left) / rect.width;
-		mouseY = 1.0 - (event.clientY - rect.top) / rect.height; // Flip Y coordinate
-		targetMouseInfluence = 1.0;
-	}
-
-	function onMouseEnter() {
-		targetMouseInfluence = 1.0;
+		mouseY = 1.0 - (event.clientY - rect.top) / rect.height;
+		targetMouseStrength = 1.0;
 	}
 
 	function onMouseLeave() {
-		targetMouseInfluence = 0.0;
+		targetMouseStrength = 0.0;
 	}
 
 	// Add event listeners
 	container.addEventListener('mousemove', onMouseMove);
-	container.addEventListener('mouseenter', onMouseEnter);
 	container.addEventListener('mouseleave', onMouseLeave);
 
 	// Animation loop
@@ -631,17 +646,18 @@ function initWebGL() {
 
 		const time = Date.now() * 0.001;
 
-		// Smooth mouse influence transition
-		mouseInfluence += (targetMouseInfluence - mouseInfluence) * 0.1;
+		// Smooth mouse strength transition
+		mouseStrength += (targetMouseStrength - mouseStrength) * 0.1;
 
-		// Update shader uniforms
+		// Update uniforms
 		material.uniforms.uTime.value = time;
 		material.uniforms.uMouse.value.set(mouseX, mouseY);
-		material.uniforms.uMouseInfluence.value = mouseInfluence;
+		material.uniforms.uMouseStrength.value = mouseStrength;
 
-		// Subtle rotation based on mouse
-		planeMesh.rotation.x = (mouseY - 0.5) * 0.1;
-		planeMesh.rotation.y = (mouseX - 0.5) * 0.1;
+		// Subtle camera movement
+		camera.position.x = (mouseX - 0.5) * 2;
+		camera.position.y = (mouseY - 0.5) * 2;
+		camera.lookAt(scene.position);
 
 		renderer.render(scene, camera);
 	}
@@ -665,7 +681,6 @@ function initWebGL() {
 	// Cleanup function
 	return function cleanup() {
 		container.removeEventListener('mousemove', onMouseMove);
-		container.removeEventListener('mouseenter', onMouseEnter);
 		container.removeEventListener('mouseleave', onMouseLeave);
 		window.removeEventListener('resize', handleResize);
 		if (container.contains(renderer.domElement)) {
@@ -673,7 +688,7 @@ function initWebGL() {
 		}
 		renderer.dispose();
 		material.dispose();
-		planeGeometry.dispose();
+		geometry.dispose();
 		imageTexture.dispose();
 	};
 }

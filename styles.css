@@ -1,6 +1,6 @@
-/* ============================
-   GLOBAL RESET
-============================ */
+/* ======================================================
+   GLOBAL RESET + THEME
+====================================================== */
 
 * {
 	margin: 0;
@@ -19,9 +19,9 @@ body.no-scroll {
 	overflow: hidden;
 }
 
-/* ============================
-   INTRO VIDEO
-============================ */
+/* ======================================================
+   INTRO VIDEO LAYER
+====================================================== */
 
 .intro-video {
 	position: fixed;
@@ -37,14 +37,9 @@ body.no-scroll {
 	object-fit: cover;
 }
 
-/* ============================
+/* ======================================================
    WEBGL BACKGROUND
-============================ */
-
-.webgl-hidden {
-	opacity: 0;
-	pointer-events: none;
-}
+====================================================== */
 
 #webgl {
 	position: fixed;
@@ -52,22 +47,27 @@ body.no-scroll {
 	width: 100%;
 	height: 100%;
 	display: block;
-	z-index: -1;
 	background: black;
 	pointer-events: none;
+	z-index: -1;
+	/* Always behind content */
 }
 
-/* ============================
+.webgl-hidden {
+	opacity: 0;
+}
+
+/* ======================================================
    NAVIGATION
-============================ */
+====================================================== */
 
 .nav {
 	position: fixed;
-	width: 100%;
 	top: 0;
+	width: 100%;
 	padding: 20px 60px;
 	backdrop-filter: blur(12px);
-	background: rgba(10, 10, 14, 0.55);
+	background: rgba(10, 10, 14, 0.5);
 	z-index: 50;
 }
 
@@ -79,9 +79,21 @@ body.no-scroll {
 	align-items: center;
 }
 
-/* ============================
-   SECTION BASE
-============================ */
+nav a {
+	margin-left: 24px;
+	color: white;
+	opacity: 0.85;
+	text-decoration: none;
+	transition: opacity 0.2s ease;
+}
+
+nav a:hover {
+	opacity: 1;
+}
+
+/* ======================================================
+   SECTION LAYOUT
+====================================================== */
 
 section {
 	padding: 160px 60px;
@@ -91,15 +103,19 @@ section {
 	z-index: 10;
 }
 
+/* Title Style (Gradient Text) */
 section h2 {
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
 	font-weight: 600;
 	margin-bottom: 40px;
-	letter-spacing: 0.5px;
-	background: linear-gradient(90deg, #fff 0%, #ccc 100%);
+	letter-spacing: 0.6px;
+
+	background: linear-gradient(90deg, #ffffff 0%, #d7d7d7 100%);
 	-webkit-background-clip: text;
+	background-clip: text;
 	-webkit-text-fill-color: transparent;
+
 	position: relative;
 }
 
@@ -107,44 +123,46 @@ section h2::after {
 	content: "";
 	position: absolute;
 	left: 0;
-	bottom: -10px;
+	bottom: -12px;
 	width: 80px;
 	height: 2px;
-	background: rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.25);
 	border-radius: 3px;
 }
 
-/* ============================
+/* ======================================================
    HERO
-============================ */
+====================================================== */
 
 .hero {
 	min-height: 100vh;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+	flex-direction: column;
 }
 
 .hero-inner>* {
 	opacity: 0;
+	/* GSAP fades these in */
 }
 
 .hero-title {
 	font-family: 'Playfair Display', serif;
 	font-size: 4.5rem;
 	line-height: 1.05;
+	max-width: 800px;
 	margin-bottom: 30px;
 }
 
 .hero-sub {
-	font-size: 1.2rem;
+	font-size: 1.25rem;
 	color: #9ca3af;
 	max-width: 600px;
 }
 
-/* ============================
+/* ======================================================
    WORK GRID
-============================ */
+====================================================== */
 
 .work-grid {
 	display: grid;
@@ -158,9 +176,9 @@ section h2::after {
 	border-radius: 18px;
 	padding: 40px;
 	backdrop-filter: blur(18px) saturate(180%);
-	border: 1px solid rgba(255, 255, 255, 0.15);
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	transition: 0.35s ease;
 	transform: translateY(0);
-	transition: 0.4s ease;
 }
 
 .glass-card:hover {
@@ -170,28 +188,30 @@ section h2::after {
 }
 
 .tech {
+	display: inline-block;
+	margin-top: 6px;
+	opacity: 0.7;
 	font-size: 0.9rem;
-	opacity: 0.75;
 }
 
 .view-btn {
-	margin-top: 10px;
+	margin-top: 14px;
 	padding: 10px 22px;
+	background: #ffffff15;
 	border-radius: 10px;
 	border: none;
-	background: #ffffff15;
 	color: white;
 	cursor: pointer;
-	transition: 0.3s;
+	transition: 0.3s ease;
 }
 
 .view-btn:hover {
 	background: #ffffff25;
 }
 
-/* ============================
+/* ======================================================
    MODALS
-============================ */
+====================================================== */
 
 .modal-overlay {
 	position: fixed;
@@ -216,10 +236,12 @@ section h2::after {
 }
 
 .glass-modal {
-	background: rgba(255, 255, 255, 0.10);
-	border: 1px solid rgba(255, 255, 255, 0.22);
+	background: rgba(255, 255, 255, 0.12);
 	padding: 40px;
 	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.23);
+	backdrop-filter: blur(18px);
+	width: min(500px, 90%);
 	transform: translateY(40px);
 	opacity: 0;
 }
@@ -227,9 +249,9 @@ section h2::after {
 .close-modal {
 	margin-top: 20px;
 	padding: 10px 20px;
+	background: #ffffff22;
 	border: none;
 	border-radius: 10px;
-	background: #ffffff22;
 	color: white;
 	cursor: pointer;
 }
@@ -238,9 +260,9 @@ section h2::after {
 	background: #ffffff33;
 }
 
-/* ============================
-   ABOUT SECTION
-============================ */
+/* ======================================================
+   ABOUT
+====================================================== */
 
 .about {
 	padding-top: 120px;
@@ -249,21 +271,24 @@ section h2::after {
 }
 
 .about-text {
-	font-size: 1.1rem;
+	max-width: 720px;
 	line-height: 1.75;
 	color: #d1d1d1;
-	max-width: 750px;
-	margin-bottom: 22px;
+	font-size: 1.1rem;
 }
 
-/* ============================
+.about-text+.about-text {
+	margin-top: 22px;
+}
+
+/* ======================================================
    SKILLS TIMELINE
-============================ */
+====================================================== */
 
 .skills-timeline {
 	position: relative;
-	padding-left: 40px;
 	margin-left: 40px;
+	padding-left: 40px;
 	border-left: 2px solid rgba(255, 255, 255, 0.15);
 }
 
@@ -280,10 +305,9 @@ section h2::after {
 }
 
 .skill-item {
-	position: relative;
-	margin-bottom: 50px;
-	transform: translateY(40px);
 	opacity: 0;
+	transform: translateY(40px);
+	margin-bottom: 50px;
 }
 
 .skill-dot {
@@ -292,40 +316,58 @@ section h2::after {
 	top: 4px;
 	width: 16px;
 	height: 16px;
-	background: #fff;
+	background: #ffffffdd;
 	border-radius: 50%;
-	box-shadow: 0 0 15px #fff7;
+	box-shadow: 0 0 16px #ffffff55;
 }
 
 .skill-item h3 {
-	font-family: 'Playfair Display', serif;
+	font-family: "Playfair Display", serif;
 	font-size: 1.6rem;
 	margin-bottom: 8px;
 }
 
 .skill-item p {
+	max-width: 650px;
+	color: #cfcfcf;
 	font-size: 1.05rem;
-	color: #ccc;
-	max-width: 700px;
-	line-height: 1.65;
+	line-height: 1.6;
 }
 
-/* ============================
+/* ======================================================
    SECTION DIVIDER
-============================ */
+====================================================== */
 
 .section-divider {
 	width: 100%;
 	height: 2px;
 	margin: 100px 0;
-	background: linear-gradient(90deg, transparent, #ffffff40, transparent);
+	background: linear-gradient(90deg,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.25) 50%,
+			rgba(255, 255, 255, 0) 100%);
 	opacity: 0;
 	transform: translateY(20px);
 }
 
-/* ============================
-   RESPONSIVE
-============================ */
+/* ======================================================
+   SCROLL PROGRESS BAR
+====================================================== */
+
+.scroll-progress {
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 4px;
+	height: 0;
+	background: linear-gradient(180deg, #ffffff, #bfbfbf);
+	border-radius: 0 0 4px 4px;
+	z-index: 9999;
+}
+
+/* ======================================================
+   RESPONSIVE QUERIES
+====================================================== */
 
 @media (max-width: 900px) {
 	.work-grid {

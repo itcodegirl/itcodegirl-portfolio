@@ -38,18 +38,18 @@ body.no-scroll {
 }
 
 /* ======================================================
-   WEBGL BACKGROUND FIX
+   WEBGL BACKGROUND (BEHIND EVERYTHING)
 ====================================================== */
 
 #webgl {
 	position: fixed;
 	inset: 0;
-	z-index: -10;
 	width: 100%;
 	height: 100%;
+	z-index: -5;
+	/* behind hero + all content */
 	display: block;
 	pointer-events: none;
-	background: #000;
 }
 
 .webgl-hidden {
@@ -66,7 +66,7 @@ body.no-scroll {
 	width: 100%;
 	padding: 20px 60px;
 	backdrop-filter: blur(12px);
-	background: rgba(10, 10, 14, 0.5);
+	background: rgba(10, 10, 14, 0.45);
 	z-index: 50;
 }
 
@@ -79,11 +79,11 @@ body.no-scroll {
 }
 
 nav a {
-	margin-left: 20px;
+	margin-left: 24px;
 	color: white;
 	opacity: 0.85;
 	text-decoration: none;
-	transition: opacity 0.2s ease;
+	transition: opacity 0.25s ease;
 }
 
 nav a:hover {
@@ -91,7 +91,7 @@ nav a:hover {
 }
 
 /* ======================================================
-   SECTION BASE LAYOUT
+   SECTION LAYOUT
 ====================================================== */
 
 section {
@@ -99,10 +99,10 @@ section {
 	max-width: 1200px;
 	margin: auto;
 	position: relative;
-	z-index: 5;
+	z-index: 10;
 }
 
-/* Section titles with gradient text */
+/* Gradient Title */
 section h2 {
 	font-family: 'Playfair Display', serif;
 	font-size: 3rem;
@@ -111,9 +111,9 @@ section h2 {
 	letter-spacing: 0.6px;
 
 	background: linear-gradient(90deg, #ffffff 0%, #d7d7d7 100%);
-	-webkit-background-clip: text;
 	background-clip: text;
-	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	color: transparent;
 
 	position: relative;
 }
@@ -130,29 +130,30 @@ section h2::after {
 }
 
 /* ======================================================
-   HERO SECTION
+   HERO
 ====================================================== */
 
 .hero {
 	position: relative;
-	z-index: 10;
-	/* Stay above WebGL */
+	z-index: 20;
+	/* Ensures hero sits ABOVE WebGL */
 	min-height: 100vh;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
+	flex-direction: column;
 }
 
 .hero-inner>* {
 	position: relative;
-	z-index: 15;
+	z-index: 30;
+	/* Extra safe */
 }
 
 .hero-title {
 	font-family: 'Playfair Display', serif;
 	font-size: 4.5rem;
-	max-width: 900px;
 	line-height: 1.05;
+	max-width: 800px;
 	margin-bottom: 30px;
 }
 
@@ -263,7 +264,7 @@ section h2::after {
 }
 
 /* ======================================================
-   ABOUT SECTION
+   ABOUT
 ====================================================== */
 
 .about {
@@ -273,11 +274,10 @@ section h2::after {
 }
 
 .about-text {
-	max-width: 750px;
+	max-width: 720px;
 	line-height: 1.75;
 	color: #d1d1d1;
 	font-size: 1.1rem;
-	margin-bottom: 20px;
 }
 
 /* ======================================================
@@ -360,13 +360,13 @@ section h2::after {
 	top: 0;
 	width: 4px;
 	height: 0;
-	background: linear-gradient(180deg, #ffffff, #bbbbbb);
+	background: linear-gradient(180deg, #ffffff, #bfbfbf);
 	border-radius: 0 0 4px 4px;
 	z-index: 9999;
 }
 
 /* ======================================================
-   RESPONSIVE STYLES
+   RESPONSIVE
 ====================================================== */
 
 @media (max-width: 900px) {

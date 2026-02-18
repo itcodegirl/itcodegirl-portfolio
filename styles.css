@@ -20,26 +20,6 @@ body.no-scroll {
 }
 
 /* ======================================================
-   WEBGL BACKGROUND (MUST COME EARLY)
-====================================================== */
-
-#webgl {
-	position: fixed;
-	inset: 0;
-	z-index: -10;
-	/* Always behind hero & content */
-	width: 100%;
-	height: 100%;
-	display: block;
-	pointer-events: none;
-	background: #000;
-}
-
-.webgl-hidden {
-	opacity: 0;
-}
-
-/* ======================================================
    INTRO VIDEO LAYER
 ====================================================== */
 
@@ -58,6 +38,26 @@ body.no-scroll {
 }
 
 /* ======================================================
+   WEBGL BACKGROUND
+====================================================== */
+
+#webgl {
+	position: fixed;
+	inset: 0;
+	z-index: -10;
+	width: 100%;
+	height: 100%;
+	display: block;
+	pointer-events: none;
+	background: #0e0e12;
+	/* fallback color */
+}
+
+.webgl-hidden {
+	opacity: 0;
+}
+
+/* ======================================================
    NAVIGATION
 ====================================================== */
 
@@ -67,7 +67,7 @@ body.no-scroll {
 	width: 100%;
 	padding: 20px 60px;
 	backdrop-filter: blur(12px);
-	background: rgba(10, 10, 14, 0.5);
+	background: rgba(10, 10, 14, 0.45);
 	z-index: 50;
 }
 
@@ -100,10 +100,10 @@ section {
 	max-width: 1200px;
 	margin: auto;
 	position: relative;
-	z-index: 10;
+	z-index: 5;
 }
 
-/* Section Titles */
+/* Section Titles — Gradient Text */
 
 section h2 {
 	font-family: 'Playfair Display', serif;
@@ -112,10 +112,10 @@ section h2 {
 	margin-bottom: 40px;
 	letter-spacing: 0.6px;
 
-	background: linear-gradient(90deg, #fff 0%, #d7d7d7 100%);
-	background-clip: text;
+	background: linear-gradient(90deg, #ffffff 0%, #d7d7d7 100%);
 	-webkit-background-clip: text;
-	color: transparent;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
 
 	position: relative;
 }
@@ -132,24 +132,22 @@ section h2::after {
 }
 
 /* ======================================================
-   HERO SECTION
+   HERO SECTION (FIXED + PROTECTED)
 ====================================================== */
 
 .hero {
 	position: relative;
 	z-index: 5;
 	min-height: 100vh;
-	/* <— THIS IS THE FIX */
+	/* Prevents collapse */
+	padding-top: 120px;
+	/* Prevents nav overlap */
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding-top: 120px;
-	/* ensures nav doesn’t overlap */
 }
 
 .hero-inner>* {
-	opacity: 0;
-	/* Required for GSAP fade-in */
 	position: relative;
 	z-index: 10;
 }
@@ -269,7 +267,7 @@ section h2::after {
 }
 
 /* ======================================================
-   ABOUT
+   ABOUT SECTION
 ====================================================== */
 
 .about {
@@ -344,7 +342,7 @@ section h2::after {
 }
 
 /* ======================================================
-   SECTION DIVIDER
+   DIVIDERS
 ====================================================== */
 
 .section-divider {
@@ -352,9 +350,9 @@ section h2::after {
 	height: 2px;
 	margin: 100px 0;
 	background: linear-gradient(90deg,
-			rgba(255, 255, 255, 0) 0%,
+			transparent 0%,
 			rgba(255, 255, 255, 0.25) 50%,
-			rgba(255, 255, 255, 0) 100%);
+			transparent 100%);
 	opacity: 0;
 	transform: translateY(20px);
 }
@@ -375,7 +373,7 @@ section h2::after {
 }
 
 /* ======================================================
-   RESPONSIVE QUERIES
+   RESPONSIVE
 ====================================================== */
 
 @media (max-width: 900px) {

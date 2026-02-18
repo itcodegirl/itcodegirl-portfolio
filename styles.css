@@ -34,32 +34,13 @@ body.no-scroll {
 	z-index: 9999;
 	background: black;
 	overflow: hidden;
+	transition: opacity 0.8s ease-out;
 }
 
 .intro-video video {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-}
-
-/* ======================================================
-   WEBGL BACKGROUND
-====================================================== */
-
-#webgl {
-	position: fixed;
-	inset: 0;
-	z-index: -10;
-	width: 100%;
-	height: 100%;
-	display: block;
-	pointer-events: none;
-	opacity: 0;
-	transition: opacity 1s ease;
-}
-
-.webgl-hidden {
-	opacity: 0 !important;
 }
 
 /* ======================================================
@@ -91,16 +72,28 @@ body.no-scroll {
 	align-items: center;
 }
 
+.logo {
+	font-family: 'Playfair Display', serif;
+	font-size: 1.8rem;
+	font-weight: 700;
+	background: linear-gradient(135deg, #ffffff, #d7d7d7);
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
 nav a {
 	margin-left: 26px;
 	color: white;
 	opacity: 0.8;
 	text-decoration: none;
 	transition: opacity 0.2s ease;
+	font-weight: 500;
 }
 
 nav a:hover {
 	opacity: 1;
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
 }
 
 /* ======================================================
@@ -115,7 +108,6 @@ section {
 	z-index: 5;
 }
 
-/* Cinematic fade-in baseline */
 section {
 	opacity: 1;
 	transform: translateY(0);
@@ -159,32 +151,157 @@ section h2::after {
 .hero {
 	min-height: 100vh;
 	display: flex;
-	justify-content: center;
-	flex-direction: column;
+	align-items: center;
 	position: relative;
+	padding: 100px 60px;
 }
 
-.hero-inner {
+.hero-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 80px;
+	align-items: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.hero-content {
 	position: relative;
 	z-index: 10;
+}
+
+.hero-visual {
+	position: relative;
+	height: 500px;
+	border-radius: 20px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	transition: all 0.3s ease;
+	cursor: crosshair;
+}
+
+.hero-visual:hover {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-5px);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Three.js container fills the entire visual area */
+#three-container {
+	position: absolute;
+	inset: 0;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+#three-container canvas {
+	width: 100% !important;
+	height: 100% !important;
+	display: block;
+	border-radius: 20px;
+}
+
+.hero-visual::after {
+	content: "Move your mouse to interact with the image";
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.8rem;
+	font-weight: 500;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+	z-index: 10;
+	background: rgba(0, 0, 0, 0.3);
+	padding: 8px 16px;
+	border-radius: 20px;
+	backdrop-filter: blur(5px);
+}
+
+.hero-visual:hover::after {
+	opacity: 1;
 }
 
 .hero-title {
 	font-family: 'Playfair Display', serif;
 	font-size: 4.5rem;
 	line-height: 1.05;
-	max-width: 900px;
 	margin-bottom: 30px;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-title::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+	transform: translateX(-150%);
+	opacity: 0.45;
+	pointer-events: none;
 }
 
 .hero-sub {
 	font-size: 1.25rem;
 	color: #bfc4c7;
-	max-width: 650px;
+	line-height: 1.6;
+}
+
+/* Three.js container styling */
+#three-container {
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+#three-container canvas {
+	width: 100% !important;
+	height: 100% !important;
+	display: block;
+	border-radius: 20px;
+}
+
+/* Responsive design for hero */
+@media (max-width: 900px) {
+	.hero-container {
+		grid-template-columns: 1fr;
+		gap: 50px;
+		text-align: center;
+	}
+
+	.hero-visual {
+		height: 400px;
+		order: -1;
+		/* Put visual above content on mobile */
+	}
+
+	.hero-title {
+		font-size: 3.5rem;
+	}
+}
+
+@media (max-width: 600px) {
+	.hero {
+		padding: 80px 30px;
+	}
+
+	.hero-visual {
+		height: 300px;
+	}
+
+	.hero-title {
+		font-size: 3rem;
+	}
 }
 
 /* ======================================================
-   WORK GRID
+   WORK GRID & CARDS
 ====================================================== */
 
 .work-grid {
@@ -200,28 +317,128 @@ section h2::after {
 	padding: 40px;
 	backdrop-filter: blur(18px);
 	border: 1px solid rgba(255, 255, 255, 0.13);
-	transition: transform 0.35s ease, background 0.35s ease;
+	transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.glass-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+	transition: left 0.5s ease;
+}
+
+.glass-card:hover::before {
+	left: 100%;
 }
 
 .glass-card:hover {
 	transform: translateY(-10px) scale(1.02);
 	background: rgba(255, 255, 255, 0.12);
-	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.featured-project {
+	position: relative;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-badge {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: linear-gradient(135deg, #667eea, #764ba2);
+	color: white;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+
+.glass-card h3 {
+	font-family: 'Playfair Display', serif;
+	font-size: 1.5rem;
+	margin-bottom: 15px;
+	color: #ffffff;
+}
+
+.glass-card p {
+	color: #d1d1d1;
+	line-height: 1.6;
+	margin-bottom: 20px;
+}
+
+.tech {
+	display: block;
+	font-size: 0.9rem;
+	color: #a8a8a8;
+	margin-bottom: 25px;
+	font-weight: 400;
+}
+
+.project-links {
+	display: flex;
+	gap: 15px;
+	align-items: center;
+}
+
+.view-btn,
+.github-link {
+	padding: 10px 20px;
+	border-radius: 8px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border: none;
+	cursor: pointer;
+	font-size: 0.9rem;
+}
+
+.view-btn {
+	background: linear-gradient(135deg, #667eea, #764ba2);
+	color: white;
+}
+
+.view-btn:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.github-link {
+	background: transparent;
+	color: #d1d1d1;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.github-link:hover {
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
 }
 
 /* ======================================================
-   MODALS
+   ENHANCED MODALS
 ====================================================== */
 
 .modal-overlay {
 	position: fixed;
 	inset: 0;
-	background: rgba(0, 0, 0, 0.5);
-	backdrop-filter: blur(5px);
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(10px);
 	opacity: 0;
 	pointer-events: none;
 	transition: 0.3s ease;
 	z-index: 999;
+}
+
+.modal-overlay.active {
+	opacity: 1;
+	pointer-events: all;
 }
 
 .modal {
@@ -233,6 +450,12 @@ section h2::after {
 	opacity: 0;
 	pointer-events: none;
 	z-index: 1000;
+	padding: 20px;
+}
+
+.modal.active {
+	opacity: 1;
+	pointer-events: all;
 }
 
 .glass-modal {
@@ -241,9 +464,120 @@ section h2::after {
 	border-radius: 20px;
 	border: 1px solid rgba(255, 255, 255, 0.22);
 	backdrop-filter: blur(20px);
-	width: min(500px, 90%);
-	transform: translateY(40px);
+	width: min(600px, 90%);
+	max-height: 80vh;
+	overflow-y: auto;
+	transform: translateY(40px) scale(0.9);
 	opacity: 0;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.modal.active .glass-modal {
+	transform: translateY(0) scale(1);
+	opacity: 1;
+}
+
+.modal-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: none;
+	border: none;
+	color: white;
+	font-size: 1.5rem;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s ease;
+}
+
+.modal-close:hover {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.modal-image {
+	width: 100%;
+	height: 200px;
+	border-radius: 12px;
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+.modal-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.modal-features {
+	margin: 20px 0;
+}
+
+.modal-features h4 {
+	color: #ffffff;
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+
+.modal-features ul {
+	list-style: none;
+	padding: 0;
+}
+
+.modal-features li {
+	color: #d1d1d1;
+	margin-bottom: 8px;
+	position: relative;
+	padding-left: 20px;
+}
+
+.modal-features li::before {
+	content: "→";
+	position: absolute;
+	left: 0;
+	color: #667eea;
+}
+
+.modal-tech {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 20px 0;
+}
+
+.modal-tech span {
+	background: rgba(255, 255, 255, 0.1);
+	color: white;
+	padding: 4px 12px;
+	border-radius: 16px;
+	font-size: 0.8rem;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-links {
+	display: flex;
+	gap: 15px;
+	margin-top: 20px;
+}
+
+.demo-link {
+	background: linear-gradient(135deg, #667eea, #764ba2);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.demo-link:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 }
 
 /* ======================================================
@@ -261,6 +595,53 @@ section h2::after {
 	line-height: 1.75;
 	color: #d1d1d1;
 	font-size: 1.1rem;
+	margin-bottom: 25px;
+}
+
+.about-text:last-child {
+	margin-bottom: 0;
+}
+
+.about-text strong {
+	color: #ffffff;
+	font-weight: 600;
+}
+
+/* ======================================================
+   CONTACT SECTION
+====================================================== */
+
+.contact h2 {
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+.contact-links {
+	display: flex;
+	justify-content: center;
+	gap: 40px;
+	flex-wrap: wrap;
+}
+
+.contact-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 15px 30px;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.13);
+	border-radius: 12px;
+	text-decoration: none;
+	color: white;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	backdrop-filter: blur(10px);
+}
+
+.contact-link:hover {
+	background: rgba(255, 255, 255, 0.15);
+	transform: translateY(-3px);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* ======================================================
@@ -272,18 +653,6 @@ section h2::after {
 	margin-left: 40px;
 	padding-left: 40px;
 	border-left: 2px solid rgba(255, 255, 255, 0.15);
-}
-
-.skills-timeline::before {
-	content: "";
-	position: absolute;
-	left: -1px;
-	top: 0;
-	width: 2px;
-	height: 0%;
-	background: linear-gradient(#ffffffaa, #ffffff33);
-	box-shadow: 0 0 15px #ffffff55;
-	transition: height 1s ease;
 }
 
 .skill-item {
@@ -302,12 +671,20 @@ section h2::after {
 	background: white;
 	border-radius: 50%;
 	box-shadow: 0 0 16px #ffffff88;
+	z-index: 2;
 }
 
 .skill-item h3 {
 	font-family: "Playfair Display", serif;
 	font-size: 1.6rem;
-	margin-bottom: 8px;
+	margin-bottom: 12px;
+	color: #ffffff;
+}
+
+.skill-item p {
+	color: #d1d1d1;
+	line-height: 1.6;
+	font-size: 1rem;
 }
 
 /* ======================================================
@@ -340,35 +717,7 @@ section h2::after {
 }
 
 /* ======================================================
-   RESPONSIVE
-====================================================== */
-
-@media (max-width: 900px) {
-	.work-grid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: 600px) {
-	.work-grid {
-		grid-template-columns: 1fr;
-	}
-
-	section {
-		padding: 130px 30px;
-	}
-
-	.hero-title {
-		font-size: 3rem;
-	}
-
-	.skill-dot {
-		left: -36px;
-	}
-}
-
-/* ======================================================
-   PREMIUM INTERACTION PACK — CURSOR
+   CUSTOM CURSOR
 ====================================================== */
 
 .custom-cursor {
@@ -386,7 +735,6 @@ section h2::after {
 	backdrop-filter: blur(4px);
 }
 
-/* Grow cursor on hover targets */
 [data-cursor="link"]:hover~.custom-cursor,
 a:hover~.custom-cursor,
 button:hover~.custom-cursor {
@@ -397,26 +745,7 @@ button:hover~.custom-cursor {
 }
 
 /* ======================================================
-   PARALLAX LIGHT SWEEP (hero)
-====================================================== */
-
-.hero-title {
-	position: relative;
-	overflow: hidden;
-}
-
-.hero-title::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
-	transform: translateX(-150%);
-	opacity: 0.45;
-	pointer-events: none;
-}
-
-/* ======================================================
-   BUTTON MICRO INTERACTION
+   BUTTON INTERACTIONS
 ====================================================== */
 
 .view-btn,
@@ -428,23 +757,132 @@ button,
 .view-btn:hover,
 button:hover {
 	transform: translateY(-3px) scale(1.03);
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* ======================================================
-   LINK GLOW
+   RESPONSIVE DESIGN
 ====================================================== */
 
-nav a:hover {
-	text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+@media (max-width: 900px) {
+	.work-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px;
+	}
+
+	.contact-links {
+		gap: 25px;
+	}
+}
+
+@media (max-width: 600px) {
+	.work-grid {
+		grid-template-columns: 1fr;
+		gap: 25px;
+	}
+
+	section {
+		padding: 130px 30px;
+	}
+
+	.nav {
+		padding: 22px 30px;
+	}
+
+	.hero-title {
+		font-size: 3rem;
+	}
+
+	section h2 {
+		font-size: 2.5rem;
+	}
+
+	.skill-dot {
+		left: -36px;
+	}
+
+	.about {
+		padding-left: 30px;
+	}
+
+	.skills-timeline {
+		padding-left: 30px;
+		margin-left: 30px;
+	}
+
+	.contact-links {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.glass-modal {
+		padding: 30px;
+	}
+
+	.project-links {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.modal-links {
+		flex-direction: column;
+		gap: 10px;
+	}
 }
 
 /* ======================================================
-   SECTION PARALLAX DEPTH
+   WEBGL CANVAS (LEGACY)
+====================================================== */
+
+#webgl {
+	display: none;
+	/* Not used anymore */
+}
+
+.webgl-hidden {
+	opacity: 0;
+}
+
+/* ======================================================
+   PARALLAX EFFECTS
 ====================================================== */
 
 .parallax-section {
 	transform: translateY(0px);
 	will-change: transform;
 	transition: transform 0.2s ease-out;
+}
+
+/* ======================================================
+   ACCESSIBILITY IMPROVEMENTS
+====================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+
+	.custom-cursor {
+		display: none;
+	}
+}
+
+/* Focus states for keyboard navigation */
+button:focus,
+a:focus {
+	outline: 2px solid rgba(255, 255, 255, 0.7);
+	outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+	.glass-card {
+		background: rgba(255, 255, 255, 0.2);
+		border: 2px solid rgba(255, 255, 255, 0.5);
+	}
 }

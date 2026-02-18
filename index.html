@@ -11,15 +11,18 @@
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
 
-	<!-- GSAP -->
-	<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
-	<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
-
 	<!-- Three.js -->
 	<script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
 
+	<!-- GSAP with TimelineMax -->
+	<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+	<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js"></script>
 
-	<link rel="stylesheet" href="styles.css?v=2">
+	<!-- Three.js BAS (Buffer Animation System) - Optional for advanced effects -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/controls/OrbitControls.js"></script>
+
+	<link rel="stylesheet" href="styles.css?v=3">
 </head>
 
 <div class="custom-cursor"></div>
@@ -41,7 +44,6 @@
 
 	<!-- NAVIGATION -->
 	<header class="nav nav-show">
-
 		<div class="nav-inner">
 			<div class="logo">JZ</div>
 			<nav>
@@ -57,12 +59,17 @@
 
 		<!-- HERO SECTION -->
 		<section class="hero">
-			<div class="hero-inner">
-				<h1 class="hero-title">
-					Designing digital experiences<br />
-					that feel intentional.
-				</h1>
-				<p class="hero-sub">Junior Frontend Developer crafting responsive, elegant interfaces.</p>
+			<div class="hero-container">
+				<div class="hero-content">
+					<h1 class="hero-title">
+						Designing digital experiences<br />
+						that feel intentional.
+					</h1>
+					<p class="hero-sub">Junior Frontend Developer crafting responsive, elegant interfaces.</p>
+				</div>
+				<div class="hero-visual">
+					<div id="three-container"></div>
+				</div>
 			</div>
 		</section>
 
@@ -72,46 +79,72 @@
 
 			<div class="work-grid">
 
-				<div class="glass-card">
-					<h3>Project One</h3>
-					<p>A clean placeholder project with sample description.</p>
-					<span class="tech">HTML • CSS • JS</span>
-					<button class="view-btn">View Project</button>
+				<div class="glass-card featured-project">
+					<div class="project-badge">Featured</div>
+					<h3>CodeHerWay Community</h3>
+					<p>A React-based community platform showcasing modern design principles and component architecture. Built to
+						empower women in tech through mentorship and resources.</p>
+					<span class="tech">React • Tailwind CSS • Component Architecture</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="1">View Project</button>
+						<a href="https://github.com/yourusername/codeherway-community" target="_blank"
+							class="github-link">GitHub</a>
+					</div>
 				</div>
 
 				<div class="glass-card">
-					<h3>Project Two</h3>
-					<p>Placeholder case study content for a frontend project.</p>
-					<span class="tech">React • Firebase</span>
-					<button class="view-btn">View Project</button>
+					<h3>LUXE E-commerce</h3>
+					<p>Interactive product page with full shopping cart functionality. Features dynamic pricing, color variants,
+						and smooth animations built with vanilla JavaScript.</p>
+					<span class="tech">JavaScript • CSS Animations • DOM Manipulation</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="2">View Project</button>
+						<a href="https://github.com/yourusername/luxe-ecommerce" target="_blank" class="github-link">GitHub</a>
+					</div>
 				</div>
 
 				<div class="glass-card">
-					<h3>Project Three</h3>
-					<p>A placeholder UI/UX focused project showcase.</p>
-					<span class="tech">Figma • HTML • CSS</span>
-					<button class="view-btn">View Project</button>
+					<h3>Weather Dashboard</h3>
+					<p>Real-time weather application with API integration, 7-day forecasts, and data visualization. Responsive
+						design with glassmorphism effects.</p>
+					<span class="tech">React • REST API • Data Visualization</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="3">View Project</button>
+						<a href="https://github.com/yourusername/weather-dashboard" target="_blank" class="github-link">GitHub</a>
+					</div>
 				</div>
 
 				<div class="glass-card">
-					<h3>Project Four</h3>
-					<p>Example ecommerce frontend placeholder project.</p>
-					<span class="tech">Next.js • Stripe</span>
-					<button class="view-btn">View Project</button>
+					<h3>Responsive Portfolio</h3>
+					<p>This portfolio website featuring GSAP animations, Three.js integration, and advanced CSS techniques.
+						Cinematic user experience with custom cursor interactions.</p>
+					<span class="tech">GSAP • Three.js • Advanced CSS</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="4">View Project</button>
+						<a href="https://github.com/yourusername/portfolio" target="_blank" class="github-link">GitHub</a>
+					</div>
 				</div>
 
 				<div class="glass-card">
-					<h3>Project Five</h3>
-					<p>A placeholder project for animation and interaction design.</p>
-					<span class="tech">GSAP • Three.js</span>
-					<button class="view-btn">View Project</button>
+					<h3>TaskFlow Manager</h3>
+					<p>Productivity application with drag-and-drop functionality, local storage persistence, and intuitive task
+						organization. Clean, modern interface design.</p>
+					<span class="tech">JavaScript • Local Storage • Drag & Drop</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="5">View Project</button>
+						<a href="https://github.com/yourusername/taskflow" target="_blank" class="github-link">GitHub</a>
+					</div>
 				</div>
 
 				<div class="glass-card">
-					<h3>Project Six</h3>
-					<p>Placeholder portfolio case study for recruitment.</p>
-					<span class="tech">React • Tailwind</span>
-					<button class="view-btn">View Project</button>
+					<h3>CSS Art Gallery</h3>
+					<p>Creative showcase of pure CSS art and animations. Features complex geometric patterns, gradient effects,
+						and keyframe animations without JavaScript.</p>
+					<span class="tech">Pure CSS • Animations • Creative Coding</span>
+					<div class="project-links">
+						<button class="view-btn" data-project="6">View Project</button>
+						<a href="https://github.com/yourusername/css-art" target="_blank" class="github-link">GitHub</a>
+					</div>
 				</div>
 
 			</div>
@@ -119,10 +152,7 @@
 
 		<div class="section-divider"></div>
 
-		<!-- ===================================== -->
-		<!-- SKILLS — GLOWING TIMELINE  -->
-		<!-- ===================================== -->
-
+		<!-- SKILLS SECTION -->
 		<section class="skills" id="skills">
 			<h2>Skills & Evolution</h2>
 
@@ -130,38 +160,41 @@
 
 				<div class="skill-item">
 					<div class="skill-dot"></div>
-					<h3>Foundation</h3>
-					<p>HTML5, Semantic Structure, Accessibility, SEO Basics</p>
+					<h3>HTML & CSS</h3>
+					<p>Semantic markup, responsive design, CSS Grid & Flexbox, accessibility best practices, and modern styling
+						techniques including glassmorphism and animations.</p>
 				</div>
 
 				<div class="skill-item">
 					<div class="skill-dot"></div>
-					<h3>Styling & Layout Systems</h3>
-					<p>CSS3, Flexbox, Grid, Responsive Design, Glassmorphism</p>
+					<h3>JavaScript Fundamentals</h3>
+					<p>ES6+ features, DOM manipulation, event handling, async/await, API integration, and debugging. Focus on
+						clean, maintainable code and problem-solving.</p>
 				</div>
 
 				<div class="skill-item">
 					<div class="skill-dot"></div>
-					<h3>Interactivity</h3>
-					<p>JavaScript (ES6+), DOM Manipulation, APIs, Async/Await</p>
+					<h3>Frontend Architecture</h3>
+					<p>Component-based development with React, state management, reusable patterns, and scalable code
+						organization. Building maintainable UI systems.</p>
 				</div>
 
 				<div class="skill-item">
 					<div class="skill-dot"></div>
-					<h3>Motion & Experience</h3>
-					<p>GSAP, ScrollTrigger, Lenis, Micro-interactions</p>
+					<h3>UI/UX Principles</h3>
+					<p>User-centered design, visual hierarchy, typography, color theory, and creating intuitive interfaces.
+						Applying psychology and empathy to design decisions.</p>
 				</div>
 
 				<div class="skill-item">
 					<div class="skill-dot"></div>
-					<h3>Advanced Visual Systems</h3>
-					<p>Three.js, WebGL Shaders, Distortion Effects, Cinematic UI</p>
+					<h3>Animation & Interaction</h3>
+					<p>GSAP animations, CSS transitions, scroll-triggered effects, micro-interactions, and Three.js for immersive
+						experiences. Motion that enhances usability.</p>
 				</div>
 
 			</div>
 		</section>
-
-
 
 		<div class="section-divider"></div>
 
@@ -171,23 +204,27 @@
 
 			<p class="about-text">
 				My path into development has been intentional. My background in Information System Security taught me to think
-				in systems and structure. Psychology shaped how I understand people — how they interact and experience
+				in systems and structure, while psychology shaped how I understand people — how they interact and experience
 				technology.
 			</p>
 
 			<p class="about-text">
-				I’m confident in HTML and CSS and actively deepening my understanding of JavaScript. I focus on strong
-				fundamentals,
-				debugging, problem-solving, and writing clean, maintainable UI code.
+				I'm confident in HTML and CSS, actively deepening my understanding of JavaScript and React. I focus on strong
+				fundamentals, debugging, problem-solving, and writing clean, maintainable UI code that prioritizes user
+				experience.
 			</p>
 
 			<p class="about-text">
-				I’m also the founder of <strong>CodeHerWay</strong>, where I document my journey and support women entering
-				tech.
+				I'm also the founder of <strong>CodeHerWay</strong>, a community platform where I document my journey and
+				support
+				other women entering tech. Through mentorship programs and resources, we're building a more inclusive tech
+				industry.
 			</p>
 
 			<p class="about-text">
-				I’m building my career with discipline, curiosity, and purpose.
+				I'm building my career deliberately — with discipline, curiosity, and purpose. Each project teaches me something
+				new,
+				and I believe the best interfaces feel effortless because of the intention behind every detail.
 			</p>
 		</section>
 
@@ -195,62 +232,183 @@
 
 		<!-- CONTACT SECTION -->
 		<section class="contact" id="contact">
-			<h2>Let’s build something exceptional.</h2>
+			<h2>Let's build something exceptional.</h2>
+			<div class="contact-links">
+				<a href="/cdn-cgi/l/email-protection#ea93859f98c48f878b8386aa8f928b879a868fc4898587" class="contact-link">
+					<span>Email</span>
+				</a>
+				<a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+					<span>LinkedIn</span>
+				</a>
+				<a href="https://github.com/yourusername" target="_blank" class="contact-link">
+					<span>GitHub</span>
+				</a>
+			</div>
 		</section>
 
 	</main>
 
-	<!-- ===================================== -->
 	<!-- PROJECT MODALS -->
-	<!-- ===================================== -->
-
 	<div class="modal-overlay" id="modalOverlay"></div>
 
+	<!-- CodeHerWay Community Modal -->
 	<div class="modal" id="modal1">
 		<div class="modal-content glass-modal">
-			<h3>Project One</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>CodeHerWay Community Platform</h3>
+			<div class="modal-image">
+				<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=400&fit=crop"
+					alt="CodeHerWay Community" />
+			</div>
+			<p>A React-based community platform designed to empower women in tech through mentorship, resources, and
+				supportive connections.</p>
+
+			<div class="modal-features">
+				<h4>Key Features:</h4>
+				<ul>
+					<li>Modern React component architecture with hooks</li>
+					<li>Responsive design with Tailwind CSS</li>
+					<li>Custom animations and micro-interactions</li>
+					<li>Accessibility-first development approach</li>
+					<li>Performance-optimized loading and rendering</li>
+				</ul>
+			</div>
+
+			<div class="modal-tech">
+				<span>React 18</span>
+				<span>Tailwind CSS</span>
+				<span>Lucide Icons</span>
+				<span>Component Design</span>
+			</div>
+
+			<div class="modal-links">
+				<a href="https://codeherway-demo.netlify.app" target="_blank" class="demo-link">Live Demo</a>
+				<a href="https://github.com/yourusername/codeherway-community" target="_blank" class="github-link">GitHub</a>
+			</div>
 		</div>
 	</div>
 
+	<!-- LUXE E-commerce Modal -->
 	<div class="modal" id="modal2">
 		<div class="modal-content glass-modal">
-			<h3>Project Two</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>LUXE E-commerce Product Page</h3>
+			<div class="modal-image">
+				<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=400&fit=crop"
+					alt="LUXE E-commerce" />
+			</div>
+			<p>Interactive product page with full shopping cart functionality, dynamic pricing, and smooth animations built
+				with vanilla JavaScript.</p>
+
+			<div class="modal-features">
+				<h4>Key Features:</h4>
+				<ul>
+					<li>Interactive shopping cart with add/remove functionality</li>
+					<li>Dynamic pricing and quantity controls</li>
+					<li>Color variant selection with real-time updates</li>
+					<li>Image gallery with thumbnail navigation</li>
+					<li>Responsive design with glassmorphism effects</li>
+				</ul>
+			</div>
+
+			<div class="modal-tech">
+				<span>Vanilla JavaScript</span>
+				<span>CSS Animations</span>
+				<span>DOM Manipulation</span>
+				<span>Responsive Design</span>
+			</div>
+
+			<div class="modal-links">
+				<a href="https://luxe-ecommerce-demo.netlify.app" target="_blank" class="demo-link">Live Demo</a>
+				<a href="https://github.com/yourusername/luxe-ecommerce" target="_blank" class="github-link">GitHub</a>
+			</div>
 		</div>
 	</div>
 
+	<!-- Weather Dashboard Modal -->
 	<div class="modal" id="modal3">
 		<div class="modal-content glass-modal">
-			<h3>Project Three</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>Weather Dashboard</h3>
+			<div class="modal-image">
+				<img src="https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=600&h=400&fit=crop"
+					alt="Weather Dashboard" />
+			</div>
+			<p>Real-time weather application with API integration, featuring 7-day forecasts, search functionality, and
+				beautiful data visualization.</p>
+
+			<div class="modal-features">
+				<h4>Key Features:</h4>
+				<ul>
+					<li>Real-time weather data with API integration</li>
+					<li>7-day forecast with trend indicators</li>
+					<li>Interactive location search functionality</li>
+					<li>Responsive data visualization</li>
+					<li>Loading states and error handling</li>
+				</ul>
+			</div>
+
+			<div class="modal-tech">
+				<span>React</span>
+				<span>REST API</span>
+				<span>Data Visualization</span>
+				<span>State Management</span>
+			</div>
+
+			<div class="modal-links">
+				<a href="https://weather-dashboard-demo.netlify.app" target="_blank" class="demo-link">Live Demo</a>
+				<a href="https://github.com/yourusername/weather-dashboard" target="_blank" class="github-link">GitHub</a>
+			</div>
 		</div>
 	</div>
 
+	<!-- Remaining modals with updated content -->
 	<div class="modal" id="modal4">
 		<div class="modal-content glass-modal">
-			<h3>Project Four</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>Portfolio Website</h3>
+			<div class="modal-image">
+				<img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=600&h=400&fit=crop"
+					alt="Portfolio Website" />
+			</div>
+			<p>This portfolio website featuring advanced animations, Three.js integration, and sophisticated user
+				interactions.</p>
+
+			<div class="modal-features">
+				<h4>Technical Highlights:</h4>
+				<ul>
+					<li>GSAP scroll-triggered animations</li>
+					<li>Three.js WebGL background effects</li>
+					<li>Custom cursor with magnetic attraction</li>
+					<li>Responsive glassmorphism design</li>
+					<li>Performance-optimized animations</li>
+				</ul>
+			</div>
+
+			<div class="modal-tech">
+				<span>GSAP</span>
+				<span>Three.js</span>
+				<span>Advanced CSS</span>
+				<span>WebGL</span>
+			</div>
 		</div>
 	</div>
 
 	<div class="modal" id="modal5">
 		<div class="modal-content glass-modal">
-			<h3>Project Five</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>TaskFlow Manager</h3>
+			<p>A productivity application featuring intuitive task management with drag-and-drop functionality and clean,
+				modern interface design.</p>
 		</div>
 	</div>
 
 	<div class="modal" id="modal6">
 		<div class="modal-content glass-modal">
-			<h3>Project Six</h3>
-			<p>This is a placeholder description.</p>
-			<button class="close-modal">Close</button>
+			<button class="modal-close">×</button>
+			<h3>CSS Art Gallery</h3>
+			<p>Creative showcase of pure CSS art and animations, featuring complex geometric patterns and keyframe animations
+				without JavaScript.</p>
 		</div>
 	</div>
 

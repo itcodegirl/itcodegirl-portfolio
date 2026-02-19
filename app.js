@@ -1,4 +1,4 @@
-console.log("CINEMATIC PARTICLE SYSTEM LOADED");
+/*
 
 const introVideo = document.getElementById("introVideo");
 
@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
 	} else {
 		setTimeout(finishIntro, 4000);
 	}
-});
+}); */
 
 // function initWebGL() {
 

@@ -1,3 +1,13 @@
+## 🧠 What This Project Demonstrates
+
+- Custom shader authoring
+- Vertex attribute manipulation
+- Depth-based distortion logic
+- Editorial-grade WebGL UX design
+- Three.js mesh subdivision workflows
+- Mouse-based uniform animation
+- Modern portfolio motion design
+
 # Interactive Glass Refraction Portrait (Three.js + GLSL)
 
 A cinematic, interactive portrait effect built using **Three.js** and **custom GLSL shaders**.  

@@ -51,6 +51,26 @@ body.no-scroll {
 	white-space: nowrap;
 }
 
+/* Color variants for floating code */
+.floating-code span.code-light {
+	color: rgba(255, 255, 255, 0.15);
+}
+
+.floating-code span.code-cyan {
+	color: rgba(13, 148, 136, 0.25);
+	/* Teal */
+}
+
+.floating-code span.code-pink {
+	color: rgba(255, 105, 180, 0.25);
+	/* Hot pink */
+}
+
+.floating-code span.code-yellow {
+	color: rgba(255, 211, 105, 0.25);
+	/* Gold */
+}
+
 @keyframes float-up {
 	0% {
 		transform: translateY(0) rotate(0deg);
@@ -416,8 +436,8 @@ section h2::after {
 .about-image img {
 	width: 100%;
 	height: auto;
-	max-height: 450px;
-	object-fit: cover;
+	max-height: 500px;
+	object-fit: contain;
 	border-radius: 18px;
 	border: 1px solid rgba(255, 255, 255, 0.13);
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);

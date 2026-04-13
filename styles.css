@@ -554,7 +554,7 @@ section h2::after {
 
 .about-container {
 	display: grid;
-	grid-template-columns: 1fr 350px;
+	grid-template-columns: 1fr 300px;
 	gap: 60px;
 	align-items: start;
 }
@@ -572,7 +572,7 @@ section h2::after {
 .about-image {
 	position: relative;
 	width: 100%;
-	max-width: 350px;
+	max-width: 300px;
 	display: flex;
 	align-items: center;
 }
@@ -580,6 +580,7 @@ section h2::after {
 .about-image img {
 	width: 100%;
 	height: auto;
+	max-height: 400px;
 	object-fit: cover;
 	object-position: center;
 	border-radius: 18px;

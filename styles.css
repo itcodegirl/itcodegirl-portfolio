@@ -43,7 +43,7 @@ body.no-scroll {
 	position: absolute;
 	font-family: 'Courier New', monospace;
 	font-size: 0.9rem;
-	color: rgba(255, 255, 255, 0.06);
+	color: rgba(255, 255, 255, 0.08);
 	animation: float-up var(--duration) linear infinite;
 	animation-delay: var(--delay);
 	left: var(--x);
@@ -505,4 +505,222 @@ section h2::after {
 	.work-grid {
 		grid-template-columns: 1fr;
 	}
+}
+
+/* ======================================================
+   MODALS
+====================================================== */
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.85);
+	backdrop-filter: blur(8px);
+	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.modal {
+	position: fixed;
+	inset: 0;
+	z-index: 101;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.3s ease;
+}
+
+.modal.active {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.modal-content {
+	position: relative;
+	max-width: 900px;
+	max-height: 90vh;
+	overflow-y: auto;
+	background: rgba(20, 20, 25, 0.95);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 20px;
+	padding: 50px;
+	backdrop-filter: blur(20px);
+}
+
+.modal-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	font-size: 2rem;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	line-height: 1;
+	padding: 0;
+}
+
+.modal-close:hover {
+	background: rgba(255, 255, 255, 0.2);
+	transform: rotate(90deg);
+}
+
+.modal-content h3 {
+	font-family: 'Playfair Display', serif;
+	font-size: 2.2rem;
+	margin-bottom: 30px;
+	color: white;
+}
+
+.modal-content p {
+	color: #c8c8c8;
+	line-height: 1.8;
+	margin-bottom: 30px;
+	font-size: 1.05rem;
+}
+
+.modal-image {
+	width: 100%;
+	margin-bottom: 30px;
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.modal-image img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.modal-features h4 {
+	font-size: 1.2rem;
+	margin-bottom: 15px;
+	color: white;
+}
+
+.modal-features ul {
+	list-style: none;
+	padding: 0;
+	margin-bottom: 30px;
+}
+
+.modal-features li {
+	color: #b8b8b8;
+	padding: 8px 0;
+	padding-left: 25px;
+	position: relative;
+	line-height: 1.6;
+}
+
+.modal-features li::before {
+	content: "→";
+	position: absolute;
+	left: 0;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.modal-tech {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 30px;
+}
+
+.modal-tech span {
+	background: rgba(255, 255, 255, 0.1);
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal-links {
+	display: flex;
+	gap: 15px;
+	margin-top: 30px;
+}
+
+.modal-links a {
+	padding: 12px 28px;
+	border-radius: 10px;
+	text-decoration: none;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.demo-link {
+	background: rgba(255, 255, 255, 0.15);
+	color: white;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.demo-link:hover {
+	background: rgba(255, 255, 255, 0.25);
+	transform: translateY(-2px);
+}
+
+.modal-links .github-link {
+	background: transparent;
+	color: rgba(255, 255, 255, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.modal-links .github-link:hover {
+	border-color: rgba(255, 255, 255, 0.4);
+	color: white;
+}
+
+/* ======================================================
+   CUSTOM CURSOR
+====================================================== */
+
+.custom-cursor {
+	width: 20px;
+	height: 20px;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+	border-radius: 50%;
+	position: fixed;
+	pointer-events: none;
+	z-index: 9999;
+	transition: transform 0.15s ease;
+	display: none;
+}
+
+@media (hover: hover) {
+	.custom-cursor {
+		display: block;
+	}
+}
+
+/* ======================================================
+   SCROLL PROGRESS
+====================================================== */
+
+.scroll-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 3px;
+	background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+	z-index: 999;
+	transform-origin: left;
+	transform: scaleX(0);
 }

@@ -22,269 +22,286 @@ window.addEventListener("load", () => {
 	}
 });
 
-// function initWebGL() {
 
-// 	const container = document.getElementById("three-container");
-// 	if (!container) return;
+/*Hover: 
+looks completely normal at rest, with no visible effect. On hover, a soft wave distortion radiates from the cursor, creating a dynamic ripple across the image. The effect is subtle and elegant, giving the impression of a delicate surface disturbance without overwhelming the viewer.*/
 
-// 	const scene = new THREE.Scene();
 
-// 	const camera = new THREE.PerspectiveCamera(
-// 		45,
-// 		container.offsetWidth / container.offsetHeight,
-// 		0.1,
-// 		1000
-// 	);
+/*function initWebGL() {
 
-// 	camera.position.z = 25;
+	const container = document.getElementById("three-container");
+	if (!container) return;
 
-// 	const renderer = new THREE.WebGLRenderer({
-// 		antialias: true,
-// 		alpha: true
-// 	});
+	const scene = new THREE.Scene();
 
-// 	renderer.setSize(container.offsetWidth, container.offsetHeight);
-// 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-// 	container.appendChild(renderer.domElement);
+	const camera = new THREE.PerspectiveCamera(
+		45,
+		container.offsetWidth / container.offsetHeight,
+		0.1,
+		1000
+	);
 
-// 	const textureLoader = new THREE.TextureLoader();
+	camera.position.z = 25;
 
-// 	const imagePath = window.location.hostname.includes("github.io")
-// 		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
-// 		: "Jenna_robot_1.jpg";
+	const renderer = new THREE.WebGLRenderer({
+		antialias: true,
+		alpha: true
+	});
 
-// 	textureLoader.load(imagePath, (texture) => {
+	renderer.setSize(container.offsetWidth, container.offsetHeight);
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+	container.appendChild(renderer.domElement);
 
-// 		const geometry = new THREE.PlaneGeometry(
-// 			16,
-// 			22,
-// 			200,   // width segments
-// 			280    // height segments
-// 		);
+	const textureLoader = new THREE.TextureLoader();
 
-// 		const material = new THREE.ShaderMaterial({
-// 			uniforms: {
-// 				uTexture: { value: texture },
-// 				uMouse: { value: new THREE.Vector2(0, 0) },
-// 				uHover: { value: 0 }
-// 			},
-// 			vertexShader: `
-//                 uniform vec2 uMouse;
-//                 uniform float uHover;
-//                 varying vec2 vUv;
+	const imagePath = window.location.hostname.includes("github.io")
+		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
+		: "Jenna_robot_1.jpg";
 
-//                 void main() {
+	textureLoader.load(imagePath, (texture) => {
 
-//                     vUv = uv;
+		const geometry = new THREE.PlaneGeometry(
+			16,
+			22,
+			200,   // width segments
+			280    // height segments
+		);
 
-//                     vec3 pos = position;
+		const material = new THREE.ShaderMaterial({
+			uniforms: {
+				uTexture: { value: texture },
+				uMouse: { value: new THREE.Vector2(0, 0) },
+				uHover: { value: 0 }
+			},
+			vertexShader: `
+                uniform vec2 uMouse;
+                uniform float uHover;
+                varying vec2 vUv;
 
-//                     float dist = distance(uv, uMouse);
+                void main() {
 
-//                     float wave = sin(dist * 30.0 - uHover * 5.0) * 0.5;
+                    vUv = uv;
 
-//                     float influence = smoothstep(0.4, 0.0, dist);
+                    vec3 pos = position;
 
-//                     pos.z += wave * influence * 4.0;
+                    float dist = distance(uv, uMouse);
 
-//                     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-//                 }
-//             `,
-// 			fragmentShader: `
-//                 uniform sampler2D uTexture;
-//                 varying vec2 vUv;
+                    float wave = sin(dist * 30.0 - uHover * 5.0) * 0.5;
 
-//                 void main() {
-//                     gl_FragColor = texture2D(uTexture, vUv);
-//                 }
-//             `,
-// 			transparent: true
-// 		});
+                    float influence = smoothstep(0.4, 0.0, dist);
 
-// 		const mesh = new THREE.Mesh(geometry, material);
-// 		scene.add(mesh);
+                    pos.z += wave * influence * 4.0;
 
-// 		let hover = 0;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `,
+			fragmentShader: `
+                uniform sampler2D uTexture;
+                varying vec2 vUv;
 
-// 		container.addEventListener("mousemove", (e) => {
+                void main() {
+                    gl_FragColor = texture2D(uTexture, vUv);
+                }
+            `,
+			transparent: true
+		});
 
-// 			const rect = container.getBoundingClientRect();
+		const mesh = new THREE.Mesh(geometry, material);
+		scene.add(mesh);
 
-// 			const x = (e.clientX - rect.left) / rect.width;
-// 			const y = 1.0 - (e.clientY - rect.top) / rect.height;
+		let hover = 0;
 
-// 			material.uniforms.uMouse.value.set(x, y);
-// 			hover = 1;
-// 		});
+		container.addEventListener("mousemove", (e) => {
 
-// 		container.addEventListener("mouseleave", () => {
-// 			hover = 0;
-// 		});
+			const rect = container.getBoundingClientRect();
 
-// 		function animate() {
-// 			requestAnimationFrame(animate);
+			const x = (e.clientX - rect.left) / rect.width;
+			const y = 1.0 - (e.clientY - rect.top) / rect.height;
 
-// 			material.uniforms.uHover.value += 0.05 * hover;
+			material.uniforms.uMouse.value.set(x, y);
+			hover = 1;
+		});
 
-// 			renderer.render(scene, camera);
-// 		}
+		container.addEventListener("mouseleave", () => {
+			hover = 0;
+		});
 
-// 		animate();
-// 	});
+		function animate() {
+			requestAnimationFrame(animate);
 
-// 	window.addEventListener("resize", () => {
-// 		camera.aspect = container.offsetWidth / container.offsetHeight;
-// 		camera.updateProjectionMatrix();
-// 		renderer.setSize(container.offsetWidth, container.offsetHeight);
-// 	});
-// }
+			material.uniforms.uHover.value += 0.05 * hover;
 
-// /* Hover:
+			renderer.render(scene, camera);
+		}
+
+		animate();
+	});
+
+	window.addEventListener("resize", () => {
+		camera.aspect = container.offsetWidth / container.offsetHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(container.offsetWidth, container.offsetHeight);
+	});
+} */
+
+
+
+
+
+
+// /* Hover: Favorite effects to implement that feel cinematic and premium, without being too chaotic or "gamer-y":
 // • Glass ripple distortion
 // • Depth wave
 // • Shards splitting outward
 // • Smooth cinematic easing on hover in/out */
 
-// function initWebGL() {
+/* function initWebGL() {
 
-// 	const container = document.getElementById("three-container");
-// 	if (!container) return;
+	const container = document.getElementById("three-container");
+	if (!container) return;
 
-// 	const scene = new THREE.Scene();
+	const scene = new THREE.Scene();
 
-// 	const camera = new THREE.PerspectiveCamera(
-// 		45,
-// 		container.offsetWidth / container.offsetHeight,
-// 		0.1,
-// 		1000
-// 	);
+	const camera = new THREE.PerspectiveCamera(
+		45,
+		container.offsetWidth / container.offsetHeight,
+		0.1,
+		1000
+	);
 
-// 	camera.position.z = 28;
+	camera.position.z = 28;
 
-// 	const renderer = new THREE.WebGLRenderer({
-// 		antialias: true,
-// 		alpha: true
-// 	});
+	const renderer = new THREE.WebGLRenderer({
+		antialias: true,
+		alpha: true
+	});
 
-// 	renderer.setSize(container.offsetWidth, container.offsetHeight);
-// 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-// 	container.appendChild(renderer.domElement);
+	renderer.setSize(container.offsetWidth, container.offsetHeight);
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+	container.appendChild(renderer.domElement);
 
-// 	const textureLoader = new THREE.TextureLoader();
+	const textureLoader = new THREE.TextureLoader();
 
-// 	const imagePath = window.location.hostname.includes("github.io")
-// 		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
-// 		: "Jenna_robot_1.jpg";
+	const imagePath = window.location.hostname.includes("github.io")
+		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
+		: "Jenna_robot_1.jpg";
 
-// 	textureLoader.load(imagePath, (texture) => {
+	textureLoader.load(imagePath, (texture) => {
 
-// 		const width = 16;
-// 		const height = 22;
+		const width = 16;
+		const height = 22;
 
-// 		const geometry = new THREE.PlaneGeometry(width, height, 180, 240);
+		const geometry = new THREE.PlaneGeometry(width, height, 180, 240);
 
-// 		// Add random per-vertex direction
-// 		const count = geometry.attributes.position.count;
-// 		const randoms = new Float32Array(count * 3);
+		// Add random per-vertex direction
+		const count = geometry.attributes.position.count;
+		const randoms = new Float32Array(count * 3);
 
-// 		for (let i = 0; i < count; i++) {
-// 			randoms[i * 3] = (Math.random() - 0.5) * 2;
-// 			randoms[i * 3 + 1] = (Math.random() - 0.5) * 2;
-// 			randoms[i * 3 + 2] = Math.random();
-// 		}
+		for (let i = 0; i < count; i++) {
+			randoms[i * 3] = (Math.random() - 0.5) * 2;
+			randoms[i * 3 + 1] = (Math.random() - 0.5) * 2;
+			randoms[i * 3 + 2] = Math.random();
+		}
 
-// 		geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
+		geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
 
-// 		const material = new THREE.ShaderMaterial({
-// 			uniforms: {
-// 				uTexture: { value: texture },
-// 				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-// 				uHover: { value: 0 }
-// 			},
-// 			vertexShader: `
-//                 uniform vec2 uMouse;
-//                 uniform float uHover;
+		const material = new THREE.ShaderMaterial({
+			uniforms: {
+				uTexture: { value: texture },
+				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+				uHover: { value: 0 }
+			},
+			vertexShader: `
+                uniform vec2 uMouse;
+                uniform float uHover;
 
-//                 attribute vec3 aRandom;
+                attribute vec3 aRandom;
 
-//                 varying vec2 vUv;
+                varying vec2 vUv;
 
-//                 void main() {
+                void main() {
 
-//                     vUv = uv;
+                    vUv = uv;
 
-//                     vec3 pos = position;
+                    vec3 pos = position;
 
-//                     float dist = distance(uv, uMouse);
+                    float dist = distance(uv, uMouse);
 
-//                     float influence = smoothstep(0.4, 0.0, dist);
+                    float influence = smoothstep(0.4, 0.0, dist);
 
-//                     // Glass ripple distortion
-//                     pos.z += sin(dist * 40.0) * influence * uHover * 2.5;
+                    // Glass ripple distortion
+                    pos.z += sin(dist * 40.0) * influence * uHover * 2.5;
 
-//                     // Shard split
-//                     pos += aRandom * influence * uHover * 3.0;
+                    // Shard split
+                    pos += aRandom * influence * uHover * 3.0;
 
-//                     gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-//                 }
-//             `,
-// 			fragmentShader: `
-//                 uniform sampler2D uTexture;
-//                 varying vec2 vUv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+                }
+            `,
+			fragmentShader: `
+                uniform sampler2D uTexture;
+                varying vec2 vUv;
 
-//                 void main() {
+                void main() {
 
-//                     // Subtle glass refraction shift
-//                     vec2 distortedUv = vUv + sin(vUv.yx * 20.0) * 0.003;
+                    // Subtle glass refraction shift
+                    vec2 distortedUv = vUv + sin(vUv.yx * 20.0) * 0.003;
 
-//                     gl_FragColor = texture2D(uTexture, distortedUv);
-//                 }
-//             `,
-// 			transparent: true
-// 		});
+                    gl_FragColor = texture2D(uTexture, distortedUv);
+                }
+            `,
+			transparent: true
+		});
 
-// 		const mesh = new THREE.Mesh(geometry, material);
-// 		scene.add(mesh);
+		const mesh = new THREE.Mesh(geometry, material);
+		scene.add(mesh);
 
-// 		let hover = 0;
+		let hover = 0;
 
-// 		container.addEventListener("mousemove", (e) => {
+		container.addEventListener("mousemove", (e) => {
 
-// 			const rect = container.getBoundingClientRect();
+			const rect = container.getBoundingClientRect();
 
-// 			const x = (e.clientX - rect.left) / rect.width;
-// 			const y = 1.0 - (e.clientY - rect.top) / rect.height;
+			const x = (e.clientX - rect.left) / rect.width;
+			const y = 1.0 - (e.clientY - rect.top) / rect.height;
 
-// 			material.uniforms.uMouse.value.set(x, y);
-// 			hover = 1;
-// 		});
+			material.uniforms.uMouse.value.set(x, y);
+			hover = 1;
+		});
 
-// 		container.addEventListener("mouseleave", () => {
-// 			hover = 0;
-// 		});
+		container.addEventListener("mouseleave", () => {
+			hover = 0;
+		});
 
-// 		function animate() {
-// 			requestAnimationFrame(animate);
+		function animate() {
+			requestAnimationFrame(animate);
 
-// 			material.uniforms.uHover.value += (hover - material.uniforms.uHover.value) * 0.08;
+			material.uniforms.uHover.value += (hover - material.uniforms.uHover.value) * 0.08;
 
-// 			renderer.render(scene, camera);
-// 		}
+			renderer.render(scene, camera);
+		}
 
-// 		animate();
-// 	});
+		animate();
+	});
 
-// 	window.addEventListener("resize", () => {
-// 		camera.aspect = container.offsetWidth / container.offsetHeight;
-// 		camera.updateProjectionMatrix();
-// 		renderer.setSize(container.offsetWidth, container.offsetHeight);
-// 	});
-// }
+	window.addEventListener("resize", () => {
+		camera.aspect = container.offsetWidth / container.offsetHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(container.offsetWidth, container.offsetHeight);
+	});
+} *
+
+
+
+
+
+
 
 /* At rest:
 • Perfect flat image
 • Clean
-• Sharp
+• Sharp - almost too large to be real
+
 
 Hover:
 • Shards split outward
@@ -292,7 +309,7 @@ Hover:
 • Subtle floating motion
 • Cinematic micro - rotation */
 
-/* function initWebGL() {
+ /*function initWebGL() {
 
 	const container = document.getElementById("three-container");
 	if (!container) return;
@@ -442,6 +459,17 @@ Hover:
 } */
 
 
+
+
+
+
+
+
+
+
+
+
+
 /* At rest:
 • Perfectly sharp image
 • No distortion
@@ -452,13 +480,13 @@ On hover:
 • Shards gently lift in depth
 • Soft floating motion
 • No chaos
-• No explosion
+• No explosion - looks like a delicate surface disturbance, not a violent shatter
 
 On leave:
 • Smooth, slow recomposition
 • No snapping */
 
-/*function initWebGL() {
+function initWebGL() {
 
 	const container = document.getElementById("three-container");
 	if (!container) return;
@@ -603,7 +631,17 @@ On leave:
 		camera.updateProjectionMatrix();
 		renderer.setSize(container.offsetWidth, container.offsetHeight);
 	});
-} */
+} 
+
+
+
+
+
+
+
+
+
+
 
 /*	At rest:
 • Looks completely normal
@@ -802,179 +840,179 @@ Gentle light shift.
 Very controlled depth.
 Looks expensive.*/
 
-function initWebGL() {
+// function initWebGL() {
 
-	const container = document.getElementById("three-container");
-	if (!container) return;
+// 	const container = document.getElementById("three-container");
+// 	if (!container) return;
 
-	const scene = new THREE.Scene();
+// 	const scene = new THREE.Scene();
 
-	const camera = new THREE.PerspectiveCamera(
-		45,
-		container.offsetWidth / container.offsetHeight,
-		0.1,
-		1000
-	);
+// 	const camera = new THREE.PerspectiveCamera(
+// 		45,
+// 		container.offsetWidth / container.offsetHeight,
+// 		0.1,
+// 		1000
+// 	);
 
-	camera.position.z = 30;
+// 	camera.position.z = 30;
 
-	const renderer = new THREE.WebGLRenderer({
-		antialias: true,
-		alpha: true
-	});
+// 	const renderer = new THREE.WebGLRenderer({
+// 		antialias: true,
+// 		alpha: true
+// 	});
 
-	renderer.setSize(container.offsetWidth, container.offsetHeight);
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-	container.appendChild(renderer.domElement);
+// 	renderer.setSize(container.offsetWidth, container.offsetHeight);
+// 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+// 	container.appendChild(renderer.domElement);
 
-	const textureLoader = new THREE.TextureLoader();
+// 	const textureLoader = new THREE.TextureLoader();
 
-	const imagePath = window.location.hostname.includes("github.io")
-		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
-		: "Jenna_robot_1.jpg";
+// 	const imagePath = window.location.hostname.includes("github.io")
+// 		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
+// 		: "Jenna_robot_1.jpg";
 
-	textureLoader.load(imagePath, (texture) => {
+// 	textureLoader.load(imagePath, (texture) => {
 
-		const width = 16;
-		const height = 22;
+// 		const width = 16;
+// 		const height = 22;
 
-		// Moderate subdivision (cleaner, not chaotic)
-		const geometry = new THREE.PlaneGeometry(width, height, 60, 80);
+// 		// Moderate subdivision (cleaner, not chaotic)
+// 		const geometry = new THREE.PlaneGeometry(width, height, 60, 80);
 
-		const count = geometry.attributes.position.count;
+// 		const count = geometry.attributes.position.count;
 
-		const randoms = new Float32Array(count * 3);
-		const offsets = new Float32Array(count);
+// 		const randoms = new Float32Array(count * 3);
+// 		const offsets = new Float32Array(count);
 
-		for (let i = 0; i < count; i++) {
-			randoms[i * 3] = (Math.random() - 0.5) * 1.5;
-			randoms[i * 3 + 1] = (Math.random() - 0.5) * 1.5;
-			randoms[i * 3 + 2] = Math.random() * 1.2;
+// 		for (let i = 0; i < count; i++) {
+// 			randoms[i * 3] = (Math.random() - 0.5) * 1.5;
+// 			randoms[i * 3 + 1] = (Math.random() - 0.5) * 1.5;
+// 			randoms[i * 3 + 2] = Math.random() * 1.2;
 
-			offsets[i] = Math.random();
-		}
+// 			offsets[i] = Math.random();
+// 		}
 
-		geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
-		geometry.setAttribute("aOffset", new THREE.BufferAttribute(offsets, 1));
+// 		geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
+// 		geometry.setAttribute("aOffset", new THREE.BufferAttribute(offsets, 1));
 
-		const material = new THREE.ShaderMaterial({
-			uniforms: {
-				uTexture: { value: texture },
-				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-				uHover: { value: 0 },
-				uTime: { value: 0 }
-			},
-			vertexShader: `
-        uniform vec2 uMouse;
-        uniform float uHover;
-        uniform float uTime;
+// 		const material = new THREE.ShaderMaterial({
+// 			uniforms: {
+// 				uTexture: { value: texture },
+// 				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+// 				uHover: { value: 0 },
+// 				uTime: { value: 0 }
+// 			},
+// 			vertexShader: `
+//         uniform vec2 uMouse;
+//         uniform float uHover;
+//         uniform float uTime;
 
-        attribute vec3 aRandom;
-        attribute float aOffset;
+//         attribute vec3 aRandom;
+//         attribute float aOffset;
 
-        varying vec2 vUv;
-        varying float vDist;
+//         varying vec2 vUv;
+//         varying float vDist;
 
-        void main() {
+//         void main() {
 
-            vUv = uv;
+//             vUv = uv;
 
-            vec3 pos = position;
+//             vec3 pos = position;
 
-            float dist = distance(uv, uMouse);
-            vDist = dist;
+//             float dist = distance(uv, uMouse);
+//             vDist = dist;
 
-            float influence = smoothstep(0.22, 0.0, dist);
+//             float influence = smoothstep(0.22, 0.0, dist);
 
-            // Gentle glass separation
-            vec3 lift = aRandom * influence * uHover * 0.25;
+//             // Gentle glass separation
+//             vec3 lift = aRandom * influence * uHover * 0.25;
 
-            // Slow editorial float
-            float floatZ = sin(uTime * 0.6 + aOffset * 4.0) * 0.02;
+//             // Slow editorial float
+//             float floatZ = sin(uTime * 0.6 + aOffset * 4.0) * 0.02;
 
-            pos += lift;
-            pos.z += floatZ * uHover;
+//             pos += lift;
+//             pos.z += floatZ * uHover;
 
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-        }
-    `,
-			fragmentShader: `
-        uniform sampler2D uTexture;
-        uniform float uHover;
-        uniform float uTime;
+//             gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+//         }
+//     `,
+// 			fragmentShader: `
+//         uniform sampler2D uTexture;
+//         uniform float uHover;
+//         uniform float uTime;
 
-        varying vec2 vUv;
-        varying float vDist;
+//         varying vec2 vUv;
+//         varying float vDist;
 
-        void main() {
+//         void main() {
 
-            vec2 uv = vUv;
+//             vec2 uv = vUv;
 
-            float influence = smoothstep(0.4, 0.0, vDist) * uHover;
+//             float influence = smoothstep(0.4, 0.0, vDist) * uHover;
 
-            // Micro refraction
-            vec2 refractOffset = (uv - 0.5) * 0.003 * influence;
+//             // Micro refraction
+//             vec2 refractOffset = (uv - 0.5) * 0.003 * influence;
 
-            vec4 base = texture2D(uTexture, uv + refractOffset);
+//             vec4 base = texture2D(uTexture, uv + refractOffset);
 
-            // Subtle chromatic glass edge
-            vec4 r = texture2D(uTexture, uv + refractOffset * 1.4);
-            vec4 g = texture2D(uTexture, uv);
-            vec4 b = texture2D(uTexture, uv - refractOffset * 1.4);
+//             // Subtle chromatic glass edge
+//             vec4 r = texture2D(uTexture, uv + refractOffset * 1.4);
+//             vec4 g = texture2D(uTexture, uv);
+//             vec4 b = texture2D(uTexture, uv - refractOffset * 1.4);
 
-            vec3 glassColor = vec3(r.r, g.g, b.b);
+//             vec3 glassColor = vec3(r.r, g.g, b.b);
 
-            vec3 color = mix(base.rgb, glassColor, influence * 0.25);
+//             vec3 color = mix(base.rgb, glassColor, influence * 0.25);
 
-            // Editorial light sweep
-            float sweep = smoothstep(0.2, 0.8, vUv.y + sin(uTime * 0.4) * 0.1);
-            color += sweep * influence * 0.06;
+//             // Editorial light sweep
+//             float sweep = smoothstep(0.2, 0.8, vUv.y + sin(uTime * 0.4) * 0.1);
+//             color += sweep * influence * 0.06;
 
-            gl_FragColor = vec4(color, 1.0);
-        }
-    `,
-			transparent: true
-		});
+//             gl_FragColor = vec4(color, 1.0);
+//         }
+//     `,
+// 			transparent: true
+// 		});
 
-		const mesh = new THREE.Mesh(geometry, material);
-		scene.add(mesh);
+// 		const mesh = new THREE.Mesh(geometry, material);
+// 		scene.add(mesh);
 
-		let hover = 0;
+// 		let hover = 0;
 
-		container.addEventListener("mousemove", (e) => {
+// 		container.addEventListener("mousemove", (e) => {
 
-			const rect = container.getBoundingClientRect();
+// 			const rect = container.getBoundingClientRect();
 
-			const x = (e.clientX - rect.left) / rect.width;
-			const y = 1.0 - (e.clientY - rect.top) / rect.height;
+// 			const x = (e.clientX - rect.left) / rect.width;
+// 			const y = 1.0 - (e.clientY - rect.top) / rect.height;
 
-			material.uniforms.uMouse.value.set(x, y);
-			hover = 1;
-		});
+// 			material.uniforms.uMouse.value.set(x, y);
+// 			hover = 1;
+// 		});
 
-		container.addEventListener("mouseleave", () => {
-			hover = 0;
-		});
+// 		container.addEventListener("mouseleave", () => {
+// 			hover = 0;
+// 		});
 
-		function animate() {
+// 		function animate() {
 
-			requestAnimationFrame(animate);
+// 			requestAnimationFrame(animate);
 
-			material.uniforms.uTime.value += 0.01;
+// 			material.uniforms.uTime.value += 0.01;
 
-			// Smooth easing (premium feel)
-			material.uniforms.uHover.value +=
-				(hover - material.uniforms.uHover.value) * 0.06;
+// 			// Smooth easing (premium feel)
+// 			material.uniforms.uHover.value +=
+// 				(hover - material.uniforms.uHover.value) * 0.06;
 
-			renderer.render(scene, camera);
-		}
+// 			renderer.render(scene, camera);
+// 		}
 
-		animate();
-	});
+// 		animate();
+// 	});
 
-	window.addEventListener("resize", () => {
-		camera.aspect = container.offsetWidth / container.offsetHeight;
-		camera.updateProjectionMatrix();
-		renderer.setSize(container.offsetWidth, container.offsetHeight);
-	});
-}
+// 	window.addEventListener("resize", () => {
+// 		camera.aspect = container.offsetWidth / container.offsetHeight;
+// 		camera.updateProjectionMatrix();
+// 		renderer.setSize(container.offsetWidth, container.offsetHeight);
+// 	});
+// }

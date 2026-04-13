@@ -25,6 +25,53 @@ body.no-scroll {
 }
 
 /* ======================================================
+   FLOATING CODE BACKGROUND
+====================================================== */
+
+.floating-code {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.floating-code span {
+	position: absolute;
+	font-family: 'Courier New', monospace;
+	font-size: 0.9rem;
+	color: rgba(255, 255, 255, 0.06);
+	animation: float-up var(--duration) linear infinite;
+	animation-delay: var(--delay);
+	left: var(--x);
+	bottom: -50px;
+	white-space: nowrap;
+}
+
+@keyframes float-up {
+	0% {
+		transform: translateY(0) rotate(0deg);
+		opacity: 0;
+	}
+
+	10% {
+		opacity: 1;
+	}
+
+	90% {
+		opacity: 1;
+	}
+
+	100% {
+		transform: translateY(-110vh) rotate(10deg);
+		opacity: 0;
+	}
+}
+
+/* ======================================================
    INTRO VIDEO
 ====================================================== */
 
@@ -345,9 +392,9 @@ section h2::after {
 
 .about-container {
 	display: grid;
-	grid-template-columns: 1fr 400px;
+	grid-template-columns: 1fr 350px;
 	gap: 60px;
-	align-items: center;
+	align-items: start;
 }
 
 .about-content {
@@ -362,11 +409,15 @@ section h2::after {
 
 .about-image {
 	position: relative;
+	width: 100%;
+	max-width: 350px;
 }
 
 .about-image img {
 	width: 100%;
 	height: auto;
+	max-height: 450px;
+	object-fit: cover;
 	border-radius: 18px;
 	border: 1px solid rgba(255, 255, 255, 0.13);
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -420,11 +471,12 @@ section h2::after {
 
 	.about-container {
 		grid-template-columns: 1fr;
+		gap: 40px;
 	}
 
 	.about-image {
 		order: -1;
-		max-width: 400px;
+		max-width: 350px;
 		margin: 0 auto;
 	}
 
@@ -444,6 +496,10 @@ section h2::after {
 
 	.about-image {
 		max-width: 100%;
+	}
+
+	.about-image img {
+		max-height: 400px;
 	}
 
 	.work-grid {

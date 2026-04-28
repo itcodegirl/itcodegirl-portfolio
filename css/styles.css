@@ -129,7 +129,12 @@ nav a {
 	text-decoration: none;
 	font-weight: 500;
 	transition: opacity 0.2s ease, text-shadow 0.2s ease;
+	margin-left: 14px;
+	font-size: 0.95rem;
+	letter-spacing: 0.02em;
 }
+
+
 
 nav a:hover {
 	opacity: 1;
@@ -147,6 +152,11 @@ section {
 .section-divider {
 	margin: 40px auto;
 	opacity: 0.6;
+}
+
+section h2 {
+	letter-spacing: -0.03em;
+	line-height: 1;
 }
 
 
@@ -449,6 +459,16 @@ section h2::after {
 	display: none;
 }
 
+.project-link-btn,
+.contact-link {
+	backdrop-filter: blur(10px);
+}
+
+.project-link-btn:hover,
+.contact-link:hover {
+	box-shadow: 0 0 24px rgba(192, 132, 252, 0.18);
+}
+
 
 
 @media (hover: hover) {
@@ -468,6 +488,8 @@ section h2::after {
 	transform: scaleX(0);
 }
 
+
+
 @media (max-width: 900px) {
 	.nav {
 		padding: 18px 30px;
@@ -485,14 +507,16 @@ section h2::after {
 	}
 }
 
+a:focus-visible,
+button:focus-visible {
+	outline: 2px solid #c084fc;
+	outline-offset: 4px;
+	border-radius: 8px;
+}
+
 @media (max-width: 600px) {
 	section {
 		padding: 110px 30px;
-	}
-
-	nav a {
-		margin-left: 14px;
-		font-size: 0.9rem;
 	}
 
 	.logo {

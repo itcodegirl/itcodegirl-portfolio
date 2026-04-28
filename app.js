@@ -1,26 +1,42 @@
-console.log("CINEMATIC PARTICLE SYSTEM LOADED");
+// const introVideo = document.getElementById("introVideo");
 
-const introVideo = document.getElementById("introVideo");
+// let introFinished = false;
 
-function finishIntro() {
-	const intro = document.querySelector(".intro-video");
+// function finishIntro() {
+// 	if (introFinished) return;
+// 	introFinished = true;
 
-	if (intro) {
-		intro.style.opacity = "0";
-		setTimeout(() => intro.remove(), 800);
-	}
+// 	const intro = document.querySelector(".intro-video");
 
-	document.body.classList.remove("no-scroll");
-	initWebGL();
-}
+// 	if (intro) {
+// 		intro.style.opacity = "0";
+// 		intro.style.pointerEvents = "none";
 
-window.addEventListener("load", () => {
-	if (introVideo) {
-		introVideo.addEventListener("ended", finishIntro);
-	} else {
-		setTimeout(finishIntro, 4000);
-	}
-});
+// 		setTimeout(() => {
+// 			intro.remove();
+// 		}, 800);
+// 	}
+
+// 	document.body.classList.remove("no-scroll");
+
+// 	if (typeof initWebGL === "function") {
+// 		initWebGL();
+// 	}
+// }
+
+// window.addEventListener("load", () => {
+// 	if (introVideo) {
+// 		introVideo.addEventListener("ended", finishIntro);
+// 		introVideo.addEventListener("error", finishIntro);
+
+// 		// 🔴 force-hide after 4.5 seconds no matter what
+// 		setTimeout(finishIntro, 4500);
+// 	} else {
+// 		finishIntro();
+// 	}
+// });
+
+
 
 
 /*Hover: 
@@ -74,35 +90,35 @@ looks completely normal at rest, with no visible effect. On hover, a soft wave d
 				uHover: { value: 0 }
 			},
 			vertexShader: `
-                uniform vec2 uMouse;
-                uniform float uHover;
-                varying vec2 vUv;
+								uniform vec2 uMouse;
+								uniform float uHover;
+								varying vec2 vUv;
 
-                void main() {
+								void main() {
 
-                    vUv = uv;
+										vUv = uv;
 
-                    vec3 pos = position;
+										vec3 pos = position;
 
-                    float dist = distance(uv, uMouse);
+										float dist = distance(uv, uMouse);
 
-                    float wave = sin(dist * 30.0 - uHover * 5.0) * 0.5;
+										float wave = sin(dist * 30.0 - uHover * 5.0) * 0.5;
 
-                    float influence = smoothstep(0.4, 0.0, dist);
+										float influence = smoothstep(0.4, 0.0, dist);
 
-                    pos.z += wave * influence * 4.0;
+										pos.z += wave * influence * 4.0;
 
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-                }
-            `,
+										gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+								}
+						`,
 			fragmentShader: `
-                uniform sampler2D uTexture;
-                varying vec2 vUv;
+								uniform sampler2D uTexture;
+								varying vec2 vUv;
 
-                void main() {
-                    gl_FragColor = texture2D(uTexture, vUv);
-                }
-            `,
+								void main() {
+										gl_FragColor = texture2D(uTexture, vUv);
+								}
+						`,
 			transparent: true
 		});
 
@@ -212,44 +228,44 @@ looks completely normal at rest, with no visible effect. On hover, a soft wave d
 				uHover: { value: 0 }
 			},
 			vertexShader: `
-                uniform vec2 uMouse;
-                uniform float uHover;
+								uniform vec2 uMouse;
+								uniform float uHover;
 
-                attribute vec3 aRandom;
+								attribute vec3 aRandom;
 
-                varying vec2 vUv;
+								varying vec2 vUv;
 
-                void main() {
+								void main() {
 
-                    vUv = uv;
+										vUv = uv;
 
-                    vec3 pos = position;
+										vec3 pos = position;
 
-                    float dist = distance(uv, uMouse);
+										float dist = distance(uv, uMouse);
 
-                    float influence = smoothstep(0.4, 0.0, dist);
+										float influence = smoothstep(0.4, 0.0, dist);
 
-                    // Glass ripple distortion
-                    pos.z += sin(dist * 40.0) * influence * uHover * 2.5;
+										// Glass ripple distortion
+										pos.z += sin(dist * 40.0) * influence * uHover * 2.5;
 
-                    // Shard split
-                    pos += aRandom * influence * uHover * 3.0;
+										// Shard split
+										pos += aRandom * influence * uHover * 3.0;
 
-                    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-                }
-            `,
+										gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+								}
+						`,
 			fragmentShader: `
-                uniform sampler2D uTexture;
-                varying vec2 vUv;
+								uniform sampler2D uTexture;
+								varying vec2 vUv;
 
-                void main() {
+								void main() {
 
-                    // Subtle glass refraction shift
-                    vec2 distortedUv = vUv + sin(vUv.yx * 20.0) * 0.003;
+										// Subtle glass refraction shift
+										vec2 distortedUv = vUv + sin(vUv.yx * 20.0) * 0.003;
 
-                    gl_FragColor = texture2D(uTexture, distortedUv);
-                }
-            `,
+										gl_FragColor = texture2D(uTexture, distortedUv);
+								}
+						`,
 			transparent: true
 		});
 
@@ -309,153 +325,153 @@ Hover:
 • Subtle floating motion
 • Cinematic micro - rotation */
 
- /*function initWebGL() {
+/*function initWebGL() {
 
-	const container = document.getElementById("three-container");
-	if (!container) return;
+ const container = document.getElementById("three-container");
+ if (!container) return;
 
-	const scene = new THREE.Scene();
+ const scene = new THREE.Scene();
 
-	const camera = new THREE.PerspectiveCamera(
-		45,
-		container.offsetWidth / container.offsetHeight,
-		0.1,
-		1000
-	);
+ const camera = new THREE.PerspectiveCamera(
+	 45,
+	 container.offsetWidth / container.offsetHeight,
+	 0.1,
+	 1000
+ );
 
-	camera.position.z = 32;
+ camera.position.z = 32;
 
-	const renderer = new THREE.WebGLRenderer({
-		antialias: true,
-		alpha: true
-	});
+ const renderer = new THREE.WebGLRenderer({
+	 antialias: true,
+	 alpha: true
+ });
 
-	renderer.setSize(container.offsetWidth, container.offsetHeight);
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-	container.appendChild(renderer.domElement);
+ renderer.setSize(container.offsetWidth, container.offsetHeight);
+ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+ container.appendChild(renderer.domElement);
 
-	const textureLoader = new THREE.TextureLoader();
+ const textureLoader = new THREE.TextureLoader();
 
-	const imagePath = window.location.hostname.includes("github.io")
-		? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
-		: "Jenna_robot_1.jpg";
+ const imagePath = window.location.hostname.includes("github.io")
+	 ? "/itcodegirl-portfolio/Jenna_robot_1.jpg"
+	 : "Jenna_robot_1.jpg";
 
-	textureLoader.load(imagePath, (texture) => {
+ textureLoader.load(imagePath, (texture) => {
 
-		const width = 16;
-		const height = 22;
+	 const width = 16;
+	 const height = 22;
 
-		// HEAVY subdivision = shard density
-		const geometry = new THREE.PlaneGeometry(width, height, 200, 280);
+	 // HEAVY subdivision = shard density
+	 const geometry = new THREE.PlaneGeometry(width, height, 200, 280);
 
-		const count = geometry.attributes.position.count;
+	 const count = geometry.attributes.position.count;
 
-		const randoms = new Float32Array(count * 3);
-		const offsets = new Float32Array(count);
+	 const randoms = new Float32Array(count * 3);
+	 const offsets = new Float32Array(count);
 
-		for (let i = 0; i < count; i++) {
-			randoms[i * 3] = (Math.random() - 0.5) * 2;
-			randoms[i * 3 + 1] = (Math.random() - 0.5) * 2;
-			randoms[i * 3 + 2] = Math.random() * 2.0;
+	 for (let i = 0; i < count; i++) {
+		 randoms[i * 3] = (Math.random() - 0.5) * 2;
+		 randoms[i * 3 + 1] = (Math.random() - 0.5) * 2;
+		 randoms[i * 3 + 2] = Math.random() * 2.0;
 
-			offsets[i] = Math.random();
-		}
+		 offsets[i] = Math.random();
+	 }
 
-		geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
-		geometry.setAttribute("aOffset", new THREE.BufferAttribute(offsets, 1));
+	 geometry.setAttribute("aRandom", new THREE.BufferAttribute(randoms, 3));
+	 geometry.setAttribute("aOffset", new THREE.BufferAttribute(offsets, 1));
 
-		const material = new THREE.ShaderMaterial({
-			uniforms: {
-				uTexture: { value: texture },
-				uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-				uHover: { value: 0 },
-				uTime: { value: 0 }
-			},
-			vertexShader: `
-								uniform vec2 uMouse;
-								uniform float uHover;
-								uniform float uTime;
+	 const material = new THREE.ShaderMaterial({
+		 uniforms: {
+			 uTexture: { value: texture },
+			 uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+			 uHover: { value: 0 },
+			 uTime: { value: 0 }
+		 },
+		 vertexShader: `
+							 uniform vec2 uMouse;
+							 uniform float uHover;
+							 uniform float uTime;
 
-								attribute vec3 aRandom;
-								attribute float aOffset;
+							 attribute vec3 aRandom;
+							 attribute float aOffset;
 
-								varying vec2 vUv;
+							 varying vec2 vUv;
 
-								void main() {
+							 void main() {
 
-										vUv = uv;
+									 vUv = uv;
 
-										vec3 pos = position;
+									 vec3 pos = position;
 
-										float dist = distance(uv, uMouse);
-										float influence = smoothstep(0.4, 0.0, dist);
+									 float dist = distance(uv, uMouse);
+									 float influence = smoothstep(0.4, 0.0, dist);
 
-										// shard explosion depth
-										vec3 explode = aRandom * influence * uHover * 6.0;
+									 // shard explosion depth
+									 vec3 explode = aRandom * influence * uHover * 6.0;
 
-										// floating cinematic drift
-										float floatMotion = sin(uTime + aOffset * 10.0) * 0.6;
+									 // floating cinematic drift
+									 float floatMotion = sin(uTime + aOffset * 10.0) * 0.6;
 
-										pos += explode;
-										pos.z += floatMotion * uHover;
+									 pos += explode;
+									 pos.z += floatMotion * uHover;
 
-										gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-								}
-						`,
-			fragmentShader: `
-								uniform sampler2D uTexture;
-								varying vec2 vUv;
+									 gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+							 }
+					 `,
+		 fragmentShader: `
+							 uniform sampler2D uTexture;
+							 varying vec2 vUv;
 
-								void main() {
+							 void main() {
 
-										gl_FragColor = texture2D(uTexture, vUv);
-								}
-						`,
-			transparent: true
-		});
+									 gl_FragColor = texture2D(uTexture, vUv);
+							 }
+					 `,
+		 transparent: true
+	 });
 
-		const mesh = new THREE.Mesh(geometry, material);
-		scene.add(mesh);
+	 const mesh = new THREE.Mesh(geometry, material);
+	 scene.add(mesh);
 
-		let hover = 0;
+	 let hover = 0;
 
-		container.addEventListener("mousemove", (e) => {
+	 container.addEventListener("mousemove", (e) => {
 
-			const rect = container.getBoundingClientRect();
+		 const rect = container.getBoundingClientRect();
 
-			const x = (e.clientX - rect.left) / rect.width;
-			const y = 1.0 - (e.clientY - rect.top) / rect.height;
+		 const x = (e.clientX - rect.left) / rect.width;
+		 const y = 1.0 - (e.clientY - rect.top) / rect.height;
 
-			material.uniforms.uMouse.value.set(x, y);
-			hover = 1;
-		});
+		 material.uniforms.uMouse.value.set(x, y);
+		 hover = 1;
+	 });
 
-		container.addEventListener("mouseleave", () => {
-			hover = 0;
-		});
+	 container.addEventListener("mouseleave", () => {
+		 hover = 0;
+	 });
 
-		function animate() {
+	 function animate() {
 
-			requestAnimationFrame(animate);
+		 requestAnimationFrame(animate);
 
-			material.uniforms.uTime.value += 0.02;
+		 material.uniforms.uTime.value += 0.02;
 
-			material.uniforms.uHover.value += (hover - material.uniforms.uHover.value) * 0.08;
+		 material.uniforms.uHover.value += (hover - material.uniforms.uHover.value) * 0.08;
 
-			// subtle cinematic rotation
-			mesh.rotation.y = Math.sin(material.uniforms.uTime.value * 0.2) * 0.1;
+		 // subtle cinematic rotation
+		 mesh.rotation.y = Math.sin(material.uniforms.uTime.value * 0.2) * 0.1;
 
-			renderer.render(scene, camera);
-		}
+		 renderer.render(scene, camera);
+	 }
 
-		animate();
-	});
+	 animate();
+ });
 
-	window.addEventListener("resize", () => {
-		camera.aspect = container.offsetWidth / container.offsetHeight;
-		camera.updateProjectionMatrix();
-		renderer.setSize(container.offsetWidth, container.offsetHeight);
-	});
+ window.addEventListener("resize", () => {
+	 camera.aspect = container.offsetWidth / container.offsetHeight;
+	 camera.updateProjectionMatrix();
+	 renderer.setSize(container.offsetWidth, container.offsetHeight);
+ });
 } */
 
 
@@ -631,7 +647,7 @@ function initWebGL() {
 		camera.updateProjectionMatrix();
 		renderer.setSize(container.offsetWidth, container.offsetHeight);
 	});
-} 
+}
 
 
 

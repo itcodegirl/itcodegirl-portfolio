@@ -137,11 +137,35 @@ nav a:hover {
 }
 
 section {
-	padding: 140px 60px;
+	padding: 120px 60px;
 	max-width: 1200px;
 	margin: auto;
 	position: relative;
 	z-index: 5;
+}
+
+.section-divider {
+	margin: 40px auto;
+	opacity: 0.6;
+}
+
+
+section:first-of-type {
+	padding-top: 180px;
+	/* hero breathing room */
+}
+
+.work {
+	padding-top: 80px;
+	/* tighter after hero */
+}
+
+.work h2 {
+	margin-bottom: 20px;
+}
+
+.work-grid {
+	margin-top: 40px;
 }
 
 section h2 {
@@ -168,7 +192,7 @@ section h2::after {
 .section-divider {
 	width: min(100% - 48px, 1120px);
 	height: 1px;
-	margin: 0 auto;
+	padding: 120px 60px;
 	background: linear-gradient(90deg,
 			transparent,
 			rgba(255, 255, 255, 0.12),
@@ -424,6 +448,8 @@ section h2::after {
 	transition: transform 0.15s ease;
 	display: none;
 }
+
+
 
 @media (hover: hover) {
 	.custom-cursor {

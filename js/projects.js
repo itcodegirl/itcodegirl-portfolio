@@ -1,6 +1,6 @@
 const projectsGrid = document.getElementById("projectsGrid");
 
-if (projectsGrid) {
+if (projectsGrid && projectsGrid.children.length === 0) {
 	projectsGrid.innerHTML = `
 		<div class="project-card project-card-featured">
 	<div class="project-header">

@@ -35,8 +35,10 @@ function finishIntro() {
 }
 
 window.addEventListener("load", () => {
+	// Always initialize background immediately
+	initBackgroundWebGL();
+
 	if (prefersReducedMotion.matches) {
-		initBackgroundWebGL();
 		initWebGL();
 		finishIntro();
 		return;
@@ -289,19 +291,3 @@ function initWebGL() {
 		renderer.setSize(container.offsetWidth, container.offsetHeight);
 	});
 }
-
-window.addEventListener("load", () => {
-	if (typeof gsap !== "undefined") {
-		gsap.from("#three-container, .hero-card img", {
-			opacity: 0,
-			y: 40,
-			scale: 0.96,
-			duration: 1.1,
-			ease: "power3.out"
-		});
-	}
-
-	if (typeof initWebGL === "function") {
-		initWebGL();
-	}
-});

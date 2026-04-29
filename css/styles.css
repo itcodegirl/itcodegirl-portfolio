@@ -10,6 +10,7 @@ body {
 }
 
 body {
+	background: #0e0e12;
 	color: white;
 	font-family: 'Inter', sans-serif;
 	overflow-x: hidden;
@@ -59,7 +60,7 @@ body.no-scroll {
 	font-size: 0.9rem;
 	color: rgba(255, 255, 255, 0.08);
 	animation: float-up var(--duration) linear infinite;
-	animation-delay: var(--delay);
+	animation-delay: calc(var(--delay) * -1);
 	left: var(--x);
 	bottom: -50px;
 	white-space: nowrap;
@@ -809,11 +810,66 @@ button:focus-visible {
 		overflow-y: auto;
 	}
 
-	.floating-code,
 	.custom-cursor,
 	.scroll-progress,
 	.intro-video {
 		display: none !important;
+	}
+
+	.floating-code {
+		display: block !important;
+	}
+
+	.floating-code span {
+		animation: none !important;
+		bottom: auto;
+		opacity: 0.55;
+		top: var(--static-y, 50%);
+		transform: none;
+	}
+
+	.floating-code span:nth-child(1),
+	.floating-code span:nth-child(7),
+	.floating-code span:nth-child(13),
+	.floating-code span:nth-child(19),
+	.floating-code span:nth-child(25) {
+		--static-y: 12%;
+	}
+
+	.floating-code span:nth-child(2),
+	.floating-code span:nth-child(8),
+	.floating-code span:nth-child(14),
+	.floating-code span:nth-child(20),
+	.floating-code span:nth-child(26) {
+		--static-y: 28%;
+	}
+
+	.floating-code span:nth-child(3),
+	.floating-code span:nth-child(9),
+	.floating-code span:nth-child(15),
+	.floating-code span:nth-child(21) {
+		--static-y: 44%;
+	}
+
+	.floating-code span:nth-child(4),
+	.floating-code span:nth-child(10),
+	.floating-code span:nth-child(16),
+	.floating-code span:nth-child(22) {
+		--static-y: 60%;
+	}
+
+	.floating-code span:nth-child(5),
+	.floating-code span:nth-child(11),
+	.floating-code span:nth-child(17),
+	.floating-code span:nth-child(23) {
+		--static-y: 76%;
+	}
+
+	.floating-code span:nth-child(6),
+	.floating-code span:nth-child(12),
+	.floating-code span:nth-child(18),
+	.floating-code span:nth-child(24) {
+		--static-y: 88%;
 	}
 
 	.hero-card:hover,

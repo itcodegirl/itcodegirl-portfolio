@@ -36,7 +36,9 @@ function finishIntro() {
 
 window.addEventListener("load", () => {
 	// Always start background
-	initBackgroundWebGL();
+	if (!prefersReducedMotion.matches) {
+		initBackgroundWebGL();
+	}
 
 	// ALWAYS initialize portrait (critical fix)
 	initWebGL();
@@ -175,14 +177,16 @@ function initWebGL() {
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
 
-	gsap.from(".hero-card", {
-		opacity: 0,
-		y: 40,
-		scale: 0.96,
-		duration: 1.1,
-		ease: "power3.out",
-		delay: 0.2
-	});
+	if (canUseGsap) {
+		gsap.from(".hero-card", {
+			opacity: 0,
+			y: 40,
+			scale: 0.96,
+			duration: 1.1,
+			ease: "power3.out",
+			delay: 0.2
+		});
+	}
 
 	const textureLoader = new THREE.TextureLoader();
 

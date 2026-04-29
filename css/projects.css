@@ -27,6 +27,8 @@
 	gap: 16px;
 	transition: all 0.3s ease;
 	height: 100%;
+	position: relative;
+	overflow: hidden;
 }
 
 .project-card:hover {
@@ -213,12 +215,12 @@
 	color: rgba(255, 255, 255, 0.72);
 }
 
-@media (max-width: 800px) {
-	.project-card-featured {
-		grid-column: span 1;
+@media (max-width: 900px) {
+	.work-grid {
+		grid-template-columns: 1fr;
 	}
 
-	.case-study-preview {
-		grid-template-columns: 1fr;
+	.project-card-featured {
+		grid-column: span 1;
 	}
 }

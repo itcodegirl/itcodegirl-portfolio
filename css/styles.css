@@ -27,7 +27,7 @@ body.no-scroll {
 	width: 100%;
 	height: 100%;
 	pointer-events: none;
-	z-index: 1;
+	z-index: 0;
 	overflow: hidden;
 }
 
@@ -141,18 +141,19 @@ nav a:hover {
 }
 
 section {
-	padding: 120px 60px;
+	padding: 100px 60px;
 	max-width: 1200px;
 	margin: auto;
 	position: relative;
-	z-index: 5;
+	z-index: 2;
 	scroll-margin-top: 100px;
 
 }
 
 .section-divider {
-	margin: 40px auto;
-	opacity: 0.6;
+	margin: 30px auto;
+	opacity: 0.5;
+	display: none;
 }
 
 section h2 {
@@ -201,6 +202,7 @@ section h2::after {
 }
 
 .section-divider {
+	display: none;
 	width: min(100% - 48px, 1120px);
 	height: 1px;
 	padding: 120px 60px;
@@ -307,7 +309,9 @@ section h2::after {
 }
 
 .about {
-	padding-top: 120px;
+	padding-top: 60px;
+	padding-bottom: 40px;
+	margin-bottom: 0;
 	border-left: 2px solid rgba(255, 255, 255, 0.12);
 	padding-left: 40px;
 }
@@ -351,12 +355,24 @@ section h2::after {
 	box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7);
 }
 
+.contact {
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	padding-top: 40px;
+	padding-bottom: 100px;
+	padding-top: 20px;
+	margin-top: 0;
+	background: transparent;
+}
+
 .contact h2 {
 	text-align: center;
-	margin-bottom: 60px;
+	margin-bottom: 20px;
+	line-height: 1.25;
+	padding-bottom: 6px;
 }
 
 .contact-links {
+	margin-top: 12px;
 	display: flex;
 	justify-content: center;
 	gap: 40px;
@@ -517,7 +533,7 @@ button:focus-visible {
 
 @media (max-width: 600px) {
 	section {
-		padding: 110px 30px;
+		padding: 100px 60px;
 	}
 
 	.logo {

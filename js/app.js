@@ -35,11 +35,14 @@ function finishIntro() {
 }
 
 window.addEventListener("load", () => {
-	// Always initialize background immediately
+	// Always start background
 	initBackgroundWebGL();
 
+	// ALWAYS initialize portrait (critical fix)
+	initWebGL();
+
+	// Handle intro separately
 	if (prefersReducedMotion.matches) {
-		initWebGL();
 		finishIntro();
 		return;
 	}
@@ -172,16 +175,14 @@ function initWebGL() {
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
 
-	if (canUseGsap) {
-		gsap.from(container, {
-			opacity: 0,
-			y: 60,
-			scale: 0.96,
-			duration: 1.2,
-			ease: "power3.out",
-			delay: 0.2
-		});
-	}
+	gsap.from(".hero-card", {
+		opacity: 0,
+		y: 40,
+		scale: 0.96,
+		duration: 1.1,
+		ease: "power3.out",
+		delay: 0.2
+	});
 
 	const textureLoader = new THREE.TextureLoader();
 

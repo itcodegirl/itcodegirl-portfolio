@@ -1,4 +1,7 @@
 const introVideo = document.getElementById("introVideo");
+const introSkip = document.querySelector(".intro-skip");
+const skipLink = document.querySelector(".skip-link");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 let introFinished = false;
 let webGLInitialized = false;
@@ -20,19 +23,39 @@ function finishIntro() {
 
 	document.body.classList.remove("no-scroll");
 
-	initWebGL();
+	if (!prefersReducedMotion.matches) {
+		initWebGL();
+	}
 }
 
 window.addEventListener("load", () => {
+	if (prefersReducedMotion.matches) {
+		finishIntro();
+		return;
+	}
+
 	if (introVideo) {
 		introVideo.addEventListener("ended", finishIntro);
 		introVideo.addEventListener("error", finishIntro);
+
+		const playPromise = introVideo.play();
+		if (playPromise) {
+			playPromise.catch(finishIntro);
+		}
 
 		setTimeout(finishIntro, 4500);
 	} else {
 		finishIntro();
 	}
 });
+
+if (introSkip) {
+	introSkip.addEventListener("click", finishIntro);
+}
+
+if (skipLink) {
+	skipLink.addEventListener("click", finishIntro);
+}
 
 function initWebGL() {
 	if (webGLInitialized) return;

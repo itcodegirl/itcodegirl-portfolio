@@ -39,6 +39,10 @@
 		0 0 60px rgba(168, 85, 247, 0.25);
 }
 
+.project-card:focus-within {
+	border-color: rgba(192, 132, 252, 0.65);
+}
+
 .project-header {
 	display: flex;
 	justify-content: space-between;
@@ -56,7 +60,7 @@
 	padding: 4px 10px;
 	border-radius: 6px;
 	background: rgba(168, 85, 247, 0.15);
-	color: #a855f7;
+	color: #d8b4fe;
 }
 
 .project-card h3 {
@@ -74,17 +78,22 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 6px;
+	list-style: none;
+	padding: 0;
 }
 
+.project-tech li,
 .project-tech span {
 	font-size: 0.75rem;
 	padding: 4px 8px;
 	border-radius: 6px;
 	background: rgba(255, 255, 255, 0.08);
+	color: rgba(255, 255, 255, 0.88);
 }
 
 .project-links {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 10px;
 	margin-top: auto;
 }
@@ -103,13 +112,20 @@
 	background: rgba(168, 85, 247, 0.3);
 }
 
+.project-link-btn:focus-visible {
+	background: rgba(168, 85, 247, 0.3);
+}
+
 .project-link-github {
+	align-items: center;
+	display: inline-flex;
 	font-size: 0.85rem;
 	color: rgba(255, 255, 255, 0.7);
 	text-decoration: none;
 }
 
-.project-link-github:hover {
+.project-link-github:hover,
+.project-link-github:focus-visible {
 	color: white;
 }
 
@@ -155,7 +171,7 @@
 }
 
 .project-card-featured::after {
-	content: "React • Supabase • Learning Platform";
+	content: "React | Supabase | Learning Platform";
 	position: absolute;
 	right: 24px;
 	bottom: 20px;
@@ -186,14 +202,20 @@
 	background: rgba(168, 85, 247, 0.35);
 }
 
+.project-card-featured .project-link-btn:focus-visible {
+	background: rgba(168, 85, 247, 0.35);
+}
+
 .case-study-preview {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 18px;
+	list-style: none;
 	margin: 10px 0 6px;
+	padding: 0;
 }
 
-.case-study-preview div {
+.case-study-preview li {
 	padding: 16px;
 	border-radius: 14px;
 	background: rgba(255, 255, 255, 0.045);
@@ -222,5 +244,10 @@
 
 	.project-card-featured {
 		grid-column: span 1;
+	}
+
+	.project-card-featured::after {
+		position: static;
+		margin-top: 4px;
 	}
 }

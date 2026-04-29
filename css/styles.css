@@ -483,9 +483,8 @@ section h2::after {
 }
 
 .skill-content p {
-	color: #b8b8b8;
-	line-height: 1.7;
-	margin-bottom: 20px;
+	line-height: 1.65;
+	color: rgba(255, 255, 255, 0.75);
 	font-size: 0.95rem;
 }
 
@@ -791,6 +790,7 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	html,
 	body {
 		scroll-behavior: auto;
@@ -829,6 +829,7 @@ button:focus-visible {
 }
 
 @media (forced-colors: active) {
+
 	.logo,
 	section h2 {
 		background: none;

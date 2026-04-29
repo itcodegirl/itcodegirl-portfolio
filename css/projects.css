@@ -171,7 +171,7 @@
 }
 
 .project-card-featured::after {
-	content: "React | Supabase | Learning Platform";
+	content: attr(data-meta);
 	position: absolute;
 	right: 24px;
 	bottom: 20px;
@@ -237,7 +237,7 @@
 	color: rgba(255, 255, 255, 0.72);
 }
 
-.case-study-preview div:hover {
+.case-study-preview li:hover {
 	transform: translateY(-4px);
 	border-color: rgba(168, 85, 247, 0.3);
 }

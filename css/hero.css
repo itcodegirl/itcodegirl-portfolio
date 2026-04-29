@@ -64,6 +64,12 @@
 	transition: transform 0.35s ease, filter 0.35s ease;
 }
 
+.hero-portrait {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+
 .hero-card:hover {
 	transform: translateY(-6px);
 	border-color: rgba(168, 85, 247, 0.42);
@@ -164,6 +170,7 @@ body {
 	min-height: 400px;
 	opacity: 1 !important;
 	transform: none !important;
+	z-index: 2;
 }
 
 #three-container canvas {

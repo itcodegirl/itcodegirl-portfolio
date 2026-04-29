@@ -173,13 +173,13 @@ function initWebGL() {
 		alpha: true
 	});
 
+	renderer.setClearColor(0x000000, 0);
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
 
 	if (canUseGsap) {
 		gsap.from(".hero-card", {
-			opacity: 0,
 			y: 40,
 			scale: 0.96,
 			duration: 1.1,
@@ -258,6 +258,7 @@ function initWebGL() {
 
 		const mesh = new THREE.Mesh(geometry, material);
 		scene.add(mesh);
+		container.classList.add("webgl-ready");
 
 		let hover = 0;
 

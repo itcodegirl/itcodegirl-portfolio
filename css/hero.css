@@ -168,9 +168,15 @@ body {
 	height: 100%;
 	min-width: 320px;
 	min-height: 400px;
-	opacity: 1 !important;
+	opacity: 0;
+	pointer-events: none;
 	transform: none !important;
+	transition: opacity 0.25s ease;
 	z-index: 2;
+}
+
+#three-container.webgl-ready {
+	opacity: 1;
 }
 
 #three-container canvas {

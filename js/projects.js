@@ -11,7 +11,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 	<h3>CodeHerWay Education Platform</h3>
 
 <p class="project-description">
-	A frontend-focused learning platform built with React and Supabase, featuring structured lessons, quizzes, and progress tracking.
+	A frontend-focused learning platform built with React and Supabase, featuring structured lessons, quizzes, progress tracking,  and a clean, beginner-friendly learning experience.
 </p>
 
 <p class="project-subtext">

@@ -261,4 +261,12 @@
 		position: static;
 		margin-top: 4px;
 	}
+
+	.project-card h3 {
+		font-size: 1.35rem;
+	}
+
+	.project-card.ceo-os h3 {
+		font-size: 1.45rem;
+	}
 }

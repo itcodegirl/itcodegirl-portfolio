@@ -52,27 +52,38 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 			<div class="project-header"><span class="project-number">02</span></div>
 			<h3>Aura Weather</h3>
 			<p class="project-description">
-				A responsive weather app with real-time API data, polished loading states,
-				and clean forecast UI.
-			</p>
+				<p class="project-description">
+	A responsive weather app built with real-time API data, featuring current conditions, hourly forecasts, and location-based weather insights.
+</p>
+
+<p class="project-subtext">
+	Focused on performance, clean UI architecture, and presenting dynamic data in a clear and accessible way. Includes polished loading states and responsive layouts to ensure a smooth user experience across devices.
+</p>
 			<div class="project-tech"><span>JavaScript</span><span>API</span><span>CSS</span></div>
 			<div class="project-links">
 				<a href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
-				<a href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
+				<a href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noreferrer" class="project-link-github">View Code →</a>
 			</div>
 		</div>
 
 		<div class="project-card">
 			<div class="project-header"><span class="project-number">03</span></div>
-			<h3>CodeHerWay CEO OS</h3>
-			<p class="project-description">
-				A React productivity dashboard for priorities, opportunities, content planning,
-				and weekly execution.
-			</p>
-			<div class="project-tech"><span>React</span><span>Router</span><span>Local Storage</span></div>
+			<h3>CodeHerWay CEO OS (Founder Dashboard)</h3>
+
+<p class="project-description">
+	A productivity and decision-support dashboard designed to help founders organize priorities, track opportunities, plan content, and review weekly progress.
+</p>
+
+<p class="project-subtext">
+	Built with a focus on reducing cognitive load and improving clarity in day-to-day decision making.
+</p>
+<p class="project-subtext">
+	Includes opportunity tracking, weekly planning, and a central workspace for managing priorities and decisions.
+</p>
+			<div class="project-tech"><span>React</span><span>ReactRouter</span><span>Local Storage</span><span>UX Systems</span></div>
 			<div class="project-links">
-				<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Demo</a>
-				<a href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
+				<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
+				<a href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noreferrer" class="project-link-github">View Code →</a>
 			</div>
 		</div>
 
@@ -86,7 +97,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 			<div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
 			<div class="project-links">
 				<a href="https://itcodegirl.github.io/itcodegirl-portfolio/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
-				<a href="https://github.com/itcodegirl/itcodegirl-portfolio" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
+				<a href="https://github.com/itcodegirl/itcodegirl-portfolio" target="_blank" rel="noreferrer" class="project-link-github">View Code →</a>
 			</div>
 		</div>
 	`;

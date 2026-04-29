@@ -123,13 +123,12 @@ body.no-scroll {
 }
 
 nav a {
-	margin-left: 26px;
+	margin-left: 20px;
 	color: white;
 	opacity: 0.8;
 	text-decoration: none;
 	font-weight: 500;
 	transition: opacity 0.2s ease, text-shadow 0.2s ease;
-	margin-left: 14px;
 	font-size: 0.95rem;
 	letter-spacing: 0.02em;
 }
@@ -138,7 +137,7 @@ nav a {
 
 nav a:hover {
 	opacity: 1;
-	text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
 }
 
 section {
@@ -147,6 +146,8 @@ section {
 	margin: auto;
 	position: relative;
 	z-index: 5;
+	scroll-margin-top: 100px;
+
 }
 
 .section-divider {

@@ -2,25 +2,45 @@ const projectsGrid = document.getElementById("projectsGrid");
 
 if (projectsGrid) {
 	projectsGrid.innerHTML = `
-		<div class="project-card">
-			<div class="project-header">
-				<span class="project-number">01</span>
-				<span class="project-status">Featured Project</span>
-			</div>
-			<h3>CodeHerWay Education Platform</h3>
-			<p class="project-description">
-				A full-stack learning platform with structured frontend lessons, quizzes,
-				progress tracking, and backend-driven rewards.
-			</p>
-			<div class="project-tech">
-				<span>React</span><span>Supabase</span><span>PostgreSQL</span><span>JavaScript</span><span>Vite</span>
-			</div>
-			<div class="project-links">
-				<a href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Platform</a>
-				<a href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn secondary">View Case Study</a>
-				<a href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
-			</div>
+		<div class="project-card project-card-featured">
+	<div class="project-header">
+		<span class="project-number">01</span>
+		<span class="project-status">Featured Case Study</span>
+	</div>
+
+	<h3>CodeHerWay Education Platform</h3>
+
+	<p class="project-description">
+		A full-stack learning platform designed to help beginners learn frontend development through structured lessons, quizzes, progress tracking, and motivational reward systems.
+	</p>
+
+	<div class="case-study-preview">
+		<div>
+			<span class="case-label">Problem</span>
+			<p>Beginners often struggle with scattered resources and unclear progress.</p>
 		</div>
+
+		<div>
+			<span class="case-label">Solution</span>
+			<p>Built a guided learning experience with lessons, quizzes, XP, streaks, and progress feedback.</p>
+		</div>
+
+		<div>
+			<span class="case-label">Impact</span>
+			<p>Created a portfolio-ready product that demonstrates frontend architecture, backend integration, and UX thinking.</p>
+		</div>
+	</div>
+
+	<div class="project-tech">
+		<span>React</span><span>Supabase</span><span>PostgreSQL</span><span>JavaScript</span><span>Vite</span>
+	</div>
+
+	<div class="project-links">
+		<a href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Platform</a>
+		<a href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn secondary">View Case Study</a>
+		<a href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
+	</div>
+</div>
 
 		<div class="project-card">
 			<div class="project-header"><span class="project-number">02</span></div>

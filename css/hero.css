@@ -119,6 +119,12 @@
 	}
 }
 
+.cs-meta {
+	margin-top: 18px;
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.55);
+}
+
 @media (max-width: 600px) {
 	.hero {
 		padding: 110px 24px 56px;

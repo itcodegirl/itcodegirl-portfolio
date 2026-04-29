@@ -2,6 +2,12 @@ const introVideo = document.getElementById("introVideo");
 const introSkip = document.querySelector(".intro-skip");
 const skipLink = document.querySelector(".skip-link");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const canUseGsap = typeof gsap !== "undefined";
+const canUseScrollTrigger = typeof ScrollTrigger !== "undefined";
+
+if (canUseGsap && canUseScrollTrigger) {
+	gsap.registerPlugin(ScrollTrigger);
+}
 
 let introFinished = false;
 let webGLInitialized = false;
@@ -59,10 +65,11 @@ if (skipLink) {
 
 function initWebGL() {
 	if (webGLInitialized) return;
-	webGLInitialized = true;
 
 	const container = document.getElementById("three-container");
 	if (!container || typeof THREE === "undefined") return;
+
+	webGLInitialized = true;
 
 	const scene = new THREE.Scene();
 
@@ -83,6 +90,17 @@ function initWebGL() {
 	renderer.setSize(container.offsetWidth, container.offsetHeight);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
+
+	if (canUseGsap) {
+		gsap.from(container, {
+			opacity: 0,
+			y: 60,
+			scale: 0.96,
+			duration: 1.2,
+			ease: "power3.out",
+			delay: 0.2
+		});
+	}
 
 	const textureLoader = new THREE.TextureLoader();
 

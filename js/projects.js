@@ -80,7 +80,7 @@ const projects = [
 		title: "CodeHerWay CEO OS (Founder Dashboard)",
 		cardClass: "ceo-os",
 		description:
-			"A productivity and decision-support dashboard designed to help founders organize priorities, track opportunities, plan content, and review weekly progress.",
+			"A React productivity dashboard designed to help founders manage priorities, opportunities, content planning, and weekly execution.",
 		subtext: [
 			"Built with a focus on reducing cognitive load and improving clarity in day-to-day decision making.",
 			"Includes opportunity tracking, weekly planning, and a central workspace for managing priorities and decisions.",

@@ -3,9 +3,31 @@
 
 <head>
 	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-s	le=1.0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description"
+		content="Jenna Zawaski is a Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven product features." />
+	<meta name="author" content="Jenna Zawaski" />
+	<meta name="robots" content="index, follow" />
+	<link rel="canonical" href="https://itcodegirl.github.io/itcodegirl-portfolio/" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Jenna Zawaski | AI Frontend Developer" />
+	<meta property="og:description"
+		content="Frontend developer focused on polished interfaces, real-world functionality, scalable UI architecture, and accessible web experiences." />
+	<meta property="og:url" content="https://itcodegirl.github.io/itcodegirl-portfolio/" />
+	<meta property="og:image"
+		content="https://itcodegirl.github.io/itcodegirl-portfolio/assets/images/Jenna_robot_1.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Jenna Zawaski | AI Frontend Developer" />
+	<meta name="twitter:description"
+		content="Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven features." />
+	<meta name="twitter:image"
+		content="https://itcodegirl.github.io/itcodegirl-portfolio/assets/images/Jenna_robot_1.jpg" />
+
 	<title>Jenna Zawaski | AI Frontend Developer</title>
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
@@ -17,13 +39,43 @@
 	<link rel="stylesheet" href="./css/styles.css">
 	<link rel="stylesheet" href="./css/hero.css">
 	<link rel="stylesheet" href="./css/projects.css">
-	<link rel="stylesheet" href="./css/responsive.css">
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Jenna Zawaski",
+			"url": "https://itcodegirl.github.io/itcodegirl-portfolio/",
+			"jobTitle": "Frontend Developer",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Chicago",
+				"addressRegion": "IL",
+				"addressCountry": "US"
+			},
+			"knowsAbout": [
+				"Frontend Development",
+				"HTML5",
+				"CSS",
+				"JavaScript",
+				"React",
+				"Accessibility",
+				"API Integration",
+				"Supabase"
+			],
+			"sameAs": [
+				"https://github.com/itcodegirl"
+			]
+		}
+	</script>
 </head>
 
 <body class="no-scroll">
 
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
 	<!-- Floating Code Background -->
-	<div class="floating-code">
+	<div class="floating-code" aria-hidden="true">
 		<span style="--delay: 0s; --duration: 20s; --x: 10%;" class="code-light">HTML5</span>
 		<span style="--delay: 1s; --duration: 25s; --x: 85%;">const</span>
 		<span style="--delay: 2s; --duration: 22s; --x: 45%;" class="code-cyan">let</span>
@@ -52,20 +104,20 @@
 		<span style="--delay: 12s; --duration: 26s; --x: 33%;" class="code-light">JavaScript</span>
 	</div>
 
-	<div class="custom-cursor"></div>
+	<div class="custom-cursor" aria-hidden="true"></div>
 
-	<div class="scroll-progress"></div>
+	<div class="scroll-progress" aria-hidden="true"></div>
 
-	<div class="intro-video">
-		<video id="introVideo" autoplay muted playsinline>
+	<div class="intro-video" aria-hidden="true">
+		<video id="introVideo" autoplay muted playsinline tabindex="-1">
 			<source src="assets/intro.mp4" type="video/mp4">
 		</video>
 	</div>
 
 	<header class="nav nav-show">
 		<div class="nav-inner">
-			<div class="logo">JZ</div>
-			<nav>
+			<a class="logo" href="#main-content" aria-label="Jenna Zawaski home">JZ</a>
+			<nav aria-label="Primary navigation">
 				<a href="#work">Work</a>
 				<a href="#skills">Skills</a>
 				<a href="#about">About</a>
@@ -74,17 +126,17 @@
 		</div>
 	</header>
 
-	<main>
+	<main id="main-content">
 
-		<section class="hero">
+		<section class="hero" aria-labelledby="hero-title">
 			<div class="hero-container">
 
 				<div class="hero-content">
 
-					<h1>
-						I build responsive web apps<br>
+					<h1 id="hero-title">
+						I build responsive <br /> web apps that integrate <br/>
 						<span class="accent">
-							that integrate modern systems and AI-driven features.
+							modern systems and AI-driven features.
 						</span>
 					</h1>
 
@@ -110,20 +162,146 @@
 
 
 		<!-- WORK SECTION -->
-		<section class="work" id="work">
-			<h2>Selected Work</h2>
-			<div class="work-grid" id="projectsGrid"></div>
+		<section class="work" id="work" aria-labelledby="work-title">
+			<h2 id="work-title">Selected Work</h2>
+			<div class="work-grid" id="projectsGrid">
+				<article class="project-card project-card-featured" aria-labelledby="project-codeherway-title">
+					<div class="project-header">
+						<span class="project-number" aria-hidden="true">01</span>
+						<span class="project-status">Featured Case Study</span>
+					</div>
+
+					<h3 id="project-codeherway-title">CodeHerWay Education Platform</h3>
+
+					<p class="project-description">
+						A full-stack learning platform designed to help beginners learn frontend development through structured
+						lessons, quizzes, progress tracking, and motivational reward systems.
+					</p>
+
+					<div class="case-study-preview" aria-label="CodeHerWay case study highlights">
+						<div>
+							<span class="case-label">Problem</span>
+							<p>Beginners often struggle with scattered resources and unclear progress.</p>
+						</div>
+
+						<div>
+							<span class="case-label">Solution</span>
+							<p>Built a guided learning experience with lessons, quizzes, XP, streaks, and progress feedback.</p>
+						</div>
+
+						<div>
+							<span class="case-label">Impact</span>
+							<p>Created a portfolio-ready product that demonstrates frontend architecture, backend integration, and UX
+								thinking.</p>
+						</div>
+					</div>
+
+					<ul class="project-tech" aria-label="Technologies used">
+						<li>React</li>
+						<li>Supabase</li>
+						<li>PostgreSQL</li>
+						<li>JavaScript</li>
+						<li>Vite</li>
+					</ul>
+
+					<div class="project-links">
+						<a href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noopener noreferrer"
+							class="project-link-btn" aria-label="View the CodeHerWay Education Platform">View Platform</a>
+						<a href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noopener noreferrer"
+							class="project-link-btn secondary" aria-label="View the CodeHerWay case study">View Case Study</a>
+						<a href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noopener noreferrer"
+							class="project-link-github"
+							aria-label="View the CodeHerWay Education Platform GitHub repository">GitHub</a>
+					</div>
+				</article>
+
+				<article class="project-card" aria-labelledby="project-aura-title">
+					<div class="project-header">
+						<span class="project-number" aria-hidden="true">02</span>
+					</div>
+
+					<h3 id="project-aura-title">Aura Weather</h3>
+
+					<p class="project-description">
+						A responsive weather app with real-time API data, polished loading states, and clean forecast UI.
+					</p>
+
+					<ul class="project-tech" aria-label="Technologies used">
+						<li>JavaScript</li>
+						<li>API</li>
+						<li>CSS</li>
+					</ul>
+
+					<div class="project-links">
+						<a href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noopener noreferrer"
+							class="project-link-btn" aria-label="View Aura Weather live">View Live</a>
+						<a href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noopener noreferrer"
+							class="project-link-github" aria-label="View the Aura Weather GitHub repository">GitHub</a>
+					</div>
+				</article>
+
+				<article class="project-card" aria-labelledby="project-ceo-title">
+					<div class="project-header">
+						<span class="project-number" aria-hidden="true">03</span>
+					</div>
+
+					<h3 id="project-ceo-title">CodeHerWay CEO OS</h3>
+
+					<p class="project-description">
+						A React productivity dashboard for priorities, opportunities, content planning, and weekly execution.
+					</p>
+
+					<ul class="project-tech" aria-label="Technologies used">
+						<li>React</li>
+						<li>Router</li>
+						<li>Local Storage</li>
+					</ul>
+
+					<div class="project-links">
+						<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noopener noreferrer"
+							class="project-link-btn" aria-label="View CodeHerWay CEO OS live">View Live</a>
+						<a href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noopener noreferrer"
+							class="project-link-github" aria-label="View the CodeHerWay CEO OS GitHub repository">GitHub</a>
+					</div>
+				</article>
+
+				<article class="project-card" aria-labelledby="project-portfolio-title">
+					<div class="project-header">
+						<span class="project-number" aria-hidden="true">04</span>
+					</div>
+
+					<h3 id="project-portfolio-title">Personal Portfolio</h3>
+
+					<p class="project-description">
+						A cinematic portfolio built with responsive layout, animation, accessibility, and performance-focused
+						frontend structure.
+					</p>
+
+					<ul class="project-tech" aria-label="Technologies used">
+						<li>HTML</li>
+						<li>CSS</li>
+						<li>JavaScript</li>
+					</ul>
+
+					<div class="project-links">
+						<a href="https://itcodegirl.github.io/itcodegirl-portfolio/" target="_blank" rel="noopener noreferrer"
+							class="project-link-btn" aria-label="View the personal portfolio live">View Live</a>
+						<a href="https://github.com/itcodegirl/itcodegirl-portfolio" target="_blank" rel="noopener noreferrer"
+							class="project-link-github" aria-label="View the personal portfolio GitHub repository">GitHub</a>
+					</div>
+				</article>
+			</div>
 		</section>
 
 		<!-- SKILLS SECTION -->
-		<section class="skills" id="skills">
-			<h2>Technical Expertise</h2>
+		<section class="skills" id="skills" aria-labelledby="skills-title">
+			<h2 id="skills-title">Technical Expertise</h2>
 
 			<div class="skills-grid">
 
 				<div class="skill-card">
 					<div class="skill-header">
-						<span class="skill-number">01</span>
+						<span class="skill-number" aria-hidden="true">01</span>
 						<h3>Frontend Development</h3>
 					</div>
 					<div class="skill-content">
@@ -145,7 +323,7 @@
 
 				<div class="skill-card">
 					<div class="skill-header">
-						<span class="skill-number">02</span>
+						<span class="skill-number" aria-hidden="true">02</span>
 						<h3>JavaScript & APIs</h3>
 					</div>
 					<div class="skill-content">
@@ -165,7 +343,7 @@
 
 				<div class="skill-card">
 					<div class="skill-header">
-						<span class="skill-number">03</span>
+						<span class="skill-number" aria-hidden="true">03</span>
 						<h3>React & UI Architecture</h3>
 					</div>
 					<div class="skill-content">
@@ -186,7 +364,7 @@
 
 				<div class="skill-card">
 					<div class="skill-header">
-						<span class="skill-number">04</span>
+						<span class="skill-number" aria-hidden="true">04</span>
 						<h3>Backend & Data Integration</h3>
 					</div>
 					<div class="skill-content">
@@ -206,7 +384,7 @@
 
 				<div class="skill-card">
 					<div class="skill-header">
-						<span class="skill-number">05</span>
+						<span class="skill-number" aria-hidden="true">05</span>
 						<h3>UI/UX Thinking</h3>
 					</div>
 					<div class="skill-content">
@@ -230,8 +408,8 @@
 		<div class="section-divider"></div>
 
 		<!-- ABOUT SECTION -->
-		<section class="about" id="about">
-			<h2>About</h2>
+		<section class="about" id="about" aria-labelledby="about-title">
+			<h2 id="about-title">About</h2>
 
 			<div class="about-container">
 				<div class="about-content">
@@ -270,10 +448,10 @@
 		<div class="section-divider"></div>
 
 		<!-- CONTACT SECTION -->
-		<section class="contact" id="contact">
+		<section class="contact" id="contact" aria-labelledby="contact-title">
 			<div class="contact-card">
 				<p class="contact-eyebrow">Available for frontend roles</p>
-				<h2>Let’s build something useful.</h2>
+				<h2 id="contact-title">Let’s build something useful.</h2>
 				<p class="contact-copy">
 					I’m looking for frontend opportunities where I can build polished, accessible interfaces and real-world
 					product
@@ -281,10 +459,11 @@
 				</p>
 
 				<div class="contact-links">
-					<a href="mailto:YOUR_EMAIL_HERE" class="contact-link">Email</a>
-					<a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noreferrer"
-						class="contact-link">LinkedIn</a>
-					<a href="https://github.com/itcodegirl" target="_blank" rel="noreferrer" class="contact-link">GitHub</a>
+					<a href="mailto:YOUR_EMAIL_HERE" class="contact-link" aria-label="Email Jenna Zawaski">Email</a>
+					<a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener noreferrer"
+						class="contact-link" aria-label="Visit Jenna Zawaski on LinkedIn">LinkedIn</a>
+					<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer" class="contact-link"
+						aria-label="Visit Jenna Zawaski on GitHub">GitHub</a>
 				</div>
 			</div>
 		</section>

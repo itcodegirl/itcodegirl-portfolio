@@ -237,6 +237,17 @@
 	color: rgba(255, 255, 255, 0.72);
 }
 
+.case-study-preview div:hover {
+	transform: translateY(-4px);
+	border-color: rgba(168, 85, 247, 0.3);
+}
+
+.project-subtext {
+	font-size: 0.85rem;
+	color: rgba(255, 255, 255, 0.6);
+	line-height: 1.6;
+}
+
 @media (max-width: 900px) {
 	.work-grid {
 		grid-template-columns: 1fr;

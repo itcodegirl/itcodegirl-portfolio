@@ -10,9 +10,15 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 
 	<h3>CodeHerWay Education Platform</h3>
 
-	<p class="project-description">
-		A full-stack learning platform designed to help beginners learn frontend development through structured lessons, quizzes, progress tracking, and motivational reward systems.
-	</p>
+<p class="project-description">
+	A frontend-focused learning platform built with React and Supabase, featuring structured lessons, quizzes, and progress tracking.
+</p>
+
+<p class="project-subtext">
+	Designed to simulate a real-world learning experience with guided progression and user feedback systems. 
+	Includes authentication, progress tracking, and reward-based feedback systems to mimic real product behavior.
+</p>
+</p>
 
 	<div class="case-study-preview">
 		<div>
@@ -27,7 +33,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 
 		<div>
 			<span class="case-label">Impact</span>
-			<p>Created a portfolio-ready product that demonstrates frontend architecture, backend integration, and UX thinking.</p>
+			<p>Demonstrates scalable frontend architecture, backend integration, and strong UX design decisions.</p>
 		</div>
 	</div>
 
@@ -36,10 +42,10 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 	</div>
 
 	<div class="project-links">
-		<a href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Platform</a>
-		<a href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn secondary">View Case Study</a>
-		<a href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
-	</div>
+	<a href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
+<a href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Case Study</a>
+<a href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noreferrer" class="project-link-github">View Code →</a>
+		</div>
 </div>
 
 		<div class="project-card">
@@ -51,7 +57,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 			</p>
 			<div class="project-tech"><span>JavaScript</span><span>API</span><span>CSS</span></div>
 			<div class="project-links">
-				<a href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Live</a>
+				<a href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
 				<a href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
 			</div>
 		</div>
@@ -65,7 +71,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 			</p>
 			<div class="project-tech"><span>React</span><span>Router</span><span>Local Storage</span></div>
 			<div class="project-links">
-				<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Live</a>
+				<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">View Demo</a>
 				<a href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
 			</div>
 		</div>
@@ -79,7 +85,7 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 			</p>
 			<div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
 			<div class="project-links">
-				<a href="https://itcodegirl.github.io/itcodegirl-portfolio/" target="_blank" rel="noreferrer" class="project-link-btn">View Live</a>
+				<a href="https://itcodegirl.github.io/itcodegirl-portfolio/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
 				<a href="https://github.com/itcodegirl/itcodegirl-portfolio" target="_blank" rel="noreferrer" class="project-link-github">GitHub →</a>
 			</div>
 		</div>

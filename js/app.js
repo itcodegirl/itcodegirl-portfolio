@@ -259,6 +259,7 @@ function initWebGL() {
 		const mesh = new THREE.Mesh(geometry, material);
 		scene.add(mesh);
 		container.classList.add("webgl-ready");
+		container.parentElement?.querySelector(".hero-portrait")?.classList.add("webgl-replaced");
 
 		let hover = 0;
 

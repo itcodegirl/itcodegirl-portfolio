@@ -36,6 +36,8 @@ function finishIntro() {
 
 window.addEventListener("load", () => {
 	if (prefersReducedMotion.matches) {
+		initBackgroundWebGL();
+		initWebGL();
 		finishIntro();
 		return;
 	}
@@ -61,6 +63,83 @@ if (introSkip) {
 
 if (skipLink) {
 	skipLink.addEventListener("click", finishIntro);
+}
+
+function initBackgroundWebGL() {
+	const canvas = document.getElementById("webgl");
+	if (!canvas || typeof THREE === "undefined") return;
+
+	const scene = new THREE.Scene();
+
+	const camera = new THREE.PerspectiveCamera(
+		75,
+		window.innerWidth / window.innerHeight,
+		0.1,
+		100
+	);
+
+	camera.position.z = 2;
+
+	const renderer = new THREE.WebGLRenderer({
+		canvas,
+		alpha: true,
+		antialias: true
+	});
+
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+	const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
+
+	const material = new THREE.ShaderMaterial({
+		uniforms: {
+			uTime: { value: 0 }
+		},
+		vertexShader: `
+			varying vec2 vUv;
+
+			void main() {
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+			}
+		`,
+		fragmentShader: `
+			uniform float uTime;
+			varying vec2 vUv;
+
+			void main() {
+				float waveA = sin(vUv.x * 8.0 + uTime * 0.8) * 0.035;
+				float waveB = cos(vUv.y * 6.0 + uTime * 0.6) * 0.025;
+
+				vec3 base = vec3(0.025, 0.03, 0.06);
+				vec3 purple = vec3(0.28, 0.08, 0.45);
+				vec3 blue = vec3(0.02, 0.22, 0.35);
+
+				vec3 color = base + waveA * purple + waveB * blue;
+
+				gl_FragColor = vec4(color, 0.95);
+			}
+		`,
+		transparent: true
+	});
+
+	const mesh = new THREE.Mesh(geometry, material);
+	mesh.position.z = -1;
+	scene.add(mesh);
+
+	function animateBackground() {
+		material.uniforms.uTime.value += 0.01;
+		renderer.render(scene, camera);
+		requestAnimationFrame(animateBackground);
+	}
+
+	animateBackground();
+
+	window.addEventListener("resize", () => {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+	});
 }
 
 function initWebGL() {
@@ -210,3 +289,19 @@ function initWebGL() {
 		renderer.setSize(container.offsetWidth, container.offsetHeight);
 	});
 }
+
+window.addEventListener("load", () => {
+	if (typeof gsap !== "undefined") {
+		gsap.from("#three-container, .hero-card img", {
+			opacity: 0,
+			y: 40,
+			scale: 0.96,
+			duration: 1.1,
+			ease: "power3.out"
+		});
+	}
+
+	if (typeof initWebGL === "function") {
+		initWebGL();
+	}
+});

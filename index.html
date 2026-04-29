@@ -80,7 +80,7 @@
 </head>
 
 <body>
-	<canvas id="webgl"></canvas>
+	<canvas id="webgl" aria-hidden="true"></canvas>
 
 	<a class="skip-link" href="#main-content">Skip to main content</a>
 
@@ -140,7 +140,7 @@
 	<main id="main-content" tabindex="-1">
 
 		<section class="hero" aria-labelledby="hero-title">
-			<class="hero-container">
+			<div class="hero-container">
 
 				<div class="hero-content">
 
@@ -167,11 +167,12 @@
 
 				<div class="hero-image">
 					<div class="hero-card">
-						<div id="three-container" aria-label="Interactive portrait of Jenna Zawaski"></div>
+						<div id="three-container" role="img" aria-label="Interactive portrait of Jenna Zawaski"></div>
 					</div>
 				</div>
 
 
+			</div>
 		</section>
 
 

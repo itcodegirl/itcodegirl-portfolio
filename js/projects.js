@@ -82,6 +82,9 @@ if (projectsGrid && projectsGrid.children.length === 0) {
 </p>
 			<div class="project-tech"><span>React</span><span>ReactRouter</span><span>Local Storage</span><span>UX Systems</span></div>
 			<div class="project-links">
+			<a class="project-link-btn" href="https://codeherway-ceo-os-case-study.netlify.app/" target="_blank">
+	Case Study
+</a>
 				<a href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noreferrer" class="project-link-btn">Live Demo</a>
 				<a href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noreferrer" class="project-link-github">View Code →</a>
 			</div>

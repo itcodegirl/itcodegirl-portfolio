@@ -20,6 +20,29 @@ body.no-scroll {
 	overflow: hidden;
 }
 
+.skip-link {
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	z-index: 10000;
+	padding: 10px 14px;
+	border-radius: 10px;
+	background: #ffffff;
+	color: #0e0e12;
+	font-weight: 700;
+	text-decoration: none;
+	transform: translateY(-150%);
+	transition: transform 0.2s ease;
+}
+
+.skip-link:focus-visible {
+	transform: translateY(0);
+}
+
+#main-content:focus {
+	outline: none;
+}
+
 .floating-code {
 	position: fixed;
 	top: 0;
@@ -41,6 +64,162 @@ body.no-scroll {
 	left: var(--x);
 	bottom: -50px;
 	white-space: nowrap;
+}
+
+.floating-code span:nth-child(1) {
+	--delay: 0s;
+	--duration: 20s;
+	--x: 10%;
+}
+
+.floating-code span:nth-child(2) {
+	--delay: 1s;
+	--duration: 25s;
+	--x: 85%;
+}
+
+.floating-code span:nth-child(3) {
+	--delay: 2s;
+	--duration: 22s;
+	--x: 45%;
+}
+
+.floating-code span:nth-child(4) {
+	--delay: 3s;
+	--duration: 28s;
+	--x: 70%;
+}
+
+.floating-code span:nth-child(5) {
+	--delay: 4s;
+	--duration: 24s;
+	--x: 30%;
+}
+
+.floating-code span:nth-child(6) {
+	--delay: 5s;
+	--duration: 26s;
+	--x: 55%;
+}
+
+.floating-code span:nth-child(7) {
+	--delay: 6s;
+	--duration: 23s;
+	--x: 15%;
+}
+
+.floating-code span:nth-child(8) {
+	--delay: 7s;
+	--duration: 27s;
+	--x: 75%;
+}
+
+.floating-code span:nth-child(9) {
+	--delay: 8s;
+	--duration: 21s;
+	--x: 40%;
+}
+
+.floating-code span:nth-child(10) {
+	--delay: 9s;
+	--duration: 29s;
+	--x: 65%;
+}
+
+.floating-code span:nth-child(11) {
+	--delay: 10s;
+	--duration: 25s;
+	--x: 20%;
+}
+
+.floating-code span:nth-child(12) {
+	--delay: 11s;
+	--duration: 22s;
+	--x: 80%;
+}
+
+.floating-code span:nth-child(13) {
+	--delay: 12s;
+	--duration: 26s;
+	--x: 50%;
+}
+
+.floating-code span:nth-child(14) {
+	--delay: 13s;
+	--duration: 24s;
+	--x: 35%;
+}
+
+.floating-code span:nth-child(15) {
+	--delay: 14s;
+	--duration: 28s;
+	--x: 60%;
+}
+
+.floating-code span:nth-child(16) {
+	--delay: 15s;
+	--duration: 23s;
+	--x: 25%;
+}
+
+.floating-code span:nth-child(17) {
+	--delay: 16s;
+	--duration: 27s;
+	--x: 90%;
+}
+
+.floating-code span:nth-child(18) {
+	--delay: 17s;
+	--duration: 21s;
+	--x: 48%;
+}
+
+.floating-code span:nth-child(19) {
+	--delay: 18s;
+	--duration: 25s;
+	--x: 12%;
+}
+
+.floating-code span:nth-child(20) {
+	--delay: 19s;
+	--duration: 29s;
+	--x: 72%;
+}
+
+.floating-code span:nth-child(21) {
+	--delay: 0.5s;
+	--duration: 24s;
+	--x: 38%;
+}
+
+.floating-code span:nth-child(22) {
+	--delay: 2.5s;
+	--duration: 26s;
+	--x: 82%;
+}
+
+.floating-code span:nth-child(23) {
+	--delay: 4.5s;
+	--duration: 22s;
+	--x: 58%;
+}
+
+.floating-code span:nth-child(24) {
+	--delay: 6.5s;
+	--duration: 28s;
+	--x: 28%;
+}
+
+.floating-code span:nth-child(25) {
+	--delay: 8.5s;
+	--duration: 23s;
+	--x: 92%;
+}
+
+.floating-code span:nth-child(26) {
+	--delay: 12s;
+	--duration: 26s;
+	--x: 33%;
 }
 
 .floating-code span.code-light {
@@ -92,6 +271,27 @@ body.no-scroll {
 	object-fit: cover;
 }
 
+.intro-skip {
+	position: absolute;
+	right: 24px;
+	bottom: 24px;
+	z-index: 1;
+	padding: 12px 18px;
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	border-radius: 999px;
+	background: rgba(14, 14, 18, 0.72);
+	color: #ffffff;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+	backdrop-filter: blur(12px);
+}
+
+.intro-skip:hover,
+.intro-skip:focus-visible {
+	background: rgba(14, 14, 18, 0.9);
+}
+
 .nav {
 	position: fixed;
 	top: 0;
@@ -137,6 +337,11 @@ nav a {
 
 
 nav a:hover {
+	opacity: 1;
+	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
+}
+
+nav a:focus-visible {
 	opacity: 1;
 	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
 }
@@ -538,8 +743,32 @@ section h2::after {
 
 
 @media (max-width: 600px) {
+	.nav {
+		height: auto;
+		min-height: 90px;
+		padding: 18px 24px;
+	}
+
+	.nav-inner {
+		align-items: flex-start;
+		flex-wrap: wrap;
+		gap: 12px;
+	}
+
+	.nav nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px 16px;
+		width: 100%;
+	}
+
+	nav a {
+		margin-left: 0;
+	}
+
 	section {
 		padding: 80px 24px;
+		scroll-margin-top: 130px;
 	}
 
 	.skills-grid,
@@ -559,6 +788,58 @@ button:focus-visible {
 	outline: 2px solid #c084fc;
 	outline-offset: 4px;
 	border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html,
+	body {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+
+	body.no-scroll {
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+
+	.floating-code,
+	.custom-cursor,
+	.scroll-progress,
+	.intro-video {
+		display: none !important;
+	}
+
+	.hero-card:hover,
+	.hero-card:hover img,
+	.skill-card:hover,
+	.project-card:hover,
+	.project-card-featured:hover,
+	.about-image img:hover,
+	.contact-link:hover {
+		transform: none;
+	}
+}
+
+@media (forced-colors: active) {
+	.logo,
+	section h2 {
+		background: none;
+		color: CanvasText;
+		-webkit-text-fill-color: CanvasText;
+	}
+
+	a:focus-visible,
+	button:focus-visible {
+		outline-color: Highlight;
+	}
 }
 
 @media (max-width: 600px) {

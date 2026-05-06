@@ -3,12 +3,14 @@
 
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="description"
 		content="Jenna Zawaski is a Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven product features.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.github.io/itcodegirl-portfolio/">
+	<meta name="theme-color" content="#0e0e12">
+	<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Jenna Zawaski | AI Frontend Developer">
@@ -22,8 +24,7 @@
 		content="Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven features.">
 	<meta name="twitter:image"
 		content="https://itcodegirl.github.io/itcodegirl-portfolio/assets/images/Jenna_robot_1.jpg">
-	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 	<title>Jenna Zawaski | AI Frontend Developer</title>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +33,9 @@
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
 
-	<script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
+	<script defer src="./js/projects.js"></script>
+	<script defer src="./js/app.js"></script>
 
 	<link rel="stylesheet" href="./css/styles.css">
 	<link rel="stylesheet" href="./css/hero.css">
@@ -72,6 +75,7 @@
 				"API Integration",
 				"Supabase"
 			],
+			"email": "itcodegirl@gmail.com",
 			"sameAs": [
 				"https://github.com/itcodegirl"
 			]
@@ -113,8 +117,6 @@
 		<span class="code-pink">ARIA</span>
 		<span class="code-light">JavaScript</span>
 	</div>
-
-	<div class="custom-cursor" aria-hidden="true"></div>
 
 	<div class="scroll-progress" aria-hidden="true"></div>
 
@@ -162,12 +164,16 @@
 					<p class="cs-meta">
 						Role: Frontend Developer • Focus: UX Systems &amp; Product Thinking
 					</p>
+					<a href="#work" class="hero-cta">View my work <span aria-hidden="true">↓</span></a>
 				</div>
 
 
 				<div class="hero-image">
 					<div class="hero-card">
-						<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait">
+						<picture>
+					<source srcset="assets/images/Jenna_robot_1.webp" type="image/webp">
+					<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait" width="2730" height="4096" fetchpriority="high">
+				</picture>
 						<div id="three-container" aria-hidden="true"></div>
 					</div>
 				</div>
@@ -306,7 +312,10 @@
 				</div>
 
 				<div class="about-image">
-					<img src="assets/headshot.png" alt="Jenna Zawaski">
+					<picture>
+						<source srcset="assets/headshot.webp" type="image/webp">
+						<img src="assets/headshot.png" alt="Jenna Zawaski" width="1286" height="2000" loading="lazy">
+					</picture>
 				</div>
 			</div>
 		</section>
@@ -325,8 +334,8 @@
 				</p>
 
 				<div class="contact-links">
-					<a href="mailto:itcodegirl@gmail.com" class="contact-link" aria-label="Email Jenna Zawaski">Email</a>
-					<a href="https://www.linkedin.com/in/YOUR-L" target="_blank" rel="noopener noreferrer"
+					<a href="mailto:itcodegirl@gmail.com" class="contact-link" aria-label="Email itcodegirl@gmail.com">itcodegirl@gmail.com</a>
+					<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer"
 						class="contact-link" aria-label="Visit Jenna Zawaski on LinkedIn">LinkedIn</a>
 					<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer" class="contact-link"
 						aria-label="Visit Jenna Zawaski on GitHub">GitHub</a>
@@ -336,8 +345,6 @@
 
 	</main>
 
-	<script src="./js/projects.js"></script>
-	<script src="./js/app.js"></script>
 </body>
 
 </html>

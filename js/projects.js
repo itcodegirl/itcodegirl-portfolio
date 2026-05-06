@@ -26,6 +26,7 @@ const projects = [
 				text: "Demonstrates scalable frontend architecture, backend integration, and strong UX design decisions.",
 			},
 		],
+		image: null,
 		tech: ["React", "Supabase", "PostgreSQL", "JavaScript", "Vite"],
 		links: [
 			{
@@ -58,6 +59,21 @@ const projects = [
 			"Focused on performance, clean UI architecture, and presenting dynamic data in a clear and accessible way.",
 			"Includes polished loading states and responsive layouts to ensure a smooth user experience across devices.",
 		],
+		highlights: [
+			{
+				label: "Problem",
+				text: "Weather data is often cluttered and hard to parse at a glance.",
+			},
+			{
+				label: "Solution",
+				text: "Built a clean, component-driven UI with dynamic states and real-time API data presented in a clear visual hierarchy.",
+			},
+			{
+				label: "Impact",
+				text: "Demonstrates async API integration, dynamic UI states, and performance-focused responsive design.",
+			},
+		],
+		image: null,
 		tech: ["JavaScript", "API", "CSS"],
 		links: [
 			{
@@ -85,6 +101,7 @@ const projects = [
 			"Built with a focus on reducing cognitive load and improving clarity in day-to-day decision making.",
 			"Includes opportunity tracking, weekly planning, and a central workspace for managing priorities and decisions.",
 		],
+		image: null,
 		tech: ["React", "React Router", "Local Storage", "UX Systems"],
 		links: [
 			{
@@ -113,6 +130,21 @@ const projects = [
 		title: "Personal Portfolio",
 		description:
 			"A cinematic portfolio built with responsive layout, animation, accessibility, and performance-focused frontend structure.",
+		highlights: [
+			{
+				label: "Problem",
+				text: "Needed a portfolio that demonstrates frontend skills through the site itself, not just the projects inside it.",
+			},
+			{
+				label: "Solution",
+				text: "Built with custom WebGL shaders, scroll-driven animations, and a performance-first approach — no frameworks, no build step.",
+			},
+			{
+				label: "Impact",
+				text: "Showcases advanced CSS architecture, Three.js integration, and careful attention to accessibility and UX detail.",
+			},
+		],
+		image: null,
 		tech: ["HTML", "CSS", "JavaScript"],
 		links: [
 			{
@@ -217,6 +249,17 @@ function createProjectCard(project) {
 	}
 
 	article.appendChild(header);
+
+	if (project.image) {
+		const img = document.createElement("img");
+		img.src = project.image;
+		img.alt = `${project.title} screenshot`;
+		img.className = "project-screenshot";
+		img.loading = "lazy";
+		img.width = 800;
+		img.height = 450;
+		article.appendChild(img);
+	}
 
 	const title = appendTextElement(article, "h3", "", project.title);
 	title.id = titleId;

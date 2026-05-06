@@ -305,6 +305,17 @@ body.no-scroll {
 	background: rgba(10, 10, 14, 0.45);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 	z-index: 50;
+	transition: transform 0.35s ease;
+}
+
+.nav.nav-hidden {
+	transform: translateY(-100%);
+}
+
+nav a.nav-active {
+	opacity: 1;
+	color: #c084fc;
+	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
 }
 
 .nav-inner {
@@ -727,6 +738,17 @@ section h2::after {
 	z-index: 999;
 	transform-origin: left;
 	transform: scaleX(0);
+}
+
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.revealed {
+	opacity: 1;
+	transform: translateY(0);
 }
 
 

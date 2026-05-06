@@ -704,17 +704,6 @@ section h2::after {
 	transform: rotate(90deg);
 }
 
-.custom-cursor {
-	width: 20px;
-	height: 20px;
-	border: 2px solid rgba(255, 255, 255, 0.5);
-	border-radius: 50%;
-	position: fixed;
-	pointer-events: none;
-	z-index: 9999;
-	transition: transform 0.15s ease;
-	display: none;
-}
 
 .project-link-btn,
 .contact-link {
@@ -728,11 +717,6 @@ section h2::after {
 
 
 
-@media (hover: hover) {
-	.custom-cursor {
-		display: block;
-	}
-}
 
 .scroll-progress {
 	position: fixed;
@@ -1074,9 +1058,6 @@ section h2::after {
 		transform: none;
 	}
 
-	.custom-cursor {
-		display: none !important;
-	}
 }
 
 a:focus-visible,
@@ -1107,7 +1088,6 @@ button:focus-visible {
 		overflow-y: auto;
 	}
 
-	.custom-cursor,
 	.scroll-progress,
 	.intro-video {
 		display: none !important;

@@ -33,7 +33,7 @@
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
 
-	<script defer src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
 	<script defer src="./js/projects.js"></script>
 	<script defer src="./js/app.js"></script>
 
@@ -170,7 +170,10 @@
 
 				<div class="hero-image">
 					<div class="hero-card">
-						<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait" width="2730" height="4096">
+						<picture>
+					<source srcset="assets/images/Jenna_robot_1.webp" type="image/webp">
+					<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait" width="2730" height="4096" fetchpriority="high">
+				</picture>
 						<div id="three-container" aria-hidden="true"></div>
 					</div>
 				</div>
@@ -309,7 +312,10 @@
 				</div>
 
 				<div class="about-image">
-					<img src="assets/headshot.png" alt="Jenna Zawaski" width="1286" height="2000" loading="lazy">
+					<picture>
+						<source srcset="assets/headshot.webp" type="image/webp">
+						<img src="assets/headshot.png" alt="Jenna Zawaski" width="1286" height="2000" loading="lazy">
+					</picture>
 				</div>
 			</div>
 		</section>

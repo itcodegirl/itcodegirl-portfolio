@@ -12,6 +12,14 @@ if (canUseGsap && canUseScrollTrigger) {
 let introFinished = false;
 let webGLInitialized = false;
 
+function runSafely(callback) {
+	try {
+		callback();
+	} catch (error) {
+		console.warn("Interactive effect failed to start.", error);
+	}
+}
+
 function finishIntro() {
 	if (introFinished) return;
 	introFinished = true;
@@ -30,18 +38,16 @@ function finishIntro() {
 	document.body.classList.remove("no-scroll");
 
 	if (!prefersReducedMotion.matches) {
-		initWebGL();
+		runSafely(initWebGL);
 	}
 }
 
 window.addEventListener("load", () => {
-	// Always start background
-	if (!prefersReducedMotion.matches) {
-		initBackgroundWebGL();
-	}
+	runSafely(initWebGL);
 
-	// ALWAYS initialize portrait (critical fix)
-	initWebGL();
+	if (!prefersReducedMotion.matches) {
+		runSafely(initBackgroundWebGL);
+	}
 
 	// Handle intro separately
 	if (prefersReducedMotion.matches) {
@@ -155,13 +161,26 @@ function initWebGL() {
 	const container = document.getElementById("three-container");
 	if (!container || typeof THREE === "undefined") return;
 
-	webGLInitialized = true;
+	const fallbackPortrait = container.parentElement?.querySelector(".hero-portrait");
+	const containerBox = container.getBoundingClientRect();
+	const width = containerBox.width || container.offsetWidth;
+	const height = containerBox.height || container.offsetHeight;
+
+	if (!width || !height) {
+		requestAnimationFrame(initWebGL);
+		return;
+	}
+
+	if (window.location.protocol === "file:") {
+		console.info("WebGL portrait requires an HTTP server; showing the static portrait instead.");
+		return;
+	}
 
 	const scene = new THREE.Scene();
 
 	const camera = new THREE.PerspectiveCamera(
 		45,
-		container.offsetWidth / container.offsetHeight,
+		width / height,
 		0.1,
 		1000
 	);
@@ -170,13 +189,15 @@ function initWebGL() {
 
 	const renderer = new THREE.WebGLRenderer({
 		antialias: true,
-		alpha: true
+		alpha: true,
+		preserveDrawingBuffer: true
 	});
 
 	renderer.setClearColor(0x000000, 0);
-	renderer.setSize(container.offsetWidth, container.offsetHeight);
+	renderer.setSize(width, height);
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
+	webGLInitialized = true;
 
 	if (canUseGsap) {
 		gsap.from(".hero-card", {
@@ -188,13 +209,11 @@ function initWebGL() {
 		});
 	}
 
-	const textureLoader = new THREE.TextureLoader();
+	const startPortrait = (texture) => {
+		if (THREE.SRGBColorSpace) {
+			texture.colorSpace = THREE.SRGBColorSpace;
+		}
 
-	const imagePath = window.location.hostname.includes("github.io")
-		? "/itcodegirl-portfolio/assets/images/Jenna_robot_1.jpg"
-		: "assets/images/Jenna_robot_1.jpg";
-
-	textureLoader.load(imagePath, (texture) => {
 		const geometry = new THREE.PlaneGeometry(16, 22, 80, 110);
 
 		const count = geometry.attributes.position.count;
@@ -258,8 +277,6 @@ function initWebGL() {
 
 		const mesh = new THREE.Mesh(geometry, material);
 		scene.add(mesh);
-		container.classList.add("webgl-ready");
-		container.parentElement?.querySelector(".hero-portrait")?.classList.add("webgl-replaced");
 
 		let hover = 0;
 
@@ -287,8 +304,29 @@ function initWebGL() {
 			renderer.render(scene, camera);
 		}
 
+		renderer.render(scene, camera);
+		requestAnimationFrame(() => {
+			container.classList.add("webgl-ready");
+			fallbackPortrait?.classList.add("webgl-replaced");
+		});
+
 		animate();
-	});
+	};
+
+	const handleTextureError = (error) => {
+		console.warn("WebGL portrait image failed to load; keeping the static portrait.", error);
+		container.replaceChildren();
+		container.classList.remove("webgl-ready");
+		fallbackPortrait?.classList.remove("webgl-replaced");
+		webGLInitialized = false;
+	};
+
+	new THREE.TextureLoader().load(
+		"assets/images/Jenna_robot_1.jpg",
+		startPortrait,
+		undefined,
+		handleTextureError
+	);
 
 	window.addEventListener("resize", () => {
 		if (!container.offsetWidth || !container.offsetHeight) return;

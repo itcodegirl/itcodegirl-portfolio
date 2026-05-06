@@ -182,6 +182,7 @@ body {
 
 #three-container.webgl-ready {
 	opacity: 1;
+	pointer-events: auto;
 }
 
 #three-container canvas {

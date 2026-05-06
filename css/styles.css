@@ -373,12 +373,6 @@ main {
 	padding-right: env(safe-area-inset-right);
 }
 
-.section-divider {
-	margin: 30px auto;
-	opacity: 0.5;
-	display: none;
-}
-
 section h2 {
 	letter-spacing: -0.03em;
 	line-height: 1;
@@ -422,17 +416,6 @@ section h2::after {
 	width: 90px;
 	height: 2px;
 	background: rgba(255, 255, 255, 0.25);
-}
-
-.section-divider {
-	display: none;
-	width: min(100% - 48px, 1120px);
-	height: 1px;
-	padding: 120px 60px;
-	background: linear-gradient(90deg,
-			transparent,
-			rgba(255, 255, 255, 0.12),
-			transparent);
 }
 
 .skills-grid {

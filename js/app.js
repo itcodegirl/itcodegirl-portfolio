@@ -3,10 +3,13 @@ const introSkip = document.querySelector(".intro-skip");
 const skipLink = document.querySelector(".skip-link");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const canUseGsap = typeof gsap !== "undefined";
-const canUseScrollTrigger = typeof ScrollTrigger !== "undefined";
 
-if (canUseGsap && canUseScrollTrigger) {
-	gsap.registerPlugin(ScrollTrigger);
+const scrollProgress = document.querySelector(".scroll-progress");
+if (scrollProgress) {
+	window.addEventListener("scroll", () => {
+		const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+		scrollProgress.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
+	}, { passive: true });
 }
 
 let introFinished = false;

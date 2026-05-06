@@ -3,10 +3,64 @@ const introSkip = document.querySelector(".intro-skip");
 const skipLink = document.querySelector(".skip-link");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const canUseGsap = typeof gsap !== "undefined";
-const canUseScrollTrigger = typeof ScrollTrigger !== "undefined";
 
-if (canUseGsap && canUseScrollTrigger) {
-	gsap.registerPlugin(ScrollTrigger);
+const scrollProgress = document.querySelector(".scroll-progress");
+const nav = document.querySelector(".nav");
+
+// Scroll progress bar
+if (scrollProgress) {
+	window.addEventListener("scroll", () => {
+		const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+		scrollProgress.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
+	}, { passive: true });
+}
+
+// Nav: hide on scroll down, reveal on scroll up
+let lastScrollY = window.scrollY;
+window.addEventListener("scroll", () => {
+	const y = window.scrollY;
+	if (y > lastScrollY && y > 90) {
+		nav?.classList.add("nav-hidden");
+	} else {
+		nav?.classList.remove("nav-hidden");
+	}
+	lastScrollY = y;
+}, { passive: true });
+
+// Active nav link tracks current section
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a[href^='#']");
+if (sections.length && navLinks.length) {
+	const sectionObserver = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				navLinks.forEach(link => link.classList.toggle(
+					"nav-active",
+					link.getAttribute("href") === `#${entry.target.id}`
+				));
+			}
+		});
+	}, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+	sections.forEach(s => sectionObserver.observe(s));
+}
+
+// Scroll reveal for cards and sections
+if (!prefersReducedMotion.matches) {
+	const revealEls = document.querySelectorAll(
+		".skill-card, .project-card, .about-content, .about-image, .contact-card"
+	);
+	const revealObserver = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("revealed");
+				revealObserver.unobserve(entry.target);
+			}
+		});
+	}, { threshold: 0.1 });
+	revealEls.forEach(el => {
+		el.classList.add("reveal");
+		revealObserver.observe(el);
+	});
 }
 
 let introFinished = false;

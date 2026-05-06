@@ -376,7 +376,7 @@ function initWebGL() {
 	};
 
 	new THREE.TextureLoader().load(
-		"assets/images/Jenna_robot_1.jpg",
+		"assets/images/Jenna_robot_1.webp",
 		startPortrait,
 		undefined,
 		handleTextureError

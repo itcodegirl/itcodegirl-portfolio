@@ -132,6 +132,41 @@ if (skipLink) {
 	skipLink.addEventListener("click", finishIntro);
 }
 
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+if (contactForm && formStatus) {
+	contactForm.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		const btn = contactForm.querySelector(".form-submit");
+		btn.disabled = true;
+		btn.textContent = "Sending…";
+		formStatus.className = "form-status";
+		formStatus.textContent = "";
+
+		try {
+			const res = await fetch(contactForm.action, {
+				method: "POST",
+				body: new FormData(contactForm),
+				headers: { Accept: "application/json" }
+			});
+			if (res.ok) {
+				formStatus.className = "form-status form-status--success";
+				formStatus.textContent = "Message sent! I'll be in touch soon.";
+				contactForm.reset();
+			} else {
+				throw new Error();
+			}
+		} catch {
+			formStatus.className = "form-status form-status--error";
+			formStatus.textContent = "Something went wrong. Please email me directly.";
+		} finally {
+			btn.disabled = false;
+			btn.innerHTML = "Send message <span aria-hidden='true'>→</span>";
+		}
+	});
+}
+
 function initBackgroundWebGL() {
 	const canvas = document.getElementById("webgl");
 	if (!canvas || typeof THREE === "undefined") return;
@@ -376,7 +411,7 @@ function initWebGL() {
 	};
 
 	new THREE.TextureLoader().load(
-		"assets/images/Jenna_robot_1.jpg",
+		"assets/images/Jenna_robot_1.webp",
 		startPortrait,
 		undefined,
 		handleTextureError

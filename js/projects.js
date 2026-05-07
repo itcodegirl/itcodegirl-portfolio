@@ -124,43 +124,6 @@ const projects = [
 			},
 		],
 	},
-	{
-		id: "portfolio",
-		number: "04",
-		title: "Personal Portfolio",
-		description:
-			"A cinematic portfolio built with responsive layout, animation, accessibility, and performance-focused frontend structure.",
-		highlights: [
-			{
-				label: "Problem",
-				text: "Needed a portfolio that demonstrates frontend skills through the site itself, not just the projects inside it.",
-			},
-			{
-				label: "Solution",
-				text: "Built with custom WebGL shaders, scroll-driven animations, and a performance-first approach — no frameworks, no build step.",
-			},
-			{
-				label: "Impact",
-				text: "Showcases advanced CSS architecture, Three.js integration, and careful attention to accessibility and UX detail.",
-			},
-		],
-		image: null,
-		tech: ["HTML", "CSS", "JavaScript"],
-		links: [
-			{
-				label: "Live Demo",
-				url: "https://itcodegirl.github.io/itcodegirl-portfolio/",
-				style: "primary",
-				ariaLabel: "View the personal portfolio live demo",
-			},
-			{
-				label: "View Code",
-				url: "https://github.com/itcodegirl/itcodegirl-portfolio",
-				style: "github",
-				ariaLabel: "View the personal portfolio GitHub repository",
-			},
-		],
-	},
 ];
 
 const projectsGrid = document.getElementById("projectsGrid");

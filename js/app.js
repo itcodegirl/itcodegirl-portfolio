@@ -1,6 +1,3 @@
-const introVideo = document.getElementById("introVideo");
-const introSkip = document.querySelector(".intro-skip");
-const skipLink = document.querySelector(".skip-link");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const canUseGsap = typeof gsap !== "undefined";
 
@@ -63,7 +60,6 @@ if (!prefersReducedMotion.matches) {
 	});
 }
 
-let introFinished = false;
 let webGLInitialized = false;
 
 function runSafely(callback) {
@@ -74,63 +70,12 @@ function runSafely(callback) {
 	}
 }
 
-function finishIntro() {
-	if (introFinished) return;
-	introFinished = true;
-
-	const intro = document.querySelector(".intro-video");
-
-	if (intro) {
-		intro.style.opacity = "0";
-		intro.style.pointerEvents = "none";
-
-		setTimeout(() => {
-			intro.remove();
-		}, 800);
-	}
-
-	document.body.classList.remove("no-scroll");
-
-	if (!prefersReducedMotion.matches) {
-		runSafely(initWebGL);
-	}
-}
-
 window.addEventListener("load", () => {
+	if (prefersReducedMotion.matches) return;
+
 	runSafely(initWebGL);
-
-	if (!prefersReducedMotion.matches) {
-		runSafely(initBackgroundWebGL);
-	}
-
-	// Handle intro separately
-	if (prefersReducedMotion.matches) {
-		finishIntro();
-		return;
-	}
-
-	if (introVideo) {
-		introVideo.addEventListener("ended", finishIntro);
-		introVideo.addEventListener("error", finishIntro);
-
-		const playPromise = introVideo.play();
-		if (playPromise) {
-			playPromise.catch(finishIntro);
-		}
-
-		setTimeout(finishIntro, 4500);
-	} else {
-		finishIntro();
-	}
+	runSafely(initBackgroundWebGL);
 });
-
-if (introSkip) {
-	introSkip.addEventListener("click", finishIntro);
-}
-
-if (skipLink) {
-	skipLink.addEventListener("click", finishIntro);
-}
 
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");

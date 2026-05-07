@@ -1,56 +1,110 @@
-## 🧠 What This Project Demonstrates
+# itcodegirl-portfolio
 
-- Custom shader authoring
-- Vertex attribute manipulation
-- Depth-based distortion logic
-- Editorial-grade WebGL UX design
-- Three.js mesh subdivision workflows
-- Mouse-based uniform animation
-- Modern portfolio motion design
+Personal portfolio for Jenna Zawaski — a Chicago-based frontend developer focused
+on building polished, accessible, product-minded web experiences.
 
-# Interactive Glass Refraction Portrait (Three.js + GLSL)
+Live site: https://itcodegirl.com
 
-A cinematic, interactive portrait effect built using **Three.js** and **custom GLSL shaders**.  
-This shader-driven system creates a premium *glass distortion* experience with:
+## What this repo is
 
-- Micro-shimmer refraction  
-- Floating glass shard displacement  
-- Mouse-driven depth warping  
-- Editorial-style lighting sweeps  
-- Subtle cinematic motion  
+A small, intentionally lightweight portfolio site written in vanilla HTML, CSS,
+and JavaScript. There is no build step, no bundler, and no framework.
 
-This project demonstrates advanced WebGL concepts and GPU-accelerated visual effects suitable for modern interactive UI, portfolio hero sections, and experiential design.
+The portfolio demonstrates frontend craft through the site itself
+(layout, accessibility, motion safety, performance discipline) and points
+visitors to the real product work it represents.
 
----
+## Stack
 
-## 🚀 Features
+- HTML5 (semantic landmarks, accessible form patterns)
+- CSS3 (custom properties, responsive design, `prefers-reduced-motion` and
+  `forced-colors` support)
+- JavaScript (vanilla, modular by file)
+- [Three.js](https://threejs.org/) — single hero portrait shader
+- [GSAP](https://gsap.com/) — one entry animation on the hero card
+- Google Fonts (Inter, Playfair Display)
+- [Formspree](https://formspree.io/) — contact form delivery
 
-### **✨ Real-Time Glass Refraction**
-A custom fragment shader generates micro-lens distortions, chromatic edges, and subtle optical warping.
+External libraries are loaded from a CDN and used only where they are needed.
 
-### **🩶 Dynamic Hover Interaction**
-The portrait remains clean and crisp until hovered, then transitions into a glass-like fractured motion.
+## Project structure
 
-### **💎 Floating Displacement Shards**
-A subdivided mesh allows individual vertices to drift in 3D space, creating a luxury editorial aesthetic.
+```
+.
+├── index.html              # main page
+├── 404.html                # 404 page
+├── css/
+│   ├── styles.css          # base, layout, components, responsive
+│   ├── hero.css            # hero section + WebGL canvas styles
+│   └── projects.css        # selected work cards
+├── js/
+│   ├── app.js              # page bootstrapping, scroll, WebGL, contact form
+│   └── projects.js         # selected work data + rendering
+├── assets/
+│   ├── images/             # portrait + project images
+│   ├── headshot.{png,webp}
+│   ├── favicon.svg
+│   └── JennaZawaski-Resume.pdf
+└── CNAME                   # GitHub Pages custom domain
+```
 
-### **🎥 Cinematic Depth**
-Particles and vertices move in Z-space, giving a volumetric feeling without heavy geometry.
+## Running locally
 
-### **🖱️ Mouse Reactive**
-The glass distortion reacts to cursor proximity, creating a responsive, premium interaction.
+The site is fully static. Serve it with any static server, for example:
 
----
+```bash
+python3 -m http.server 8000
+# then visit http://localhost:8000
+```
 
-## 🛠️ Tech Stack
+A local server is recommended because the WebGL portrait loads a texture
+asynchronously and the `file://` protocol blocks it.
 
-- **Three.js**
-- **GLSL (Vertex + Fragment Shaders)**
-- **WebGL**
-- **JavaScript**
-- **GSAP (optional) for hover easing**
+## Deployment
 
----
+Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
+`itcodegirl.com`.
 
-## 📂 Project Structure
+## Accessibility and motion
 
+- All interactive elements have visible focus states.
+- A skip link is the first focusable element.
+- `prefers-reduced-motion` disables the WebGL portrait, decorative animations,
+  and reveal-on-scroll transitions.
+- `forced-colors` is respected.
+- Form fields are labeled and the form status is announced via `aria-live`.
+
+## Engineering notes
+
+Short writeups live under `/notes/`. Linked from the homepage footer.
+
+- `/notes/why-vanilla.html` — why this site is vanilla JS instead of React.
+
+## Case study structure
+
+Future per-project case study pages follow this structure. Sections may be
+omitted only when truthful information is not available — labels are not
+filled with marketing copy.
+
+1. **Problem** — what was broken or missing.
+2. **Users** — who the product is for.
+3. **Goals** — what success looked like.
+4. **Constraints** — time, scope, stack, or product constraints.
+5. **My role** — what I owned, what I did not.
+6. **Key decisions** — the choices that shaped the product.
+7. **UX decisions** — interaction, hierarchy, copy, and flow choices.
+8. **Engineering decisions** — architecture, data, and stack tradeoffs.
+9. **Accessibility considerations** — what was checked, what is still open.
+10. **Performance considerations** — what was measured, what was tuned.
+11. **Current status** — what is shipped, what is in progress.
+12. **What I would improve next** — the honest next iteration.
+
+Where metrics are not yet known, sections use neutral labels
+(`Current status`, `Engineering focus`, `Next iteration`) instead of
+invented numbers.
+
+## Roadmap
+
+- Add real screenshots / short loops to each selected work card.
+- Add dedicated case study pages on this domain following the structure above.
+- Continue tightening LCP image weight and font loading.

@@ -1,31 +1,42 @@
-const introVideo = document.getElementById("introVideo");
-const introSkip = document.querySelector(".intro-skip");
-const skipLink = document.querySelector(".skip-link");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const canUseGsap = typeof gsap !== "undefined";
 
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".nav");
 
-// Scroll progress bar
-if (scrollProgress) {
-	window.addEventListener("scroll", () => {
+// Single rAF-batched scroll handler driving both the progress bar and the
+// nav hide-on-scroll behaviour. Avoids two raw scroll listeners running per
+// frame.
+let lastScrollY = window.scrollY;
+let scrollFrame = 0;
+
+function onScrollFrame() {
+	scrollFrame = 0;
+	const y = window.scrollY;
+
+	if (scrollProgress) {
 		const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-		scrollProgress.style.transform = `scaleX(${maxScroll > 0 ? window.scrollY / maxScroll : 0})`;
-	}, { passive: true });
+		const ratio = maxScroll > 0 ? y / maxScroll : 0;
+		scrollProgress.style.transform = `scaleX(${ratio})`;
+	}
+
+	if (nav) {
+		if (y > lastScrollY && y > 90) {
+			nav.classList.add("nav-hidden");
+		} else {
+			nav.classList.remove("nav-hidden");
+		}
+	}
+
+	lastScrollY = y;
 }
 
-// Nav: hide on scroll down, reveal on scroll up
-let lastScrollY = window.scrollY;
-window.addEventListener("scroll", () => {
-	const y = window.scrollY;
-	if (y > lastScrollY && y > 90) {
-		nav?.classList.add("nav-hidden");
-	} else {
-		nav?.classList.remove("nav-hidden");
-	}
-	lastScrollY = y;
-}, { passive: true });
+if (scrollProgress || nav) {
+	window.addEventListener("scroll", () => {
+		if (scrollFrame) return;
+		scrollFrame = requestAnimationFrame(onScrollFrame);
+	}, { passive: true });
+}
 
 // Active nav link tracks current section
 const sections = document.querySelectorAll("section[id]");
@@ -63,7 +74,6 @@ if (!prefersReducedMotion.matches) {
 	});
 }
 
-let introFinished = false;
 let webGLInitialized = false;
 
 function runSafely(callback) {
@@ -74,63 +84,12 @@ function runSafely(callback) {
 	}
 }
 
-function finishIntro() {
-	if (introFinished) return;
-	introFinished = true;
-
-	const intro = document.querySelector(".intro-video");
-
-	if (intro) {
-		intro.style.opacity = "0";
-		intro.style.pointerEvents = "none";
-
-		setTimeout(() => {
-			intro.remove();
-		}, 800);
-	}
-
-	document.body.classList.remove("no-scroll");
-
-	if (!prefersReducedMotion.matches) {
-		runSafely(initWebGL);
-	}
-}
-
 window.addEventListener("load", () => {
+	if (prefersReducedMotion.matches) return;
+
 	runSafely(initWebGL);
-
-	if (!prefersReducedMotion.matches) {
-		runSafely(initBackgroundWebGL);
-	}
-
-	// Handle intro separately
-	if (prefersReducedMotion.matches) {
-		finishIntro();
-		return;
-	}
-
-	if (introVideo) {
-		introVideo.addEventListener("ended", finishIntro);
-		introVideo.addEventListener("error", finishIntro);
-
-		const playPromise = introVideo.play();
-		if (playPromise) {
-			playPromise.catch(finishIntro);
-		}
-
-		setTimeout(finishIntro, 4500);
-	} else {
-		finishIntro();
-	}
+	runSafely(initBackgroundWebGL);
 });
-
-if (introSkip) {
-	introSkip.addEventListener("click", finishIntro);
-}
-
-if (skipLink) {
-	skipLink.addEventListener("click", finishIntro);
-}
 
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
@@ -229,13 +188,30 @@ function initBackgroundWebGL() {
 	mesh.position.z = -1;
 	scene.add(mesh);
 
+	let bgFrame = 0;
 	function animateBackground() {
 		material.uniforms.uTime.value += 0.01;
 		renderer.render(scene, camera);
-		requestAnimationFrame(animateBackground);
+		bgFrame = requestAnimationFrame(animateBackground);
 	}
 
-	animateBackground();
+	function startBg() {
+		if (!bgFrame) bgFrame = requestAnimationFrame(animateBackground);
+	}
+
+	function stopBg() {
+		if (bgFrame) {
+			cancelAnimationFrame(bgFrame);
+			bgFrame = 0;
+		}
+	}
+
+	startBg();
+
+	// Pause when the tab is hidden to avoid wasted GPU/CPU work.
+	document.addEventListener("visibilitychange", () => {
+		if (document.hidden) stopBg(); else startBg();
+	});
 
 	window.addEventListener("resize", () => {
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -244,7 +220,7 @@ function initBackgroundWebGL() {
 	});
 }
 
-function initWebGL() {
+function initWebGL(retries = 0) {
 	if (webGLInitialized) return;
 
 	const container = document.getElementById("three-container");
@@ -256,7 +232,12 @@ function initWebGL() {
 	const height = containerBox.height || container.offsetHeight;
 
 	if (!width || !height) {
-		requestAnimationFrame(initWebGL);
+		// Container has no layout box yet (e.g. fonts/CSS still loading).
+		// Retry on the next frame, but cap to avoid an infinite loop if the
+		// hero is hidden for some reason.
+		if (retries < 60) {
+			requestAnimationFrame(() => initWebGL(retries + 1));
+		}
 		return;
 	}
 
@@ -278,8 +259,7 @@ function initWebGL() {
 
 	const renderer = new THREE.WebGLRenderer({
 		antialias: true,
-		alpha: true,
-		preserveDrawingBuffer: true
+		alpha: true
 	});
 
 	renderer.setClearColor(0x000000, 0);
@@ -368,6 +348,8 @@ function initWebGL() {
 		scene.add(mesh);
 
 		let hover = 0;
+		let frame = 0;
+		let inView = true;
 
 		container.addEventListener("mousemove", (event) => {
 			const rect = container.getBoundingClientRect();
@@ -384,7 +366,7 @@ function initWebGL() {
 		});
 
 		function animate() {
-			requestAnimationFrame(animate);
+			frame = requestAnimationFrame(animate);
 
 			material.uniforms.uTime.value += 0.02;
 			material.uniforms.uHover.value +=
@@ -393,13 +375,41 @@ function initWebGL() {
 			renderer.render(scene, camera);
 		}
 
+		function start() {
+			if (!frame && inView && !document.hidden) {
+				frame = requestAnimationFrame(animate);
+			}
+		}
+
+		function stop() {
+			if (frame) {
+				cancelAnimationFrame(frame);
+				frame = 0;
+			}
+		}
+
+		// Pause when the hero is offscreen — saves GPU/CPU while reading
+		// other sections.
+		const heroVisibility = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				inView = entry.isIntersecting;
+				if (inView) start(); else stop();
+			});
+		}, { threshold: 0 });
+		heroVisibility.observe(container);
+
+		// Pause when the tab is hidden.
+		document.addEventListener("visibilitychange", () => {
+			if (document.hidden) stop(); else start();
+		});
+
 		renderer.render(scene, camera);
 		requestAnimationFrame(() => {
 			container.classList.add("webgl-ready");
 			fallbackPortrait?.classList.add("webgl-replaced");
 		});
 
-		animate();
+		start();
 	};
 
 	const handleTextureError = (error) => {
@@ -411,7 +421,7 @@ function initWebGL() {
 	};
 
 	new THREE.TextureLoader().load(
-		"assets/images/Jenna_robot_1.webp",
+		"assets/images/Jenna_robot_840.webp",
 		startPortrait,
 		undefined,
 		handleTextureError

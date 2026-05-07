@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="description"
-		content="Jenna Zawaski is a Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven product features.">
+		content="Jenna Zawaski is a Chicago-based frontend developer building polished, accessible, product-minded web applications.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/">
@@ -15,15 +15,15 @@
 	<meta property="og:type" content="website">
 	<meta property="og:title" content="Jenna Zawaski | Frontend Developer">
 	<meta property="og:description"
-		content="Frontend developer focused on polished interfaces, real-world functionality, scalable UI architecture, and accessible web experiences.">
+		content="Frontend developer focused on accessible interfaces, clear UX, and real product logic — not just visual demos.">
 	<meta property="og:url" content="https://itcodegirl.com/">
-	<meta property="og:image" content="https://itcodegirl.com/assets/images/Jenna_robot_1.jpg">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Jenna Zawaski | Frontend Developer">
 	<meta name="twitter:description"
-		content="Chicago-based frontend developer building responsive web apps, accessible interfaces, and AI-driven features.">
+		content="Frontend developer focused on accessible interfaces, clear UX, and real product logic.">
 	<meta name="twitter:image"
-		content="https://itcodegirl.com/assets/images/Jenna_robot_1.jpg">
+		content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
 	<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 	<title>Jenna Zawaski | Frontend Developer</title>
 
@@ -40,17 +40,6 @@
 	<link rel="stylesheet" href="./css/styles.css">
 	<link rel="stylesheet" href="./css/hero.css">
 	<link rel="stylesheet" href="./css/projects.css">
-	<noscript>
-		<style>
-			body.no-scroll {
-				overflow: auto;
-			}
-
-			.intro-video {
-				display: none;
-			}
-		</style>
-	</noscript>
 
 	<script type="application/ld+json">
 		{
@@ -88,44 +77,7 @@
 
 	<a class="skip-link" href="#main-content">Skip to main content</a>
 
-	<!-- Floating Code Background -->
-	<div class="floating-code" aria-hidden="true">
-		<span class="code-light">HTML5</span>
-		<span>const</span>
-		<span class="code-cyan">let</span>
-		<span>function</span>
-		<span class="code-pink">async</span>
-		<span>await</span>
-		<span class="code-yellow">=&gt;</span>
-		<span class="code-light">React</span>
-		<span>useState</span>
-		<span class="code-cyan">useEffect</span>
-		<span>.map()</span>
-		<span class="code-pink">.filter()</span>
-		<span class="code-light">CSS Grid</span>
-		<span>Flexbox</span>
-		<span class="code-yellow">API</span>
-		<span>fetch()</span>
-		<span class="code-cyan">promise</span>
-		<span>component</span>
-		<span class="code-pink">props</span>
-		<span>state</span>
-		<span class="code-light">JSX</span>
-		<span class="code-yellow">responsive</span>
-		<span>mobile-first</span>
-		<span class="code-cyan">accessibility</span>
-		<span class="code-pink">ARIA</span>
-		<span class="code-light">JavaScript</span>
-	</div>
-
 	<div class="scroll-progress" aria-hidden="true"></div>
-
-	<div class="intro-video">
-		<video id="introVideo" muted playsinline tabindex="-1" aria-hidden="true">
-			<source src="assets/intro.mp4" type="video/mp4">
-		</video>
-		<button class="intro-skip" type="button">Skip intro</button>
-	</div>
 
 	<header class="nav nav-show">
 		<div class="nav-inner">
@@ -153,33 +105,49 @@
 					</div>
 
 					<h1 id="hero-title">
-						I build polished frontend applications with thoughtful
-						<span class="accent">
-							UX, clean architecture, and real-world product functionality.
-						</span>
+						I build polished frontend products.
 					</h1>
 
 					<p>
-						Frontend Developer focused on polished interfaces, real-world functionality,
-						and scalable UI architecture.
+						Frontend developer focused on accessible interfaces, clear UX,
+						and real product logic — not just visual demos.
 					</p>
 
 					<p class="hero-sub">
 						Chicago-based Frontend Developer
 					</p>
-					<p class="cs-meta">
-						Role: Frontend Developer • Focus: UX Systems &amp; Product Thinking
-					</p>
-					<a href="#work" class="hero-cta">View my work <span aria-hidden="true">↓</span></a>
+
+					<div class="hero-actions">
+						<a href="#work" class="hero-cta hero-cta--primary">
+							View work <span aria-hidden="true">→</span>
+						</a>
+						<a href="#contact" class="hero-cta hero-cta--secondary">
+							Get in touch
+						</a>
+					</div>
 				</div>
 
 
 				<div class="hero-image">
 					<div class="hero-card">
 						<picture>
-					<source srcset="assets/images/Jenna_robot_1.webp" type="image/webp">
-					<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait" width="2730" height="4096" fetchpriority="high">
-				</picture>
+							<source
+								type="image/avif"
+								srcset="assets/images/Jenna_robot_420.avif 420w,
+										assets/images/Jenna_robot_840.avif 840w"
+								sizes="(max-width: 600px) 300px, (max-width: 900px) 380px, 420px">
+							<source
+								type="image/webp"
+								srcset="assets/images/Jenna_robot_420.webp 420w,
+										assets/images/Jenna_robot_840.webp 840w"
+								sizes="(max-width: 600px) 300px, (max-width: 900px) 380px, 420px">
+							<img class="hero-portrait"
+								src="assets/images/Jenna_robot_420.webp"
+								alt="Portrait of Jenna Zawaski"
+								width="840" height="1260"
+								fetchpriority="high"
+								decoding="async">
+						</picture>
 						<div id="three-container" aria-hidden="true"></div>
 					</div>
 				</div>
@@ -232,7 +200,6 @@
 						<p>Focused on using motion to support usability, not just visual effects.</p>
 						<div class="skill-tags">
 							<span>GSAP</span>
-							<span>ScrollTrigger</span>
 							<span>Responsive Design</span>
 							<span>Accessibility Principles</span>
 						</div>
@@ -372,6 +339,7 @@
 		<div class="footer-inner">
 			<p class="footer-copy">© 2026 Jenna Zawaski</p>
 			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="notes/">Notes</a>
 				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
 				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 				<a href="assets/JennaZawaski-Resume.pdf" download>Resume</a>

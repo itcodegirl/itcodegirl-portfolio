@@ -1,3 +1,46 @@
+/* =============================================================
+   Design tokens
+   ----------------------------------------------------------------
+   One primary accent (purple). Hover and active states are
+   intentionally distinct: hover = soft glow, active = solid
+   accent + underline. Surfaces and text levels are exposed as
+   tokens so future work can adjust the palette in one place.
+   ============================================================= */
+:root {
+	/* Brand */
+	--accent: #c084fc;
+	--accent-rgb: 192, 132, 252;
+	--accent-deep-rgb: 168, 85, 247;
+	--accent-soft: rgba(var(--accent-rgb), 0.12);
+	--accent-strong: rgba(var(--accent-rgb), 0.5);
+
+	/* Status */
+	--success: #4ade80;
+	--success-rgb: 74, 222, 128;
+	--danger: #f87171;
+
+	/* Background */
+	--bg-base: #0e0e12;
+	--bg-elevated: rgba(20, 20, 25, 0.95);
+
+	/* Surfaces */
+	--surface-1: rgba(255, 255, 255, 0.03);
+	--surface-2: rgba(255, 255, 255, 0.06);
+	--surface-3: rgba(255, 255, 255, 0.1);
+
+	/* Borders */
+	--border-subtle: rgba(255, 255, 255, 0.1);
+	--border-strong: rgba(255, 255, 255, 0.2);
+
+	/* Text */
+	--text-primary: #ffffff;
+	--text-secondary: rgba(255, 255, 255, 0.72);
+	--text-muted: rgba(255, 255, 255, 0.55);
+
+	/* Focus */
+	--focus-ring: var(--accent);
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -10,14 +53,10 @@ body {
 }
 
 body {
-	background: #0e0e12;
-	color: white;
+	background: var(--bg-base);
+	color: var(--text-primary);
 	font-family: 'Inter', sans-serif;
 	overflow-x: hidden;
-}
-
-body.no-scroll {
-	overflow: hidden;
 }
 
 .skip-link {
@@ -39,258 +78,11 @@ body.no-scroll {
 	transform: translateY(0);
 }
 
-#main-content:focus {
-	outline: none;
-}
-
-.floating-code {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	pointer-events: none;
-	z-index: 0;
-	overflow: hidden;
-}
-
-.floating-code span {
-	position: absolute;
-	font-family: 'Courier New', monospace;
-	font-size: 0.9rem;
-	color: rgba(255, 255, 255, 0.08);
-	animation: float-up var(--duration) linear infinite;
-	animation-delay: calc(var(--delay) * -1);
-	left: var(--x);
-	bottom: -50px;
-	white-space: nowrap;
-}
-
-.floating-code span:nth-child(1) {
-	--delay: 0s;
-	--duration: 20s;
-	--x: 10%;
-}
-
-.floating-code span:nth-child(2) {
-	--delay: 1s;
-	--duration: 25s;
-	--x: 85%;
-}
-
-.floating-code span:nth-child(3) {
-	--delay: 2s;
-	--duration: 22s;
-	--x: 45%;
-}
-
-.floating-code span:nth-child(4) {
-	--delay: 3s;
-	--duration: 28s;
-	--x: 70%;
-}
-
-.floating-code span:nth-child(5) {
-	--delay: 4s;
-	--duration: 24s;
-	--x: 30%;
-}
-
-.floating-code span:nth-child(6) {
-	--delay: 5s;
-	--duration: 26s;
-	--x: 55%;
-}
-
-.floating-code span:nth-child(7) {
-	--delay: 6s;
-	--duration: 23s;
-	--x: 15%;
-}
-
-.floating-code span:nth-child(8) {
-	--delay: 7s;
-	--duration: 27s;
-	--x: 75%;
-}
-
-.floating-code span:nth-child(9) {
-	--delay: 8s;
-	--duration: 21s;
-	--x: 40%;
-}
-
-.floating-code span:nth-child(10) {
-	--delay: 9s;
-	--duration: 29s;
-	--x: 65%;
-}
-
-.floating-code span:nth-child(11) {
-	--delay: 10s;
-	--duration: 25s;
-	--x: 20%;
-}
-
-.floating-code span:nth-child(12) {
-	--delay: 11s;
-	--duration: 22s;
-	--x: 80%;
-}
-
-.floating-code span:nth-child(13) {
-	--delay: 12s;
-	--duration: 26s;
-	--x: 50%;
-}
-
-.floating-code span:nth-child(14) {
-	--delay: 13s;
-	--duration: 24s;
-	--x: 35%;
-}
-
-.floating-code span:nth-child(15) {
-	--delay: 14s;
-	--duration: 28s;
-	--x: 60%;
-}
-
-.floating-code span:nth-child(16) {
-	--delay: 15s;
-	--duration: 23s;
-	--x: 25%;
-}
-
-.floating-code span:nth-child(17) {
-	--delay: 16s;
-	--duration: 27s;
-	--x: 90%;
-}
-
-.floating-code span:nth-child(18) {
-	--delay: 17s;
-	--duration: 21s;
-	--x: 48%;
-}
-
-.floating-code span:nth-child(19) {
-	--delay: 18s;
-	--duration: 25s;
-	--x: 12%;
-}
-
-.floating-code span:nth-child(20) {
-	--delay: 19s;
-	--duration: 29s;
-	--x: 72%;
-}
-
-.floating-code span:nth-child(21) {
-	--delay: 0.5s;
-	--duration: 24s;
-	--x: 38%;
-}
-
-.floating-code span:nth-child(22) {
-	--delay: 2.5s;
-	--duration: 26s;
-	--x: 82%;
-}
-
-.floating-code span:nth-child(23) {
-	--delay: 4.5s;
-	--duration: 22s;
-	--x: 58%;
-}
-
-.floating-code span:nth-child(24) {
-	--delay: 6.5s;
-	--duration: 28s;
-	--x: 28%;
-}
-
-.floating-code span:nth-child(25) {
-	--delay: 8.5s;
-	--duration: 23s;
-	--x: 92%;
-}
-
-.floating-code span:nth-child(26) {
-	--delay: 12s;
-	--duration: 26s;
-	--x: 33%;
-}
-
-.floating-code span.code-light {
-	color: rgba(255, 255, 255, 0.25);
-	font-weight: 500;
-}
-
-.floating-code span.code-cyan {
-	color: rgba(13, 148, 136, 0.45);
-}
-
-.floating-code span.code-pink {
-	color: rgba(255, 105, 180, 0.45);
-}
-
-.floating-code span.code-yellow {
-	color: rgba(255, 211, 105, 0.45);
-}
-
-@keyframes float-up {
-	0% {
-		transform: translateY(0) rotate(0deg);
-		opacity: 0;
-	}
-
-	10%,
-	90% {
-		opacity: 1;
-	}
-
-	100% {
-		transform: translateY(-110vh) rotate(10deg);
-		opacity: 0;
-	}
-}
-
-.intro-video {
-	position: fixed;
-	inset: 0;
-	z-index: 9999;
-	background: black;
-	overflow: hidden;
-	transition: opacity 0.8s ease-out;
-}
-
-.intro-video video {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.intro-skip {
-	position: absolute;
-	right: max(24px, env(safe-area-inset-right));
-	bottom: max(24px, env(safe-area-inset-bottom));
-	z-index: 1;
-	padding: 12px 18px;
-	border: 1px solid rgba(255, 255, 255, 0.28);
-	border-radius: 999px;
-	background: rgba(14, 14, 18, 0.72);
-	color: #ffffff;
-	font: inherit;
-	font-weight: 700;
-	cursor: pointer;
-	backdrop-filter: blur(12px);
-	min-height: 44px;
-}
-
-.intro-skip:hover,
-.intro-skip:focus-visible {
-	background: rgba(14, 14, 18, 0.9);
+/* Programmatic focus from the skip link — keep a visible indicator */
+#main-content:focus-visible {
+	outline: 2px solid #c084fc;
+	outline-offset: 4px;
+	border-radius: 8px;
 }
 
 .nav {
@@ -312,10 +104,13 @@ body.no-scroll {
 	transform: translateY(-100%);
 }
 
+/* Active is intentionally distinct from hover: white text plus a
+   small accent underline so users know which section they are in. */
 nav a.nav-active {
 	opacity: 1;
-	color: #c084fc;
-	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
+	color: var(--text-primary);
+	text-shadow: none;
+	box-shadow: inset 0 -2px 0 var(--accent);
 }
 
 .nav-inner {
@@ -351,7 +146,7 @@ nav a {
 
 nav a:hover {
 	opacity: 1;
-	text-shadow: 0 0 12px rgba(192, 132, 252, 0.4);
+	text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.4);
 }
 
 nav a:focus-visible {
@@ -448,11 +243,11 @@ section h2::after {
 }
 
 .skill-card {
-	background: rgba(255, 255, 255, 0.03);
-	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: var(--surface-1);
+	border: 1px solid var(--border-subtle);
 	border-radius: 16px;
 	padding: 35px;
-	transition: all 0.3s ease;
+	transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
 	position: relative;
 	overflow: hidden;
 }
@@ -526,7 +321,7 @@ section h2::after {
 	color: rgba(255, 255, 255, 0.85);
 	font-family: 'Courier New', monospace;
 	letter-spacing: 0.02em;
-	transition: all 0.2s ease;
+	transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .skill-tags span:hover {
@@ -641,85 +436,13 @@ section h2::after {
 	border: 1px solid rgba(255, 255, 255, 0.12);
 	text-decoration: none;
 	color: white;
-	transition: 0.25s ease;
+	transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .contact-link:hover {
 	background: rgba(255, 255, 255, 0.15);
 	transform: translateY(-3px);
 }
-
-.modal-overlay {
-	position: fixed;
-	inset: 0;
-	background: rgba(0, 0, 0, 0.85);
-	backdrop-filter: blur(8px);
-	z-index: 100;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.3s ease;
-}
-
-.modal-overlay.active {
-	opacity: 1;
-	pointer-events: all;
-}
-
-.modal {
-	position: fixed;
-	inset: 0;
-	z-index: 101;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 40px;
-	opacity: 0;
-	pointer-events: none;
-	transition: opacity 0.3s ease;
-}
-
-.modal.active {
-	opacity: 1;
-	pointer-events: all;
-}
-
-.modal-content {
-	position: relative;
-	max-width: 900px;
-	max-height: 90vh;
-	overflow-y: auto;
-	background: rgba(20, 20, 25, 0.95);
-	border: 1px solid rgba(255, 255, 255, 0.15);
-	border-radius: 20px;
-	padding: 50px;
-	backdrop-filter: blur(20px);
-}
-
-.modal-close {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	background: rgba(255, 255, 255, 0.1);
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	color: white;
-	font-size: 2rem;
-	width: 45px;
-	height: 45px;
-	border-radius: 50%;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: all 0.3s ease;
-	line-height: 1;
-	padding: 0;
-}
-
-.modal-close:hover {
-	background: rgba(255, 255, 255, 0.2);
-	transform: rotate(90deg);
-}
-
 
 .project-link-btn,
 .contact-link {
@@ -1060,15 +783,6 @@ section h2::after {
 	.contact-card {
 		padding: 44px 28px;
 	}
-
-	.modal {
-		padding: 24px;
-	}
-
-	.modal-content {
-		padding: 36px 28px;
-		max-height: 88vh;
-	}
 }
 
 /* Phones */
@@ -1101,9 +815,9 @@ section h2::after {
 
 	nav a {
 		margin-left: 0;
-		padding: 6px 0;
+		padding: 10px 4px;
 		font-size: 0.92rem;
-		min-height: 32px;
+		min-height: 44px;
 		display: inline-flex;
 		align-items: center;
 	}
@@ -1210,34 +924,6 @@ section h2::after {
 		align-items: center;
 	}
 
-	.modal {
-		padding: 16px;
-	}
-
-	.modal-content {
-		padding: 28px 20px;
-		border-radius: 16px;
-		max-height: 90vh;
-	}
-
-	.modal-close {
-		top: 12px;
-		right: 12px;
-		width: 40px;
-		height: 40px;
-		font-size: 1.6rem;
-	}
-
-	.intro-skip {
-		right: max(16px, env(safe-area-inset-right));
-		bottom: max(16px, env(safe-area-inset-bottom));
-		padding: 10px 16px;
-		font-size: 0.9rem;
-	}
-
-	.floating-code span {
-		font-size: 0.78rem;
-	}
 }
 
 /* Small phones (iPhone SE etc.) */
@@ -1319,70 +1005,8 @@ button:focus-visible {
 		transition-duration: 0.01ms !important;
 	}
 
-	body.no-scroll {
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
-
-	.scroll-progress,
-	.intro-video {
+	.scroll-progress {
 		display: none !important;
-	}
-
-	.floating-code {
-		display: block !important;
-	}
-
-	.floating-code span {
-		animation: none !important;
-		bottom: auto;
-		opacity: 0.55;
-		top: var(--static-y, 50%);
-		transform: none;
-	}
-
-	.floating-code span:nth-child(1),
-	.floating-code span:nth-child(7),
-	.floating-code span:nth-child(13),
-	.floating-code span:nth-child(19),
-	.floating-code span:nth-child(25) {
-		--static-y: 12%;
-	}
-
-	.floating-code span:nth-child(2),
-	.floating-code span:nth-child(8),
-	.floating-code span:nth-child(14),
-	.floating-code span:nth-child(20),
-	.floating-code span:nth-child(26) {
-		--static-y: 28%;
-	}
-
-	.floating-code span:nth-child(3),
-	.floating-code span:nth-child(9),
-	.floating-code span:nth-child(15),
-	.floating-code span:nth-child(21) {
-		--static-y: 44%;
-	}
-
-	.floating-code span:nth-child(4),
-	.floating-code span:nth-child(10),
-	.floating-code span:nth-child(16),
-	.floating-code span:nth-child(22) {
-		--static-y: 60%;
-	}
-
-	.floating-code span:nth-child(5),
-	.floating-code span:nth-child(11),
-	.floating-code span:nth-child(17),
-	.floating-code span:nth-child(23) {
-		--static-y: 76%;
-	}
-
-	.floating-code span:nth-child(6),
-	.floating-code span:nth-child(12),
-	.floating-code span:nth-child(18),
-	.floating-code span:nth-child(24) {
-		--static-y: 88%;
 	}
 
 	.hero-card:hover,

@@ -1,130 +1,157 @@
+// Selected work data + rendering.
+//
+// Each project is rendered as an article with a header (number + status),
+// optional screenshot OR placeholder, title, tagline, description, optional
+// highlights (problem / decisions / status), tech list, and links.
+//
+// Link order is normalised on render: Live demo -> Case study -> Code.
+//
+// TODO: replace `image: null` with real screenshots in /assets/images/projects/
+// once available. The placeholder treatment is intentional, not broken state.
+
 const projects = [
 	{
 		id: "codeherway",
 		number: "01",
 		title: "CodeHerWay Education Platform",
+		tagline: "Learning platform helping women entering tech build foundational skills.",
 		status: "Featured Case Study",
 		featured: true,
-		meta: "React | Supabase | Learning Platform",
+		meta: "React • Supabase • Learning platform",
 		description:
-			"A frontend-focused learning platform built with React and Supabase, featuring structured lessons, quizzes, progress tracking, and a clean, beginner-friendly learning experience.",
+			"A frontend-focused learning platform with structured lessons, quizzes, progress tracking, and a beginner-friendly interface. Built around how people actually learn, not how courses are usually packaged.",
 		subtext: [
-			"Designed to simulate a real-world learning experience with guided progression and user feedback systems.",
-			"Includes authentication, progress tracking, and reward-based feedback systems to mimic real product behavior.",
+			"Authentication, persisted progress, and a reward engine (XP and streaks) are wired through Supabase so the experience matches real product behavior, not a static demo.",
 		],
 		highlights: [
 			{
 				label: "Problem",
-				text: "Beginners often struggle with scattered resources and unclear progress.",
+				text: "Beginners drop off when resources are scattered and progress is invisible.",
 			},
 			{
-				label: "Solution",
-				text: "Built a guided learning experience with lessons, quizzes, XP, streaks, and progress feedback.",
+				label: "Key decisions",
+				text: "Guided lesson flow, immediate quiz feedback, and a streak/XP system that rewards consistency over volume.",
 			},
 			{
-				label: "Impact",
-				text: "Demonstrates scalable frontend architecture, backend integration, and strong UX design decisions.",
+				label: "Engineering focus",
+				text: "Component structure for a scalable lesson tree, Supabase auth and row-level data access, and async UI states throughout.",
 			},
 		],
 		image: null,
 		tech: ["React", "Supabase", "PostgreSQL", "JavaScript", "Vite"],
 		links: [
 			{
-				label: "Live Demo",
+				kind: "live",
+				label: "Live demo",
 				url: "https://codeherway-education-platform.netlify.app/",
-				style: "primary",
-				ariaLabel: "View the CodeHerWay Education Platform live demo",
+				ariaLabel: "Open the CodeHerWay Education Platform live demo",
 			},
 			{
-				label: "Case Study",
+				kind: "case-study",
+				label: "Case study",
 				url: "https://codeherway-reward-engine-case-study.netlify.app/",
-				style: "primary",
-				ariaLabel: "View the CodeHerWay Education Platform case study",
+				ariaLabel: "Read the CodeHerWay Education Platform case study",
 			},
 			{
-				label: "View Code",
+				kind: "code",
+				label: "View code",
 				url: "https://github.com/itcodegirl/education_platform",
-				style: "github",
 				ariaLabel: "View the CodeHerWay Education Platform GitHub repository",
 			},
 		],
 	},
 	{
-		id: "aura",
+		id: "ceo",
 		number: "02",
-		title: "Aura Weather",
+		title: "CodeHerWay CEO OS",
+		tagline: "Founder dashboard for tracking priorities, opportunities, and weekly execution.",
+		cardClass: "ceo-os",
 		description:
-			"A responsive weather app built with real-time API data, featuring current conditions, hourly forecasts, and location-based weather insights.",
+			"A React productivity dashboard for founders managing priorities, opportunities, content planning, and weekly execution in one workspace.",
 		subtext: [
-			"Focused on performance, clean UI architecture, and presenting dynamic data in a clear and accessible way.",
-			"Includes polished loading states and responsive layouts to ensure a smooth user experience across devices.",
+			"Designed to reduce cognitive load: a single source of truth for what matters this week, with persistence between sessions.",
 		],
 		highlights: [
 			{
 				label: "Problem",
-				text: "Weather data is often cluttered and hard to parse at a glance.",
+				text: "Founders juggle context across too many tools; the important work gets lost in tool-switching.",
 			},
 			{
-				label: "Solution",
-				text: "Built a clean, component-driven UI with dynamic states and real-time API data presented in a clear visual hierarchy.",
+				label: "Key decisions",
+				text: "One-screen overview, opportunity tracking, weekly planning view, and minimal chrome so the data is the interface.",
 			},
 			{
-				label: "Impact",
-				text: "Demonstrates async API integration, dynamic UI states, and performance-focused responsive design.",
+				label: "Engineering focus",
+				text: "Routing per workspace area, persisted state via Local Storage, and a small, predictable component tree.",
 			},
 		],
 		image: null,
-		tech: ["JavaScript", "API", "CSS"],
+		tech: ["React", "React Router", "Local Storage", "JavaScript"],
 		links: [
 			{
-				label: "Live Demo",
-				url: "https://aura-weather-platform.netlify.app/",
-				style: "primary",
-				ariaLabel: "View Aura Weather live demo",
-			},
-			{
-				label: "View Code",
-				url: "https://github.com/itcodegirl/aura-weather",
-				style: "github",
-				ariaLabel: "View the Aura Weather GitHub repository",
-			},
-		],
-	},
-	{
-		id: "ceo",
-		number: "03",
-		title: "CodeHerWay CEO OS (Founder Dashboard)",
-		cardClass: "ceo-os",
-		description:
-			"A React productivity dashboard designed to help founders manage priorities, opportunities, content planning, and weekly execution.",
-		subtext: [
-			"Built with a focus on reducing cognitive load and improving clarity in day-to-day decision making.",
-			"Includes opportunity tracking, weekly planning, and a central workspace for managing priorities and decisions.",
-		],
-		image: null,
-		tech: ["React", "React Router", "Local Storage", "UX Systems"],
-		links: [
-			{
-				label: "Case Study",
-				url: "https://codeherway-ceo-os-case-study.netlify.app/",
-				style: "primary",
-				ariaLabel: "View the CodeHerWay CEO OS case study",
-			},
-			{
-				label: "Live Demo",
+				kind: "live",
+				label: "Live demo",
 				url: "https://codeherway-ceo-os.netlify.app/",
-				style: "primary",
-				ariaLabel: "View CodeHerWay CEO OS live demo",
+				ariaLabel: "Open the CodeHerWay CEO OS live demo",
 			},
 			{
-				label: "View Code",
+				kind: "case-study",
+				label: "Case study",
+				url: "https://codeherway-ceo-os-case-study.netlify.app/",
+				ariaLabel: "Read the CodeHerWay CEO OS case study",
+			},
+			{
+				kind: "code",
+				label: "View code",
 				url: "https://github.com/itcodegirl/codeherway-ceo-os",
-				style: "github",
 				ariaLabel: "View the CodeHerWay CEO OS GitHub repository",
 			},
 		],
 	},
+	{
+		id: "aura",
+		number: "03",
+		title: "Aura Weather",
+		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
+		description:
+			"A weather app built around how people actually use weather data: glance, decide, move on. Real-time conditions, hourly forecasts, and location-based insights with a clean information hierarchy.",
+		subtext: [
+			"Polished loading and empty states keep the interface trustworthy when data is in flight or unavailable.",
+		],
+		highlights: [
+			{
+				label: "Problem",
+				text: "Most weather UIs bury the answer under decoration and density.",
+			},
+			{
+				label: "Key decisions",
+				text: "Clear visual hierarchy, scannable hourly strip, and meaningful loading/empty states instead of spinners.",
+			},
+			{
+				label: "Engineering focus",
+				text: "Async data flow, component-driven UI, and responsive layout work without a framework.",
+			},
+		],
+		image: null,
+		tech: ["JavaScript", "HTML5", "CSS", "REST API"],
+		links: [
+			{
+				kind: "live",
+				label: "Live demo",
+				url: "https://aura-weather-platform.netlify.app/",
+				ariaLabel: "Open the Aura Weather live demo",
+			},
+			{
+				kind: "code",
+				label: "View code",
+				url: "https://github.com/itcodegirl/aura-weather",
+				ariaLabel: "View the Aura Weather GitHub repository",
+			},
+		],
+	},
 ];
+
+const LINK_ORDER = ["live", "case-study", "code"];
 
 const projectsGrid = document.getElementById("projectsGrid");
 
@@ -141,17 +168,31 @@ function appendTextElement(parent, tagName, className, text) {
 	return element;
 }
 
+function classForLink(kind) {
+	if (kind === "code") return "project-link-github";
+	if (kind === "case-study") return "project-link-btn project-link-btn--case-study";
+	return "project-link-btn project-link-btn--primary";
+}
+
+function sortLinks(links) {
+	return [...links].sort((a, b) => {
+		const aIndex = LINK_ORDER.indexOf(a.kind);
+		const bIndex = LINK_ORDER.indexOf(b.kind);
+		return (aIndex === -1 ? 99 : aIndex) - (bIndex === -1 ? 99 : bIndex);
+	});
+}
+
 function createProjectLinks(links) {
 	const linksContainer = document.createElement("div");
 	linksContainer.className = "project-links";
 
-	links.forEach((link) => {
+	sortLinks(links).forEach((link) => {
 		const anchor = document.createElement("a");
 		anchor.href = link.url;
 		anchor.target = "_blank";
 		anchor.rel = "noopener noreferrer";
-		anchor.className = link.style === "github" ? "project-link-github" : "project-link-btn";
-		anchor.setAttribute("aria-label", link.ariaLabel);
+		anchor.className = classForLink(link.kind);
+		if (link.ariaLabel) anchor.setAttribute("aria-label", link.ariaLabel);
 		anchor.textContent = link.label;
 		linksContainer.appendChild(anchor);
 	});
@@ -184,6 +225,37 @@ function createProjectHighlights(highlights) {
 	return highlightsList;
 }
 
+function createScreenshot(project) {
+	const img = document.createElement("img");
+	img.src = project.image;
+	img.alt = `${project.title} interface screenshot`;
+	img.className = "project-screenshot";
+	img.loading = "lazy";
+	img.decoding = "async";
+	img.width = 800;
+	img.height = 450;
+	return img;
+}
+
+function createPlaceholder(project) {
+	const placeholder = document.createElement("div");
+	placeholder.className = "project-placeholder";
+	placeholder.setAttribute("aria-hidden", "true");
+
+	const number = document.createElement("span");
+	number.className = "project-placeholder-number";
+	number.textContent = project.number;
+	placeholder.appendChild(number);
+
+	const liveLink = (project.links || []).find((l) => l.kind === "live");
+	const label = document.createElement("span");
+	label.className = "project-placeholder-label";
+	label.textContent = liveLink ? "Live preview available" : "Project preview";
+	placeholder.appendChild(label);
+
+	return placeholder;
+}
+
 function createProjectCard(project) {
 	const article = document.createElement("article");
 	const titleId = `project-${project.id}-title`;
@@ -191,6 +263,7 @@ function createProjectCard(project) {
 	article.className = [
 		"project-card",
 		project.featured ? "project-card-featured" : "",
+		project.image ? "" : "project-card--no-image",
 		project.cardClass || "",
 	]
 		.filter(Boolean)
@@ -214,18 +287,17 @@ function createProjectCard(project) {
 	article.appendChild(header);
 
 	if (project.image) {
-		const img = document.createElement("img");
-		img.src = project.image;
-		img.alt = `${project.title} screenshot`;
-		img.className = "project-screenshot";
-		img.loading = "lazy";
-		img.width = 800;
-		img.height = 450;
-		article.appendChild(img);
+		article.appendChild(createScreenshot(project));
+	} else {
+		article.appendChild(createPlaceholder(project));
 	}
 
 	const title = appendTextElement(article, "h3", "", project.title);
 	title.id = titleId;
+
+	if (project.tagline) {
+		appendTextElement(article, "p", "project-tagline", project.tagline);
+	}
 
 	appendTextElement(article, "p", "project-description", project.description);
 

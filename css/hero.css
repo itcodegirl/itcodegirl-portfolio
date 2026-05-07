@@ -127,20 +127,13 @@
 	}
 
 	.hero-content p,
-	.hero-sub,
-	.cs-meta {
+	.hero-sub {
 		margin-inline: auto;
 	}
 
 	.hero-card {
 		width: min(100%, 380px);
 	}
-}
-
-.cs-meta {
-	margin-top: 18px;
-	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.55);
 }
 
 .hero-cta {
@@ -212,11 +205,6 @@
 	.hero-sub {
 		font-size: 0.74rem;
 		letter-spacing: 0.12em;
-	}
-
-	.cs-meta {
-		font-size: 0.78rem;
-		margin-top: 14px;
 	}
 
 	.hero-card {

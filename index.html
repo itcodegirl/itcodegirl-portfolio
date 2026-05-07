@@ -17,13 +17,13 @@
 	<meta property="og:description"
 		content="Frontend developer focused on accessible interfaces, clear UX, and real product logic — not just visual demos.">
 	<meta property="og:url" content="https://itcodegirl.com/">
-	<meta property="og:image" content="https://itcodegirl.com/assets/images/Jenna_robot_1.jpg">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Jenna Zawaski | Frontend Developer">
 	<meta name="twitter:description"
 		content="Frontend developer focused on accessible interfaces, clear UX, and real product logic.">
 	<meta name="twitter:image"
-		content="https://itcodegirl.com/assets/images/Jenna_robot_1.jpg">
+		content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
 	<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 	<title>Jenna Zawaski | Frontend Developer</title>
 
@@ -131,9 +131,23 @@
 				<div class="hero-image">
 					<div class="hero-card">
 						<picture>
-					<source srcset="assets/images/Jenna_robot_1.webp" type="image/webp">
-					<img class="hero-portrait" src="assets/images/Jenna_robot_1.jpg" alt="Jenna Zawaski portrait" width="2730" height="4096" fetchpriority="high">
-				</picture>
+							<source
+								type="image/avif"
+								srcset="assets/images/Jenna_robot_420.avif 420w,
+										assets/images/Jenna_robot_840.avif 840w"
+								sizes="(max-width: 600px) 300px, (max-width: 900px) 380px, 420px">
+							<source
+								type="image/webp"
+								srcset="assets/images/Jenna_robot_420.webp 420w,
+										assets/images/Jenna_robot_840.webp 840w"
+								sizes="(max-width: 600px) 300px, (max-width: 900px) 380px, 420px">
+							<img class="hero-portrait"
+								src="assets/images/Jenna_robot_420.webp"
+								alt="Portrait of Jenna Zawaski"
+								width="840" height="1260"
+								fetchpriority="high"
+								decoding="async">
+						</picture>
 						<div id="three-container" aria-hidden="true"></div>
 					</div>
 				</div>

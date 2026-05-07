@@ -74,9 +74,37 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 - `forced-colors` is respected.
 - Form fields are labeled and the form status is announced via `aria-live`.
 
+## Engineering notes
+
+Short writeups live under `/notes/`. Linked from the homepage footer.
+
+- `/notes/why-vanilla.html` — why this site is vanilla JS instead of React.
+
+## Case study structure
+
+Future per-project case study pages follow this structure. Sections may be
+omitted only when truthful information is not available — labels are not
+filled with marketing copy.
+
+1. **Problem** — what was broken or missing.
+2. **Users** — who the product is for.
+3. **Goals** — what success looked like.
+4. **Constraints** — time, scope, stack, or product constraints.
+5. **My role** — what I owned, what I did not.
+6. **Key decisions** — the choices that shaped the product.
+7. **UX decisions** — interaction, hierarchy, copy, and flow choices.
+8. **Engineering decisions** — architecture, data, and stack tradeoffs.
+9. **Accessibility considerations** — what was checked, what is still open.
+10. **Performance considerations** — what was measured, what was tuned.
+11. **Current status** — what is shipped, what is in progress.
+12. **What I would improve next** — the honest next iteration.
+
+Where metrics are not yet known, sections use neutral labels
+(`Current status`, `Engineering focus`, `Next iteration`) instead of
+invented numbers.
+
 ## Roadmap
 
 - Add real screenshots / short loops to each selected work card.
-- Add dedicated case study pages (problem, decisions, outcome, next).
-- Add a short engineering writeup explaining the vanilla-first stack choice.
+- Add dedicated case study pages on this domain following the structure above.
 - Continue tightening LCP image weight and font loading.

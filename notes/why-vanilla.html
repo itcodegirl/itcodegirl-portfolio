@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="description"
+		content="Why this portfolio is built with vanilla HTML, CSS, and JavaScript instead of React — a short engineering note by Jenna Zawaski.">
+	<meta name="author" content="Jenna Zawaski">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://itcodegirl.com/notes/why-vanilla.html">
+	<meta name="theme-color" content="#0e0e12">
+	<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+	<title>Why this portfolio is vanilla JavaScript | Jenna Zawaski</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+		rel="stylesheet">
+
+	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="./notes.css">
+</head>
+
+<body class="notes-body">
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="nav nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="../" aria-label="Jenna Zawaski home">JZ</a>
+			<nav aria-label="Primary navigation">
+				<a href="../#work">Work</a>
+				<a href="../#skills">Skills</a>
+				<a href="../#about">About</a>
+				<a href="../#contact">Contact</a>
+				<a href="../assets/JennaZawaski-Resume.pdf" class="nav-resume" download
+					aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" tabindex="-1" class="notes-main">
+		<article class="note-article">
+			<p class="notes-eyebrow">Engineering note</p>
+			<h1>Why this portfolio is vanilla JavaScript.</h1>
+			<p class="note-meta">Stack choice · ~3 min read</p>
+
+			<p>
+				My production work uses React, and the platforms I link to from this
+				site are React applications. So a fair question for any reviewer is:
+				why is the portfolio itself written in plain HTML, CSS, and JavaScript,
+				with no build step?
+			</p>
+
+			<h2>What this site actually is</h2>
+			<p>
+				It is a one-page marketing site that links to the real product work.
+				There is no routing beyond hash anchors, no shared state between
+				components, no data fetching beyond a single contact form post, and no
+				editorial content that needs templating. The work itself lives on
+				other deployments.
+			</p>
+
+			<h2>What I would gain from React here</h2>
+			<ul>
+				<li>Component ergonomics — JSX is nicer than imperative DOM building.</li>
+				<li>Better authoring for the project card list (currently in
+					<code>js/projects.js</code>).</li>
+				<li>A familiar build pipeline (Vite, ESLint, type-checking).</li>
+			</ul>
+
+			<h2>What I would lose</h2>
+			<ul>
+				<li>A build step, a node_modules directory, and a framework runtime
+					shipped to every visitor for a page that does not need any of that.</li>
+				<li>The ability to read the entire site in five minutes by opening
+					three files.</li>
+				<li>The credibility of demonstrating I know when not to reach for a
+					framework.</li>
+			</ul>
+
+			<h2>The tradeoff I am still paying</h2>
+			<p>
+				This site loads Three.js and GSAP from a CDN to power the hero
+				portrait and a single entry animation. That is roughly 670 KB of
+				vendor JavaScript for a page that, structurally, does not need it.
+				Replacing that with a smaller, gated WebGL bootstrap (or removing
+				it entirely) is on the roadmap and will land before the next
+				deployment cycle.
+			</p>
+
+			<h2>When I would migrate</h2>
+			<p>
+				I would move this site to React + Vite the moment it stops being a
+				one-page marketing surface — when case studies live on the same
+				domain, when content is templated from a CMS, or when more than one
+				person is editing it. Until then, the simpler stack is the honest
+				choice.
+			</p>
+
+			<p class="notes-back">
+				<a href="./">← Back to engineering notes</a>
+			</p>
+		</article>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="../assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

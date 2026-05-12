@@ -117,6 +117,25 @@
 	line-height: 1.5;
 }
 
+.project-proof {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+	list-style: none;
+	margin: -2px 0 2px;
+	padding: 0;
+}
+
+.project-proof li {
+	font-size: 0.74rem;
+	line-height: 1.2;
+	padding: 5px 9px;
+	border-radius: 999px;
+	background: rgba(168, 85, 247, 0.09);
+	border: 1px solid rgba(216, 180, 254, 0.2);
+	color: rgba(255, 255, 255, 0.82);
+}
+
 .project-tech {
 	display: flex;
 	flex-wrap: wrap;
@@ -443,6 +462,15 @@
 
 	.project-placeholder-number {
 		font-size: 1.9rem;
+	}
+
+	.project-proof {
+		gap: 6px;
+	}
+
+	.project-proof li {
+		font-size: 0.72rem;
+		padding: 5px 8px;
 	}
 
 	.project-tech li,

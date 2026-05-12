@@ -1,9 +1,9 @@
 // Selected work data + rendering.
 //
 // Each project is rendered as an article with a header (number + status),
-// optional screenshot OR placeholder, title, tagline, description, optional
-// subtext, an explicit "My role" line, optional highlights (problem /
-// decisions / focus), tech list, and links.
+// optional screenshot OR placeholder, title, tagline, optional proof points,
+// description, optional subtext, an explicit "My role" line, optional
+// highlights (problem / decisions / focus), tech list, and links.
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
@@ -18,6 +18,7 @@ const projects = [
 		meta: "React • Supabase • Learning platform",
 		description:
 			"A frontend-focused learning platform with structured lessons, quizzes, progress tracking, and a beginner-friendly interface. Built around how people actually learn, not how courses are usually packaged.",
+		proofPoints: ["Supabase auth", "Persisted progress", "XP / streak logic", "Quiz feedback"],
 		subtext: [
 			"Authentication, persisted progress, and a reward engine (XP and streaks) are wired through Supabase so the experience matches real product behavior, not a static demo.",
 		],
@@ -70,6 +71,7 @@ const projects = [
 		cardClass: "ceo-os",
 		description:
 			"A React productivity dashboard for founders managing priorities, opportunities, content planning, and weekly execution in one workspace.",
+		proofPoints: ["React routing", "Local persistence", "Founder workflow UI", "Weekly planning"],
 		subtext: [
 			"Designed to reduce cognitive load: a single source of truth for what matters this week, with persistence between sessions.",
 		],
@@ -121,6 +123,7 @@ const projects = [
 		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
 		description:
 			"A weather app built around how people actually use weather data: glance, decide, move on. Real-time conditions, hourly forecasts, and location-based insights with a clean information hierarchy.",
+		proofPoints: ["REST API data", "Loading states", "Responsive layout", "Clear forecast hierarchy"],
 		subtext: [
 			"Polished loading and empty states keep the interface trustworthy when data is in flight or unavailable.",
 		],
@@ -208,6 +211,18 @@ function createProjectLinks(links) {
 	});
 
 	return linksContainer;
+}
+
+function createProjectProofList(proofPoints, projectTitle) {
+	const proofList = document.createElement("ul");
+	proofList.className = "project-proof";
+	proofList.setAttribute("aria-label", `Implementation highlights for ${projectTitle}`);
+
+	proofPoints.forEach((point) => {
+		appendTextElement(proofList, "li", "", point);
+	});
+
+	return proofList;
 }
 
 function createProjectTechList(techItems) {
@@ -319,6 +334,10 @@ function createProjectCard(project) {
 
 	if (project.tagline) {
 		appendTextElement(article, "p", "project-tagline", project.tagline);
+	}
+
+	if (project.proofPoints) {
+		article.appendChild(createProjectProofList(project.proofPoints, project.title));
 	}
 
 	appendTextElement(article, "p", "project-description", project.description);

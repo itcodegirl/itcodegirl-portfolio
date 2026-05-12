@@ -197,6 +197,39 @@
 	border-radius: 0 12px 12px 0;
 }
 
+.decision-receipts,
+.qa-list {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+	padding-left: 0;
+	list-style: none;
+}
+
+.decision-receipts li,
+.qa-list li {
+	padding: 16px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 14px;
+	background: rgba(255, 255, 255, 0.045);
+}
+
+.decision-receipts span {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: rgba(216, 180, 254, 0.9);
+}
+
+.decision-receipts p,
+.qa-list li {
+	font-size: 0.92rem;
+	line-height: 1.65;
+}
+
 .work-card-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -301,6 +334,11 @@
 		gap: 24px;
 		padding-top: 34px;
 		padding-bottom: 34px;
+	}
+
+	.decision-receipts,
+	.qa-list {
+		grid-template-columns: 1fr;
 	}
 
 	.work-card-grid {

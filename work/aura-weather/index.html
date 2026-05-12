@@ -144,6 +144,26 @@
 			</div>
 
 			<div class="case-section">
+				<h2>Decision Receipts</h2>
+				<div>
+					<ul class="decision-receipts">
+						<li>
+							<span>Constraint</span>
+							<p>Weather data can be partial, delayed, or unavailable from individual provider endpoints.</p>
+						</li>
+						<li>
+							<span>Decision</span>
+							<p>Normalize values at the API boundary and render unavailable data explicitly instead of forcing fallback zeros.</p>
+						</li>
+						<li>
+							<span>Tradeoff</span>
+							<p>The interface stays more trustworthy, but the UI has to carry more clear empty and unsupported states.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
@@ -163,6 +183,17 @@
 						<li>Lazy panels and deferred mounting reduce the amount of work needed for the first useful screen.</li>
 						<li>Unit toggles are handled client-side so changing F/C does not trigger unnecessary provider requests.</li>
 						<li>Service worker support is limited to the app shell; live weather data remains a network truth source.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>QA Notes</h2>
+				<div>
+					<ul class="qa-list">
+						<li><strong>Verified on this portfolio:</strong> the local case study path, live demo link, GitHub repo link, and shared navigation paths are present.</li>
+						<li><strong>Evidence standard:</strong> missing-data behavior is described as a trust decision without inventing reliability metrics.</li>
+						<li><strong>Still to validate:</strong> fresh production Lighthouse profiling, reverse-geocoding edge cases, and saved-city behavior with real users.</li>
 					</ul>
 				</div>
 			</div>

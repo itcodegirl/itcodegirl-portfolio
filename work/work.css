@@ -110,6 +110,12 @@
 	color: #f4e8ff;
 }
 
+.case-link--archived {
+	color: rgba(255, 255, 255, 0.62);
+	border-color: rgba(255, 255, 255, 0.1);
+	background: rgba(255, 255, 255, 0.035);
+}
+
 .case-link:hover,
 .directory-link:hover,
 .case-link:focus-visible,
@@ -144,6 +150,14 @@
 	border-radius: 18px;
 	border: 1px solid rgba(255, 255, 255, 0.14);
 	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+
+.case-visual figcaption {
+	margin-top: 12px;
+	color: rgba(255, 255, 255, 0.56);
+	font-size: 0.85rem;
+	line-height: 1.5;
+	text-align: center;
 }
 
 .case-content,

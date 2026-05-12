@@ -134,7 +134,7 @@ const projects = [
 			},
 		],
 		image: "assets/images/projects/aura-weather-interface.webp",
-		imagePosition: "center top",
+		imagePosition: "top center",
 		imageAlt: "Aura Weather app interface screenshot",
 		tech: ["JavaScript", "HTML5", "CSS", "REST API"],
 		links: [

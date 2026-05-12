@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: UX decisions, engineering focus, accessibility, performance, current status, and next iteration.">
+	<meta name="author" content="Jenna Zawaski">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://itcodegirl.com/work/codeherway/">
+	<meta name="theme-color" content="#0e0e12">
+	<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
+	<meta property="og:description" content="A same-domain case study for CodeHerWay, a learning platform for women entering tech.">
+	<meta property="og:url" content="https://itcodegirl.com/work/codeherway/">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
+	<meta name="twitter:description" content="UX, engineering, accessibility, performance, and next-iteration notes for CodeHerWay.">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
+
+	<title>CodeHerWay Education Platform Case Study | Jenna Zawaski</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/work/work.css">
+</head>
+
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="nav nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="/" aria-label="Jenna Zawaski home">JZ</a>
+			<nav aria-label="Primary navigation">
+				<a href="/work/" class="nav-active">Work</a>
+				<a href="/#skills">Skills</a>
+				<a href="/#about">About</a>
+				<a href="/#contact">Contact</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" class="work-main" tabindex="-1">
+		<section class="case-hero" aria-labelledby="case-title">
+			<div>
+				<a class="back-link" href="/work/">← All case studies</a>
+				<p class="case-eyebrow">Case study</p>
+				<h1 id="case-title">CodeHerWay Education Platform</h1>
+				<p class="case-summary">
+					A frontend-focused learning platform for women entering tech, built around structured lessons, quizzes, visible progress, and a calm beginner experience. The project is strongest as a product-minded education platform with real auth, data, and quality-gate concerns in scope.
+				</p>
+				<div class="case-links" aria-label="Project links">
+					<a class="case-link case-link--primary" href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
+					<a class="case-link" href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noopener noreferrer">GitHub repo</a>
+					<a class="case-link" href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Original write-up</a>
+				</div>
+			</div>
+			<dl class="case-meta-list" aria-label="Project summary">
+				<div>
+					<dt>Project type</dt>
+					<dd>Learning platform and portfolio product</dd>
+				</div>
+				<div>
+					<dt>Stack</dt>
+					<dd>React, Vite, Supabase, JavaScript, CSS</dd>
+				</div>
+				<div>
+					<dt>Primary focus</dt>
+					<dd>Beginner learning flow, progress trust, accessibility, and release confidence</dd>
+				</div>
+			</dl>
+		</section>
+
+		<div class="case-visual">
+			<img src="/assets/images/projects/codeherway-dashboard.webp" alt="CodeHerWay Education Platform dashboard interface screenshot" width="800" height="450" loading="eager" decoding="async">
+		</div>
+
+		<section class="case-content" aria-label="CodeHerWay case study details">
+			<div class="case-section">
+				<h2>Problem</h2>
+				<div>
+					<p>Beginners can lose momentum when learning resources are scattered, next steps are unclear, or progress feels invisible. The product needed to feel supportive without hiding the technical rigor of learning HTML, CSS, JavaScript, and React.</p>
+					<p class="case-note"><strong>Still to validate:</strong> real learner retention, completion friction, and where beginners most often need intervention should be measured before making outcome claims.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Users</h2>
+				<div>
+					<ul>
+						<li>Women entering tech who need a structured, beginner-friendly path.</li>
+						<li>Self-directed learners who benefit from visible progress, review, and consistency cues.</li>
+						<li>Technical reviewers evaluating whether the project behaves like a real product rather than a static demo.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Goals</h2>
+				<div>
+					<ul>
+						<li>Make the first learning path clear and guided.</li>
+						<li>Keep lesson, quiz, bookmark, and progress states understandable.</li>
+						<li>Use reward mechanics to support consistency without overstating mastery.</li>
+						<li>Keep the product credible for portfolio review through quality gates and documented limitations.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>My Role</h2>
+				<div>
+					<p>I own the product end to end: frontend architecture, learning and quiz UI, progress tracking, the XP and streak reward engine, Supabase authentication/data integration, and the portfolio documentation around product quality and current limits.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Key UX Decisions</h2>
+				<div>
+					<ul>
+						<li>Guided course flow with visible navigation so learners know where they are and what comes next.</li>
+						<li>Immediate quiz feedback and review surfaces that help learners understand mistakes without harsh tone.</li>
+						<li>Progress and reward language that separates motivational completion from verified mastery.</li>
+						<li>Honest sync and recovery copy when persistence depends on browser-local state or backend validation.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Engineering Decisions</h2>
+				<div>
+					<ul>
+						<li>React and Vite support a modular lesson platform while preserving fast local iteration.</li>
+						<li>Supabase provides an authentication and database path for real user progress instead of hardcoded demo state.</li>
+						<li>Learning, reward, route, and sync behaviors are covered by focused tests so reliability work is visible to reviewers.</li>
+						<li>Server-mediated AI and scheduled workflows stay behind Netlify functions rather than exposing sensitive keys in the browser.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Accessibility Considerations</h2>
+				<div>
+					<ul>
+						<li>Keyboard navigation and focus handling are treated as product behavior, especially in lessons, dialogs, and panels.</li>
+						<li>Quiz and progress interactions use clearer semantic relationships and user-facing status copy.</li>
+						<li>Motion and feedback are kept purposeful so the interface supports learning rather than distracting from it.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Performance Considerations</h2>
+				<div>
+					<ul>
+						<li>The project uses explicit local and CI checks to keep regressions visible.</li>
+						<li>Route and lesson surfaces are structured so future performance work can target specific product areas instead of a single global bundle.</li>
+						<li>Next iteration includes deeper Lighthouse reporting and continued CSS modularization to reduce global surface area.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Current Status</h2>
+				<div>
+					<p>CodeHerWay is an active portfolio product and learning-platform build. It demonstrates real product architecture and quality practices, but it should be presented honestly as a stabilized project still moving toward production readiness.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>What I Would Improve Next</h2>
+				<div>
+					<ul>
+						<li>Validate authenticated learner flows against a configured staging backend.</li>
+						<li>Add stronger Lighthouse reporting and performance budgets.</li>
+						<li>Refine onboarding analytics around drop-off and lesson completion friction.</li>
+						<li>Continue reducing global CSS and clarifying shared UI primitives.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="/work/">Work</a>
+				<a href="/notes/">Notes</a>
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

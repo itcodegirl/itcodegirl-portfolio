@@ -52,7 +52,7 @@ const projects = [
 			{
 				kind: "case-study",
 				label: "Case study",
-				url: "https://codeherway-reward-engine-case-study.netlify.app/",
+				url: "/work/codeherway/",
 				ariaLabel: "Read the CodeHerWay Education Platform case study",
 			},
 			{
@@ -105,7 +105,7 @@ const projects = [
 			{
 				kind: "case-study",
 				label: "Case study",
-				url: "https://codeherway-ceo-os-case-study.netlify.app/",
+				url: "/work/ceo-os/",
 				ariaLabel: "Read the CodeHerWay CEO OS case study",
 			},
 			{
@@ -155,6 +155,12 @@ const projects = [
 				ariaLabel: "Open the Aura Weather live demo",
 			},
 			{
+				kind: "case-study",
+				label: "Case study",
+				url: "/work/aura-weather/",
+				ariaLabel: "Read the Aura Weather case study",
+			},
+			{
 				kind: "code",
 				label: "View code",
 				url: "https://github.com/itcodegirl/aura-weather",
@@ -187,6 +193,10 @@ function classForLink(kind) {
 	return "project-link-btn project-link-btn--primary";
 }
 
+function isExternalLink(url) {
+	return /^https?:\/\//i.test(url);
+}
+
 function sortLinks(links) {
 	return [...links].sort((a, b) => {
 		const aIndex = LINK_ORDER.indexOf(a.kind);
@@ -202,8 +212,10 @@ function createProjectLinks(links) {
 	sortLinks(links).forEach((link) => {
 		const anchor = document.createElement("a");
 		anchor.href = link.url;
-		anchor.target = "_blank";
-		anchor.rel = "noopener noreferrer";
+		if (isExternalLink(link.url)) {
+			anchor.target = "_blank";
+			anchor.rel = "noopener noreferrer";
+		}
 		anchor.className = classForLink(link.kind);
 		if (link.ariaLabel) anchor.setAttribute("aria-label", link.ariaLabel);
 		anchor.textContent = link.label;

@@ -2,7 +2,8 @@
 //
 // Each project is rendered as an article with a header (number + status),
 // optional screenshot OR placeholder, title, tagline, description, optional
-// highlights (problem / decisions / status), tech list, and links.
+// subtext, an explicit "My role" line, optional highlights (problem /
+// decisions / focus), tech list, and links.
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
@@ -20,6 +21,8 @@ const projects = [
 		subtext: [
 			"Authentication, persisted progress, and a reward engine (XP and streaks) are wired through Supabase so the experience matches real product behavior, not a static demo.",
 		],
+		role:
+			"I own this product end to end — frontend architecture, the lesson and quiz UI, progress tracking, and the XP/streak reward engine, plus the Supabase auth and data layer behind it.",
 		highlights: [
 			{
 				label: "Problem",
@@ -70,6 +73,8 @@ const projects = [
 		subtext: [
 			"Designed to reduce cognitive load: a single source of truth for what matters this week, with persistence between sessions.",
 		],
+		role:
+			"I designed and built the dashboard: the one-screen overview, opportunity tracker, and weekly planning views, the routing per workspace area, and the persisted local state between sessions.",
 		highlights: [
 			{
 				label: "Problem",
@@ -119,6 +124,8 @@ const projects = [
 		subtext: [
 			"Polished loading and empty states keep the interface trustworthy when data is in flight or unavailable.",
 		],
+		role:
+			"I built the whole frontend — the responsive layout, the scannable hourly forecast, the async data flow against the weather API, and the loading and empty states that keep it trustworthy.",
 		highlights: [
 			{
 				label: "Problem",
@@ -320,6 +327,14 @@ function createProjectCard(project) {
 		project.subtext.forEach((text) => {
 			appendTextElement(article, "p", "project-subtext", text);
 		});
+	}
+
+	if (project.role) {
+		const roleParagraph = document.createElement("p");
+		roleParagraph.className = "project-role";
+		appendTextElement(roleParagraph, "span", "project-role-label", "My role");
+		roleParagraph.append(` — ${project.role}`);
+		article.appendChild(roleParagraph);
 	}
 
 	if (project.highlights) {

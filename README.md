@@ -48,6 +48,9 @@ External libraries are loaded from a CDN and used only where they are needed.
 └── CNAME                   # GitHub Pages custom domain
 ```
 
+Project screenshots used by the Selected Work cards are stored in
+`assets/images/projects/`.
+
 ## Running locally
 
 The site is fully static. Serve it with any static server, for example:

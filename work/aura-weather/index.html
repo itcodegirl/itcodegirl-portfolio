@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="description" content="Aura Weather case study by Jenna Zawaski: weather dashboard UX, resilient API handling, accessibility, performance, current status, and next iteration.">
+	<meta name="author" content="Jenna Zawaski">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://itcodegirl.com/work/aura-weather/">
+	<meta name="theme-color" content="#0e0e12">
+	<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="Aura Weather Case Study | Jenna Zawaski">
+	<meta property="og:description" content="A same-domain case study for Aura Weather, a responsive weather dashboard with resilient API states.">
+	<meta property="og:url" content="https://itcodegirl.com/work/aura-weather/">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="Aura Weather Case Study | Jenna Zawaski">
+	<meta name="twitter:description" content="UX, API resilience, accessibility, performance, and next-iteration notes for Aura Weather.">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
+
+	<title>Aura Weather Case Study | Jenna Zawaski</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/work/work.css">
+</head>
+
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="nav nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="/" aria-label="Jenna Zawaski home">JZ</a>
+			<nav aria-label="Primary navigation">
+				<a href="/work/" class="nav-active">Work</a>
+				<a href="/#skills">Skills</a>
+				<a href="/#about">About</a>
+				<a href="/#contact">Contact</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" class="work-main" tabindex="-1">
+		<section class="case-hero" aria-labelledby="case-title">
+			<div>
+				<a class="back-link" href="/work/">← All case studies</a>
+				<p class="case-eyebrow">Case study</p>
+				<h1 id="case-title">Aura Weather</h1>
+				<p class="case-summary">
+					A responsive weather dashboard designed for quick decisions: glance, understand the day, and move on. The strongest product story is trust: missing provider data is shown as unavailable instead of being coerced into fake zero values.
+				</p>
+				<div class="case-links" aria-label="Project links">
+					<a class="case-link case-link--primary" href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
+					<a class="case-link" href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noopener noreferrer">GitHub repo</a>
+				</div>
+			</div>
+			<dl class="case-meta-list" aria-label="Project summary">
+				<div>
+					<dt>Project type</dt>
+					<dd>Weather dashboard and data-trust frontend project</dd>
+				</div>
+				<div>
+					<dt>Stack</dt>
+					<dd>React, Vite, JavaScript, plain CSS, Open-Meteo APIs</dd>
+				</div>
+				<div>
+					<dt>Primary focus</dt>
+					<dd>Scannable hierarchy, resilient async states, mobile usability, and honest data fallbacks</dd>
+				</div>
+			</dl>
+		</section>
+
+		<div class="case-visual">
+			<img src="/assets/images/projects/aura-weather-interface.webp" alt="Aura Weather app interface screenshot" width="800" height="450" loading="eager" decoding="async">
+		</div>
+
+		<section class="case-content" aria-label="Aura Weather case study details">
+			<div class="case-section">
+				<h2>Problem</h2>
+				<div>
+					<p>Weather apps can become visually busy while still failing at the basic question: what does the user need to know right now? A second issue is data trust. When APIs return partial or missing values, the interface must not silently display fake readings.</p>
+					<p class="case-note"><strong>Still to validate:</strong> real user behavior around saved cities, location permissions, and which weather panels people use most often.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Users</h2>
+				<div>
+					<ul>
+						<li>People who want a fast, readable weather snapshot before making daily decisions.</li>
+						<li>Mobile users scanning current conditions, hourly changes, rain guidance, and alerts.</li>
+						<li>Technical reviewers evaluating async data handling, API boundaries, and fallback states.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Goals</h2>
+				<div>
+					<ul>
+						<li>Make the current day understandable quickly without burying the answer in decoration.</li>
+						<li>Keep forecast, air quality, alerts, and climate context resilient when one source is slow or unavailable.</li>
+						<li>Represent missing data as missing, never as a confident zero.</li>
+						<li>Keep the responsive layout useful from desktop down to small mobile screens.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>My Role</h2>
+				<div>
+					<p>I built the frontend experience: dashboard layout, city search, saved-location behavior, weather API orchestration, data normalization, missing-data rendering, responsive CSS, accessibility states, and the QA coverage around the trust contract.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Key UX Decisions</h2>
+				<div>
+					<ul>
+						<li>Start with a usable fallback forecast instead of blocking the first load on geolocation permission.</li>
+						<li>Prioritize the hero summary, rain guidance, and hourly trend for fast scanning.</li>
+						<li>Use labelled unsupported or unavailable states instead of vague failure copy.</li>
+						<li>Add touch-friendly mobile sample controls for dense timelines that would otherwise rely on hover.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Engineering Decisions</h2>
+				<div>
+					<ul>
+						<li>Separate forecast, supplemental data, and climate archive requests so secondary API problems do not block the core forecast.</li>
+						<li>Normalize provider data at the API boundary with strict numeric handling so null values stay null.</li>
+						<li>Cache last-known forecasts with freshness limits for offline or provider-failure recovery.</li>
+						<li>Keep CSS co-located with components in the app project so dashboard surfaces remain maintainable as they evolve.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Accessibility Considerations</h2>
+				<div>
+					<ul>
+						<li>City search uses keyboard-friendly combobox and listbox behavior.</li>
+						<li>Loading, refresh, error, and missing-data states use live status messaging where it helps.</li>
+						<li>Missing values include assistive text such as no data available instead of relying only on an em dash.</li>
+						<li>Reduced-motion behavior and mobile touch target work are part of the interface contract.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Performance Considerations</h2>
+				<div>
+					<ul>
+						<li>Core forecast content loads before lower-priority supplemental panels.</li>
+						<li>Lazy panels and deferred mounting reduce the amount of work needed for the first useful screen.</li>
+						<li>Unit toggles are handled client-side so changing °F/°C does not trigger unnecessary provider requests.</li>
+						<li>Service worker support is limited to the app shell; live weather data remains a network truth source.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Current Status</h2>
+				<div>
+					<p>Aura Weather is a working portfolio project with real API integration, resilient loading/error behavior, and documented limitations. It should not be described as a full production weather platform.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>What I Would Improve Next</h2>
+				<div>
+					<ul>
+						<li>Refine image and paint-cost tuning after fresh Lighthouse profiling on production.</li>
+						<li>Improve reverse-geocoding for raw device coordinates.</li>
+						<li>Revisit saved-city sync if the project needs account-level trust rather than lightweight optional sync.</li>
+						<li>Use product analytics or user testing to decide which panels deserve the most visual priority.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="/work/">Work</a>
+				<a href="/notes/">Notes</a>
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

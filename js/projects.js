@@ -235,9 +235,7 @@ function createScreenshot(project) {
 	img.className = "project-screenshot";
 	img.loading = "lazy";
 	img.decoding = "async";
-	if (project.imagePosition) {
-		img.style.setProperty("--project-image-position", project.imagePosition);
-	}
+	img.style.setProperty("--project-image-position", project.imagePosition || "top center");
 	img.width = 800;
 	img.height = 450;
 	return img;

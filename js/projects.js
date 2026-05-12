@@ -6,9 +6,6 @@
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
-// TODO: replace `image: null` with real screenshots in /assets/images/projects/
-// once available. The placeholder treatment is intentional, not broken state.
-
 const projects = [
 	{
 		id: "codeherway",
@@ -37,7 +34,9 @@ const projects = [
 				text: "Component structure for a scalable lesson tree, Supabase auth and row-level data access, and async UI states throughout.",
 			},
 		],
-		image: null,
+		image: "assets/images/projects/codeherway-dashboard.webp",
+		imagePosition: "top center",
+		imageAlt: "CodeHerWay Education Platform dashboard interface screenshot",
 		tech: ["React", "Supabase", "PostgreSQL", "JavaScript", "Vite"],
 		links: [
 			{
@@ -85,7 +84,9 @@ const projects = [
 				text: "Routing per workspace area, persisted state via Local Storage, and a small, predictable component tree.",
 			},
 		],
-		image: null,
+		image: "assets/images/projects/ceo-os-dashboard.webp",
+		imagePosition: "top center",
+		imageAlt: "CodeHerWay CEO OS dashboard interface screenshot",
 		tech: ["React", "React Router", "Local Storage", "JavaScript"],
 		links: [
 			{
@@ -132,7 +133,9 @@ const projects = [
 				text: "Async data flow, component-driven UI, and responsive layout work without a framework.",
 			},
 		],
-		image: null,
+		image: "assets/images/projects/aura-weather-interface.webp",
+		imagePosition: "top center",
+		imageAlt: "Aura Weather app interface screenshot",
 		tech: ["JavaScript", "HTML5", "CSS", "REST API"],
 		links: [
 			{
@@ -228,10 +231,13 @@ function createProjectHighlights(highlights) {
 function createScreenshot(project) {
 	const img = document.createElement("img");
 	img.src = project.image;
-	img.alt = `${project.title} interface screenshot`;
+	img.alt = project.imageAlt || `${project.title} interface screenshot`;
 	img.className = "project-screenshot";
 	img.loading = "lazy";
 	img.decoding = "async";
+	if (project.imagePosition) {
+		img.style.setProperty("--project-image-position", project.imagePosition);
+	}
 	img.width = 800;
 	img.height = 450;
 	return img;
@@ -287,7 +293,16 @@ function createProjectCard(project) {
 	article.appendChild(header);
 
 	if (project.image) {
-		article.appendChild(createScreenshot(project));
+		const screenshot = createScreenshot(project);
+		screenshot.addEventListener(
+			"error",
+			() => {
+				article.classList.add("project-card--no-image");
+				screenshot.replaceWith(createPlaceholder(project));
+			},
+			{ once: true }
+		);
+		article.appendChild(screenshot);
 	} else {
 		article.appendChild(createPlaceholder(project));
 	}

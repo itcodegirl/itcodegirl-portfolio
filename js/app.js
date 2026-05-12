@@ -2,7 +2,7 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 const canUseGsap = typeof gsap !== "undefined";
 
 const scrollProgress = document.querySelector(".scroll-progress");
-const nav = document.querySelector(".nav");
+const nav = document.querySelector(".site-header");
 
 // Single rAF-batched scroll handler driving both the progress bar and the
 // nav hide-on-scroll behaviour. Avoids two raw scroll listeners running per
@@ -21,10 +21,18 @@ function onScrollFrame() {
 	}
 
 	if (nav) {
-		if (y > lastScrollY && y > 90) {
+		const navContainsFocus = nav.contains(document.activeElement);
+		const isNearTop = y <= 90;
+		const isScrollingDown = y > lastScrollY;
+		const isScrollingUp = y < lastScrollY;
+
+		if (navContainsFocus || isNearTop || isScrollingUp) {
+			nav.classList.remove("nav-hidden");
+		} else if (isScrollingDown) {
 			nav.classList.add("nav-hidden");
 		} else {
-			nav.classList.remove("nav-hidden");
+			// Preserve the current state when scrolling settles so the header
+			// does not snap back into view after a downward scroll finishes.
 		}
 	}
 
@@ -38,9 +46,15 @@ if (scrollProgress || nav) {
 	}, { passive: true });
 }
 
+if (nav) {
+	nav.addEventListener("focusin", () => {
+		nav.classList.remove("nav-hidden");
+	});
+}
+
 // Active nav link tracks current section
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll("nav a[href^='#']");
+const navLinks = document.querySelectorAll(".nav a[href^='#']");
 if (sections.length && navLinks.length) {
 	const sectionObserver = new IntersectionObserver(entries => {
 		entries.forEach(entry => {
@@ -95,13 +109,87 @@ const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
 
 if (contactForm && formStatus) {
+	const contactFields = Array.from(contactForm.querySelectorAll(
+		"#contactName, #contactEmail, #contactMessage"
+	));
+
+	function getErrorElement(field) {
+		return document.getElementById(`${field.id}Error`);
+	}
+
+	function syncFieldValidity(field) {
+		const errorElement = getErrorElement(field);
+		const isValid = field.checkValidity();
+
+		if (!errorElement) return isValid;
+
+		if (isValid) {
+			field.removeAttribute("aria-invalid");
+			errorElement.textContent = "";
+			return true;
+		}
+
+		field.setAttribute("aria-invalid", "true");
+		errorElement.textContent = field.validationMessage;
+		return false;
+	}
+
+	function syncContactFieldValidity() {
+		let isFormValid = true;
+
+		contactFields.forEach(field => {
+			if (!syncFieldValidity(field)) {
+				isFormValid = false;
+			}
+		});
+
+		return isFormValid;
+	}
+
+	function clearContactFieldValidity() {
+		contactFields.forEach(field => {
+			field.removeAttribute("aria-invalid");
+			const errorElement = getErrorElement(field);
+			if (errorElement) {
+				errorElement.textContent = "";
+			}
+		});
+	}
+
+	contactFields.forEach(field => {
+		field.addEventListener("blur", () => {
+			syncFieldValidity(field);
+		});
+
+		field.addEventListener("input", () => {
+			if (field.getAttribute("aria-invalid") === "true" || field.value.trim() !== "") {
+				syncFieldValidity(field);
+			} else {
+				field.removeAttribute("aria-invalid");
+				const errorElement = getErrorElement(field);
+				if (errorElement) {
+					errorElement.textContent = "";
+				}
+			}
+		});
+	});
+
 	contactForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
+		formStatus.className = "form-status";
+		formStatus.textContent = "";
+
+		const isFormValid = contactForm.checkValidity();
+		syncContactFieldValidity();
+
+		if (!isFormValid) {
+			contactForm.reportValidity();
+			return;
+		}
+
 		const btn = contactForm.querySelector(".form-submit");
 		btn.disabled = true;
 		btn.textContent = "Sending…";
-		formStatus.className = "form-status";
-		formStatus.textContent = "";
 
 		try {
 			const res = await fetch(contactForm.action, {
@@ -113,6 +201,7 @@ if (contactForm && formStatus) {
 				formStatus.className = "form-status form-status--success";
 				formStatus.textContent = "Message sent! I'll be in touch soon.";
 				contactForm.reset();
+				clearContactFieldValidity();
 			} else {
 				throw new Error();
 			}

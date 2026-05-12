@@ -15,11 +15,11 @@
 	<meta property="og:title" content="Aura Weather Case Study | Jenna Zawaski">
 	<meta property="og:description" content="A same-domain case study for Aura Weather, a responsive weather dashboard with resilient API states.">
 	<meta property="og:url" content="https://itcodegirl.com/work/aura-weather/">
-	<meta property="og:image" content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Aura Weather Case Study | Jenna Zawaski">
 	<meta name="twitter:description" content="UX, API resilience, accessibility, performance, and next-iteration notes for Aura Weather.">
-	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 
 	<title>Aura Weather Case Study | Jenna Zawaski</title>
 
@@ -77,7 +77,7 @@
 		</section>
 
 		<div class="case-visual">
-			<img src="/assets/images/Jenna_robot_840.webp" alt="Jenna Zawaski portfolio visual identity artwork" width="840" height="840" loading="eager" decoding="async">
+			<img src="/assets/images/projects/aura-weather-interface.webp" alt="Aura Weather current conditions and environmental exposure interface" width="1200" height="750" loading="eager" decoding="async">
 		</div>
 
 		<section class="case-content" aria-label="Aura Weather case study details">
@@ -144,6 +144,26 @@
 			</div>
 
 			<div class="case-section">
+				<h2>Decision Receipts</h2>
+				<div>
+					<ul class="decision-receipts">
+						<li>
+							<span>Constraint</span>
+							<p>Weather data can be partial, delayed, or unavailable from individual provider endpoints.</p>
+						</li>
+						<li>
+							<span>Decision</span>
+							<p>Normalize values at the API boundary and render unavailable data explicitly instead of forcing fallback zeros.</p>
+						</li>
+						<li>
+							<span>Tradeoff</span>
+							<p>The interface stays more trustworthy, but the UI has to carry more clear empty and unsupported states.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
@@ -168,9 +188,27 @@
 			</div>
 
 			<div class="case-section">
+				<h2>QA Notes</h2>
+				<div>
+					<ul class="qa-list">
+						<li><strong>Verified on this portfolio:</strong> the local case study path, live demo link, GitHub repo link, and shared navigation paths are present.</li>
+						<li><strong>Evidence standard:</strong> missing-data behavior is described as a trust decision without inventing reliability metrics.</li>
+						<li><strong>Still to validate:</strong> fresh production Lighthouse profiling, reverse-geocoding edge cases, and saved-city behavior with real users.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
 					<p>Aura Weather is a working portfolio project with real API integration, resilient loading/error behavior, and documented limitations. It should not be described as a full production weather platform.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>What I Learned</h2>
+				<div>
+					<p>Data products need honest absence states as much as polished success states. Keeping null, unavailable, and delayed provider responses visible makes the interface more trustworthy than a cleaner-looking screen with misleading fallback values.</p>
 				</div>
 			</div>
 

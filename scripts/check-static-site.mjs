@@ -242,6 +242,25 @@ function getSitemapEntry(sitemap, canonicalUrl) {
 	return sitemap.match(entryPattern)?.[0] || '';
 }
 
+function getXmlTagValue(xml, tagName) {
+	const tagPattern = new RegExp(`<${tagName}>([\\s\\S]*?)<\\/${tagName}>`);
+	return xml.match(tagPattern)?.[1].trim() || '';
+}
+
+function isValidDateOnly(value) {
+	const match = value.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+	if (!match) return false;
+
+	const [, year, month, day] = match.map(Number);
+	const date = new Date(Date.UTC(year, month - 1, day));
+
+	return (
+		date.getUTCFullYear() === year &&
+		date.getUTCMonth() === month - 1 &&
+		date.getUTCDate() === day
+	);
+}
+
 function checkDiscoveryMetadata() {
 	assert(fs.existsSync(path.join(rootDir, 'robots.txt')), 'robots.txt is missing.');
 	assert(fs.existsSync(path.join(rootDir, 'sitemap.xml')), 'sitemap.xml is missing.');
@@ -258,13 +277,14 @@ function checkDiscoveryMetadata() {
 		const canonicalUrl = getCanonicalUrl(relativePath);
 		const html = readFile(relativePath);
 		const sitemapEntry = getSitemapEntry(sitemap, canonicalUrl);
+		const lastmod = getXmlTagValue(sitemapEntry, 'lastmod');
 
 		assert(
 			html.includes(`<link rel="canonical" href="${canonicalUrl}">`),
 			`${relativePath} should include canonical URL ${canonicalUrl}.`,
 		);
 		assert(Boolean(sitemapEntry), `sitemap.xml should include ${canonicalUrl}.`);
-		assert(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(sitemapEntry), `${canonicalUrl} should keep lastmod metadata.`);
+		assert(isValidDateOnly(lastmod), `${canonicalUrl} should keep valid YYYY-MM-DD lastmod metadata.`);
 		assert(sitemapEntry.includes('<changefreq>'), `${canonicalUrl} should keep changefreq metadata.`);
 		assert(sitemapEntry.includes('<priority>'), `${canonicalUrl} should keep priority metadata.`);
 	});

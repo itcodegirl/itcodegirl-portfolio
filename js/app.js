@@ -1,5 +1,113 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const canUseGsap = typeof gsap !== "undefined";
+const coarsePointer = window.matchMedia("(pointer: coarse)");
+const motionScriptSources = {
+	gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+	three: "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"
+};
+const loadedScripts = new Map();
+let webGLSupport;
+
+function getConnection() {
+	return navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+}
+
+function hasSaveDataPreference() {
+	return Boolean(getConnection()?.saveData);
+}
+
+function supportsWebGL() {
+	if (typeof webGLSupport === "boolean") {
+		return webGLSupport;
+	}
+
+	try {
+		const canvas = document.createElement("canvas");
+		webGLSupport = Boolean(
+			window.WebGLRenderingContext &&
+			(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+		);
+	} catch {
+		webGLSupport = false;
+	}
+
+	return webGLSupport;
+}
+
+function addScriptPreconnect(src) {
+	const { origin } = new URL(src, window.location.href);
+	const existing = Array.from(document.querySelectorAll("link[rel='preconnect']"))
+		.some(link => link.href === `${origin}/` || link.href === origin);
+
+	if (existing) return;
+
+	const link = document.createElement("link");
+	link.rel = "preconnect";
+	link.href = origin;
+	link.crossOrigin = "";
+	document.head.appendChild(link);
+}
+
+function loadScript(src) {
+	if (loadedScripts.has(src)) {
+		return loadedScripts.get(src);
+	}
+
+	const loadPromise = new Promise((resolve, reject) => {
+		const existingScript = Array.from(document.scripts).find(script => script.src === src);
+
+		if (existingScript?.dataset.loaded === "true") {
+			resolve(existingScript);
+			return;
+		}
+
+		if (existingScript) {
+			existingScript.addEventListener("load", () => resolve(existingScript), { once: true });
+			existingScript.addEventListener("error", () => reject(new Error(`Failed to load ${src}`)), { once: true });
+			return;
+		}
+
+		addScriptPreconnect(src);
+
+		const script = document.createElement("script");
+		script.src = src;
+		script.async = true;
+		script.onload = () => {
+			script.dataset.loaded = "true";
+			resolve(script);
+		};
+		script.onerror = () => {
+			script.remove();
+			loadedScripts.delete(src);
+			reject(new Error(`Failed to load ${src}`));
+		};
+
+		document.head.appendChild(script);
+	});
+
+	loadedScripts.set(src, loadPromise);
+	return loadPromise;
+}
+
+function shouldRunHeroCardAnimation() {
+	return (
+		!prefersReducedMotion.matches &&
+		!hasSaveDataPreference() &&
+		Boolean(document.querySelector(".hero-card"))
+	);
+}
+
+function shouldRunWebGLPortrait() {
+	const hasPortraitTarget = Boolean(document.getElementById("three-container"));
+
+	return (
+		hasPortraitTarget &&
+		!prefersReducedMotion.matches &&
+		!hasSaveDataPreference() &&
+		!coarsePointer.matches &&
+		supportsWebGL() &&
+		window.location.protocol !== "file:"
+	);
+}
 
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".nav");
@@ -78,7 +186,13 @@ let webGLInitialized = false;
 
 function runSafely(callback) {
 	try {
-		callback();
+		const result = callback();
+
+		if (result && typeof result.catch === "function") {
+			result.catch((error) => {
+				console.warn("Interactive effect failed to start.", error);
+			});
+		}
 	} catch (error) {
 		console.warn("Interactive effect failed to start.", error);
 	}
@@ -87,8 +201,8 @@ function runSafely(callback) {
 window.addEventListener("load", () => {
 	if (prefersReducedMotion.matches) return;
 
-	runSafely(initWebGL);
-	runSafely(initBackgroundWebGL);
+	runSafely(initHeroCardAnimation);
+	runSafely(initWebGLExperience);
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -124,6 +238,51 @@ if (contactForm && formStatus) {
 			btn.innerHTML = "Send message <span aria-hidden='true'>→</span>";
 		}
 	});
+}
+
+async function initHeroCardAnimation() {
+	if (!shouldRunHeroCardAnimation()) return;
+
+	try {
+		await loadScript(motionScriptSources.gsap);
+	} catch (error) {
+		console.warn("GSAP failed to load; skipping hero animation.", error);
+		return;
+	}
+
+	if (typeof gsap === "undefined") {
+		console.warn("GSAP unavailable; skipping hero animation.");
+		return;
+	}
+
+	gsap.from(".hero-card", {
+		y: 40,
+		scale: 0.96,
+		duration: 1.1,
+		ease: "power3.out",
+		delay: 0.2
+	});
+}
+
+async function initWebGLExperience() {
+	if (!shouldRunWebGLPortrait()) return;
+
+	try {
+		await loadScript(motionScriptSources.three);
+	} catch (error) {
+		console.warn("Three.js failed to load; keeping the static portrait.", error);
+		return;
+	}
+
+	if (typeof THREE === "undefined") {
+		console.warn("Three.js unavailable; keeping the static portrait.");
+		return;
+	}
+
+	if (!shouldRunWebGLPortrait()) return;
+
+	initWebGL();
+	initBackgroundWebGL();
 }
 
 function initBackgroundWebGL() {
@@ -267,16 +426,6 @@ function initWebGL(retries = 0) {
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
 	webGLInitialized = true;
-
-	if (canUseGsap) {
-		gsap.from(".hero-card", {
-			y: 40,
-			scale: 0.96,
-			duration: 1.1,
-			ease: "power3.out",
-			delay: 0.2
-		});
-	}
 
 	const startPortrait = (texture) => {
 		if (THREE.SRGBColorSpace) {

@@ -34,3 +34,6 @@ jobs:
 
       - name: Check static performance and accessibility guardrails
         run: node scripts/check-static-site.mjs
+
+      - name: Check internal links and static references
+        run: node scripts/check-links.mjs

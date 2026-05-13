@@ -150,6 +150,10 @@ function checkScriptLoading() {
 			remoteScripts.length === 0,
 			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep motion libraries lazy.`,
 		);
+		assert(
+			!html.includes('href="https://cdn.jsdelivr.net"'),
+			`${relativePath} should not preconnect to jsdelivr unless a motion script is being loaded.`,
+		);
 	});
 
 	const appJs = readFile('js/app.js');

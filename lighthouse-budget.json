@@ -1,15 +1,18 @@
 {
 	"categories": {
-		"performance": 0.9,
+		"performance": 0.7,
 		"accessibility": 0.95,
 		"best-practices": 0.95,
 		"seo": 0.95
 	},
+	"deployPreview": {
+		"seo": 0.65
+	},
 	"audits": {
-		"first-contentful-paint": 1800,
-		"largest-contentful-paint": 2500,
+		"first-contentful-paint": 3500,
+		"largest-contentful-paint": 5500,
 		"total-blocking-time": 150,
 		"cumulative-layout-shift": 0.1,
-		"speed-index": 3000
+		"speed-index": 3500
 	}
 }

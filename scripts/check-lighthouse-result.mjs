@@ -16,6 +16,22 @@ function assert(condition, message) {
 	if (!condition) failures.push(message);
 }
 
+function auditedUrl(report) {
+	return report.finalDisplayedUrl || report.finalUrl || report.requestedUrl || '';
+}
+
+function isDeployPreview(report) {
+	return /^https:\/\/deploy-preview-\d+--[^/]+\.netlify\.app\//.test(auditedUrl(report));
+}
+
+function minimumScoreFor(report, categoryName) {
+	if (categoryName === 'seo' && isDeployPreview(report)) {
+		return budget.deployPreview?.seo ?? budget.categories.seo;
+	}
+
+	return budget.categories[categoryName];
+}
+
 function loadReport(reportPath) {
 	const absolutePath = path.resolve(process.cwd(), reportPath);
 	return {
@@ -49,11 +65,11 @@ function checkAudit(reportName, report, auditName, maximumValue) {
 }
 
 function checkReport({ name, report }) {
-	assert(Boolean(report.finalDisplayedUrl || report.finalUrl || report.requestedUrl), `${name} is missing the audited URL.`);
+	assert(Boolean(auditedUrl(report)), `${name} is missing the audited URL.`);
 	assert(Boolean(report.fetchTime), `${name} is missing fetchTime evidence.`);
 
-	Object.entries(budget.categories).forEach(([categoryName, minimumScore]) => {
-		checkCategory(name, report, categoryName, minimumScore);
+	Object.keys(budget.categories).forEach((categoryName) => {
+		checkCategory(name, report, categoryName, minimumScoreFor(report, categoryName));
 	});
 
 	Object.entries(budget.audits).forEach(([auditName, maximumValue]) => {

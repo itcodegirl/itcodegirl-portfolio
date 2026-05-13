@@ -40,6 +40,8 @@ const jsFiles = [
 	'js/projects.js',
 ];
 
+const siteOrigin = 'https://itcodegirl.com';
+
 const assetBudgets = [
 	{
 		label: 'image asset',
@@ -112,6 +114,71 @@ function getAttributes(tag) {
 			value,
 		]),
 	);
+}
+
+function getIds(html) {
+	return new Set(Array.from(html.matchAll(/\sid=(["'])(.*?)\1/g), ([,, id]) => id));
+}
+
+function getPageUrl(relativePath) {
+	if (relativePath === 'index.html') return `${siteOrigin}/`;
+	if (relativePath.endsWith('/index.html')) {
+		return `${siteOrigin}/${relativePath.replace(/index\.html$/, '')}`;
+	}
+
+	return `${siteOrigin}/${relativePath}`;
+}
+
+function getLocalPathFromUrl(url) {
+	let pathname = decodeURIComponent(url.pathname).replace(/^\/+/, '');
+
+	if (!pathname) return 'index.html';
+	if (pathname.endsWith('/')) return `${pathname}index.html`;
+	if (!path.extname(pathname)) return `${pathname}/index.html`;
+
+	return pathname;
+}
+
+function parseSrcset(srcset) {
+	return srcset
+		.split(',')
+		.map((candidate) => candidate.trim().split(/\s+/)[0])
+		.filter(Boolean);
+}
+
+function checkUrlTarget(relativePath, rawUrl, sourceLabel) {
+	const value = rawUrl.trim();
+	if (!value || value.startsWith('data:') || value.startsWith('blob:')) return;
+
+	let url;
+	try {
+		url = new URL(value, getPageUrl(relativePath));
+	} catch {
+		assert(false, `${sourceLabel} has an invalid URL: ${value}.`);
+		return;
+	}
+
+	if (url.protocol === 'mailto:') {
+		assert(url.pathname.includes('@'), `${sourceLabel} mailto link should include an email address.`);
+		return;
+	}
+
+	if (url.origin !== siteOrigin) {
+		assert(url.protocol === 'https:', `${sourceLabel} external URL should use HTTPS: ${value}.`);
+		return;
+	}
+
+	const localPath = getLocalPathFromUrl(url);
+	const absolutePath = path.join(rootDir, localPath);
+
+	assert(!localPath.startsWith('..'), `${sourceLabel} should not resolve outside the site root: ${value}.`);
+	assert(fs.existsSync(absolutePath), `${sourceLabel} points to a missing local file: ${value} -> ${localPath}.`);
+
+	if (url.hash && localPath.endsWith('.html') && fs.existsSync(absolutePath)) {
+		const targetIds = getIds(readFile(localPath));
+		const decodedHash = decodeURIComponent(url.hash.slice(1));
+		assert(targetIds.has(decodedHash), `${sourceLabel} points to missing section #${decodedHash} in ${localPath}.`);
+	}
 }
 
 function checkRequiredFiles() {
@@ -216,13 +283,33 @@ function checkNavigationStructure() {
 	});
 }
 
-function getCanonicalUrl(relativePath) {
-	if (relativePath === 'index.html') return 'https://itcodegirl.com/';
-	if (relativePath.endsWith('/index.html')) {
-		return `https://itcodegirl.com/${relativePath.replace(/index\.html$/, '')}`;
-	}
+function checkLinkIntegrity() {
+	pageFiles.forEach((relativePath) => {
+		const html = readFile(relativePath);
+		const tags = Array.from(html.matchAll(/<(a|link|script|img|source|form)\b[^>]*>/gi), ([tag, tagName]) => ({
+			attrs: getAttributes(tag),
+			tagName: tagName.toLowerCase(),
+		}));
 
-	return `https://itcodegirl.com/${relativePath}`;
+		tags.forEach(({ attrs, tagName }) => {
+			const sourceLabel = `${relativePath} <${tagName}>`;
+
+			if (attrs.href) checkUrlTarget(relativePath, attrs.href, `${sourceLabel} href`);
+			if (attrs.src) checkUrlTarget(relativePath, attrs.src, `${sourceLabel} src`);
+			if (attrs.action) checkUrlTarget(relativePath, attrs.action, `${sourceLabel} action`);
+			if (attrs.srcset) {
+				parseSrcset(attrs.srcset).forEach((srcsetUrl) => {
+					checkUrlTarget(relativePath, srcsetUrl, `${sourceLabel} srcset`);
+				});
+			}
+
+			if (tagName === 'a' && attrs.target === '_blank') {
+				const relValues = new Set((attrs.rel || '').split(/\s+/).filter(Boolean));
+				assert(relValues.has('noopener'), `${relativePath} new-tab link ${attrs.href} should include rel="noopener".`);
+				assert(relValues.has('noreferrer'), `${relativePath} new-tab link ${attrs.href} should include rel="noreferrer".`);
+			}
+		});
+	});
 }
 
 function checkDiscoveryMetadata() {
@@ -238,7 +325,7 @@ function checkDiscoveryMetadata() {
 	);
 
 	canonicalPages.forEach((relativePath) => {
-		const canonicalUrl = getCanonicalUrl(relativePath);
+		const canonicalUrl = getPageUrl(relativePath);
 		const html = readFile(relativePath);
 
 		assert(
@@ -255,6 +342,7 @@ checkScriptLoading();
 checkImages();
 checkContactAccessibility();
 checkNavigationStructure();
+checkLinkIntegrity();
 checkDiscoveryMetadata();
 
 if (failures.length) {

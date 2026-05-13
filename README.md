@@ -72,7 +72,8 @@ node scripts/check-static-site.mjs
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
-lazy motion loading, scroll safety, and contact-form accessibility.
+lazy motion loading, scroll safety, contact-form accessibility, and link
+integrity for local pages/assets plus safe external links.
 
 ## Deployment
 

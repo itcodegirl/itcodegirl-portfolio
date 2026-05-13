@@ -157,8 +157,8 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
-- `prefers-reduced-motion` disables decorative animations and reveal-on-scroll
-  transitions.
+- User preferences keep non-essential effects and reveal-on-scroll
+  transitions optional.
 - `forced-colors` is respected.
 - Form fields are labeled and the form status is announced via `aria-live`.
 

@@ -110,7 +110,7 @@ function shouldRunWebGLPortrait() {
 }
 
 const scrollProgress = document.querySelector(".scroll-progress");
-const nav = document.querySelector(".nav");
+const nav = document.querySelector(".site-header");
 
 // Single rAF-batched scroll handler driving both the progress bar and the
 // nav hide-on-scroll behaviour. Avoids two raw scroll listeners running per
@@ -148,7 +148,7 @@ if (scrollProgress || nav) {
 
 // Active nav link tracks current section
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll("nav a[href^='#']");
+const navLinks = document.querySelectorAll(".nav a[href^='#']");
 if (sections.length && navLinks.length) {
 	const sectionObserver = new IntersectionObserver(entries => {
 		entries.forEach(entry => {

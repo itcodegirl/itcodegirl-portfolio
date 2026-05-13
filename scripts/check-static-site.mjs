@@ -206,12 +206,12 @@ function checkNavigationStructure() {
 		const html = readFile(relativePath);
 
 		assert(
-			html.includes('<header class="nav nav-show">'),
+			html.includes('<header class="site-header nav-show">'),
 			`${relativePath} should use the shared fixed navigation wrapper.`,
 		);
 		assert(
-			html.includes('<nav aria-label="Primary navigation">'),
-			`${relativePath} should keep primary navigation labelled without duplicating the nav wrapper class.`,
+			html.includes('<nav class="nav" aria-label="Primary navigation">'),
+			`${relativePath} should keep primary navigation labelled on the inner nav element.`,
 		);
 	});
 }

@@ -28,6 +28,48 @@
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="stylesheet" href="/work/work.css">
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "BreadcrumbList",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Home",
+							"item": "https://itcodegirl.com/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "Case Studies",
+							"item": "https://itcodegirl.com/work/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "Aura Weather",
+							"item": "https://itcodegirl.com/work/aura-weather/"
+						}
+					]
+				},
+				{
+					"@type": "CreativeWork",
+					"name": "Aura Weather Case Study",
+					"url": "https://itcodegirl.com/work/aura-weather/",
+					"description": "Case study for a responsive weather dashboard with resilient API states and honest data fallbacks.",
+					"image": "https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp",
+					"dateModified": "2026-05-12",
+					"creator": {
+						"@type": "Person",
+						"name": "Jenna Zawaski"
+					}
+				}
+			]
+		}
+	</script>
 </head>
 
 <body>
@@ -73,12 +115,17 @@
 					<dt>Primary focus</dt>
 					<dd>Scannable hierarchy, resilient async states, mobile usability, and honest data fallbacks</dd>
 				</div>
+				<div>
+					<dt>Last verified</dt>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
+				</div>
 			</dl>
 		</section>
 
-		<div class="case-visual">
-			<img src="/assets/images/projects/aura-weather-interface.webp" alt="Aura Weather current conditions and environmental exposure interface" width="1200" height="750" loading="eager" decoding="async">
-		</div>
+		<figure class="case-visual">
+			<img src="/assets/images/projects/aura-weather-interface.webp" srcset="/assets/images/projects/aura-weather-interface-640.webp 640w, /assets/images/projects/aura-weather-interface-960.webp 960w, /assets/images/projects/aura-weather-interface.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="Aura Weather current conditions and environmental exposure interface" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
+			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
+		</figure>
 
 		<section class="case-content" aria-label="Aura Weather case study details">
 			<div class="case-section">
@@ -191,7 +238,8 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Verified on this portfolio:</strong> the local case study path, live demo link, GitHub repo link, and shared navigation paths are present.</li>
+						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
+						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
 						<li><strong>Evidence standard:</strong> missing-data behavior is described as a trust decision without inventing reliability metrics.</li>
 						<li><strong>Still to validate:</strong> fresh production Lighthouse profiling, reverse-geocoding edge cases, and saved-city behavior with real users.</li>
 					</ul>
@@ -224,6 +272,17 @@
 				</div>
 			</div>
 		</section>
+
+		<nav class="case-study-nav" aria-label="More case studies">
+			<a href="/work/ceo-os/" class="case-study-nav-link">
+				<span>Previous case study</span>
+				<strong>CodeHerWay CEO OS</strong>
+			</a>
+			<a href="/work/" class="case-study-nav-link">
+				<span>All case studies</span>
+				<strong>Return to work index</strong>
+			</a>
+		</nav>
 	</main>
 
 	<footer class="site-footer">

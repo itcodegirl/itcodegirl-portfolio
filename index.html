@@ -26,7 +26,6 @@
 		content="Frontend developer focused on accessible interfaces, clear UX, and real product logic.">
 	<meta name="twitter:image"
 		content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
-	<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 	<title>Jenna Zawaski | Frontend Developer</title>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +34,6 @@
 		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
 		rel="stylesheet">
 
-	<script defer src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"></script>
 	<script defer src="./js/projects.js"></script>
 	<script defer src="./js/app.js"></script>
 
@@ -301,7 +299,7 @@
 				<div class="about-image">
 					<picture>
 						<source srcset="assets/headshot.webp" type="image/webp">
-						<img src="assets/headshot.png" alt="Jenna Zawaski" width="1286" height="2000" loading="lazy">
+						<img src="assets/headshot.png" alt="Jenna Zawaski" width="1286" height="2000" loading="lazy" decoding="async">
 					</picture>
 				</div>
 			</div>
@@ -322,18 +320,18 @@
 						<div class="form-group">
 							<label for="contactName">Name</label>
 							<input type="text" id="contactName" name="name" required autocomplete="name" placeholder="Your name" aria-describedby="contactNameError">
-							<p class="field-error" id="contactNameError"></p>
+							<p class="field-error" id="contactNameError" aria-live="polite" aria-atomic="true"></p>
 						</div>
 						<div class="form-group">
 							<label for="contactEmail">Email</label>
 							<input type="email" id="contactEmail" name="email" required autocomplete="email" placeholder="your@email.com" aria-describedby="contactEmailError">
-							<p class="field-error" id="contactEmailError"></p>
+							<p class="field-error" id="contactEmailError" aria-live="polite" aria-atomic="true"></p>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="contactMessage">Message</label>
 						<textarea id="contactMessage" name="message" required rows="5" placeholder="Tell me about the role or project..." aria-describedby="contactMessageError"></textarea>
-						<p class="field-error" id="contactMessageError"></p>
+						<p class="field-error" id="contactMessageError" aria-live="polite" aria-atomic="true"></p>
 					</div>
 					<button type="submit" class="form-submit">Send message <span aria-hidden="true">→</span></button>
 					<p class="form-status" id="formStatus" aria-live="polite"></p>

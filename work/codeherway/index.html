@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: product thinking, React engineering, Supabase auth, progress tracking, accessibility, performance, and next iteration.">
+	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: UX decisions, engineering focus, accessibility, performance, current status, and next iteration.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/codeherway/">
@@ -13,13 +13,13 @@
 
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
-	<meta property="og:description" content="A flagship case study for CodeHerWay, a React and Supabase learning platform for women entering tech.">
+	<meta property="og:description" content="A same-domain case study for CodeHerWay, a learning platform for women entering tech.">
 	<meta property="og:url" content="https://itcodegirl.com/work/codeherway/">
 	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
-	<meta name="twitter:description" content="Product, UX, engineering, accessibility, performance, and next-iteration notes for CodeHerWay.">
-	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/Jenna_robot_840.webp">
+	<meta name="twitter:description" content="UX, engineering, accessibility, performance, and next-iteration notes for CodeHerWay.">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 
 	<title>CodeHerWay Education Platform Case Study | Jenna Zawaski</title>
 
@@ -28,6 +28,48 @@
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="stylesheet" href="/work/work.css">
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "BreadcrumbList",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Home",
+							"item": "https://itcodegirl.com/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "Case Studies",
+							"item": "https://itcodegirl.com/work/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "CodeHerWay Education Platform",
+							"item": "https://itcodegirl.com/work/codeherway/"
+						}
+					]
+				},
+				{
+					"@type": "CreativeWork",
+					"name": "CodeHerWay Education Platform Case Study",
+					"url": "https://itcodegirl.com/work/codeherway/",
+					"description": "Case study for a frontend-focused learning platform for women entering tech.",
+					"image": "https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp",
+					"dateModified": "2026-05-12",
+					"creator": {
+						"@type": "Person",
+						"name": "Jenna Zawaski"
+					}
+				}
+			]
+		}
+	</script>
 </head>
 
 <body>
@@ -50,74 +92,70 @@
 		<section class="case-hero" aria-labelledby="case-title">
 			<div>
 				<a class="back-link" href="/work/">Back to all case studies</a>
-				<p class="case-eyebrow">Flagship case study</p>
+				<p class="case-eyebrow">Case study</p>
 				<h1 id="case-title">CodeHerWay Education Platform</h1>
 				<p class="case-summary">
-					A React and Supabase learning product for beginner developers, designed around guided lessons, quizzes, persisted progress, and a calm reward system that encourages consistency without pretending practice equals mastery.
+					A frontend-focused learning platform for women entering tech, built around structured lessons, quizzes, visible progress, and a calm beginner experience. The project is strongest as a product-minded education platform with real auth, data, and quality-gate concerns in scope.
 				</p>
 				<div class="case-links" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://codeherway-education-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl/education_platform" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-					<a class="case-link" href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Reward engine write-up</a>
+					<a class="case-link case-link--archived" href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Archived write-up</a>
 				</div>
 			</div>
 			<dl class="case-meta-list" aria-label="Project summary">
 				<div>
 					<dt>Project type</dt>
-					<dd>Education platform and portfolio product</dd>
+					<dd>Learning platform and portfolio product</dd>
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>React, Vite, Supabase, JavaScript, CSS, Netlify</dd>
+					<dd>React, Vite, Supabase, JavaScript, CSS</dd>
 				</div>
 				<div>
-					<dt>Proof points</dt>
-					<dd>Auth, progress persistence, quizzes, rewards, async states, accessibility, and test coverage</dd>
+					<dt>Primary focus</dt>
+					<dd>Beginner learning flow, progress trust, accessibility, and release confidence</dd>
+				</div>
+				<div>
+					<dt>Last verified</dt>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
 				</div>
 			</dl>
 		</section>
 
-		<section class="case-visual" aria-labelledby="screenshot-title">
-			<div>
-				<p class="case-kicker">Product surface</p>
-				<h2 id="screenshot-title">Dashboard screenshot support</h2>
-			</div>
-			<figure class="case-screenshot">
-				<img src="/assets/images/projects/codeherway-dashboard.webp" alt="CodeHerWay dashboard showing learner progress and lesson navigation" width="1200" height="675" loading="eager" decoding="async" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
-				<div class="case-screenshot-fallback" role="note" hidden>
-					<p>Dashboard screenshot asset not available yet.</p>
-					<span>This page is wired for <code>/assets/images/projects/codeherway-dashboard.webp</code> and intentionally avoids showing a fake product image.</span>
-				</div>
-				<figcaption>Reserved for the real CodeHerWay dashboard capture when the asset is added.</figcaption>
-			</figure>
-		</section>
+		<figure class="case-visual">
+			<img src="/assets/images/projects/codeherway-dashboard.webp" srcset="/assets/images/projects/codeherway-dashboard-640.webp 640w, /assets/images/projects/codeherway-dashboard-960.webp 960w, /assets/images/projects/codeherway-dashboard.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay Education Platform landing and account creation interface" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
+			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
+		</figure>
 
 		<section class="case-content" aria-label="CodeHerWay case study details">
 			<div class="case-section">
-				<h2>Hero Summary</h2>
+				<h2>Problem</h2>
 				<div>
-					<p>CodeHerWay is a product-minded learning platform, not just a portfolio landing page. It combines structured frontend curriculum, authenticated learner state, quiz feedback, XP and streak mechanics, progress recovery, and documentation that makes tradeoffs visible to reviewers.</p>
-					<p>The goal was to prove that I can think across product experience and implementation details: how a beginner moves through lessons, how the app earns trust when saving progress, and how the codebase can keep growing without turning every new lesson into one-off UI.</p>
+					<p>Beginners can lose momentum when learning resources are scattered, next steps are unclear, or progress feels invisible. The product needed to feel supportive without hiding the technical rigor of learning HTML, CSS, JavaScript, and React.</p>
+					<p class="case-note"><strong>Still to validate:</strong> real learner retention, completion friction, and where beginners most often need intervention should be measured before making outcome claims.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
-				<h2>Product Problem</h2>
-				<div>
-					<p>Beginner learners often face too many choices at once: scattered resources, unclear next steps, inconsistent feedback, and progress that disappears between sessions. For women entering tech, that friction can make a difficult subject feel more isolating than it needs to be.</p>
-					<p>CodeHerWay addresses that by giving learners a clear path, small completion loops, visible progress, and a product tone that supports confidence while still respecting the rigor of learning HTML, CSS, JavaScript, and React.</p>
-					<p class="case-note"><strong>Honest boundary:</strong> I do not claim user growth, retention, revenue, or learner outcome metrics for this project. The case study focuses on the product and engineering decisions I can directly prove.</p>
-				</div>
-			</div>
-
-			<div class="case-section">
-				<h2>Target Users</h2>
+				<h2>Users</h2>
 				<div>
 					<ul>
-						<li>Women entering tech who want a structured, less intimidating path into frontend development.</li>
-						<li>Self-directed learners who benefit from visible progress, immediate feedback, and a clear next lesson.</li>
-						<li>Returning learners who need their progress, streak, XP, bookmarks, and last position to feel dependable.</li>
-						<li>Hiring managers reviewing whether the project behaves like a real product with real state, constraints, and quality gates.</li>
+						<li>Women entering tech who need a structured, beginner-friendly path.</li>
+						<li>Self-directed learners who benefit from visible progress, review, and consistency cues.</li>
+						<li>Technical reviewers evaluating whether the project behaves like a real product rather than a static demo.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Goals</h2>
+				<div>
+					<ul>
+						<li>Make the first learning path clear and guided.</li>
+						<li>Keep lesson, quiz, bookmark, and progress states understandable.</li>
+						<li>Use reward mechanics to support consistency without overstating mastery.</li>
+						<li>Keep the product credible for portfolio review through quality gates and documented limitations.</li>
 					</ul>
 				</div>
 			</div>
@@ -125,122 +163,31 @@
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>I owned the product end to end: frontend architecture, learning experience, quiz and lesson UI, reward logic, progress persistence, Supabase integration, accessibility improvements, test coverage, documentation, and release-readiness planning.</p>
-					<p>This meant working at both levels: shaping the learner journey and making the underlying system resilient enough that progress, rewards, and lesson state were not just decorative UI.</p>
+					<p>I own the product end to end: frontend architecture, learning and quiz UI, progress tracking, the XP and streak reward engine, Supabase authentication/data integration, and the portfolio documentation around product quality and current limits.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
-				<h2>Product Goals</h2>
+				<h2>Key UX Decisions</h2>
 				<div>
 					<ul>
-						<li>Make the first learning session obvious: sign in, choose a course, begin a lesson, answer a quiz, and see progress update.</li>
-						<li>Keep the learner oriented with course structure, lesson status, current position, review surfaces, and completion feedback.</li>
-						<li>Use XP and streaks to reward consistency over volume so the platform encourages steady practice instead of grind behavior.</li>
-						<li>Build the product with enough real infrastructure that recruiters can evaluate engineering judgment, not just static visuals.</li>
+						<li>Guided course flow with visible navigation so learners know where they are and what comes next.</li>
+						<li>Immediate quiz feedback and review surfaces that help learners understand mistakes without harsh tone.</li>
+						<li>Progress and reward language that separates motivational completion from verified mastery.</li>
+						<li>Honest sync and recovery copy when persistence depends on browser-local state or backend validation.</li>
 					</ul>
-				</div>
-			</div>
-		</section>
-
-		<section class="case-system-overview" aria-labelledby="system-overview-title">
-			<div class="case-section-heading">
-				<p class="case-kicker">System overview</p>
-				<h2 id="system-overview-title">From sign-in to reward state</h2>
-				<p>The core loop connects learner intent, lesson activity, quiz completion, persistence, and reward updates without making the interface feel heavy.</p>
-			</div>
-			<ol class="system-flow" aria-label="CodeHerWay learner flow">
-				<li>
-					<span class="flow-step-number">01</span>
-					<h3>User signs in</h3>
-					<p>Supabase auth establishes the learner session and separates guest exploration from saved progress.</p>
-				</li>
-				<li>
-					<span class="flow-step-number">02</span>
-					<h3>User views lessons</h3>
-					<p>The lesson tree presents beginner-friendly modules with a visible current position and next step.</p>
-				</li>
-				<li>
-					<span class="flow-step-number">03</span>
-					<h3>User completes quizzes</h3>
-					<p>Quiz feedback gives learners a fast read on what worked, what needs review, and what to revisit.</p>
-				</li>
-				<li>
-					<span class="flow-step-number">04</span>
-					<h3>Progress is persisted</h3>
-					<p>Lesson completion, bookmarks, last position, and review state are written through the progress layer.</p>
-				</li>
-				<li>
-					<span class="flow-step-number">05</span>
-					<h3>XP and streak update</h3>
-					<p>Reward state responds to consistent practice while keeping motivational progress distinct from mastery.</p>
-				</li>
-			</ol>
-		</section>
-
-		<section class="case-content" aria-label="CodeHerWay product and engineering decisions">
-			<div class="case-section">
-				<h2>Core User Flow</h2>
-				<div>
-					<ol class="case-ordered-list">
-						<li>A learner signs in or starts from the public learning entry point.</li>
-						<li>They choose a course path and land in a lesson view with navigation, context, and supporting tools.</li>
-						<li>They read structured lesson content, complete tasks or quizzes, and receive immediate feedback.</li>
-						<li>The app saves completion and position state so the learner can return without rebuilding context.</li>
-						<li>XP, streak, and progress surfaces update to make steady practice visible without overstating the result.</li>
-					</ol>
-				</div>
-			</div>
-
-			<div class="case-section">
-				<h2>UX Decisions</h2>
-				<div class="case-decision-grid">
-					<article>
-						<h3>Guided learning flow</h3>
-						<p>Lessons are arranged as a path rather than a loose resource library, which helps beginners understand what to do next.</p>
-					</article>
-					<article>
-						<h3>Immediate feedback</h3>
-						<p>Quiz states and review copy respond quickly, so mistakes become part of the learning loop instead of dead ends.</p>
-					</article>
-					<article>
-						<h3>Visible progress</h3>
-						<p>Completion, last position, bookmarks, XP, and streak state make return sessions feel continuous.</p>
-					</article>
-					<article>
-						<h3>Reduced overwhelm</h3>
-						<p>The interface favors clear next actions, compact supporting panels, and calm language over dense dashboards.</p>
-					</article>
-					<article>
-						<h3>Consistency over volume</h3>
-						<p>Reward language is designed to encourage regular practice, not marathon sessions or inflated mastery claims.</p>
-					</article>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>Engineering Decisions</h2>
-				<div class="case-decision-grid">
-					<article>
-						<h3>Supabase auth</h3>
-						<p>Authentication gives the product a real learner boundary and supports saved state beyond a static demo.</p>
-					</article>
-					<article>
-						<h3>Persisted progress</h3>
-						<p>The progress layer handles lesson completion, last position, bookmarks, sync status, and recovery messaging.</p>
-					</article>
-					<article>
-						<h3>Beginner-friendly lessons</h3>
-						<p>Lesson content is structured so concepts, examples, checks, and review states can be presented consistently.</p>
-					</article>
-					<article>
-						<h3>Async UI states</h3>
-						<p>Loading, saving, error, recovery, and offline-adjacent states are treated as part of the product experience.</p>
-					</article>
-					<article>
-						<h3>Scalable lesson structure</h3>
-						<p>Courses, modules, quizzes, and supporting panels are separated enough to add lessons without redesigning the app each time.</p>
-					</article>
+				<div>
+					<ul>
+						<li>React and Vite support a modular lesson platform while preserving fast local iteration.</li>
+						<li>Supabase provides an authentication and database path for real user progress instead of hardcoded demo state.</li>
+						<li>Learning, reward, route, and sync behaviors are covered by focused tests so reliability work is visible to reviewers.</li>
+						<li>Server-mediated AI and scheduled workflows stay behind Netlify functions rather than exposing sensitive keys in the browser.</li>
+					</ul>
 				</div>
 			</div>
 
@@ -268,10 +215,9 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
-						<li>Keyboard navigation and focus handling matter across lessons, route boundaries, panels, dialogs, and mobile tool surfaces.</li>
-						<li>Progress and quiz feedback use clear status copy so learners are not forced to infer meaning from color or motion alone.</li>
-						<li>The learning interface keeps motion restrained and purposeful, with reduced-motion support treated as a product requirement.</li>
-						<li>Semantic structure, headings, readable contrast, and touch-friendly controls support both screen reader and mobile use.</li>
+						<li>Keyboard navigation and focus handling are treated as product behavior, especially in lessons, dialogs, and panels.</li>
+						<li>Quiz and progress interactions use clearer semantic relationships and user-facing status copy.</li>
+						<li>Motion and feedback are kept purposeful so the interface supports learning rather than distracting from it.</li>
 					</ul>
 				</div>
 			</div>
@@ -280,10 +226,9 @@
 				<h2>Performance Considerations</h2>
 				<div>
 					<ul>
-						<li>Vite keeps local iteration fast while the product remains small enough for focused performance budgets.</li>
-						<li>Route-level and lesson-level concerns are documented so future optimization can target real learner surfaces.</li>
-						<li>Performance work is framed around measurable checks, bundle awareness, and mobile learning flow rather than visual flash.</li>
-						<li>The next phase should keep adding Lighthouse evidence, bundle policy checks, and screenshot-based regression review.</li>
+						<li>The project uses explicit local and CI checks to keep regressions visible.</li>
+						<li>Route and lesson surfaces are structured so future performance work can target specific product areas instead of a single global bundle.</li>
+						<li>Next iteration includes deeper Lighthouse reporting and continued CSS modularization to reduce global surface area.</li>
 					</ul>
 				</div>
 			</div>
@@ -292,7 +237,8 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Verified on this portfolio:</strong> the local case study path, live demo link, GitHub repo link, and shared navigation paths are present.</li>
+						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
+						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
 						<li><strong>Evidence standard:</strong> accessibility and performance content is framed as considerations and next work, not as unmeasured outcome claims.</li>
 						<li><strong>Still to validate:</strong> authenticated learner flows against a configured staging backend and fresh Lighthouse reporting.</li>
 					</ul>
@@ -302,8 +248,7 @@
 			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
-					<p>CodeHerWay is an active portfolio product with real frontend architecture, authenticated-state planning, progress and reward systems, tests, documentation, and deployment paths. It is credible as a product-engineering case study, but I present it honestly as still moving through staging validation and production-readiness hardening.</p>
-					<p class="case-note"><strong>What is proven here:</strong> product thinking, frontend architecture, state design, accessibility intent, testing discipline, and the ability to document tradeoffs clearly.</p>
+					<p>CodeHerWay is an active portfolio product and learning-platform build. It demonstrates real product architecture and quality practices, but it should be presented honestly as a stabilized project still moving toward production readiness.</p>
 				</div>
 			</div>
 
@@ -318,20 +263,30 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Validate the authenticated learner journey against a configured staging Supabase project.</li>
-						<li>Add the real dashboard screenshot and keep it current with the deployed product.</li>
-						<li>Deepen Lighthouse reporting, bundle budgets, and mobile regression evidence.</li>
-						<li>Instrument learning friction points such as quiz retries, drop-off, and lesson resume behavior before making outcome claims.</li>
-						<li>Continue reducing global CSS and clarifying reusable lesson, panel, and progress primitives.</li>
+						<li>Validate authenticated learner flows against a configured staging backend.</li>
+						<li>Add stronger Lighthouse reporting and performance budgets.</li>
+						<li>Refine onboarding analytics around drop-off and lesson completion friction.</li>
+						<li>Continue reducing global CSS and clarifying shared UI primitives.</li>
 					</ul>
 				</div>
 			</div>
 		</section>
+
+		<nav class="case-study-nav" aria-label="More case studies">
+			<a href="/work/" class="case-study-nav-link">
+				<span>All case studies</span>
+				<strong>Return to work index</strong>
+			</a>
+			<a href="/work/ceo-os/" class="case-study-nav-link">
+				<span>Next case study</span>
+				<strong>CodeHerWay CEO OS</strong>
+			</a>
+		</nav>
 	</main>
 
 	<footer class="site-footer">
 		<div class="footer-inner">
-			<p class="footer-copy">&copy; 2026 Jenna Zawaski</p>
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
 			<nav class="footer-links" aria-label="Footer navigation">
 				<a href="/work/">Work</a>
 				<a href="/notes/">Notes</a>

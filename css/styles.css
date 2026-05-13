@@ -292,7 +292,7 @@ section h2::after {
 	font-family: 'Courier New', monospace;
 	font-size: 2rem;
 	font-weight: 700;
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(255, 255, 255, 0.52);
 	line-height: 1;
 }
 
@@ -536,7 +536,7 @@ section h2::after {
 	font-size: 0.78rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.3);
+	color: var(--text-muted);
 }
 
 .contact-form {
@@ -581,7 +581,8 @@ section h2::after {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-	color: rgba(255, 255, 255, 0.25);
+	color: rgba(255, 255, 255, 0.48);
+	opacity: 1;
 }
 
 .form-group input:focus,
@@ -673,7 +674,7 @@ section h2::after {
 
 .footer-copy {
 	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.35);
+	color: var(--text-muted);
 }
 
 .footer-links {
@@ -682,8 +683,11 @@ section h2::after {
 }
 
 .footer-links a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
 	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.45);
+	color: var(--text-muted);
 	text-decoration: none;
 	transition: color 0.2s ease;
 }
@@ -705,6 +709,12 @@ section h2::after {
 		flex-direction: column;
 		text-align: center;
 		gap: 14px;
+	}
+
+	.footer-links {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 4px 18px;
 	}
 }
 
@@ -835,36 +845,41 @@ section h2::after {
 
 	.logo {
 		font-size: 1.5rem;
-		flex-shrink: 0;
+		flex: 0 0 auto;
 	}
 
 	.site-header .nav {
 		display: flex;
+		flex: 1 1 auto;
 		flex-wrap: nowrap;
 		justify-content: flex-end;
-		gap: 6px 10px;
+		gap: 8px;
 		width: auto;
-		margin-left: auto;
+		min-width: 0;
 	}
 
 	nav a {
 		margin-left: 0;
-		padding: 8px 2px;
-		font-size: 0.84rem;
-		min-height: 40px;
+		padding: 10px 6px;
+		font-size: 0.92rem;
+		min-height: 44px;
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		white-space: nowrap;
 	}
 
+	.nav a[data-mobile-nav="secondary"] {
+		display: none;
+	}
+
 	.nav-resume {
-		padding: 7px 10px;
-		font-size: 0.82rem !important;
+		padding: 10px 12px;
 	}
 
 	section {
 		padding: 64px 20px;
-		scroll-margin-top: 140px;
+		scroll-margin-top: 96px;
 	}
 
 	section h2 {
@@ -976,13 +991,17 @@ section h2::after {
 		font-size: 1.35rem;
 	}
 
-	nav a {
-		font-size: 0.8rem;
+	.nav a {
+		font-size: 0.86rem;
+		padding-inline: 4px;
+	}
+
+	.site-header .nav {
+		gap: 6px;
 	}
 
 	.nav-resume {
-		padding: 6px 8px;
-		font-size: 0.76rem !important;
+		padding-inline: 9px;
 	}
 
 	section {
@@ -1035,6 +1054,15 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+	.site-header,
+	.nav {
+		transition: none !important;
+	}
+
+	.site-header.nav-hidden {
+		transform: none;
+	}
 
 	html,
 	body {

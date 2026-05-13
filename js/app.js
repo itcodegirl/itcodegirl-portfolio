@@ -1,5 +1,4 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".site-header");
 let revealObserver = null;
@@ -48,7 +47,7 @@ function setupRevealObserver() {
 	if (prefersReducedMotion.matches || revealObserver) return;
 
 	const revealEls = document.querySelectorAll(
-		".evidence-card, .review-path, .skill-card, .project-card, .about-content, .about-image, .contact-card"
+		".quality-card, .review-path, .skill-card, .project-card, .about-content, .about-image, .contact-card"
 	);
 
 	if (!revealEls.length) return;
@@ -116,17 +115,28 @@ if (typeof prefersReducedMotion.addEventListener === "function") {
 	prefersReducedMotion.addListener(syncReducedMotionState);
 }
 
+// Active nav link tracks current section.
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav a[href^='#']");
 
 if (sections.length && navLinks.length) {
+	const setActiveNavLink = (sectionId) => {
+		navLinks.forEach(link => {
+			const isActive = link.getAttribute("href") === `#${sectionId}`;
+			link.classList.toggle("nav-active", isActive);
+
+			if (isActive) {
+				link.setAttribute("aria-current", "location");
+			} else {
+				link.removeAttribute("aria-current");
+			}
+		});
+	};
+
 	const sectionObserver = new IntersectionObserver(entries => {
 		entries.forEach(entry => {
 			if (entry.isIntersecting) {
-				navLinks.forEach(link => link.classList.toggle(
-					"nav-active",
-					link.getAttribute("href") === `#${entry.target.id}`
-				));
+				setActiveNavLink(entry.target.id);
 			}
 		});
 	}, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });

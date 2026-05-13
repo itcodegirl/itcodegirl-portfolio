@@ -20,12 +20,12 @@ visitors to the real product work it represents.
 - CSS3 (custom properties, responsive design, `prefers-reduced-motion` and
   `forced-colors` support)
 - JavaScript (vanilla, modular by file)
-- [Three.js](https://threejs.org/) for the hero portrait shader
-- [GSAP](https://gsap.com/) for the hero card entry animation
 - Google Fonts (Inter, Playfair Display)
 - [Formspree](https://formspree.io/) for contact form delivery
 
-External libraries are loaded from a CDN and used only where they are needed.
+Decorative motion is treated as a progressive enhancement. It is not the
+primary skill story of the portfolio; the primary story is UX-focused frontend
+product work with clear evidence.
 
 ## Project structure
 
@@ -35,10 +35,10 @@ External libraries are loaded from a CDN and used only where they are needed.
 |-- 404.html                    # 404 page
 |-- css/
 |   |-- styles.css              # base, layout, components, responsive
-|   |-- hero.css                # hero section + WebGL canvas styles
+|   |-- hero.css                # hero section + portrait enhancement styles
 |   `-- projects.css            # selected work cards
 |-- js/
-|   |-- app.js                  # page bootstrapping, scroll, WebGL, contact form
+|   |-- app.js                  # page bootstrapping, scroll, contact form
 |   `-- projects.js             # selected work data + rendering
 |-- scripts/
 |   `-- check-static-site.mjs   # static performance/accessibility guardrails
@@ -55,6 +55,7 @@ External libraries are loaded from a CDN and used only where they are needed.
 |   `-- work.css                # work and case study styling
 |-- assets/
 |   |-- images/                 # portrait + project images
+|   |-- evidence/               # dated reports and screenshots, when captured
 |   |-- headshot.{png,webp}
 |   |-- favicon.svg
 |   `-- JennaZawaski-Resume.pdf
@@ -63,6 +64,32 @@ External libraries are loaded from a CDN and used only where they are needed.
 
 Project screenshots used by the Selected Work cards are stored in
 `assets/images/projects/`.
+
+## Evidence Layer
+
+The portfolio is designed to show proof, not only claims. Project cards
+summarize ownership, product value, implementation work, challenge areas, and
+proof currently available. Case studies include Evidence Snapshots so reviewers
+can quickly see what was built, what was hard, what changed because of product
+and engineering decisions, and what can be verified in a short review.
+
+Quality checks are documented honestly. If a report, screenshot, accessibility
+scan, or user-flow capture does not exist yet, it should be marked as planned
+evidence or needs capture instead of being presented as completed proof.
+
+Future evidence includes Lighthouse reports, axe accessibility scans,
+responsive screenshots, key user-flow captures, repo structure screenshots, and
+dated QA checks.
+
+## Evidence Capture Checklist
+
+- [ ] Capture Lighthouse mobile and desktop reports
+- [ ] Capture axe accessibility scan
+- [ ] Capture responsive screenshots for mobile/tablet/desktop
+- [ ] Capture key flow screenshots for CodeHerWay
+- [ ] Capture repo structure screenshot
+- [ ] Add short interaction clip for flagship flow
+- [ ] Add dates for last verified QA checks
 
 ## Running locally
 
@@ -76,8 +103,8 @@ npx serve .
 
 Then open the local URL that `serve` prints.
 
-A local server is recommended because the WebGL portrait loads a texture
-asynchronously and the `file://` protocol blocks it.
+A local server is recommended because some browser APIs and asynchronous assets
+are more reliable over `http://` than the `file://` protocol.
 
 ## Quality checks
 
@@ -87,6 +114,7 @@ static site:
 ```bash
 node --check js/app.js
 node --check js/projects.js
+node --check scripts/check-static-site.mjs
 node scripts/check-static-site.mjs
 ```
 
@@ -103,8 +131,8 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
-- `prefers-reduced-motion` disables the WebGL portrait, decorative animations,
-  and reveal-on-scroll transitions.
+- `prefers-reduced-motion` disables decorative portrait behavior and
+  reveal-on-scroll transitions.
 - `forced-colors` is respected.
 - Form fields are labeled and the form status is announced via `aria-live`.
 
@@ -132,7 +160,7 @@ not filled with marketing copy.
 7. **UX decisions** - interaction, hierarchy, copy, and flow choices.
 8. **Engineering decisions** - architecture, data, and stack tradeoffs.
 9. **Accessibility considerations** - what was checked, what is still open.
-10. **Performance considerations** - what was measured, what was tuned.
+10. **Performance considerations** - what was checked, what was tuned, and what still needs fresh evidence.
 11. **Current status** - what is shipped, what is in progress.
 12. **What I would improve next** - the honest next iteration.
 

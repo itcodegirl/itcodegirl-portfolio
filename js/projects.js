@@ -16,8 +16,8 @@ const projects = [
 		featured: true,
 		meta: "React • Supabase • Learning platform",
 		description:
-			"React and Supabase learning platform with structured lessons, quizzes, persisted progress, and reward state built around beginner momentum.",
-		proofPoints: ["Supabase auth", "Persisted progress", "XP / streak logic", "Quiz feedback"],
+			"Flagship React and Supabase product work with learner-focused UX, structured lessons, persisted progress, quiz feedback states, and reward logic built around beginner momentum.",
+		proofPoints: ["React product UI", "Supabase auth", "Persisted progress", "Quiz feedback states", "XP / streak logic"],
 		role:
 			"End-to-end product ownership across frontend architecture, lesson and quiz UI, progress state, rewards, and Supabase data flow.",
 		image: "assets/images/projects/codeherway-dashboard.webp",
@@ -52,10 +52,10 @@ const projects = [
 		tagline: "Founder dashboard for tracking priorities, opportunities, and weekly execution.",
 		cardClass: "ceo-os",
 		description:
-			"React productivity dashboard for managing founder priorities, opportunities, content planning, and weekly execution in one workspace.",
-		proofPoints: ["React routing", "Local persistence", "Founder workflow UI", "Weekly planning"],
+			"React founder workspace that turns priorities, opportunities, content planning, and weekly execution into organized product workflows.",
+		proofPoints: ["React routes", "Local persistence", "Workflow states", "Weekly planning"],
 		role:
-			"Designed and built dashboard routes, one-screen overview, opportunity tracker, weekly planning views, and persisted local state.",
+			"Designed and built dashboard routes, the one-screen overview, opportunity tracker, weekly planning views, and persisted local state.",
 		image: "assets/images/projects/ceo-os-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay CEO OS dashboard interface screenshot",
@@ -87,10 +87,10 @@ const projects = [
 		title: "Aura Weather",
 		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
 		description:
-			"Responsive weather app with real-time conditions, hourly forecasts, API states, and a hierarchy designed for quick decisions.",
-		proofPoints: ["REST API data", "Loading states", "Responsive layout", "Clear forecast hierarchy"],
+			"Responsive weather interface with real-time conditions, hourly forecasts, API states, and a hierarchy designed for quick decisions.",
+		proofPoints: ["REST API data", "Loading states", "Responsive UI", "Forecast hierarchy"],
 		role:
-			"Built the responsive layout, scannable forecast UI, async weather API flow, and loading and empty states.",
+			"Built the responsive layout, scannable forecast UI, async weather API flow, and loading, empty, and missing-data states.",
 		image: "assets/images/projects/aura-weather-interface.webp",
 		imagePosition: "top center",
 		imageAlt: "Aura Weather app interface screenshot",

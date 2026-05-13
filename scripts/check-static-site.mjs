@@ -148,24 +148,22 @@ function checkScriptLoading() {
 
 		assert(
 			remoteScripts.length === 0,
-			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep motion libraries lazy.`,
+			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep page behavior in local scripts.`,
 		);
 		assert(
 			!html.includes('href="https://cdn.jsdelivr.net"'),
-			`${relativePath} should not preconnect to jsdelivr unless a motion script is being loaded.`,
+			`${relativePath} should not preconnect to jsdelivr because remote runtime scripts are not part of this portfolio.`,
 		);
 	});
 
 	const appJs = readFile('js/app.js');
 	assert(appJs.includes('requestAnimationFrame(onScrollFrame)'), 'Scroll updates must stay requestAnimationFrame-batched.');
 	assert(appJs.includes('{ passive: true }'), 'Scroll listener should stay passive.');
-	assert(appJs.includes('prefersReducedMotion'), 'Motion effects must honor prefers-reduced-motion.');
-	assert(appJs.includes('hasSaveDataPreference'), 'Heavy motion effects must honor Save-Data.');
-	assert(appJs.includes('shouldRunWebGLPortrait'), 'WebGL portrait must stay behind capability/preference checks.');
-	assert(appJs.includes('runSafely(initHeroCardAnimation)'), 'Hero card animation should stay behind lazy GSAP startup.');
-	assert(appJs.includes('runSafely(initWebGLExperience)'), 'WebGL effects should start through the lazy Three.js loader.');
-	assert(appJs.includes('loadScript(motionScriptSources.gsap)'), 'GSAP should stay lazy-loaded.');
-	assert(appJs.includes('loadScript(motionScriptSources.three)'), 'Three.js should stay lazy-loaded.');
+	assert(appJs.includes('prefersReducedMotion'), 'Decorative reveals must honor prefers-reduced-motion.');
+	assert(appJs.includes('setupRevealObserver'), 'Reveal states should stay behind a small local observer.');
+	assert(appJs.includes('validateContactFields'), 'Contact form validation should stay in the local script.');
+	assert(!appJs.includes('loadScript('), 'Remote script loading should not return to js/app.js.');
+	assert(!/https?:\/\//.test(appJs), 'js/app.js should not load remote scripts or assets.');
 }
 
 function checkImages() {

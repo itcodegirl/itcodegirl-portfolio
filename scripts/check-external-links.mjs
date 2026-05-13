@@ -9,6 +9,7 @@ const runLiveChecks = args.has('--live');
 const timeoutArg = process.argv.find((arg) => arg.startsWith('--timeout='));
 const timeoutMs = timeoutArg ? Number(timeoutArg.split('=')[1]) : 10000;
 const failures = [];
+const warnings = [];
 
 function normalizePath(relativePath) {
 	return relativePath.replace(/\\/g, '/').replace(/^\.\//, '');
@@ -27,6 +28,15 @@ function listFiles(relativeDir = '.') {
 
 function readFile(relativePath) {
 	return fs.readFileSync(path.join(rootDir, relativePath), 'utf8');
+}
+
+function getAttributes(tag) {
+	return Object.fromEntries(
+		Array.from(tag.matchAll(/\s([a-zA-Z:-]+)(?:=(["'])(.*?)\2)?/g), ([, name,, value = '']) => [
+			name.toLowerCase(),
+			value,
+		]),
+	);
 }
 
 function pageUrl(relativePath) {
@@ -85,12 +95,20 @@ function collectHtmlUrls(urls) {
 		.forEach((sourceFile) => {
 			const html = readFile(sourceFile);
 
-			Array.from(html.matchAll(/\s(?:href|src|action|poster)=["']([^"']+)["']/gi), ([, reference]) => {
-				addExternalUrl(urls, reference, sourceFile, 'attribute');
-			});
+			Array.from(html.matchAll(/<([a-z][a-z0-9:-]*)\b[^>]*>/gi), ([tag, tagName]) => {
+				const attrs = getAttributes(tag);
+				const relTokens = attrs.rel?.split(/\s+/) || [];
 
-			Array.from(html.matchAll(/\ssrcset=["']([^"']+)["']/gi), ([, srcset]) => {
-				srcset.split(',').forEach((candidate) => {
+				if (tagName.toLowerCase() === 'link' && relTokens.includes('preconnect')) return;
+
+				['href', 'src', 'poster'].forEach((attrName) => {
+					if (attrs[attrName]) addExternalUrl(urls, attrs[attrName], sourceFile, attrName);
+				});
+
+				if (attrs.action) addExternalUrl(urls, attrs.action, sourceFile, 'form action');
+				if (!attrs.srcset) return;
+
+				attrs.srcset.split(',').forEach((candidate) => {
 					addExternalUrl(urls, candidate.trim().split(/\s+/)[0], sourceFile, 'srcset');
 				});
 			});
@@ -137,6 +155,13 @@ async function fetchWithTimeout(url, method) {
 }
 
 async function checkUrl({ url, sources }) {
+	const hostname = new URL(url).hostname;
+
+	if (hostname === 'formspree.io' && sources.some((source) => source.includes('form action'))) {
+		warnings.push(`${url} is a form endpoint; live GET/HEAD health is skipped.`);
+		return;
+	}
+
 	try {
 		let response = await fetchWithTimeout(url, 'HEAD');
 
@@ -145,6 +170,11 @@ async function checkUrl({ url, sources }) {
 		}
 
 		if (response.status >= 400) {
+			if (hostname === 'www.linkedin.com' && response.status === 999) {
+				warnings.push(`${url} returned LinkedIn anti-bot status 999; manual browser verification recommended.`);
+				return;
+			}
+
 			failures.push(`${url} returned ${response.status}. Sources: ${sources.join('; ')}`);
 		}
 	} catch (error) {
@@ -167,6 +197,8 @@ if (!runLiveChecks) {
 }
 
 await Promise.all(sortedUrls.map(checkUrl));
+
+warnings.forEach((warning) => console.warn(`Warning: ${warning}`));
 
 if (failures.length) {
 	console.error('External URL health check failed:');

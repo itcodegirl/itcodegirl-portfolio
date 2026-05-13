@@ -131,13 +131,33 @@ nav a.nav-active {
 }
 
 .logo {
-	font-family: 'Playfair Display', serif;
-	font-size: 1.8rem;
-	font-weight: 700;
-	background: linear-gradient(135deg, #ffffff, #d7d7d7);
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 118px;
+	height: 46px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	border-radius: 10px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.05);
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+	transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+	flex: 0 0 auto;
+}
+
+.logo img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
+	object-position: center 43%;
+}
+
+.logo:hover,
+.logo:focus-visible {
+	border-color: rgba(192, 132, 252, 0.5);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34), 0 0 18px rgba(192, 132, 252, 0.16);
+	transform: translateY(-1px);
 }
 
 nav a {
@@ -982,7 +1002,8 @@ section h2::after {
 	}
 
 	.logo {
-		font-size: 1.6rem;
+		width: 104px;
+		height: 44px;
 	}
 
 	nav a {
@@ -1074,8 +1095,8 @@ section h2::after {
 	}
 
 	.logo {
-		font-size: 1.5rem;
-		flex: 0 0 auto;
+		width: 70px;
+		height: 44px;
 		min-height: 44px;
 		display: inline-flex;
 		align-items: center;
@@ -1384,7 +1405,8 @@ section h2::after {
 	}
 
 	.logo {
-		font-size: 1.35rem;
+		width: 58px;
+		height: 42px;
 	}
 
 	.nav a {

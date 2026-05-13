@@ -8,6 +8,7 @@ const pageFiles = [
 	'index.html',
 	'404.html',
 	'notes/index.html',
+	'notes/site-performance.html',
 	'notes/why-vanilla.html',
 	'work/index.html',
 	'work/aura-weather/index.html',

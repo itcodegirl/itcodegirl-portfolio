@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="description"
+		content="How this portfolio keeps performance and accessibility honest with static budgets, lazy motion, and lightweight quality checks.">
+	<meta name="author" content="Jenna Zawaski">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://itcodegirl.com/notes/site-performance.html">
+	<meta name="theme-color" content="#0e0e12">
+	<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+
+	<title>How this portfolio keeps performance honest | Jenna Zawaski</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
+		rel="stylesheet">
+
+	<link rel="stylesheet" href="../css/styles.css">
+	<link rel="stylesheet" href="./notes.css">
+</head>
+
+<body class="notes-body">
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="nav nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="../" aria-label="Jenna Zawaski home">JZ</a>
+			<nav aria-label="Primary navigation">
+				<a href="../#work">Work</a>
+				<a href="../#skills">Skills</a>
+				<a href="../#about">About</a>
+				<a href="../#contact">Contact</a>
+				<a href="../assets/JennaZawaski-Resume.pdf" class="nav-resume" download
+					aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" tabindex="-1" class="notes-main">
+		<article class="note-article">
+			<p class="notes-eyebrow">Engineering note</p>
+			<h1>How this portfolio keeps performance honest.</h1>
+			<p class="note-meta">Performance budget · ~2 min read</p>
+
+			<p>
+				A portfolio should feel polished, but it should also load quickly and
+				stay readable on the devices a recruiter or engineering manager is
+				actually using. This site keeps that discipline visible in the code.
+			</p>
+
+			<h2>The budget</h2>
+			<p>
+				The repository has a static quality check that protects the basics:
+				total JavaScript, total CSS, image weight, resume PDF weight, image
+				dimensions, async image decoding, and contact-form accessibility.
+			</p>
+
+			<h2>The motion rule</h2>
+			<p>
+				Three.js and GSAP are not loaded from the HTML. They are requested
+				only when the browser supports the effect, the visitor has not asked
+				for reduced motion, Save-Data is off, and the device is not a coarse
+				pointer mobile device.
+			</p>
+
+			<h2>The image rule</h2>
+			<p>
+				Above-the-fold hero images are explicit about priority. Supporting
+				project images use responsive WebP sources, fixed dimensions, async
+				decoding, and lazy loading unless they are the case-study hero image.
+			</p>
+
+			<h2>The current tradeoff</h2>
+			<p>
+				The portfolio is intentionally static, but it still uses two rich
+				motion libraries for one visual moment. That is why the libraries are
+				gated and lazy instead of treated as part of the critical path.
+			</p>
+
+			<h2>The next improvement</h2>
+			<p>
+				The next useful step is deployed Lighthouse evidence for the homepage
+				and case-study pages, plus a small visual regression pass on mobile.
+				That would make the quality bar measurable outside a local machine.
+			</p>
+
+			<p class="notes-back">
+				<a href="./">Back to engineering notes</a>
+			</p>
+		</article>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="../assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

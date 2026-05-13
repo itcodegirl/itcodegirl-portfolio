@@ -70,6 +70,7 @@ node --check js/app.js
 node --check js/projects.js
 node scripts/check-static-site.mjs
 node scripts/check-links.mjs
+node scripts/check-route-readiness.mjs
 node scripts/check-lighthouse-result.mjs --help
 ```
 
@@ -77,6 +78,9 @@ The static check protects JavaScript/CSS budgets, asset weight, image attributes
 lazy motion loading, scroll safety, contact-form accessibility, and local link integrity.
 The link check verifies internal page links, fragments, static assets, CSS
 references, and project-card links before changes reach GitHub Pages.
+The route-readiness check protects critical page structure: one H1, skip-link
+wiring, canonical metadata, duplicate IDs, case-study sections, and accessible
+link-name alignment.
 
 Deploy-preview evidence should be captured separately with the real preview URL,
 date, viewport mode, and tool used. Do not publish Lighthouse or performance

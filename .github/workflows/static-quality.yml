@@ -37,3 +37,6 @@ jobs:
 
       - name: Check internal links and static references
         run: node scripts/check-links.mjs
+
+      - name: Check critical route readiness
+        run: node scripts/check-route-readiness.mjs

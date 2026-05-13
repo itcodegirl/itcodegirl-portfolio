@@ -144,7 +144,9 @@ The manual `Lighthouse evidence` GitHub workflow accepts a deployed URL, capture
 a JSON report, checks it against `lighthouse-budget.json`, and stores the report
 as an artifact for review. Netlify deploy previews are allowed a lower SEO
 threshold because preview responses include `x-robots-tag: noindex`; production
-URLs should still meet the normal SEO budget.
+URLs should still meet the normal SEO budget. The current Lighthouse budget is
+an aspirational production-quality gate until verified reports exist; budget
+targets should not be described as passing scores without attached reports.
 
 ## Deployment
 

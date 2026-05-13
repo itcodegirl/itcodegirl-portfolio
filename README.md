@@ -1,31 +1,30 @@
 # itcodegirl-portfolio
 
-Personal portfolio for Jenna Zawaski, a Chicago-based frontend developer focused
-on building polished, accessible, product-minded web experiences.
+Personal portfolio for Jenna Zawaski, a UX-focused frontend developer building
+polished, accessible product interfaces with real product behavior.
 
 Live site: https://itcodegirl.com
 
 ## What this repo is
 
-A small, intentionally lightweight portfolio site written in vanilla HTML, CSS,
-and JavaScript. There is no build step, no bundler, and no framework.
+A lightweight vanilla HTML/CSS/JS portfolio focused on accessible UI,
+product-minded case studies, responsive design, performance-conscious assets,
+and recruiter-friendly navigation. There is no build step, no bundler, and no
+framework.
 
 The portfolio demonstrates frontend craft through the site itself
-(layout, accessibility, motion safety, performance discipline) and points
-visitors to the real product work it represents.
+(layout, UX clarity, accessible interface patterns, performance discipline) and
+points visitors to the real product work it represents.
 
 ## Stack
 
-- HTML5 (semantic landmarks, accessible form patterns)
-- CSS3 (custom properties, responsive design, `prefers-reduced-motion` and
-  `forced-colors` support)
+- HTML5 (semantic landmarks, labeled form patterns)
+- CSS3 (custom properties, responsive design)
 - JavaScript (vanilla, modular by file)
-- [Three.js](https://threejs.org/) for the hero portrait shader
-- [GSAP](https://gsap.com/) for the hero card entry animation
 - Google Fonts (Inter, Playfair Display)
 - [Formspree](https://formspree.io/) for contact form delivery
 
-External libraries are loaded from a CDN and used only where they are needed.
+No remote scripts are loaded directly from the HTML.
 
 ## Project structure
 
@@ -35,13 +34,13 @@ External libraries are loaded from a CDN and used only where they are needed.
 |-- 404.html                    # 404 page
 |-- css/
 |   |-- styles.css              # base, layout, components, responsive
-|   |-- hero.css                # hero section + WebGL canvas styles
+|   |-- hero.css                # hero section and static portrait styles
 |   `-- projects.css            # selected work cards
 |-- js/
-|   |-- app.js                  # page bootstrapping, scroll, WebGL, contact form
+|   |-- app.js                  # page bootstrapping, scroll, nav, reveals, contact form
 |   `-- projects.js             # selected work data + rendering
 |-- scripts/
-|   `-- check-static-site.mjs   # static performance/accessibility guardrails
+|   `-- check-static-site.mjs   # static performance and structure guardrails
 |-- notes/
 |   |-- index.html              # engineering notes index
 |   |-- site-performance.html   # performance notes and budget decisions
@@ -74,10 +73,9 @@ One simple option:
 npx serve .
 ```
 
-Then open the local URL that `serve` prints.
-
-A local server is recommended because the WebGL portrait loads a texture
-asynchronously and the `file://` protocol blocks it.
+Then open the local URL that `serve` prints. Opening `index.html` directly also
+works for most static review, but a local server mirrors deployment paths more
+closely.
 
 ## Quality checks
 
@@ -88,24 +86,44 @@ static site:
 node --check js/app.js
 node --check js/projects.js
 node scripts/check-static-site.mjs
+node scripts/check-links.mjs
+node scripts/check-route-readiness.mjs
+node scripts/check-external-links.mjs
+node scripts/check-lighthouse-result.mjs --help
 ```
 
-The static check protects JavaScript/CSS budgets, asset weight, image
-attributes, lazy motion loading, scroll safety, and contact-form
-accessibility.
+The static check protects JavaScript/CSS budgets, asset weight, image attributes,
+scroll and reveal behavior, contact-form labels, and local link
+integrity.
+The link check verifies internal page links, fragments, static assets, CSS
+references, and project-card links before changes reach GitHub Pages.
+The route-readiness check protects critical page structure: one H1, skip-link
+wiring, canonical metadata, duplicate IDs, case-study sections, and clear
+link-name alignment.
+The external-link check inventories off-site URLs locally. Run
+`node scripts/check-external-links.mjs --live` or the manual `External URL health`
+workflow when you want network-backed status checks.
+
+Deploy-preview evidence should be captured separately with the real preview URL,
+date, viewport mode, and tool used. Do not publish Lighthouse or performance
+claims unless the result has actually been captured.
+
+The manual `Lighthouse evidence` GitHub workflow accepts a deployed URL, captures
+a JSON report, checks it against `lighthouse-budget.json`, and stores the report
+as an artifact for review. Netlify deploy previews are allowed a lower SEO
+threshold because preview responses include `x-robots-tag: noindex`; production
+URLs should still meet the normal SEO budget.
 
 ## Deployment
 
 Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 `itcodegirl.com`.
 
-## Accessibility and motion
+## Accessibility and interface checks
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
-- `prefers-reduced-motion` disables the WebGL portrait, decorative animations,
-  and reveal-on-scroll transitions.
-- `forced-colors` is respected.
+- Decorative transitions and reveal states honor reduced-motion preferences.
 - Form fields are labeled and the form status is announced via `aria-live`.
 
 ## Engineering notes
@@ -145,4 +163,5 @@ invented numbers.
 - Keep tightening recruiter trust cues and case study proof on the same domain.
 - Refresh product screenshots and supporting media as newer captures become
   available.
-- Continue tightening LCP image weight and font loading.
+- Add measurable accessibility and performance evidence from deployed previews.
+- Continue tightening LCP image weight, responsive images, and font loading.

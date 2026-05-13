@@ -148,16 +148,22 @@ function checkScriptLoading() {
 
 		assert(
 			remoteScripts.length === 0,
-			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep motion libraries lazy.`,
+			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep page behavior in local scripts.`,
+		);
+		assert(
+			!html.includes('href="https://cdn.jsdelivr.net"'),
+			`${relativePath} should not preconnect to jsdelivr because remote runtime scripts are not part of this portfolio.`,
 		);
 	});
 
 	const appJs = readFile('js/app.js');
 	assert(appJs.includes('requestAnimationFrame(onScrollFrame)'), 'Scroll updates must stay requestAnimationFrame-batched.');
 	assert(appJs.includes('{ passive: true }'), 'Scroll listener should stay passive.');
-	assert(appJs.includes('prefersReducedMotion'), 'Motion effects must honor prefers-reduced-motion.');
-	assert(appJs.includes('hasSaveDataPreference'), 'Heavy motion effects must honor Save-Data.');
-	assert(appJs.includes('shouldRunWebGLPortrait'), 'WebGL portrait must stay behind capability/preference checks.');
+	assert(appJs.includes('prefersReducedMotion'), 'Decorative reveals must honor prefers-reduced-motion.');
+	assert(appJs.includes('setupRevealObserver'), 'Reveal states should stay behind a small local observer.');
+	assert(appJs.includes('validateContactFields'), 'Contact form validation should stay in the local script.');
+	assert(!appJs.includes('loadScript('), 'Remote script loading should not return to js/app.js.');
+	assert(!/https?:\/\//.test(appJs), 'js/app.js should not load remote scripts or assets.');
 }
 
 function checkImages() {
@@ -204,6 +210,7 @@ function checkContactAccessibility() {
 function checkNavigationStructure() {
 	canonicalPages.forEach((relativePath) => {
 		const html = readFile(relativePath);
+		const activeNavLinks = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnav-active\b[^"']*["'][^>]*>/gi));
 
 		assert(
 			html.includes('<header class="site-header nav-show">'),
@@ -213,6 +220,14 @@ function checkNavigationStructure() {
 			html.includes('<nav class="nav" aria-label="Primary navigation">'),
 			`${relativePath} should keep primary navigation labelled on the inner nav element.`,
 		);
+
+		activeNavLinks.forEach(([tag]) => {
+			const attrs = getAttributes(tag);
+			assert(
+				attrs['aria-current'] === 'page' || attrs['aria-current'] === 'location',
+				`${relativePath} active navigation link should expose aria-current.`,
+			);
+		});
 	});
 }
 
@@ -223,6 +238,15 @@ function getCanonicalUrl(relativePath) {
 	}
 
 	return `https://itcodegirl.com/${relativePath}`;
+}
+
+function escapeRegExp(value) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSitemapEntry(sitemap, canonicalUrl) {
+	const entryPattern = new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(canonicalUrl)}</loc>[\\s\\S]*?</url>`);
+	return sitemap.match(entryPattern)?.[0] || '';
 }
 
 function checkDiscoveryMetadata() {
@@ -240,12 +264,16 @@ function checkDiscoveryMetadata() {
 	canonicalPages.forEach((relativePath) => {
 		const canonicalUrl = getCanonicalUrl(relativePath);
 		const html = readFile(relativePath);
+		const sitemapEntry = getSitemapEntry(sitemap, canonicalUrl);
 
 		assert(
 			html.includes(`<link rel="canonical" href="${canonicalUrl}">`),
 			`${relativePath} should include canonical URL ${canonicalUrl}.`,
 		);
-		assert(sitemap.includes(`<loc>${canonicalUrl}</loc>`), `sitemap.xml should include ${canonicalUrl}.`);
+		assert(Boolean(sitemapEntry), `sitemap.xml should include ${canonicalUrl}.`);
+		assert(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(sitemapEntry), `${canonicalUrl} should keep lastmod metadata.`);
+		assert(sitemapEntry.includes('<changefreq>'), `${canonicalUrl} should keep changefreq metadata.`);
+		assert(sitemapEntry.includes('<priority>'), `${canonicalUrl} should keep priority metadata.`);
 	});
 }
 

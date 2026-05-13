@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="description"
-		content="How this portfolio keeps performance and accessibility honest with static budgets, lazy motion, and lightweight quality checks.">
+		content="How this portfolio keeps performance and accessibility honest with static budgets, lightweight JavaScript, and quality checks.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/notes/site-performance.html">
@@ -29,7 +29,7 @@
 
 	<header class="site-header nav-show">
 		<div class="nav-inner">
-			<a class="logo" href="../" aria-label="Jenna Zawaski home">JZ</a>
+			<a class="logo" href="../" aria-label="JZ - Jenna Zawaski home">JZ</a>
 			<nav class="nav" aria-label="Primary navigation">
 				<a href="../#work">Work</a>
 				<a href="../#skills">Skills</a>
@@ -45,7 +45,7 @@
 		<article class="note-article">
 			<p class="notes-eyebrow">Engineering note</p>
 			<h1>How this portfolio keeps performance honest.</h1>
-			<p class="note-meta">Performance budget · ~2 min read</p>
+			<p class="note-meta">Performance budget · ~3 min read</p>
 
 			<p>
 				A portfolio should feel polished, but it should also load quickly and
@@ -60,12 +60,11 @@
 				dimensions, async image decoding, and contact-form accessibility.
 			</p>
 
-			<h2>The motion rule</h2>
+			<h2>The JavaScript rule</h2>
 			<p>
-				Three.js and GSAP are not loaded from the HTML. They are requested
-				only when the browser supports the effect, the visitor has not asked
-				for reduced motion, Save-Data is off, and the device is not a coarse
-				pointer mobile device.
+				Decorative reveals and scroll polish are small, local JavaScript
+				behaviors. They respect reduced-motion preferences, and the interface
+				stays readable without them.
 			</p>
 
 			<h2>The image rule</h2>
@@ -77,9 +76,11 @@
 
 			<h2>The current tradeoff</h2>
 			<p>
-				The portfolio is intentionally static, but it still uses two rich
-				motion libraries for one visual moment. That is why the libraries are
-				gated and lazy instead of treated as part of the critical path.
+				The portfolio is intentionally static, but it still has a small amount
+				of JavaScript for project-card rendering, scroll progress, reveal
+				states, active navigation, and accessible contact form validation.
+				That keeps the interaction layer useful without turning the portfolio
+				into an application shell.
 			</p>
 
 			<h2>The next improvement</h2>
@@ -87,6 +88,21 @@
 				The next useful step is deployed Lighthouse evidence for the homepage
 				and case-study pages, plus a small visual regression pass on mobile.
 				That would make the quality bar measurable outside a local machine.
+			</p>
+
+			<h2>Evidence workflow</h2>
+			<p>
+				Local checks protect the structure before deploy: JavaScript syntax,
+				static budgets, image attributes, local scripts, contact-form
+				accessibility, and internal link integrity. Deploy-preview checks
+				should then verify the
+				homepage, work index, each case study, notes, sitemap, and robots file.
+			</p>
+			<p>
+				Lighthouse scores should be captured only from a real deploy URL and
+				recorded with the date, URL, viewport mode, and any known limitations.
+				If a score is not captured yet, the site should say that plainly rather
+				than presenting a target as a result.
 			</p>
 
 			<p class="notes-back">

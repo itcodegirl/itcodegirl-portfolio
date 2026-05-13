@@ -29,7 +29,7 @@
 
 	<header class="site-header nav-show">
 		<div class="nav-inner">
-			<a class="logo" href="../" aria-label="Jenna Zawaski home">JZ</a>
+			<a class="logo" href="../" aria-label="JZ - Jenna Zawaski home">JZ</a>
 			<nav class="nav" aria-label="Primary navigation">
 				<a href="../#work">Work</a>
 				<a href="../#skills">Skills</a>
@@ -83,12 +83,10 @@
 
 			<h2>The tradeoff I am still paying</h2>
 			<p>
-				This site loads Three.js and GSAP from a CDN to power the hero
-				portrait and a single entry animation. That is roughly 670 KB of
-				vendor JavaScript for a page that, structurally, does not need it.
-				Replacing that with a smaller, gated WebGL bootstrap (or removing
-				it entirely) is on the roadmap and will land before the next
-				deployment cycle.
+				The main vanilla-JS tradeoff is the project-card renderer in
+				<code>js/projects.js</code>. It keeps the project data in one place and
+				avoids repeated HTML, but it is less ergonomic than JSX would be once
+				the content model grows.
 			</p>
 
 			<h2>When I would migrate</h2>

@@ -2,8 +2,7 @@
 //
 // Each project is rendered as an article with a header (number + status),
 // optional screenshot OR placeholder, title, tagline, optional proof points,
-// description, optional subtext, an explicit "My role" line, optional
-// highlights (problem / decisions / focus), tech list, and links.
+// a concise description, an explicit "My role" line, tech list, and links.
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
@@ -17,27 +16,10 @@ const projects = [
 		featured: true,
 		meta: "React • Supabase • Learning platform",
 		description:
-			"A frontend-focused learning platform with structured lessons, quizzes, progress tracking, and a beginner-friendly interface. Built around how people actually learn, not how courses are usually packaged.",
+			"React and Supabase learning platform with structured lessons, quizzes, persisted progress, and reward state built around beginner momentum.",
 		proofPoints: ["Supabase auth", "Persisted progress", "XP / streak logic", "Quiz feedback"],
-		subtext: [
-			"Authentication, persisted progress, and a reward engine (XP and streaks) are wired through Supabase so the experience matches real product behavior, not a static demo.",
-		],
 		role:
-			"I own this product end to end — frontend architecture, the lesson and quiz UI, progress tracking, and the XP/streak reward engine, plus the Supabase auth and data layer behind it.",
-		highlights: [
-			{
-				label: "Problem",
-				text: "Beginners drop off when resources are scattered and progress is invisible.",
-			},
-			{
-				label: "Key decisions",
-				text: "Guided lesson flow, immediate quiz feedback, and a streak/XP system that rewards consistency over volume.",
-			},
-			{
-				label: "Engineering focus",
-				text: "Component structure for a scalable lesson tree, Supabase auth and row-level data access, and async UI states throughout.",
-			},
-		],
+			"End-to-end product ownership across frontend architecture, lesson and quiz UI, progress state, rewards, and Supabase data flow.",
 		image: "assets/images/projects/codeherway-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay Education Platform dashboard interface screenshot",
@@ -70,27 +52,10 @@ const projects = [
 		tagline: "Founder dashboard for tracking priorities, opportunities, and weekly execution.",
 		cardClass: "ceo-os",
 		description:
-			"A React productivity dashboard for founders managing priorities, opportunities, content planning, and weekly execution in one workspace.",
+			"React productivity dashboard for managing founder priorities, opportunities, content planning, and weekly execution in one workspace.",
 		proofPoints: ["React routing", "Local persistence", "Founder workflow UI", "Weekly planning"],
-		subtext: [
-			"Designed to reduce cognitive load: a single source of truth for what matters this week, with persistence between sessions.",
-		],
 		role:
-			"I designed and built the dashboard: the one-screen overview, opportunity tracker, and weekly planning views, the routing per workspace area, and the persisted local state between sessions.",
-		highlights: [
-			{
-				label: "Problem",
-				text: "Founders juggle context across too many tools; the important work gets lost in tool-switching.",
-			},
-			{
-				label: "Key decisions",
-				text: "One-screen overview, opportunity tracking, weekly planning view, and minimal chrome so the data is the interface.",
-			},
-			{
-				label: "Engineering focus",
-				text: "Routing per workspace area, persisted state via Local Storage, and a small, predictable component tree.",
-			},
-		],
+			"Designed and built dashboard routes, one-screen overview, opportunity tracker, weekly planning views, and persisted local state.",
 		image: "assets/images/projects/ceo-os-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay CEO OS dashboard interface screenshot",
@@ -122,27 +87,10 @@ const projects = [
 		title: "Aura Weather",
 		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
 		description:
-			"A weather app built around how people actually use weather data: glance, decide, move on. Real-time conditions, hourly forecasts, and location-based insights with a clean information hierarchy.",
+			"Responsive weather app with real-time conditions, hourly forecasts, API states, and a hierarchy designed for quick decisions.",
 		proofPoints: ["REST API data", "Loading states", "Responsive layout", "Clear forecast hierarchy"],
-		subtext: [
-			"Polished loading and empty states keep the interface trustworthy when data is in flight or unavailable.",
-		],
 		role:
-			"I built the whole frontend — the responsive layout, the scannable hourly forecast, the async data flow against the weather API, and the loading and empty states that keep it trustworthy.",
-		highlights: [
-			{
-				label: "Problem",
-				text: "Most weather UIs bury the answer under decoration and density.",
-			},
-			{
-				label: "Key decisions",
-				text: "Clear visual hierarchy, scannable hourly strip, and meaningful loading/empty states instead of spinners.",
-			},
-			{
-				label: "Engineering focus",
-				text: "Async data flow, component-driven UI, and responsive layout work without a framework.",
-			},
-		],
+			"Built the responsive layout, scannable forecast UI, async weather API flow, and loading and empty states.",
 		image: "assets/images/projects/aura-weather-interface.webp",
 		imagePosition: "top center",
 		imageAlt: "Aura Weather app interface screenshot",
@@ -240,26 +188,13 @@ function createProjectProofList(proofPoints, projectTitle) {
 function createProjectTechList(techItems) {
 	const techList = document.createElement("ul");
 	techList.className = "project-tech";
+	techList.setAttribute("aria-label", "Technology used");
 
 	techItems.forEach((tech) => {
 		appendTextElement(techList, "li", "", tech);
 	});
 
 	return techList;
-}
-
-function createProjectHighlights(highlights) {
-	const highlightsList = document.createElement("ul");
-	highlightsList.className = "case-study-preview";
-
-	highlights.forEach((highlight) => {
-		const item = document.createElement("li");
-		appendTextElement(item, "span", "case-label", highlight.label);
-		appendTextElement(item, "p", "", highlight.text);
-		highlightsList.appendChild(item);
-	});
-
-	return highlightsList;
 }
 
 function createScreenshot(project) {
@@ -354,22 +289,12 @@ function createProjectCard(project) {
 
 	appendTextElement(article, "p", "project-description", project.description);
 
-	if (project.subtext) {
-		project.subtext.forEach((text) => {
-			appendTextElement(article, "p", "project-subtext", text);
-		});
-	}
-
 	if (project.role) {
 		const roleParagraph = document.createElement("p");
 		roleParagraph.className = "project-role";
 		appendTextElement(roleParagraph, "span", "project-role-label", "My role");
-		roleParagraph.append(` — ${project.role}`);
+		roleParagraph.append(` - ${project.role}`);
 		article.appendChild(roleParagraph);
-	}
-
-	if (project.highlights) {
-		article.appendChild(createProjectHighlights(project.highlights));
 	}
 
 	article.appendChild(createProjectTechList(project.tech));

@@ -1,6 +1,6 @@
 .hero {
-	min-height: calc(100vh - 90px);
-	min-height: calc(100svh - 90px);
+	min-height: calc(100vh - var(--header-height));
+	min-height: calc(100svh - var(--header-height));
 	display: flex;
 	align-items: flex-start;
 	padding: 60px 60px 100px;

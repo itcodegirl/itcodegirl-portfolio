@@ -12,24 +12,25 @@ const projects = [
 		id: "codeherway",
 		number: "01",
 		title: "CodeHerWay Education Platform",
-		tagline: "Learning platform helping women entering tech build foundational skills.",
+		tagline: "Flagship React product for learner-focused UX, persisted progress, quizzes, and rewards.",
 		status: "Flagship project",
 		featured: true,
-		meta: "React • Supabase • Learning platform",
+		meta: "React / Supabase / Learner UX",
 		description:
-			"Flagship React learning platform with guided lessons, quiz feedback, persisted progress, Supabase integration, and reward-based motivation logic.",
+			"Flagship React product interface with Supabase auth, persisted progress, quiz feedback states, and XP / streak logic.",
 		productValue:
-			"Helps beginners move through lessons, quizzes, progress, and rewards in one guided learner flow.",
+			"Helps beginners move through lessons, quizzes, saved progress, and rewards in one guided learner-focused flow.",
 		built:
-			"React product UI, guided lesson flow, quiz feedback states, persisted learner progress, XP/streak logic, and Supabase-backed auth/data integration.",
+			"React product UI, Supabase auth, guided lesson flow, persisted progress, quiz feedback states, and XP / streak logic.",
 		challenge:
-			"Balancing beginner-friendly UX with real product logic across loading, feedback, saved progress, and incomplete flows.",
+			"Balancing beginner-friendly UX with real product logic across loading, feedback, saved progress, and incomplete learner flows.",
 		proofAvailable: [
 			"React product UI",
-			"Supabase auth/data integration",
-			"Persisted learner progress",
+			"Supabase auth",
+			"Persisted progress",
 			"Quiz feedback states",
 			"XP / streak logic",
+			"Learner-focused UX",
 			"Case study with decision notes",
 		],
 		image: "assets/images/projects/codeherway-dashboard.webp",
@@ -64,13 +65,13 @@ const projects = [
 		tagline: "Founder dashboard for tracking priorities, opportunities, and weekly execution.",
 		cardClass: "ceo-os",
 		description:
-			"Focused React founder dashboard for priorities, opportunities, weekly planning, and local-first workflow state.",
+			"React founder dashboard with scannable priorities, opportunity tracking, weekly planning, and local-first product state.",
 		productValue:
-			"Helps a solo founder see what needs attention now without scattering work across unrelated tools.",
+			"Helps a solo founder see what needs attention now without scattering key decisions across unrelated tools.",
 		built:
-			"Focus Home, opportunity tracker, weekly planning views, workspace routing, persisted local state, and source-status cues.",
+			"Focus Home, opportunity tracker, weekly planning views, workspace routing, persisted local state, and explicit source-status cues.",
 		challenge:
-			"Making local-first data feel trustworthy while keeping a dense founder workflow calm and scannable.",
+			"Making local-first data feel trustworthy while keeping a dense product workflow calm, readable, and easy to resume.",
 		proofAvailable: [
 			"Live demo",
 			"Source code",
@@ -109,13 +110,13 @@ const projects = [
 		title: "Aura Weather",
 		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
 		description:
-			"Frontend weather dashboard centered on quick scanning, resilient API states, and honest handling of missing data.",
+			"Responsive frontend weather dashboard centered on quick scanning, resilient API states, and honest handling of missing data.",
 		productValue:
 			"Helps people check current conditions and forecast context quickly before making daily decisions.",
 		built:
-			"Responsive forecast interface, city search, API data handling, loading and unavailable states, and mobile layout behavior.",
+			"Responsive forecast interface, city search, API data handling, loading states, unavailable states, and mobile layout behavior.",
 		challenge:
-			"Keeping weather data readable while representing delayed or missing provider values honestly.",
+			"Keeping weather data readable while representing delayed or missing provider values clearly and accessibly.",
 		proofAvailable: [
 			"Live demo",
 			"Source code",
@@ -249,26 +250,13 @@ function createProjectProofList(proofPoints, projectTitle) {
 function createProjectTechList(techItems) {
 	const techList = document.createElement("ul");
 	techList.className = "project-tech";
+	techList.setAttribute("aria-label", "Technology used");
 
 	techItems.forEach((tech) => {
 		appendTextElement(techList, "li", "", tech);
 	});
 
 	return techList;
-}
-
-function createProjectHighlights(highlights) {
-	const highlightsList = document.createElement("ul");
-	highlightsList.className = "case-study-preview";
-
-	highlights.forEach((highlight) => {
-		const item = document.createElement("li");
-		appendTextElement(item, "span", "case-label", highlight.label);
-		appendTextElement(item, "p", "", highlight.text);
-		highlightsList.appendChild(item);
-	});
-
-	return highlightsList;
 }
 
 function createScreenshot(project) {
@@ -368,22 +356,12 @@ function createProjectCard(project) {
 		article.appendChild(createProjectProofList(project.proofAvailable, project.title));
 	}
 
-	if (project.subtext) {
-		project.subtext.forEach((text) => {
-			appendTextElement(article, "p", "project-subtext", text);
-		});
-	}
-
 	if (project.role) {
 		const roleParagraph = document.createElement("p");
 		roleParagraph.className = "project-role";
 		appendTextElement(roleParagraph, "span", "project-role-label", "My role");
-		roleParagraph.append(` — ${project.role}`);
+		roleParagraph.append(` - ${project.role}`);
 		article.appendChild(roleParagraph);
-	}
-
-	if (project.highlights) {
-		article.appendChild(createProjectHighlights(project.highlights));
 	}
 
 	article.appendChild(createProjectTechList(project.tech));

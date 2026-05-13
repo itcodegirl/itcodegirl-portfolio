@@ -219,6 +219,64 @@ section:first-of-type {
 	margin-top: 40px;
 }
 
+.product-quality {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.quality-intro {
+	max-width: 760px;
+	color: rgba(255, 255, 255, 0.74);
+	font-size: 1rem;
+	line-height: 1.75;
+	margin: 0 0 34px;
+}
+
+.quality-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 18px;
+}
+
+.quality-card {
+	min-height: 245px;
+	padding: 26px;
+	border: 1px solid var(--border-subtle);
+	border-radius: 16px;
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.025)),
+		var(--surface-1);
+	transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.quality-card:hover {
+	background: rgba(255, 255, 255, 0.065);
+	border-color: rgba(255, 255, 255, 0.18);
+	transform: translateY(-4px);
+}
+
+.quality-number {
+	display: inline-flex;
+	margin-bottom: 28px;
+	font-family: 'Courier New', monospace;
+	font-size: 0.82rem;
+	font-weight: 700;
+	color: rgba(192, 132, 252, 0.86);
+}
+
+.quality-card h3 {
+	margin: 0 0 14px;
+	font-size: 1.06rem;
+	letter-spacing: -0.01em;
+}
+
+.quality-card p {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.7);
+	font-size: 0.92rem;
+	line-height: 1.65;
+}
+
 .evidence,
 .review-path {
 	padding-top: 72px;
@@ -911,6 +969,15 @@ section h2::after {
 		margin-top: 40px;
 	}
 
+	.quality-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.quality-card {
+		min-height: 220px;
+	}
+
 	.skill-card {
 		padding: 26px;
 	}
@@ -1027,12 +1094,34 @@ section h2::after {
 		bottom: -10px;
 	}
 
+	.quality-grid,
 	.skills-grid,
 	.about-container,
 	.evidence-grid {
 		grid-template-columns: 1fr;
 		gap: 18px;
 		margin-top: 36px;
+	}
+
+	.product-quality {
+		padding-top: 56px;
+		padding-bottom: 56px;
+	}
+
+	.quality-intro {
+		font-size: 0.95rem;
+		line-height: 1.7;
+		margin-bottom: 28px;
+	}
+
+	.quality-card {
+		min-height: auto;
+		padding: 22px;
+		border-radius: 14px;
+	}
+
+	.quality-number {
+		margin-bottom: 20px;
 	}
 
 	.evidence,
@@ -1173,6 +1262,7 @@ section h2::after {
 		font-size: 1.75rem;
 	}
 
+	.quality-card,
 	.skill-card {
 		padding: 18px;
 	}
@@ -1195,6 +1285,7 @@ section h2::after {
    leave cards stuck in the hover state after a tap. */
 @media (hover: none) {
 	.skill-card:hover,
+	.quality-card:hover,
 	.project-card:hover,
 	.project-card-featured:hover,
 	.about-image img:hover,
@@ -1246,6 +1337,7 @@ button:focus-visible {
 
 	.hero-card:hover,
 	.hero-card:hover img,
+	.quality-card:hover,
 	.skill-card:hover,
 	.project-card:hover,
 	.project-card-featured:hover,

@@ -1,5 +1,113 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const canUseGsap = typeof gsap !== "undefined";
+const coarsePointer = window.matchMedia("(pointer: coarse)");
+const motionScriptSources = {
+	gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
+	three: "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"
+};
+const loadedScripts = new Map();
+let webGLSupport;
+
+function getConnection() {
+	return navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+}
+
+function hasSaveDataPreference() {
+	return Boolean(getConnection()?.saveData);
+}
+
+function supportsWebGL() {
+	if (typeof webGLSupport === "boolean") {
+		return webGLSupport;
+	}
+
+	try {
+		const canvas = document.createElement("canvas");
+		webGLSupport = Boolean(
+			window.WebGLRenderingContext &&
+			(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+		);
+	} catch {
+		webGLSupport = false;
+	}
+
+	return webGLSupport;
+}
+
+function addScriptPreconnect(src) {
+	const { origin } = new URL(src, window.location.href);
+	const existing = Array.from(document.querySelectorAll("link[rel='preconnect']"))
+		.some(link => link.href === `${origin}/` || link.href === origin);
+
+	if (existing) return;
+
+	const link = document.createElement("link");
+	link.rel = "preconnect";
+	link.href = origin;
+	link.crossOrigin = "";
+	document.head.appendChild(link);
+}
+
+function loadScript(src) {
+	if (loadedScripts.has(src)) {
+		return loadedScripts.get(src);
+	}
+
+	const loadPromise = new Promise((resolve, reject) => {
+		const existingScript = Array.from(document.scripts).find(script => script.src === src);
+
+		if (existingScript?.dataset.loaded === "true") {
+			resolve(existingScript);
+			return;
+		}
+
+		if (existingScript) {
+			existingScript.addEventListener("load", () => resolve(existingScript), { once: true });
+			existingScript.addEventListener("error", () => reject(new Error(`Failed to load ${src}`)), { once: true });
+			return;
+		}
+
+		addScriptPreconnect(src);
+
+		const script = document.createElement("script");
+		script.src = src;
+		script.async = true;
+		script.onload = () => {
+			script.dataset.loaded = "true";
+			resolve(script);
+		};
+		script.onerror = () => {
+			script.remove();
+			loadedScripts.delete(src);
+			reject(new Error(`Failed to load ${src}`));
+		};
+
+		document.head.appendChild(script);
+	});
+
+	loadedScripts.set(src, loadPromise);
+	return loadPromise;
+}
+
+function shouldRunHeroCardAnimation() {
+	return (
+		!prefersReducedMotion.matches &&
+		!hasSaveDataPreference() &&
+		Boolean(document.querySelector(".hero-card"))
+	);
+}
+
+function shouldRunWebGLPortrait() {
+	const hasPortraitTarget = Boolean(document.getElementById("three-container"));
+
+	return (
+		hasPortraitTarget &&
+		!prefersReducedMotion.matches &&
+		!hasSaveDataPreference() &&
+		!coarsePointer.matches &&
+		supportsWebGL() &&
+		window.location.protocol !== "file:"
+	);
+}
 
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".site-header");
@@ -39,8 +147,7 @@ function onScrollFrame() {
 		} else if (isScrollingDown) {
 			nav.classList.add("nav-hidden");
 		} else {
-			// Preserve the current state when scrolling settles so the header
-			// does not snap back into view after a downward scroll finishes.
+			nav.classList.remove("nav-hidden");
 		}
 	}
 
@@ -144,7 +251,13 @@ let webGLInitialized = false;
 
 function runSafely(callback) {
 	try {
-		callback();
+		const result = callback();
+
+		if (result && typeof result.catch === "function") {
+			result.catch((error) => {
+				console.warn("Interactive effect failed to start.", error);
+			});
+		}
 	} catch (error) {
 		console.warn("Interactive effect failed to start.", error);
 	}
@@ -158,89 +271,120 @@ window.addEventListener("load", () => {
 
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const contactFieldConfigs = [
+	{
+		field: document.getElementById("contactName"),
+		errorEl: document.getElementById("contactNameError")
+	},
+	{
+		field: document.getElementById("contactEmail"),
+		errorEl: document.getElementById("contactEmailError")
+	},
+	{
+		field: document.getElementById("contactMessage"),
+		errorEl: document.getElementById("contactMessageError")
+	}
+].filter(({ field, errorEl }) => field && errorEl);
+
+function getContactFieldMessage(field) {
+	const fieldValue = field.value.trim();
+
+	if (field.id === "contactName") {
+		if (!fieldValue) return "Please enter your name.";
+		return "";
+	}
+
+	if (field.id === "contactEmail") {
+		if (!fieldValue) return "Please enter your email address.";
+		if (!emailPattern.test(fieldValue)) return "Please enter a valid email address.";
+		return "";
+	}
+
+	if (field.id === "contactMessage") {
+		if (!fieldValue) return "Please add a message before sending.";
+		return "";
+	}
+
+	return field.validationMessage;
+}
+
+function clearFieldError(field, errorEl) {
+	field.removeAttribute("aria-invalid");
+	errorEl.textContent = "";
+}
+
+function updateFieldError(config) {
+	const { field, errorEl } = config;
+
+	if (field.validity.valid) {
+		clearFieldError(field, errorEl);
+		return true;
+	}
+
+	field.setAttribute("aria-invalid", "true");
+	errorEl.textContent = getContactFieldMessage(field) || field.validationMessage;
+	return false;
+}
+
+function clearContactFieldErrors() {
+	contactFieldConfigs.forEach(({ field, errorEl }) => {
+		clearFieldError(field, errorEl);
+	});
+}
+
+function validateContactFields() {
+	let allValid = true;
+
+	contactFieldConfigs.forEach((config) => {
+		if (!updateFieldError(config)) {
+			allValid = false;
+		}
+	});
+
+	return allValid;
+}
 
 if (contactForm && formStatus) {
-	const contactFields = Array.from(contactForm.querySelectorAll(
-		"#contactName, #contactEmail, #contactMessage"
-	));
+	contactFieldConfigs.forEach((config) => {
+		const { field, errorEl } = config;
 
-	function getErrorElement(field) {
-		return document.getElementById(`${field.id}Error`);
-	}
-
-	function syncFieldValidity(field) {
-		const errorElement = getErrorElement(field);
-		const isValid = field.checkValidity();
-
-		if (!errorElement) return isValid;
-
-		if (isValid) {
-			field.removeAttribute("aria-invalid");
-			errorElement.textContent = "";
-			return true;
-		}
-
-		field.setAttribute("aria-invalid", "true");
-		errorElement.textContent = field.validationMessage;
-		return false;
-	}
-
-	function syncContactFieldValidity() {
-		let isFormValid = true;
-
-		contactFields.forEach(field => {
-			if (!syncFieldValidity(field)) {
-				isFormValid = false;
-			}
-		});
-
-		return isFormValid;
-	}
-
-	function clearContactFieldValidity() {
-		contactFields.forEach(field => {
-			field.removeAttribute("aria-invalid");
-			const errorElement = getErrorElement(field);
-			if (errorElement) {
-				errorElement.textContent = "";
-			}
-		});
-	}
-
-	contactFields.forEach(field => {
 		field.addEventListener("blur", () => {
-			syncFieldValidity(field);
+			updateFieldError(config);
 		});
 
 		field.addEventListener("input", () => {
-			if (field.getAttribute("aria-invalid") === "true" || field.value.trim() !== "") {
-				syncFieldValidity(field);
-			} else {
-				field.removeAttribute("aria-invalid");
-				const errorElement = getErrorElement(field);
-				if (errorElement) {
-					errorElement.textContent = "";
-				}
+			if (field.validity.valid) {
+				clearFieldError(field, errorEl);
+				return;
 			}
+
+			if (field.getAttribute("aria-invalid") === "true") {
+				updateFieldError(config);
+			}
+		});
+
+		field.addEventListener("invalid", () => {
+			updateFieldError(config);
 		});
 	});
 
 	contactForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
+		const btn = contactForm.querySelector(".form-submit");
 		formStatus.className = "form-status";
 		formStatus.textContent = "";
 
-		const isFormValid = contactForm.checkValidity();
-		syncContactFieldValidity();
+		const isValid = contactForm.checkValidity();
+		validateContactFields();
 
-		if (!isFormValid) {
+		if (!isValid) {
 			contactForm.reportValidity();
 			return;
 		}
 
-		const btn = contactForm.querySelector(".form-submit");
 		btn.disabled = true;
-		btn.textContent = "Sending…";
+		btn.textContent = "Sending...";
 
 		try {
 			const res = await fetch(contactForm.action, {
@@ -252,7 +396,7 @@ if (contactForm && formStatus) {
 				formStatus.className = "form-status form-status--success";
 				formStatus.textContent = "Message sent! I'll be in touch soon.";
 				contactForm.reset();
-				clearContactFieldValidity();
+				clearContactFieldErrors();
 			} else {
 				throw new Error();
 			}
@@ -261,7 +405,7 @@ if (contactForm && formStatus) {
 			formStatus.textContent = "Something went wrong. Please email me directly.";
 		} finally {
 			btn.disabled = false;
-			btn.innerHTML = "Send message <span aria-hidden='true'>→</span>";
+			btn.innerHTML = "Send message <span aria-hidden='true'>&rarr;</span>";
 		}
 	});
 }
@@ -313,16 +457,6 @@ function initWebGL(retries = 0) {
 	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 	container.appendChild(renderer.domElement);
 	webGLInitialized = true;
-
-	if (canUseGsap) {
-		gsap.from(".hero-card", {
-			y: 40,
-			scale: 0.96,
-			duration: 1.1,
-			ease: "power3.out",
-			delay: 0.2
-		});
-	}
 
 	const startPortrait = (texture) => {
 		if (THREE.SRGBColorSpace) {

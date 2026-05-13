@@ -28,6 +28,48 @@
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="/css/styles.css">
 	<link rel="stylesheet" href="/work/work.css">
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "BreadcrumbList",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Home",
+							"item": "https://itcodegirl.com/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "Case Studies",
+							"item": "https://itcodegirl.com/work/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "CodeHerWay CEO OS",
+							"item": "https://itcodegirl.com/work/ceo-os/"
+						}
+					]
+				},
+				{
+					"@type": "CreativeWork",
+					"name": "CodeHerWay CEO OS Case Study",
+					"url": "https://itcodegirl.com/work/ceo-os/",
+					"description": "Case study for a local-first founder workflow dashboard and command center.",
+					"image": "https://itcodegirl.com/assets/images/projects/ceo-os-dashboard.webp",
+					"dateModified": "2026-05-12",
+					"creator": {
+						"@type": "Person",
+						"name": "Jenna Zawaski"
+					}
+				}
+			]
+		}
+	</script>
 </head>
 
 <body>
@@ -58,7 +100,7 @@
 				<div class="case-links" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noopener noreferrer">GitHub repo</a>
-					<a class="case-link" href="https://codeherway-ceo-os-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Original write-up</a>
+					<a class="case-link case-link--archived" href="https://codeherway-ceo-os-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Archived write-up</a>
 				</div>
 			</div>
 			<dl class="case-meta-list" aria-label="Project summary">
@@ -74,12 +116,17 @@
 					<dt>Primary focus</dt>
 					<dd>Calm execution, local-first resilience, and clear persistence trust cues</dd>
 				</div>
+				<div>
+					<dt>Last verified</dt>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
+				</div>
 			</dl>
 		</section>
 
-		<div class="case-visual">
-			<img src="/assets/images/projects/ceo-os-dashboard.webp" alt="CodeHerWay CEO OS Focus Home dashboard interface" width="1200" height="750" loading="eager" decoding="async">
-		</div>
+		<figure class="case-visual">
+			<img src="/assets/images/projects/ceo-os-dashboard.webp" srcset="/assets/images/projects/ceo-os-dashboard-640.webp 640w, /assets/images/projects/ceo-os-dashboard-960.webp 960w, /assets/images/projects/ceo-os-dashboard.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay CEO OS Focus Home dashboard interface" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
+			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
+		</figure>
 
 		<section class="case-content" aria-label="CodeHerWay CEO OS case study details">
 			<div class="case-section">
@@ -191,7 +238,8 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Verified on this portfolio:</strong> the local case study path, live demo link, GitHub repo link, and shared navigation paths are present.</li>
+						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
+						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
 						<li><strong>Evidence standard:</strong> the page separates local-first behavior from the Supabase upgrade path instead of presenting unfinished cloud sync as complete.</li>
 						<li><strong>Still to validate:</strong> authenticated multi-user flows, concurrent updates, and assistant fallback telemetry in a production-like environment.</li>
 					</ul>
@@ -224,6 +272,21 @@
 				</div>
 			</div>
 		</section>
+
+		<nav class="case-study-nav" aria-label="More case studies">
+			<a href="/work/codeherway/" class="case-study-nav-link">
+				<span>Previous case study</span>
+				<strong>CodeHerWay Education Platform</strong>
+			</a>
+			<a href="/work/" class="case-study-nav-link">
+				<span>All case studies</span>
+				<strong>Return to work index</strong>
+			</a>
+			<a href="/work/aura-weather/" class="case-study-nav-link">
+				<span>Next case study</span>
+				<strong>Aura Weather</strong>
+			</a>
+		</nav>
 	</main>
 
 	<footer class="site-footer">

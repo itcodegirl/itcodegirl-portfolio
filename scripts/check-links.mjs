@@ -82,6 +82,10 @@ function getAttributes(tag) {
 	);
 }
 
+function getRelTokens(attrs) {
+	return (attrs.rel || '').trim().split(/\s+/).filter(Boolean);
+}
+
 function isExternalHttpReference(reference, baseFile) {
 	if (isIgnoredReference(reference)) return false;
 
@@ -165,7 +169,7 @@ function checkHtmlReferences() {
 				const attrs = getAttributes(tag);
 				if (!isExternalHttpReference(attrs.href, sourceFile) || attrs.target !== '_blank') return;
 
-				const relTokens = (attrs.rel || '').split(/\s+/);
+				const relTokens = getRelTokens(attrs);
 				assert(
 					relTokens.includes('noopener') && relTokens.includes('noreferrer'),
 					`${sourceFile} external link ${attrs.href} should use rel="noopener noreferrer".`,

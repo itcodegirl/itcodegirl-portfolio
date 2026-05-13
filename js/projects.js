@@ -1,8 +1,6 @@
 // Selected work data + rendering.
 //
 // Each project is rendered as an article with a header (number + status),
-// optional screenshot OR placeholder, title, tagline, optional proof points,
-// a concise description, an explicit "My role" line, tech list, and links.
 // optional screenshot OR placeholder, title, tagline, product value,
 // built-feature summary, UX/engineering challenge, proof available,
 // a concise description, an explicit "My role" line, tech list, and links.

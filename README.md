@@ -69,10 +69,13 @@ static site:
 node --check js/app.js
 node --check js/projects.js
 node scripts/check-static-site.mjs
+node scripts/check-links.mjs
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
-lazy motion loading, scroll safety, and contact-form accessibility.
+lazy motion loading, scroll safety, contact-form accessibility, and local link integrity.
+The link check verifies internal page links, fragments, static assets, CSS
+references, and project-card links before changes reach GitHub Pages.
 
 ## Deployment
 

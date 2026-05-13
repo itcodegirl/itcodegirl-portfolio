@@ -3,6 +3,9 @@
 // Each project is rendered as an article with a header (number + status),
 // optional screenshot OR placeholder, title, tagline, optional proof points,
 // a concise description, an explicit "My role" line, tech list, and links.
+// optional screenshot OR placeholder, title, tagline, product value,
+// built-feature summary, UX/engineering challenge, proof available,
+// a concise description, an explicit "My role" line, tech list, and links.
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
@@ -12,14 +15,27 @@ const projects = [
 		number: "01",
 		title: "CodeHerWay Education Platform",
 		tagline: "Learning platform helping women entering tech build foundational skills.",
-		status: "Featured Case Study",
+		status: "Flagship project",
 		featured: true,
 		meta: "React • Supabase • Learning platform",
 		description:
 			"React and Supabase learning platform with structured lessons, quizzes, persisted progress, and reward state built around beginner momentum.",
-		proofPoints: ["Supabase auth", "Persisted progress", "XP / streak logic", "Quiz feedback"],
 		role:
 			"End-to-end product ownership across frontend architecture, lesson and quiz UI, progress state, rewards, and Supabase data flow.",
+		productValue:
+			"Helps beginners move through lessons, quizzes, progress, and rewards in one guided learner flow.",
+		built:
+			"React product UI, guided lesson flow, quiz feedback states, persisted learner progress, XP/streak logic, and Supabase-backed auth/data integration.",
+		challenge:
+			"Balancing beginner-friendly UX with real product logic across loading, feedback, saved progress, and incomplete flows.",
+		proofAvailable: [
+			"React product UI",
+			"Supabase auth/data integration",
+			"Persisted learner progress",
+			"Quiz feedback states",
+			"XP / streak logic",
+			"Case study with decision notes",
+		],
 		image: "assets/images/projects/codeherway-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay Education Platform dashboard interface screenshot",
@@ -53,9 +69,21 @@ const projects = [
 		cardClass: "ceo-os",
 		description:
 			"React productivity dashboard for managing founder priorities, opportunities, content planning, and weekly execution in one workspace.",
-		proofPoints: ["React routing", "Local persistence", "Founder workflow UI", "Weekly planning"],
 		role:
 			"Designed and built dashboard routes, one-screen overview, opportunity tracker, weekly planning views, and persisted local state.",
+		productValue:
+			"Helps a solo founder see what needs attention now without scattering work across unrelated tools.",
+		built:
+			"Focus Home, opportunity tracker, weekly planning views, workspace routing, persisted local state, and source-status cues.",
+		challenge:
+			"Making local-first data feel trustworthy while keeping a dense founder workflow calm and scannable.",
+		proofAvailable: [
+			"Live demo",
+			"Source code",
+			"Case study",
+			"QA notes",
+			"Last verified date",
+		],
 		image: "assets/images/projects/ceo-os-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay CEO OS dashboard interface screenshot",
@@ -88,9 +116,21 @@ const projects = [
 		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
 		description:
 			"Responsive weather app with real-time conditions, hourly forecasts, API states, and a hierarchy designed for quick decisions.",
-		proofPoints: ["REST API data", "Loading states", "Responsive layout", "Clear forecast hierarchy"],
 		role:
 			"Built the responsive layout, scannable forecast UI, async weather API flow, and loading and empty states.",
+		productValue:
+			"Helps people check current conditions and forecast context quickly before making daily decisions.",
+		built:
+			"Responsive forecast interface, city search, API data handling, loading and unavailable states, and mobile layout behavior.",
+		challenge:
+			"Keeping weather data readable while representing delayed or missing provider values honestly.",
+		proofAvailable: [
+			"Live demo",
+			"Source code",
+			"Case study",
+			"QA notes",
+			"Last verified date",
+		],
 		image: "assets/images/projects/aura-weather-interface.webp",
 		imagePosition: "top center",
 		imageAlt: "Aura Weather app interface screenshot",
@@ -173,16 +213,45 @@ function createProjectLinks(links) {
 	return linksContainer;
 }
 
+function createProjectEvidenceList(project) {
+	const evidenceItems = [
+		["Product value", project.productValue],
+		["What I built", project.built],
+		["UX / engineering challenge", project.challenge],
+	].filter(([, text]) => Boolean(text));
+
+	if (!evidenceItems.length) return null;
+
+	const evidenceList = document.createElement("dl");
+	evidenceList.className = "project-evidence";
+
+	evidenceItems.forEach(([label, text]) => {
+		const group = document.createElement("div");
+		appendTextElement(group, "dt", "project-evidence-label", label);
+		appendTextElement(group, "dd", "", text);
+		evidenceList.appendChild(group);
+	});
+
+	return evidenceList;
+}
+
 function createProjectProofList(proofPoints, projectTitle) {
+	const proofGroup = document.createElement("div");
+	proofGroup.className = "project-proof-group";
+
+	appendTextElement(proofGroup, "p", "project-proof-label", "Proof Available");
+
 	const proofList = document.createElement("ul");
 	proofList.className = "project-proof";
-	proofList.setAttribute("aria-label", `Implementation highlights for ${projectTitle}`);
+	proofList.setAttribute("aria-label", `Proof available for ${projectTitle}`);
 
 	proofPoints.forEach((point) => {
 		appendTextElement(proofList, "li", "", point);
 	});
 
-	return proofList;
+	proofGroup.appendChild(proofList);
+
+	return proofGroup;
 }
 
 function createProjectTechList(techItems) {
@@ -283,11 +352,16 @@ function createProjectCard(project) {
 		appendTextElement(article, "p", "project-tagline", project.tagline);
 	}
 
-	if (project.proofPoints) {
-		article.appendChild(createProjectProofList(project.proofPoints, project.title));
+	appendTextElement(article, "p", "project-description", project.description);
+
+	const evidenceList = createProjectEvidenceList(project);
+	if (evidenceList) {
+		article.appendChild(evidenceList);
 	}
 
-	appendTextElement(article, "p", "project-description", project.description);
+	if (project.proofAvailable) {
+		article.appendChild(createProjectProofList(project.proofAvailable, project.title));
+	}
 
 	if (project.role) {
 		const roleParagraph = document.createElement("p");

@@ -212,6 +212,7 @@ function checkContactAccessibility() {
 function checkNavigationStructure() {
 	canonicalPages.forEach((relativePath) => {
 		const html = readFile(relativePath);
+		const activeNavLinks = Array.from(html.matchAll(/<a\b[^>]*class=["'][^"']*\bnav-active\b[^"']*["'][^>]*>/gi));
 
 		assert(
 			html.includes('<header class="site-header nav-show">'),
@@ -221,6 +222,14 @@ function checkNavigationStructure() {
 			html.includes('<nav class="nav" aria-label="Primary navigation">'),
 			`${relativePath} should keep primary navigation labelled on the inner nav element.`,
 		);
+
+		activeNavLinks.forEach(([tag]) => {
+			const attrs = getAttributes(tag);
+			assert(
+				attrs['aria-current'] === 'page' || attrs['aria-current'] === 'location',
+				`${relativePath} active navigation link should expose aria-current.`,
+			);
+		});
 	});
 }
 

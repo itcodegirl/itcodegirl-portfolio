@@ -83,12 +83,10 @@
 
 			<h2>The tradeoff I am still paying</h2>
 			<p>
-				This site loads Three.js and GSAP from a CDN to power the hero
-				portrait and a single entry animation. That is roughly 670 KB of
-				vendor JavaScript for a page that, structurally, does not need it.
-				Replacing that with a smaller, gated WebGL bootstrap (or removing
-				it entirely) is on the roadmap and will land before the next
-				deployment cycle.
+				This site keeps one richer visual moment behind a gated, lazy
+				Three.js portrait enhancement. The static portrait stays in place for
+				reduced motion, Save-Data, touch-first devices, missing WebGL support,
+				or local file previews.
 			</p>
 
 			<h2>When I would migrate</h2>

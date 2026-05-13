@@ -62,7 +62,7 @@
 
 			<h2>The motion rule</h2>
 			<p>
-				Three.js and GSAP are not loaded from the HTML. They are requested
+				Three.js is not loaded from the HTML. It is requested
 				only when the browser supports the effect, the visitor has not asked
 				for reduced motion, Save-Data is off, and the device is not a coarse
 				pointer mobile device.
@@ -77,9 +77,9 @@
 
 			<h2>The current tradeoff</h2>
 			<p>
-				The portfolio is intentionally static, but it still uses two rich
-				motion libraries for one visual moment. That is why the libraries are
-				gated and lazy instead of treated as part of the critical path.
+				The portfolio is intentionally static, but it still uses an optional
+				Three.js enhancement for one visual moment. That is why the library
+				is gated and lazy instead of treated as part of the critical path.
 			</p>
 
 			<h2>The next improvement</h2>

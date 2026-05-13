@@ -7,12 +7,13 @@ Live site: https://itcodegirl.com
 
 ## What this repo is
 
-A small, intentionally lightweight portfolio site written in vanilla HTML, CSS,
-and JavaScript. There is no build step, no bundler, and no framework.
+A lightweight vanilla HTML/CSS/JS portfolio focused on accessible UI,
+product-minded case studies, responsive design, performance-conscious assets,
+and recruiter-friendly navigation.
 
 The portfolio demonstrates frontend craft through the site itself
-(layout, accessibility, motion safety, performance discipline) and points
-visitors to the real product work it represents.
+(layout, accessibility, responsive behavior, and performance discipline) and
+points visitors to the real product work it represents.
 
 ## Stack
 
@@ -23,9 +24,8 @@ visitors to the real product work it represents.
 - Google Fonts (Inter, Playfair Display)
 - [Formspree](https://formspree.io/) for contact form delivery
 
-Decorative motion is treated as a progressive enhancement. It is not the
-primary skill story of the portfolio; the primary story is UX-focused frontend
-product work with clear evidence.
+Subtle transitions and reveal states are treated as progressive enhancement.
+The primary story is UX-focused frontend product work with clear evidence.
 
 ## Project structure
 
@@ -35,7 +35,7 @@ product work with clear evidence.
 |-- 404.html                    # 404 page
 |-- css/
 |   |-- styles.css              # base, layout, components, responsive
-|   |-- hero.css                # hero section + portrait enhancement styles
+|   |-- hero.css                # hero section + static portrait styles
 |   `-- projects.css            # selected work cards
 |-- js/
 |   |-- app.js                  # page bootstrapping, scroll, contact form
@@ -123,7 +123,7 @@ node scripts/check-lighthouse-result.mjs --help
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
-lazy motion loading, scroll safety, contact-form accessibility, and local link
+local script loading, scroll safety, contact-form accessibility, and local link
 integrity.
 The link check verifies internal page links, fragments, static assets, CSS
 references, and project-card links before changes reach GitHub Pages.
@@ -153,8 +153,8 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
-- `prefers-reduced-motion` disables decorative portrait behavior and
-  reveal-on-scroll transitions.
+- `prefers-reduced-motion` disables decorative animations and reveal-on-scroll
+  transitions.
 - `forced-colors` is respected.
 - Form fields are labeled and the form status is announced via `aria-live`.
 
@@ -192,7 +192,8 @@ invented numbers.
 
 ## Roadmap
 
-- Keep tightening recruiter trust cues and case study proof on the same domain.
+- Add measurable accessibility and performance evidence for the homepage and
+  case-study pages.
 - Refresh product screenshots and supporting media as newer captures become
   available.
-- Continue tightening LCP image weight and font loading.
+- Continue tightening LCP image weight, font loading, and static quality checks.

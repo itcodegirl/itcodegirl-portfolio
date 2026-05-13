@@ -15,7 +15,7 @@ const projects = [
 		number: "01",
 		title: "CodeHerWay Education Platform",
 		tagline: "Learning platform helping women entering tech build foundational skills.",
-		status: "Flagship project",
+		status: "Flagship Project",
 		featured: true,
 		meta: "React • Supabase • Learning platform",
 		description:

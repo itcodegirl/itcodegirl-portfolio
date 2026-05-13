@@ -1,12 +1,14 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const coarsePointer = window.matchMedia("(pointer: coarse)");
 const motionScriptSources = {
+	gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
 	three: "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"
 };
 const loadedScripts = new Map();
 let webGLSupport;
 let webGLInitialized = false;
 let webGLLoadRequested = false;
+let heroCardAnimationStarted = false;
 let pageHasLoaded = document.readyState === "complete";
 
 function getConnection() {
@@ -88,6 +90,14 @@ function loadScript(src) {
 
 	loadedScripts.set(src, loadPromise);
 	return loadPromise;
+}
+
+function shouldRunHeroCardAnimation() {
+	return (
+		!prefersReducedMotion.matches &&
+		!hasSaveDataPreference() &&
+		Boolean(document.querySelector(".hero-card"))
+	);
 }
 
 function shouldRunWebGLPortrait() {
@@ -201,7 +211,7 @@ function syncReducedMotionState() {
 	onScrollFrame();
 
 	if (pageHasLoaded) {
-		runSafely(requestWebGLPortrait);
+		requestMotionEffects();
 	}
 }
 
@@ -269,29 +279,17 @@ function runSafely(callback) {
 	}
 }
 
-function requestWebGLPortrait() {
-	if (!shouldRunWebGLPortrait() || webGLInitialized || webGLLoadRequested) return;
+function requestMotionEffects() {
+	if (prefersReducedMotion.matches) return;
 
-	webGLLoadRequested = true;
-
-	return loadScript(motionScriptSources.three)
-		.then(() => {
-			if (typeof window.THREE === "undefined") {
-				throw new Error("Three.js did not attach to window.");
-			}
-
-			initWebGL();
-		})
-		.catch((error) => {
-			webGLLoadRequested = false;
-			console.warn("Three.js failed to load; keeping the static portrait.", error);
-		});
+	runSafely(initHeroCardAnimation);
+	runSafely(initWebGLExperience);
 }
 
 window.addEventListener("load", () => {
 	pageHasLoaded = true;
 
-	runSafely(requestWebGLPortrait);
+	requestMotionEffects();
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -436,7 +434,7 @@ if (contactForm && formStatus) {
 }
 
 async function initHeroCardAnimation() {
-	if (!shouldRunHeroCardAnimation()) return;
+	if (!shouldRunHeroCardAnimation() || heroCardAnimationStarted) return;
 
 	try {
 		await loadScript(motionScriptSources.gsap);
@@ -450,6 +448,8 @@ async function initHeroCardAnimation() {
 		return;
 	}
 
+	heroCardAnimationStarted = true;
+
 	gsap.from(".hero-card", {
 		y: 40,
 		scale: 0.96,
@@ -460,21 +460,28 @@ async function initHeroCardAnimation() {
 }
 
 async function initWebGLExperience() {
-	if (!shouldRunWebGLPortrait()) return;
+	if (!shouldRunWebGLPortrait() || webGLInitialized || webGLLoadRequested) return;
+
+	webGLLoadRequested = true;
 
 	try {
 		await loadScript(motionScriptSources.three);
 	} catch (error) {
+		webGLLoadRequested = false;
 		console.warn("Three.js failed to load; keeping the static portrait.", error);
 		return;
 	}
 
 	if (typeof THREE === "undefined") {
+		webGLLoadRequested = false;
 		console.warn("Three.js unavailable; keeping the static portrait.");
 		return;
 	}
 
-	if (!shouldRunWebGLPortrait()) return;
+	if (!shouldRunWebGLPortrait()) {
+		webGLLoadRequested = false;
+		return;
+	}
 
 	initWebGL();
 	initBackgroundWebGL();

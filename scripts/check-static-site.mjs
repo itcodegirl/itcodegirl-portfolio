@@ -277,6 +277,24 @@ function checkDiscoveryMetadata() {
 	});
 }
 
+function checkEvidenceFramework() {
+	const homeHtml = readFile('index.html');
+	const codeHerWayHtml = readFile('work/codeherway/index.html');
+	const readme = readFile('README.md');
+	const evidenceReadmePath = path.join(rootDir, 'assets/evidence/README.md');
+
+	assert(homeHtml.includes('Evidence, Not Just Claims'), 'Homepage should include Evidence, Not Just Claims section.');
+	assert(homeHtml.includes('90-Second Review Path'), 'Homepage should include 90-Second Review Path section.');
+	assert(codeHerWayHtml.includes('Evidence Snapshot'), 'CodeHerWay case study should include Evidence Snapshot.');
+	assert(
+		codeHerWayHtml.includes('What to verify in 90 seconds'),
+		'CodeHerWay case study should include what to verify in 90 seconds.',
+	);
+	assert(readme.includes('Evidence Layer'), 'README should include Evidence Layer section.');
+	assert(readme.includes('Evidence Capture Checklist'), 'README should include Evidence Capture Checklist section.');
+	assert(fs.existsSync(evidenceReadmePath), 'assets/evidence/README.md is missing.');
+}
+
 checkRequiredFiles();
 checkBudgets();
 checkScriptLoading();
@@ -284,6 +302,7 @@ checkImages();
 checkContactAccessibility();
 checkNavigationStructure();
 checkDiscoveryMetadata();
+checkEvidenceFramework();
 
 if (failures.length) {
 	console.error('Static site quality check failed:');

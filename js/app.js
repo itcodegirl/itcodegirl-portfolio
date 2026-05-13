@@ -1,11 +1,13 @@
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const coarsePointer = window.matchMedia("(pointer: coarse)");
 const motionScriptSources = {
-	gsap: "https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js",
 	three: "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js"
 };
 const loadedScripts = new Map();
 let webGLSupport;
+let webGLInitialized = false;
+let webGLLoadRequested = false;
+let pageHasLoaded = document.readyState === "complete";
 
 function getConnection() {
 	return navigator.connection || navigator.mozConnection || navigator.webkitConnection;
@@ -86,14 +88,6 @@ function loadScript(src) {
 
 	loadedScripts.set(src, loadPromise);
 	return loadPromise;
-}
-
-function shouldRunHeroCardAnimation() {
-	return (
-		!prefersReducedMotion.matches &&
-		!hasSaveDataPreference() &&
-		Boolean(document.querySelector(".hero-card"))
-	);
 }
 
 function shouldRunWebGLPortrait() {
@@ -205,6 +199,10 @@ function syncReducedMotionState() {
 
 	setupRevealObserver();
 	onScrollFrame();
+
+	if (pageHasLoaded) {
+		runSafely(requestWebGLPortrait);
+	}
 }
 
 if (scrollProgress || nav) {
@@ -230,13 +228,23 @@ if (typeof prefersReducedMotion.addEventListener === "function") {
 const sections = document.querySelectorAll("section[id]");
 const navLinks = document.querySelectorAll(".nav a[href^='#']");
 if (sections.length && navLinks.length) {
+	const setActiveNavLink = (sectionId) => {
+		navLinks.forEach(link => {
+			const isActive = link.getAttribute("href") === `#${sectionId}`;
+			link.classList.toggle("nav-active", isActive);
+
+			if (isActive) {
+				link.setAttribute("aria-current", "location");
+			} else {
+				link.removeAttribute("aria-current");
+			}
+		});
+	};
+
 	const sectionObserver = new IntersectionObserver(entries => {
 		entries.forEach(entry => {
 			if (entry.isIntersecting) {
-				navLinks.forEach(link => link.classList.toggle(
-					"nav-active",
-					link.getAttribute("href") === `#${entry.target.id}`
-				));
+				setActiveNavLink(entry.target.id);
 			}
 		});
 	}, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
@@ -246,8 +254,6 @@ if (sections.length && navLinks.length) {
 // Scroll reveal for cards and sections
 setupRevealObserver();
 syncReducedMotionState();
-
-let webGLInitialized = false;
 
 function runSafely(callback) {
 	try {
@@ -263,11 +269,29 @@ function runSafely(callback) {
 	}
 }
 
-window.addEventListener("load", () => {
-	if (prefersReducedMotion.matches) return;
+function requestWebGLPortrait() {
+	if (!shouldRunWebGLPortrait() || webGLInitialized || webGLLoadRequested) return;
 
-	runSafely(initHeroCardAnimation);
-	runSafely(initWebGLExperience);
+	webGLLoadRequested = true;
+
+	return loadScript(motionScriptSources.three)
+		.then(() => {
+			if (typeof window.THREE === "undefined") {
+				throw new Error("Three.js did not attach to window.");
+			}
+
+			initWebGL();
+		})
+		.catch((error) => {
+			webGLLoadRequested = false;
+			console.warn("Three.js failed to load; keeping the static portrait.", error);
+		});
+}
+
+window.addEventListener("load", () => {
+	pageHasLoaded = true;
+
+	runSafely(requestWebGLPortrait);
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -738,6 +762,7 @@ function initWebGL(retries = 0) {
 		container.classList.remove("webgl-ready");
 		fallbackPortrait?.classList.remove("webgl-replaced");
 		webGLInitialized = false;
+		webGLLoadRequested = false;
 	};
 
 	new THREE.TextureLoader().load(

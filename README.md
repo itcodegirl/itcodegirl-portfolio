@@ -20,12 +20,11 @@ visitors to the real product work it represents.
 - CSS3 (custom properties, responsive design, `prefers-reduced-motion` and
   `forced-colors` support)
 - JavaScript (vanilla, modular by file)
-- [Three.js](https://threejs.org/) for the hero portrait shader
-- [GSAP](https://gsap.com/) for the hero card entry animation
+- [Three.js](https://threejs.org/) for the optional desktop hero portrait shader
 - Google Fonts (Inter, Playfair Display)
 - [Formspree](https://formspree.io/) for contact form delivery
 
-External libraries are loaded from a CDN and used only where they are needed.
+External libraries are lazy-loaded from a CDN and used only where they are needed.
 
 ## Project structure
 
@@ -125,8 +124,8 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
-- `prefers-reduced-motion` disables the WebGL portrait, decorative animations,
-  and reveal-on-scroll transitions.
+- `prefers-reduced-motion`, Save-Data, touch-first devices, and missing WebGL
+  support keep the hero on the static portrait fallback.
 - `forced-colors` is respected.
 - Form fields are labeled and the form status is announced via `aria-live`.
 

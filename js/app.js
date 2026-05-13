@@ -3,6 +3,7 @@ const canUseGsap = typeof gsap !== "undefined";
 
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".site-header");
+let revealObserver = null;
 
 // Single rAF-batched scroll handler driving both the progress bar and the
 // nav hide-on-scroll behaviour. Avoids two raw scroll listeners running per
@@ -13,14 +14,21 @@ let scrollFrame = 0;
 function onScrollFrame() {
 	scrollFrame = 0;
 	const y = window.scrollY;
+	const reducedMotion = prefersReducedMotion.matches;
 
-	if (scrollProgress) {
+	if (scrollProgress && !reducedMotion) {
 		const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 		const ratio = maxScroll > 0 ? y / maxScroll : 0;
 		scrollProgress.style.transform = `scaleX(${ratio})`;
 	}
 
 	if (nav) {
+		if (reducedMotion) {
+			nav.classList.remove("nav-hidden");
+			lastScrollY = y;
+			return;
+		}
+
 		const navContainsFocus = nav.contains(document.activeElement);
 		const isNearTop = y <= 90;
 		const isScrollingDown = y > lastScrollY;
@@ -39,6 +47,59 @@ function onScrollFrame() {
 	lastScrollY = y;
 }
 
+function setupRevealObserver() {
+	if (prefersReducedMotion.matches || revealObserver) return;
+
+	const revealEls = document.querySelectorAll(
+		".skill-card, .project-card, .about-content, .about-image, .contact-card"
+	);
+
+	if (!revealEls.length) return;
+
+	revealObserver = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("revealed");
+				revealObserver.unobserve(entry.target);
+			}
+		});
+	}, { threshold: 0.1 });
+
+	revealEls.forEach(el => {
+		if (el.classList.contains("revealed")) return;
+		el.classList.add("reveal");
+		revealObserver.observe(el);
+	});
+}
+
+function syncReducedMotionState() {
+	if (prefersReducedMotion.matches) {
+		if (nav) {
+			nav.classList.remove("nav-hidden");
+		}
+
+		if (scrollProgress) {
+			scrollProgress.style.transform = "";
+		}
+
+		if (revealObserver) {
+			revealObserver.disconnect();
+			revealObserver = null;
+		}
+
+		document.querySelectorAll(".reveal").forEach(el => {
+			el.classList.remove("reveal");
+			el.classList.add("revealed");
+		});
+
+		lastScrollY = window.scrollY;
+		return;
+	}
+
+	setupRevealObserver();
+	onScrollFrame();
+}
+
 if (scrollProgress || nav) {
 	window.addEventListener("scroll", () => {
 		if (scrollFrame) return;
@@ -50,6 +111,12 @@ if (nav) {
 	nav.addEventListener("focusin", () => {
 		nav.classList.remove("nav-hidden");
 	});
+}
+
+if (typeof prefersReducedMotion.addEventListener === "function") {
+	prefersReducedMotion.addEventListener("change", syncReducedMotionState);
+} else if (typeof prefersReducedMotion.addListener === "function") {
+	prefersReducedMotion.addListener(syncReducedMotionState);
 }
 
 // Active nav link tracks current section
@@ -70,23 +137,8 @@ if (sections.length && navLinks.length) {
 }
 
 // Scroll reveal for cards and sections
-if (!prefersReducedMotion.matches) {
-	const revealEls = document.querySelectorAll(
-		".skill-card, .project-card, .about-content, .about-image, .contact-card"
-	);
-	const revealObserver = new IntersectionObserver(entries => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add("revealed");
-				revealObserver.unobserve(entry.target);
-			}
-		});
-	}, { threshold: 0.1 });
-	revealEls.forEach(el => {
-		el.classList.add("reveal");
-		revealObserver.observe(el);
-	});
-}
+setupRevealObserver();
+syncReducedMotionState();
 
 let webGLInitialized = false;
 
@@ -102,7 +154,6 @@ window.addEventListener("load", () => {
 	if (prefersReducedMotion.matches) return;
 
 	runSafely(initWebGL);
-	runSafely(initBackgroundWebGL);
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -212,100 +263,6 @@ if (contactForm && formStatus) {
 			btn.disabled = false;
 			btn.innerHTML = "Send message <span aria-hidden='true'>→</span>";
 		}
-	});
-}
-
-function initBackgroundWebGL() {
-	const canvas = document.getElementById("webgl");
-	if (!canvas || typeof THREE === "undefined") return;
-
-	const scene = new THREE.Scene();
-
-	const camera = new THREE.PerspectiveCamera(
-		75,
-		window.innerWidth / window.innerHeight,
-		0.1,
-		100
-	);
-
-	camera.position.z = 2;
-
-	const renderer = new THREE.WebGLRenderer({
-		canvas,
-		alpha: true,
-		antialias: true
-	});
-
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-	const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
-
-	const material = new THREE.ShaderMaterial({
-		uniforms: {
-			uTime: { value: 0 }
-		},
-		vertexShader: `
-			varying vec2 vUv;
-
-			void main() {
-				vUv = uv;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-			}
-		`,
-		fragmentShader: `
-			uniform float uTime;
-			varying vec2 vUv;
-
-			void main() {
-				float waveA = sin(vUv.x * 8.0 + uTime * 0.8) * 0.035;
-				float waveB = cos(vUv.y * 6.0 + uTime * 0.6) * 0.025;
-
-				vec3 base = vec3(0.025, 0.03, 0.06);
-				vec3 purple = vec3(0.28, 0.08, 0.45);
-				vec3 blue = vec3(0.02, 0.22, 0.35);
-
-				vec3 color = base + waveA * purple + waveB * blue;
-
-				gl_FragColor = vec4(color, 0.95);
-			}
-		`,
-		transparent: true
-	});
-
-	const mesh = new THREE.Mesh(geometry, material);
-	mesh.position.z = -1;
-	scene.add(mesh);
-
-	let bgFrame = 0;
-	function animateBackground() {
-		material.uniforms.uTime.value += 0.01;
-		renderer.render(scene, camera);
-		bgFrame = requestAnimationFrame(animateBackground);
-	}
-
-	function startBg() {
-		if (!bgFrame) bgFrame = requestAnimationFrame(animateBackground);
-	}
-
-	function stopBg() {
-		if (bgFrame) {
-			cancelAnimationFrame(bgFrame);
-			bgFrame = 0;
-		}
-	}
-
-	startBg();
-
-	// Pause when the tab is hidden to avoid wasted GPU/CPU work.
-	document.addEventListener("visibilitychange", () => {
-		if (document.hidden) stopBg(); else startBg();
-	});
-
-	window.addEventListener("resize", () => {
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-		renderer.setSize(window.innerWidth, window.innerHeight);
 	});
 }
 

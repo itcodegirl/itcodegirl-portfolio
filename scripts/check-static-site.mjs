@@ -150,6 +150,10 @@ function checkScriptLoading() {
 			remoteScripts.length === 0,
 			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep motion libraries lazy.`,
 		);
+		assert(
+			!html.includes('href="https://cdn.jsdelivr.net"'),
+			`${relativePath} should not preconnect to jsdelivr unless a motion script is being loaded.`,
+		);
 	});
 
 	const appJs = readFile('js/app.js');
@@ -158,6 +162,10 @@ function checkScriptLoading() {
 	assert(appJs.includes('prefersReducedMotion'), 'Motion effects must honor prefers-reduced-motion.');
 	assert(appJs.includes('hasSaveDataPreference'), 'Heavy motion effects must honor Save-Data.');
 	assert(appJs.includes('shouldRunWebGLPortrait'), 'WebGL portrait must stay behind capability/preference checks.');
+	assert(appJs.includes('runSafely(initHeroCardAnimation)'), 'Hero card animation should stay behind lazy GSAP startup.');
+	assert(appJs.includes('runSafely(initWebGLExperience)'), 'WebGL effects should start through the lazy Three.js loader.');
+	assert(appJs.includes('loadScript(motionScriptSources.gsap)'), 'GSAP should stay lazy-loaded.');
+	assert(appJs.includes('loadScript(motionScriptSources.three)'), 'Three.js should stay lazy-loaded.');
 }
 
 function checkImages() {
@@ -225,6 +233,15 @@ function getCanonicalUrl(relativePath) {
 	return `https://itcodegirl.com/${relativePath}`;
 }
 
+function escapeRegExp(value) {
+	return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function getSitemapEntry(sitemap, canonicalUrl) {
+	const entryPattern = new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(canonicalUrl)}</loc>[\\s\\S]*?</url>`);
+	return sitemap.match(entryPattern)?.[0] || '';
+}
+
 function checkDiscoveryMetadata() {
 	assert(fs.existsSync(path.join(rootDir, 'robots.txt')), 'robots.txt is missing.');
 	assert(fs.existsSync(path.join(rootDir, 'sitemap.xml')), 'sitemap.xml is missing.');
@@ -240,12 +257,16 @@ function checkDiscoveryMetadata() {
 	canonicalPages.forEach((relativePath) => {
 		const canonicalUrl = getCanonicalUrl(relativePath);
 		const html = readFile(relativePath);
+		const sitemapEntry = getSitemapEntry(sitemap, canonicalUrl);
 
 		assert(
 			html.includes(`<link rel="canonical" href="${canonicalUrl}">`),
 			`${relativePath} should include canonical URL ${canonicalUrl}.`,
 		);
-		assert(sitemap.includes(`<loc>${canonicalUrl}</loc>`), `sitemap.xml should include ${canonicalUrl}.`);
+		assert(Boolean(sitemapEntry), `sitemap.xml should include ${canonicalUrl}.`);
+		assert(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(sitemapEntry), `${canonicalUrl} should keep lastmod metadata.`);
+		assert(sitemapEntry.includes('<changefreq>'), `${canonicalUrl} should keep changefreq metadata.`);
+		assert(sitemapEntry.includes('<priority>'), `${canonicalUrl} should keep priority metadata.`);
 	});
 }
 

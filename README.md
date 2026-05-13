@@ -116,11 +116,33 @@ node --check js/app.js
 node --check js/projects.js
 node --check scripts/check-static-site.mjs
 node scripts/check-static-site.mjs
+node scripts/check-links.mjs
+node scripts/check-route-readiness.mjs
+node scripts/check-external-links.mjs
+node scripts/check-lighthouse-result.mjs --help
 ```
 
-The static check protects JavaScript/CSS budgets, asset weight, image
-attributes, lazy motion loading, scroll safety, and contact-form
-accessibility.
+The static check protects JavaScript/CSS budgets, asset weight, image attributes,
+lazy motion loading, scroll safety, contact-form accessibility, and local link
+integrity.
+The link check verifies internal page links, fragments, static assets, CSS
+references, and project-card links before changes reach GitHub Pages.
+The route-readiness check protects critical page structure: one H1, skip-link
+wiring, canonical metadata, duplicate IDs, case-study sections, and accessible
+link-name alignment.
+The external-link check inventories off-site URLs locally. Run
+`node scripts/check-external-links.mjs --live` or the manual `External URL health`
+workflow when you want network-backed status checks.
+
+Deploy-preview evidence should be captured separately with the real preview URL,
+date, viewport mode, and tool used. Do not publish Lighthouse or performance
+claims unless the result has actually been captured.
+
+The manual `Lighthouse evidence` GitHub workflow accepts a deployed URL, captures
+a JSON report, checks it against `lighthouse-budget.json`, and stores the report
+as an artifact for review. Netlify deploy previews are allowed a lower SEO
+threshold because preview responses include `x-robots-tag: noindex`; production
+URLs should still meet the normal SEO budget.
 
 ## Deployment
 

@@ -7,6 +7,9 @@
    tokens so future work can adjust the palette in one place.
    ============================================================= */
 :root {
+	--header-height: 76px;
+	--hero-header-gap: 32px;
+
 	/* Brand */
 	--accent: #c084fc;
 	--accent-rgb: 192, 132, 252;
@@ -90,8 +93,8 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	height: 90px;
-	padding: 22px 60px;
+	height: var(--header-height);
+	padding: 16px 60px;
 	padding-left: max(60px, env(safe-area-inset-left));
 	padding-right: max(60px, env(safe-area-inset-right));
 	backdrop-filter: blur(14px);
@@ -121,6 +124,7 @@ nav a.nav-active {
 .nav-inner {
 	max-width: 1200px;
 	margin: auto;
+	height: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -202,7 +206,7 @@ section h2 {
 
 
 section:first-of-type {
-	padding-top: 90px;
+	padding-top: calc(var(--header-height) + var(--hero-header-gap));
 	/* hero breathing room */
 }
 
@@ -660,7 +664,7 @@ section h2::after {
 	align-items: center;
 	gap: 8px;
 	padding: 6px 14px;
-	margin-bottom: 22px;
+	margin-bottom: 26px;
 	border-radius: 999px;
 	border: 1px solid rgba(74, 222, 128, 0.35);
 	background: rgba(74, 222, 128, 0.07);
@@ -923,8 +927,12 @@ section h2::after {
 
 /* Tablet landscape and small laptops */
 @media (max-width: 1024px) {
+	:root {
+		--header-height: 72px;
+	}
+
 	.site-header {
-		padding: 22px 40px;
+		padding: 15px 40px;
 		padding-left: max(40px, env(safe-area-inset-left));
 		padding-right: max(40px, env(safe-area-inset-right));
 	}
@@ -963,8 +971,12 @@ section h2::after {
 
 /* Tablet portrait / iPad */
 @media (max-width: 900px) {
+	:root {
+		--header-height: 70px;
+	}
+
 	.site-header {
-		padding: 18px 28px;
+		padding: 14px 28px;
 		padding-left: max(28px, env(safe-area-inset-left));
 		padding-right: max(28px, env(safe-area-inset-right));
 	}
@@ -1041,13 +1053,17 @@ section h2::after {
 
 /* Phones */
 @media (max-width: 600px) {
+	:root {
+		--header-height: 68px;
+	}
+
 	.site-header {
 		height: auto;
-		min-height: 72px;
-		padding: 14px 20px;
+		min-height: var(--header-height);
+		padding: 12px 20px;
 		padding-left: max(20px, env(safe-area-inset-left));
 		padding-right: max(20px, env(safe-area-inset-right));
-		padding-top: max(14px, env(safe-area-inset-top));
+		padding-top: max(12px, env(safe-area-inset-top));
 		padding-bottom: 12px;
 	}
 
@@ -1102,6 +1118,10 @@ section h2::after {
 
 	.nav-resume {
 		padding: 10px 12px;
+	}
+
+	.availability-badge {
+		margin-bottom: 20px;
 	}
 
 	section {

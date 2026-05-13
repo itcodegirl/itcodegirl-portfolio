@@ -207,15 +207,120 @@ window.addEventListener("load", () => {
 
 const contactForm = document.getElementById("contactForm");
 const formStatus = document.getElementById("formStatus");
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const contactFieldConfigs = [
+	{
+		field: document.getElementById("contactName"),
+		errorEl: document.getElementById("contactNameError")
+	},
+	{
+		field: document.getElementById("contactEmail"),
+		errorEl: document.getElementById("contactEmailError")
+	},
+	{
+		field: document.getElementById("contactMessage"),
+		errorEl: document.getElementById("contactMessageError")
+	}
+].filter(({ field, errorEl }) => field && errorEl);
+
+function getContactFieldMessage(field) {
+	const fieldValue = field.value.trim();
+
+	if (field.id === "contactName") {
+		if (!fieldValue) return "Please enter your name.";
+		return "";
+	}
+
+	if (field.id === "contactEmail") {
+		if (!fieldValue) return "Please enter your email address.";
+		if (!emailPattern.test(fieldValue)) return "Please enter a valid email address.";
+		return "";
+	}
+
+	if (field.id === "contactMessage") {
+		if (!fieldValue) return "Please add a message before sending.";
+		return "";
+	}
+
+	return field.validationMessage;
+}
+
+function clearFieldError(field, errorEl) {
+	field.removeAttribute("aria-invalid");
+	errorEl.textContent = "";
+}
+
+function updateFieldError(config) {
+	const { field, errorEl } = config;
+
+	if (field.validity.valid) {
+		clearFieldError(field, errorEl);
+		return true;
+	}
+
+	field.setAttribute("aria-invalid", "true");
+	errorEl.textContent = getContactFieldMessage(field) || field.validationMessage;
+	return false;
+}
+
+function clearContactFieldErrors() {
+	contactFieldConfigs.forEach(({ field, errorEl }) => {
+		clearFieldError(field, errorEl);
+	});
+}
+
+function validateContactFields() {
+	let allValid = true;
+
+	contactFieldConfigs.forEach((config) => {
+		if (!updateFieldError(config)) {
+			allValid = false;
+		}
+	});
+
+	return allValid;
+}
 
 if (contactForm && formStatus) {
+	contactFieldConfigs.forEach((config) => {
+		const { field, errorEl } = config;
+
+		field.addEventListener("blur", () => {
+			updateFieldError(config);
+		});
+
+		field.addEventListener("input", () => {
+			if (field.validity.valid) {
+				clearFieldError(field, errorEl);
+				return;
+			}
+
+			if (field.getAttribute("aria-invalid") === "true") {
+				updateFieldError(config);
+			}
+		});
+
+		field.addEventListener("invalid", () => {
+			updateFieldError(config);
+		});
+	});
+
 	contactForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const btn = contactForm.querySelector(".form-submit");
-		btn.disabled = true;
-		btn.textContent = "Sending…";
 		formStatus.className = "form-status";
 		formStatus.textContent = "";
+
+		const isValid = contactForm.checkValidity();
+		validateContactFields();
+
+		if (!isValid) {
+			contactForm.reportValidity();
+			return;
+		}
+
+		btn.disabled = true;
+		btn.textContent = "Sending...";
 
 		try {
 			const res = await fetch(contactForm.action, {
@@ -227,6 +332,7 @@ if (contactForm && formStatus) {
 				formStatus.className = "form-status form-status--success";
 				formStatus.textContent = "Message sent! I'll be in touch soon.";
 				contactForm.reset();
+				clearContactFieldErrors();
 			} else {
 				throw new Error();
 			}

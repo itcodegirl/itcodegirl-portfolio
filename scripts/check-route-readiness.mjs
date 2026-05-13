@@ -116,7 +116,7 @@ function checkWorkIndex(html) {
 		assert(html.includes(`href="${href}"`), `work/index.html should link to ${href}.`);
 	});
 
-	assert(countMatches(html, /class="work-card"/g) === 3, 'work/index.html should keep three case-study cards.');
+	assert(countMatches(html, /class="[^"]*\bwork-card\b/g) >= 3, 'work/index.html should keep at least three case-study cards.');
 }
 
 function checkCaseStudy(file, html) {

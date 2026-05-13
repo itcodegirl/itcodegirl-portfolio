@@ -341,7 +341,7 @@ if (contactForm && formStatus) {
 			formStatus.textContent = "Something went wrong. Please email me directly.";
 		} finally {
 			btn.disabled = false;
-			btn.innerHTML = "Send message <span aria-hidden='true'>→</span>";
+			btn.innerHTML = "Send message <span aria-hidden='true'>&rarr;</span>";
 		}
 	});
 }

@@ -290,7 +290,7 @@ section h2::after {
 	font-family: 'Courier New', monospace;
 	font-size: 2rem;
 	font-weight: 700;
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(255, 255, 255, 0.52);
 	line-height: 1;
 }
 
@@ -534,7 +534,7 @@ section h2::after {
 	font-size: 0.78rem;
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.3);
+	color: var(--text-muted);
 }
 
 .contact-form {
@@ -579,7 +579,8 @@ section h2::after {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-	color: rgba(255, 255, 255, 0.25);
+	color: rgba(255, 255, 255, 0.48);
+	opacity: 1;
 }
 
 .form-group input:focus,
@@ -675,7 +676,7 @@ section h2::after {
 
 .footer-copy {
 	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.35);
+	color: var(--text-muted);
 }
 
 .footer-links {
@@ -685,7 +686,7 @@ section h2::after {
 
 .footer-links a {
 	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.45);
+	color: var(--text-muted);
 	text-decoration: none;
 	transition: color 0.2s ease;
 }

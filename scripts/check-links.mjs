@@ -74,6 +74,26 @@ function isInternalUrl(url) {
 	return url.origin === siteOrigin;
 }
 
+function getAttributes(tag) {
+	return Object.fromEntries(
+		Array.from(tag.matchAll(/\s([a-zA-Z:-]+)(?:=(["'])(.*?)\2)?/g), ([, name,, value = '']) => [
+			name.toLowerCase(),
+			value,
+		]),
+	);
+}
+
+function isExternalHttpReference(reference, baseFile) {
+	if (isIgnoredReference(reference)) return false;
+
+	try {
+		const url = new URL(reference, pageUrl(baseFile));
+		return /^https?:$/i.test(url.protocol) && !isInternalUrl(url);
+	} catch {
+		return false;
+	}
+}
+
 function hasFragmentTarget(relativePath, fragment) {
 	if (!fragment) return true;
 	if (!relativePath.endsWith('.html')) return true;
@@ -136,8 +156,21 @@ function checkHtmlReferences() {
 	listFiles()
 		.filter((relativePath) => relativePath.endsWith('.html'))
 		.forEach((sourceFile) => {
-			getAttributeReferences(readFile(sourceFile)).forEach(({ reference, context }) => {
+			const html = readFile(sourceFile);
+
+			getAttributeReferences(html).forEach(({ reference, context }) => {
 				checkResolvedReference({ reference, sourceFile, context });
+			});
+
+			Array.from(html.matchAll(/<a\b[^>]*>/gi), ([tag]) => {
+				const attrs = getAttributes(tag);
+				if (!isExternalHttpReference(attrs.href, sourceFile) || attrs.target !== '_blank') return;
+
+				const relTokens = attrs.rel.split(/\s+/);
+				assert(
+					relTokens.includes('noopener') && relTokens.includes('noreferrer'),
+					`${sourceFile} external link ${attrs.href} should use rel="noopener noreferrer".`,
+				);
 			});
 		});
 }

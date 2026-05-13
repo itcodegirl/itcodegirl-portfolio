@@ -61,7 +61,6 @@ function sitePathToFile(pathname) {
 function isIgnoredReference(reference) {
 	return (
 		!reference ||
-		reference.startsWith('#') ||
 		reference.startsWith('mailto:') ||
 		reference.startsWith('tel:') ||
 		reference.startsWith('sms:') ||
@@ -166,7 +165,7 @@ function checkHtmlReferences() {
 				const attrs = getAttributes(tag);
 				if (!isExternalHttpReference(attrs.href, sourceFile) || attrs.target !== '_blank') return;
 
-				const relTokens = attrs.rel.split(/\s+/);
+				const relTokens = (attrs.rel || '').split(/\s+/);
 				assert(
 					relTokens.includes('noopener') && relTokens.includes('noreferrer'),
 					`${sourceFile} external link ${attrs.href} should use rel="noopener noreferrer".`,

@@ -162,6 +162,10 @@ function checkScriptLoading() {
 	assert(appJs.includes('prefersReducedMotion'), 'Motion effects must honor prefers-reduced-motion.');
 	assert(appJs.includes('hasSaveDataPreference'), 'Heavy motion effects must honor Save-Data.');
 	assert(appJs.includes('shouldRunWebGLPortrait'), 'WebGL portrait must stay behind capability/preference checks.');
+	assert(appJs.includes('runSafely(initHeroCardAnimation)'), 'Hero card animation should stay behind lazy GSAP startup.');
+	assert(appJs.includes('runSafely(initWebGLExperience)'), 'WebGL effects should start through the lazy Three.js loader.');
+	assert(appJs.includes('loadScript(motionScriptSources.gsap)'), 'GSAP should stay lazy-loaded.');
+	assert(appJs.includes('loadScript(motionScriptSources.three)'), 'Three.js should stay lazy-loaded.');
 }
 
 function checkImages() {
@@ -250,6 +254,9 @@ function checkDiscoveryMetadata() {
 			`${relativePath} should include canonical URL ${canonicalUrl}.`,
 		);
 		assert(sitemap.includes(`<loc>${canonicalUrl}</loc>`), `sitemap.xml should include ${canonicalUrl}.`);
+		assert(sitemap.includes('<lastmod>2026-05-12</lastmod>'), 'sitemap.xml should keep explicit lastmod metadata.');
+		assert(sitemap.includes('<changefreq>'), 'sitemap.xml should keep changefreq metadata.');
+		assert(sitemap.includes('<priority>'), 'sitemap.xml should keep priority metadata.');
 	});
 }
 

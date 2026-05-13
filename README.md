@@ -70,6 +70,7 @@ node --check js/app.js
 node --check js/projects.js
 node scripts/check-static-site.mjs
 node scripts/check-links.mjs
+node scripts/check-lighthouse-result.mjs --help
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
@@ -80,6 +81,10 @@ references, and project-card links before changes reach GitHub Pages.
 Deploy-preview evidence should be captured separately with the real preview URL,
 date, viewport mode, and tool used. Do not publish Lighthouse or performance
 claims unless the result has actually been captured.
+
+The manual `Lighthouse evidence` GitHub workflow accepts a deployed URL, captures
+a JSON report, checks it against `lighthouse-budget.json`, and stores the report
+as an artifact for review.
 
 ## Deployment
 

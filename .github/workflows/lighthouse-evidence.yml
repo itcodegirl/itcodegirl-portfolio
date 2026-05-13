@@ -1,0 +1,44 @@
+name: Lighthouse evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_url:
+        description: URL to audit, usually a Netlify deploy preview or production page.
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Capture Lighthouse JSON
+        run: >
+          npx --yes lighthouse@12
+          "${{ inputs.target_url }}"
+          --output=json
+          --output-path=./lighthouse-result.json
+          --chrome-flags="--headless --no-sandbox"
+          --quiet
+
+      - name: Check Lighthouse budgets
+        run: node scripts/check-lighthouse-result.mjs lighthouse-result.json
+
+      - name: Upload Lighthouse evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-result
+          path: lighthouse-result.json

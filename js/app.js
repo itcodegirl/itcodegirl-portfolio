@@ -266,7 +266,8 @@ function runSafely(callback) {
 window.addEventListener("load", () => {
 	if (prefersReducedMotion.matches) return;
 
-	runSafely(initWebGL);
+	runSafely(initHeroCardAnimation);
+	runSafely(initWebGLExperience);
 });
 
 const contactForm = document.getElementById("contactForm");
@@ -407,6 +408,145 @@ if (contactForm && formStatus) {
 			btn.disabled = false;
 			btn.innerHTML = "Send message <span aria-hidden='true'>&rarr;</span>";
 		}
+	});
+}
+
+async function initHeroCardAnimation() {
+	if (!shouldRunHeroCardAnimation()) return;
+
+	try {
+		await loadScript(motionScriptSources.gsap);
+	} catch (error) {
+		console.warn("GSAP failed to load; skipping hero animation.", error);
+		return;
+	}
+
+	if (typeof gsap === "undefined") {
+		console.warn("GSAP unavailable; skipping hero animation.");
+		return;
+	}
+
+	gsap.from(".hero-card", {
+		y: 40,
+		scale: 0.96,
+		duration: 1.1,
+		ease: "power3.out",
+		delay: 0.2
+	});
+}
+
+async function initWebGLExperience() {
+	if (!shouldRunWebGLPortrait()) return;
+
+	try {
+		await loadScript(motionScriptSources.three);
+	} catch (error) {
+		console.warn("Three.js failed to load; keeping the static portrait.", error);
+		return;
+	}
+
+	if (typeof THREE === "undefined") {
+		console.warn("Three.js unavailable; keeping the static portrait.");
+		return;
+	}
+
+	if (!shouldRunWebGLPortrait()) return;
+
+	initWebGL();
+	initBackgroundWebGL();
+}
+
+function initBackgroundWebGL() {
+	const canvas = document.getElementById("webgl");
+	if (!canvas || typeof THREE === "undefined") return;
+
+	const scene = new THREE.Scene();
+
+	const camera = new THREE.PerspectiveCamera(
+		75,
+		window.innerWidth / window.innerHeight,
+		0.1,
+		100
+	);
+
+	camera.position.z = 2;
+
+	const renderer = new THREE.WebGLRenderer({
+		canvas,
+		alpha: true,
+		antialias: true
+	});
+
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+	const geometry = new THREE.PlaneGeometry(4, 4, 64, 64);
+
+	const material = new THREE.ShaderMaterial({
+		uniforms: {
+			uTime: { value: 0 }
+		},
+		vertexShader: `
+			varying vec2 vUv;
+
+			void main() {
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+			}
+		`,
+		fragmentShader: `
+			uniform float uTime;
+			varying vec2 vUv;
+
+			void main() {
+				float waveA = sin(vUv.x * 8.0 + uTime * 0.8) * 0.035;
+				float waveB = cos(vUv.y * 6.0 + uTime * 0.6) * 0.025;
+
+				vec3 base = vec3(0.025, 0.03, 0.06);
+				vec3 purple = vec3(0.28, 0.08, 0.45);
+				vec3 blue = vec3(0.02, 0.22, 0.35);
+
+				vec3 color = base + waveA * purple + waveB * blue;
+
+				gl_FragColor = vec4(color, 0.95);
+			}
+		`,
+		transparent: true
+	});
+
+	const mesh = new THREE.Mesh(geometry, material);
+	mesh.position.z = -1;
+	scene.add(mesh);
+
+	let bgFrame = 0;
+	function animateBackground() {
+		material.uniforms.uTime.value += 0.01;
+		renderer.render(scene, camera);
+		bgFrame = requestAnimationFrame(animateBackground);
+	}
+
+	function startBg() {
+		if (!bgFrame) bgFrame = requestAnimationFrame(animateBackground);
+	}
+
+	function stopBg() {
+		if (bgFrame) {
+			cancelAnimationFrame(bgFrame);
+			bgFrame = 0;
+		}
+	}
+
+	startBg();
+
+	// Pause when the tab is hidden to avoid wasted GPU/CPU work.
+	document.addEventListener("visibilitychange", () => {
+		if (document.hidden) stopBg(); else startBg();
+	});
+
+	window.addEventListener("resize", () => {
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(window.innerWidth, window.innerHeight);
 	});
 }
 

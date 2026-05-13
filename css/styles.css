@@ -685,6 +685,9 @@ section h2::after {
 }
 
 .footer-links a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
 	font-size: 0.85rem;
 	color: var(--text-muted);
 	text-decoration: none;
@@ -708,6 +711,12 @@ section h2::after {
 		flex-direction: column;
 		text-align: center;
 		gap: 14px;
+	}
+
+	.footer-links {
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 4px 18px;
 	}
 }
 
@@ -831,34 +840,48 @@ section h2::after {
 	}
 
 	.nav-inner {
-		align-items: flex-start;
-		flex-wrap: wrap;
-		gap: 10px;
+		align-items: center;
+		flex-wrap: nowrap;
+		gap: 12px;
 	}
 
 	.logo {
 		font-size: 1.5rem;
+		flex: 0 0 auto;
 	}
 
 	.site-header .nav {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 6px 14px;
-		width: 100%;
+		flex: 1 1 auto;
+		flex-wrap: nowrap;
+		justify-content: flex-end;
+		gap: 8px;
+		width: auto;
+		min-width: 0;
 	}
 
 	.nav a {
 		margin-left: 0;
-		padding: 10px 4px;
+		padding: 10px 6px;
 		font-size: 0.92rem;
 		min-height: 44px;
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+	}
+
+	.nav a[data-mobile-nav="secondary"] {
+		display: none;
+	}
+
+	.nav-resume {
+		padding: 10px 12px;
 	}
 
 	section {
 		padding: 64px 20px;
-		scroll-margin-top: 140px;
+		scroll-margin-top: 96px;
 	}
 
 	section h2 {
@@ -972,6 +995,15 @@ section h2::after {
 
 	.nav a {
 		font-size: 0.86rem;
+		padding-inline: 4px;
+	}
+
+	.site-header .nav {
+		gap: 6px;
+	}
+
+	.nav-resume {
+		padding-inline: 9px;
 	}
 
 	section {
@@ -1024,6 +1056,15 @@ button:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+	.site-header,
+	.nav {
+		transition: none !important;
+	}
+
+	.site-header.nav-hidden {
+		transform: none;
+	}
 
 	html,
 	body {

@@ -73,8 +73,6 @@
 </head>
 
 <body>
-	<canvas id="webgl" aria-hidden="true"></canvas>
-
 	<a class="skip-link" href="#main-content">Skip to main content</a>
 
 	<div class="scroll-progress" aria-hidden="true"></div>
@@ -83,11 +81,11 @@
 		<div class="nav-inner">
 			<a class="logo" href="#main-content" aria-label="Jenna Zawaski home">JZ</a>
 			<nav class="nav" aria-label="Primary navigation">
-				<a href="#work">Work</a>
-				<a href="#skills">Skills</a>
-				<a href="#about">About</a>
-				<a href="#contact">Contact</a>
-				<a href="assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+				<a href="#work" data-mobile-nav="primary">Work</a>
+				<a href="#skills" data-mobile-nav="secondary">Skills</a>
+				<a href="#about" data-mobile-nav="secondary">About</a>
+				<a href="#contact" data-mobile-nav="primary">Contact</a>
+				<a href="assets/JennaZawaski-Resume.pdf" class="nav-resume" data-mobile-nav="primary" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
 			</nav>
 		</div>
 	</header>
@@ -348,6 +346,8 @@
 			<p class="footer-copy">© 2026 Jenna Zawaski</p>
 			<nav class="footer-links" aria-label="Footer navigation">
 				<a href="work/">Work</a>
+				<a href="#skills">Skills</a>
+				<a href="#about">About</a>
 				<a href="notes/">Notes</a>
 				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
 				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>

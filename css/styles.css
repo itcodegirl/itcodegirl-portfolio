@@ -687,7 +687,8 @@ section h2::after {
 	align-items: center;
 	min-height: 44px;
 	font-size: 0.85rem;
-	color: var(--text-muted);
+	color: var(--text-secondary);
+	opacity: 1;
 	text-decoration: none;
 	transition: color 0.2s ease;
 }

@@ -111,6 +111,7 @@ function shouldRunWebGLPortrait() {
 
 const scrollProgress = document.querySelector(".scroll-progress");
 const nav = document.querySelector(".site-header");
+let revealObserver = null;
 
 // Single rAF-batched scroll handler driving both the progress bar and the
 // nav hide-on-scroll behaviour. Avoids two raw scroll listeners running per
@@ -121,15 +122,29 @@ let scrollFrame = 0;
 function onScrollFrame() {
 	scrollFrame = 0;
 	const y = window.scrollY;
+	const reducedMotion = prefersReducedMotion.matches;
 
-	if (scrollProgress) {
+	if (scrollProgress && !reducedMotion) {
 		const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
 		const ratio = maxScroll > 0 ? y / maxScroll : 0;
 		scrollProgress.style.transform = `scaleX(${ratio})`;
 	}
 
 	if (nav) {
-		if (y > lastScrollY && y > 90) {
+		if (reducedMotion) {
+			nav.classList.remove("nav-hidden");
+			lastScrollY = y;
+			return;
+		}
+
+		const navContainsFocus = nav.contains(document.activeElement);
+		const isNearTop = y <= 90;
+		const isScrollingDown = y > lastScrollY;
+		const isScrollingUp = y < lastScrollY;
+
+		if (navContainsFocus || isNearTop || isScrollingUp) {
+			nav.classList.remove("nav-hidden");
+		} else if (isScrollingDown) {
 			nav.classList.add("nav-hidden");
 		} else {
 			nav.classList.remove("nav-hidden");
@@ -139,11 +154,76 @@ function onScrollFrame() {
 	lastScrollY = y;
 }
 
+function setupRevealObserver() {
+	if (prefersReducedMotion.matches || revealObserver) return;
+
+	const revealEls = document.querySelectorAll(
+		".skill-card, .project-card, .about-content, .about-image, .contact-card"
+	);
+
+	if (!revealEls.length) return;
+
+	revealObserver = new IntersectionObserver(entries => {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add("revealed");
+				revealObserver.unobserve(entry.target);
+			}
+		});
+	}, { threshold: 0.1 });
+
+	revealEls.forEach(el => {
+		if (el.classList.contains("revealed")) return;
+		el.classList.add("reveal");
+		revealObserver.observe(el);
+	});
+}
+
+function syncReducedMotionState() {
+	if (prefersReducedMotion.matches) {
+		if (nav) {
+			nav.classList.remove("nav-hidden");
+		}
+
+		if (scrollProgress) {
+			scrollProgress.style.transform = "";
+		}
+
+		if (revealObserver) {
+			revealObserver.disconnect();
+			revealObserver = null;
+		}
+
+		document.querySelectorAll(".reveal").forEach(el => {
+			el.classList.remove("reveal");
+			el.classList.add("revealed");
+		});
+
+		lastScrollY = window.scrollY;
+		return;
+	}
+
+	setupRevealObserver();
+	onScrollFrame();
+}
+
 if (scrollProgress || nav) {
 	window.addEventListener("scroll", () => {
 		if (scrollFrame) return;
 		scrollFrame = requestAnimationFrame(onScrollFrame);
 	}, { passive: true });
+}
+
+if (nav) {
+	nav.addEventListener("focusin", () => {
+		nav.classList.remove("nav-hidden");
+	});
+}
+
+if (typeof prefersReducedMotion.addEventListener === "function") {
+	prefersReducedMotion.addEventListener("change", syncReducedMotionState);
+} else if (typeof prefersReducedMotion.addListener === "function") {
+	prefersReducedMotion.addListener(syncReducedMotionState);
 }
 
 // Active nav link tracks current section
@@ -164,23 +244,8 @@ if (sections.length && navLinks.length) {
 }
 
 // Scroll reveal for cards and sections
-if (!prefersReducedMotion.matches) {
-	const revealEls = document.querySelectorAll(
-		".skill-card, .project-card, .about-content, .about-image, .contact-card"
-	);
-	const revealObserver = new IntersectionObserver(entries => {
-		entries.forEach(entry => {
-			if (entry.isIntersecting) {
-				entry.target.classList.add("revealed");
-				revealObserver.unobserve(entry.target);
-			}
-		});
-	}, { threshold: 0.1 });
-	revealEls.forEach(el => {
-		el.classList.add("reveal");
-		revealObserver.observe(el);
-	});
-}
+setupRevealObserver();
+syncReducedMotionState();
 
 let webGLInitialized = false;
 

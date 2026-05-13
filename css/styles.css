@@ -824,29 +824,38 @@ section h2::after {
 	}
 
 	.nav-inner {
-		align-items: flex-start;
-		flex-wrap: wrap;
-		gap: 10px;
+		align-items: center;
+		flex-wrap: nowrap;
+		gap: 12px;
 	}
 
 	.logo {
 		font-size: 1.5rem;
+		flex-shrink: 0;
 	}
 
 	.nav nav {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 6px 14px;
-		width: 100%;
+		flex-wrap: nowrap;
+		justify-content: flex-end;
+		gap: 6px 10px;
+		width: auto;
+		margin-left: auto;
 	}
 
 	nav a {
 		margin-left: 0;
-		padding: 10px 4px;
-		font-size: 0.92rem;
-		min-height: 44px;
+		padding: 8px 2px;
+		font-size: 0.84rem;
+		min-height: 40px;
 		display: inline-flex;
 		align-items: center;
+		white-space: nowrap;
+	}
+
+	.nav-resume {
+		padding: 7px 10px;
+		font-size: 0.82rem !important;
 	}
 
 	section {
@@ -964,7 +973,12 @@ section h2::after {
 	}
 
 	nav a {
-		font-size: 0.86rem;
+		font-size: 0.8rem;
+	}
+
+	.nav-resume {
+		padding: 6px 8px;
+		font-size: 0.76rem !important;
 	}
 
 	section {

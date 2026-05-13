@@ -60,6 +60,9 @@
 				The repository has a static quality check that protects the basics:
 				total JavaScript, total CSS, image weight, resume PDF weight, image
 				dimensions, async image decoding, and contact-form accessibility.
+				The separate Lighthouse budget is an aspirational production-quality
+				gate for deployed reports, not a claim that the site currently has
+				passing Lighthouse evidence.
 			</p>
 
 			<h2>The lightweight JavaScript rule</h2>
@@ -104,7 +107,9 @@
 				Lighthouse scores should be captured only from a real deploy URL and
 				recorded with the date, URL, viewport mode, and any known limitations.
 				If a score is not captured yet, the site should say that plainly rather
-				than presenting a target as a result.
+				than presenting a target as a result. The production thresholds in
+				<code>lighthouse-budget.json</code> define the quality bar to verify
+				against; they are not published results on their own.
 			</p>
 
 			<p class="notes-back">

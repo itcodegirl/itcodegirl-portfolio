@@ -1,0 +1,36 @@
+name: Static quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: static-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static-quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/app.js
+          node --check js/projects.js
+
+      - name: Check static performance and accessibility guardrails
+        run: node scripts/check-static-site.mjs

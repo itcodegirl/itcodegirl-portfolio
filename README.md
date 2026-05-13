@@ -1,7 +1,7 @@
 # itcodegirl-portfolio
 
-Personal portfolio for Jenna Zawaski, a Chicago-based frontend developer focused
-on building polished, accessible, product-minded web experiences.
+Personal portfolio for Jenna Zawaski, a UX-focused frontend developer building
+polished, accessible product interfaces with real product behavior.
 
 Live site: https://itcodegirl.com
 
@@ -9,17 +9,18 @@ Live site: https://itcodegirl.com
 
 A lightweight vanilla HTML/CSS/JS portfolio focused on accessible UI,
 product-minded case studies, responsive design, performance-conscious assets,
-and recruiter-friendly navigation.
+and recruiter-friendly navigation. There is no build step, no bundler, and no
+framework.
 
 The portfolio demonstrates frontend craft through the site itself
-(layout, accessibility, responsive behavior, and performance discipline) and
+(layout, UX clarity, accessible interface patterns, responsive behavior, and
+performance discipline) and
 points visitors to the real product work it represents.
 
 ## Stack
 
-- HTML5 (semantic landmarks, accessible form patterns)
-- CSS3 (custom properties, responsive design, `prefers-reduced-motion` and
-  `forced-colors` support)
+- HTML5 (semantic landmarks, labeled form patterns)
+- CSS3 (custom properties, responsive design)
 - JavaScript (vanilla, modular by file)
 - Google Fonts (Inter, Playfair Display)
 - [Formspree](https://formspree.io/) for contact form delivery
@@ -41,7 +42,7 @@ The primary story is UX-focused frontend product work with clear evidence.
 |   |-- app.js                  # page bootstrapping, scroll, contact form
 |   `-- projects.js             # selected work data + rendering
 |-- scripts/
-|   `-- check-static-site.mjs   # static performance/accessibility guardrails
+|   `-- check-static-site.mjs   # static performance and structure guardrails
 |-- notes/
 |   |-- index.html              # engineering notes index
 |   |-- site-performance.html   # performance notes and budget decisions
@@ -123,12 +124,13 @@ node scripts/check-lighthouse-result.mjs --help
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
-local script loading, scroll safety, contact-form accessibility, and local link
+local script loading, scroll and reveal behavior, contact-form accessibility,
+and local link
 integrity.
 The link check verifies internal page links, fragments, static assets, CSS
 references, and project-card links before changes reach GitHub Pages.
 The route-readiness check protects critical page structure: one H1, skip-link
-wiring, canonical metadata, duplicate IDs, case-study sections, and accessible
+wiring, canonical metadata, duplicate IDs, case-study sections, and clear
 link-name alignment.
 The external-link check inventories off-site URLs locally. Run
 `node scripts/check-external-links.mjs --live` or the manual `External URL health`
@@ -149,7 +151,7 @@ URLs should still meet the normal SEO budget.
 Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 `itcodegirl.com`.
 
-## Accessibility and motion
+## Accessibility and interface checks
 
 - All interactive elements have visible focus states.
 - A skip link is the first focusable element.
@@ -193,7 +195,8 @@ invented numbers.
 ## Roadmap
 
 - Add measurable accessibility and performance evidence for the homepage and
-  case-study pages.
+  case-study pages from deployed previews.
 - Refresh product screenshots and supporting media as newer captures become
   available.
-- Continue tightening LCP image weight, font loading, and static quality checks.
+- Continue tightening LCP image weight, responsive images, font loading, and
+  static quality checks.

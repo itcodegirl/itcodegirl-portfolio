@@ -250,26 +250,13 @@ function createProjectProofList(proofPoints, projectTitle) {
 function createProjectTechList(techItems) {
 	const techList = document.createElement("ul");
 	techList.className = "project-tech";
+	techList.setAttribute("aria-label", "Technology used");
 
 	techItems.forEach((tech) => {
 		appendTextElement(techList, "li", "", tech);
 	});
 
 	return techList;
-}
-
-function createProjectHighlights(highlights) {
-	const highlightsList = document.createElement("ul");
-	highlightsList.className = "case-study-preview";
-
-	highlights.forEach((highlight) => {
-		const item = document.createElement("li");
-		appendTextElement(item, "span", "case-label", highlight.label);
-		appendTextElement(item, "p", "", highlight.text);
-		highlightsList.appendChild(item);
-	});
-
-	return highlightsList;
 }
 
 function createScreenshot(project) {
@@ -369,22 +356,12 @@ function createProjectCard(project) {
 		article.appendChild(createProjectProofList(project.proofAvailable, project.title));
 	}
 
-	if (project.subtext) {
-		project.subtext.forEach((text) => {
-			appendTextElement(article, "p", "project-subtext", text);
-		});
-	}
-
 	if (project.role) {
 		const roleParagraph = document.createElement("p");
 		roleParagraph.className = "project-role";
 		appendTextElement(roleParagraph, "span", "project-role-label", "My role");
-		roleParagraph.append(` — ${project.role}`);
+		roleParagraph.append(` - ${project.role}`);
 		article.appendChild(roleParagraph);
-	}
-
-	if (project.highlights) {
-		article.appendChild(createProjectHighlights(project.highlights));
 	}
 
 	article.appendChild(createProjectTechList(project.tech));

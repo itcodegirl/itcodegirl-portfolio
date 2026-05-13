@@ -5,8 +5,8 @@
 .work-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: 30px;
-	margin-top: 60px;
+	gap: 24px;
+	margin-top: 46px;
 }
 
 .work {
@@ -88,9 +88,9 @@
 
 .project-role {
 	font-size: 0.9rem;
-	line-height: 1.6;
+	line-height: 1.5;
 	color: rgba(255, 255, 255, 0.78);
-	padding-left: 14px;
+	padding-left: 12px;
 	border-left: 2px solid rgba(168, 85, 247, 0.45);
 }
 
@@ -113,10 +113,10 @@
 	height: auto;
 	object-fit: cover;
 	object-position: var(--project-image-position, top center);
-	border-radius: 12px;
+	border-radius: 8px;
 	border: 1px solid rgba(255, 255, 255, 0.14);
 	display: block;
-	margin-bottom: 4px;
+	margin-bottom: 0;
 	box-shadow:
 		0 18px 36px rgba(0, 0, 0, 0.35),
 		inset 0 0 0 1px rgba(255, 255, 255, 0.03);
@@ -125,11 +125,11 @@
 .project-card {
 	background: rgba(255, 255, 255, 0.04);
 	border: 1px solid rgba(255, 255, 255, 0.1);
-	border-radius: 16px;
-	padding: 28px;
+	border-radius: 10px;
+	padding: 24px;
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 12px;
 	transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 	height: 100%;
 	position: relative;
@@ -169,7 +169,7 @@
 }
 
 .project-card h3 {
-	font-size: 1.3rem;
+	font-size: 1.24rem;
 	margin: 0;
 }
 
@@ -177,6 +177,7 @@
 	font-size: 0.95rem;
 	color: rgba(255, 255, 255, 0.7);
 	line-height: 1.5;
+	margin: 0;
 }
 
 .project-evidence {
@@ -350,15 +351,19 @@
 
 .project-card-featured {
 	grid-column: span 2;
-	min-height: 360px;
+	min-height: 0;
 	background:
 		linear-gradient(135deg, rgba(168, 85, 247, 0.16), rgba(13, 148, 136, 0.08)),
 		rgba(255, 255, 255, 0.04);
 	border-color: rgba(168, 85, 247, 0.35);
 }
 
+.project-card-featured .project-screenshot {
+	height: clamp(240px, 38vw, 390px);
+}
+
 .project-card-featured h3 {
-	font-size: 1.75rem;
+	font-size: 1.6rem;
 }
 
 .project-card-featured .project-description {
@@ -413,55 +418,9 @@
 	background: rgba(168, 85, 247, 0.35);
 }
 
-.case-study-preview {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 18px;
-	list-style: none;
-	margin: 10px 0 6px;
-	padding: 0;
-}
-
-.case-study-preview li {
-	padding: 16px;
-	border-radius: 14px;
-	background: rgba(255, 255, 255, 0.045);
-	border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.case-label {
-	display: block;
-	margin-bottom: 8px;
-	font-size: 0.72rem;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	color: #d8b4fe;
-}
-
-.case-study-preview p {
-	font-size: 0.85rem;
-	line-height: 1.5;
-	color: rgba(255, 255, 255, 0.78);
-}
-
-.case-study-preview li:hover {
-	transform: translateY(-4px);
-	border-color: rgba(168, 85, 247, 0.3);
-}
-
-.project-subtext {
-	font-size: 0.85rem;
-	color: rgba(255, 255, 255, 0.6);
-	line-height: 1.6;
-}
-
 @media (max-width: 1024px) {
 	.work-grid {
 		gap: 24px;
-	}
-
-	.case-study-preview {
-		gap: 14px;
 	}
 }
 
@@ -498,9 +457,6 @@
 		font-size: 1.45rem;
 	}
 
-	.case-study-preview {
-		grid-template-columns: repeat(2, 1fr);
-	}
 }
 
 @media (max-width: 600px) {
@@ -518,8 +474,8 @@
 
 	.project-card {
 		padding: 20px;
-		border-radius: 14px;
-		gap: 14px;
+		border-radius: 10px;
+		gap: 12px;
 	}
 
 	.project-card h3,
@@ -531,21 +487,12 @@
 		font-size: 1.3rem;
 	}
 
+	.project-card-featured .project-screenshot {
+		height: auto;
+	}
+
 	.project-description {
 		font-size: 0.92rem;
-	}
-
-	.project-subtext {
-		font-size: 0.82rem;
-	}
-
-	.case-study-preview {
-		grid-template-columns: 1fr;
-		gap: 10px;
-	}
-
-	.case-study-preview li {
-		padding: 14px;
 	}
 
 	.project-link-btn {

@@ -76,9 +76,11 @@
 
 			<h2>The current tradeoff</h2>
 			<p>
-				The portfolio is intentionally static, but it still uses JavaScript to
-				render project cards from structured data. That keeps the markup easier
-				to update, while the script stays small enough to read and audit.
+				The portfolio is intentionally static, but it still has a small amount
+				of JavaScript for project-card rendering, scroll progress, reveal
+				states, active navigation, and accessible contact form validation.
+				That keeps the interaction layer useful without turning the portfolio
+				into an application shell.
 			</p>
 
 			<h2>The next improvement</h2>
@@ -91,8 +93,9 @@
 			<h2>Evidence workflow</h2>
 			<p>
 				Local checks protect the structure before deploy: JavaScript syntax,
-				static budgets, image attributes, contact-form accessibility, and
-				internal link integrity. Deploy-preview checks should then verify the
+				static budgets, image attributes, local scripts, contact-form
+				accessibility, and internal link integrity. Deploy-preview checks
+				should then verify the
 				homepage, work index, each case study, notes, sitemap, and robots file.
 			</p>
 			<p>

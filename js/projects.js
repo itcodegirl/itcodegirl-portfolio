@@ -35,7 +35,7 @@ const projects = [
 		],
 		image: "assets/images/projects/codeherway-dashboard.webp",
 		imagePosition: "top center",
-		imageAlt: "CodeHerWay Education Platform dashboard interface screenshot",
+		imageAlt: "CodeHerWay Education Platform landing and account creation interface screenshot",
 		tech: ["React", "Supabase", "PostgreSQL", "JavaScript", "Vite"],
 		links: [
 			{

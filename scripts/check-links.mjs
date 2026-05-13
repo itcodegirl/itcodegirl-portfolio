@@ -59,6 +59,7 @@ function sitePathToFile(pathname) {
 }
 
 function isIgnoredReference(reference) {
+	// Hash-only links must stay checkable so same-page anchors are verified.
 	return (
 		!reference ||
 		reference.startsWith('mailto:') ||
@@ -67,6 +68,14 @@ function isIgnoredReference(reference) {
 		reference.startsWith('data:') ||
 		reference.startsWith('javascript:')
 	);
+}
+
+function decodeFragment(fragment) {
+	try {
+		return decodeURIComponent(fragment);
+	} catch {
+		return null;
+	}
 }
 
 function isInternalUrl(url) {
@@ -80,6 +89,10 @@ function getAttributes(tag) {
 			value,
 		]),
 	);
+}
+
+function getRelTokens(attrs) {
+	return (attrs.rel || '').trim().split(/\s+/).filter(Boolean);
 }
 
 function isExternalHttpReference(reference, baseFile) {
@@ -97,7 +110,9 @@ function hasFragmentTarget(relativePath, fragment) {
 	if (!fragment) return true;
 	if (!relativePath.endsWith('.html')) return true;
 
-	const decodedFragment = decodeURIComponent(fragment);
+	const decodedFragment = decodeFragment(fragment);
+	if (!decodedFragment) return false;
+
 	const html = readFile(relativePath);
 	const quoted = decodedFragment.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const targetPattern = new RegExp(`\\s(?:id|name)=["']${quoted}["']`, 'i');
@@ -165,7 +180,7 @@ function checkHtmlReferences() {
 				const attrs = getAttributes(tag);
 				if (!isExternalHttpReference(attrs.href, sourceFile) || attrs.target !== '_blank') return;
 
-				const relTokens = (attrs.rel || '').split(/\s+/);
+				const relTokens = getRelTokens(attrs);
 				assert(
 					relTokens.includes('noopener') && relTokens.includes('noreferrer'),
 					`${sourceFile} external link ${attrs.href} should use rel="noopener noreferrer".`,

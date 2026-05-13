@@ -148,24 +148,20 @@ function checkScriptLoading() {
 
 		assert(
 			remoteScripts.length === 0,
-			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep motion libraries lazy.`,
+			`${relativePath} loads remote scripts directly: ${remoteScripts.join(', ')}. Keep portfolio behavior in local scripts.`,
 		);
 		assert(
 			!html.includes('href="https://cdn.jsdelivr.net"'),
-			`${relativePath} should not preconnect to jsdelivr unless a motion script is being loaded.`,
+			`${relativePath} should not preconnect to jsdelivr because page behavior uses local scripts.`,
 		);
 	});
 
 	const appJs = readFile('js/app.js');
 	assert(appJs.includes('requestAnimationFrame(onScrollFrame)'), 'Scroll updates must stay requestAnimationFrame-batched.');
 	assert(appJs.includes('{ passive: true }'), 'Scroll listener should stay passive.');
-	assert(appJs.includes('prefersReducedMotion'), 'Motion effects must honor prefers-reduced-motion.');
-	assert(appJs.includes('hasSaveDataPreference'), 'Heavy motion effects must honor Save-Data.');
-	assert(appJs.includes('shouldRunWebGLPortrait'), 'WebGL portrait must stay behind capability/preference checks.');
-	assert(appJs.includes('runSafely(initHeroCardAnimation)'), 'Hero card animation should stay behind lazy GSAP startup.');
-	assert(appJs.includes('runSafely(initWebGLExperience)'), 'WebGL effects should start through the lazy Three.js loader.');
-	assert(appJs.includes('loadScript(motionScriptSources.gsap)'), 'GSAP should stay lazy-loaded.');
-	assert(appJs.includes('loadScript(motionScriptSources.three)'), 'Three.js should stay lazy-loaded.');
+	assert(appJs.includes('prefersReducedMotion'), 'Decorative reveals must honor prefers-reduced-motion.');
+	assert(!/https?:\/\//.test(appJs), 'Portfolio page script should not embed remote runtime URLs.');
+	assert(!/createElement\(["']script["']\)/.test(appJs), 'Portfolio page script should not create runtime script tags.');
 }
 
 function checkImages() {
@@ -276,7 +272,10 @@ function checkEvidenceFramework() {
 	const readme = readFile('README.md');
 	const evidenceReadmePath = path.join(rootDir, 'assets/evidence/README.md');
 
-	assert(homeHtml.includes('Evidence, Not Just Claims'), 'Homepage should include Evidence, Not Just Claims section.');
+	assert(homeHtml.includes('Frontend Product Quality'), 'Homepage should include Frontend Product Quality section.');
+	['UX Systems', 'Accessible Interfaces', 'Product UI States', 'Performance-Minded Implementation'].forEach((cardTitle) => {
+		assert(homeHtml.includes(cardTitle), `Homepage product quality section should include ${cardTitle}.`);
+	});
 	assert(homeHtml.includes('90-Second Review Path'), 'Homepage should include 90-Second Review Path section.');
 	assert(codeHerWayHtml.includes('Evidence Snapshot'), 'CodeHerWay case study should include Evidence Snapshot.');
 	assert(

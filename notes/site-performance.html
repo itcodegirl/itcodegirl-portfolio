@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 	<meta name="description"
-		content="How this portfolio keeps performance and accessibility honest with static budgets, lazy motion, and lightweight quality checks.">
+		content="How this portfolio keeps performance and accessibility honest with static budgets, local scripts, and lightweight quality checks.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/notes/site-performance.html">
@@ -60,12 +60,11 @@
 				dimensions, async image decoding, and contact-form accessibility.
 			</p>
 
-			<h2>The decorative enhancement rule</h2>
+			<h2>The lightweight JavaScript rule</h2>
 			<p>
-				The optional portrait enhancement is not loaded from the HTML. Its
-				libraries are requested only when the browser supports the effect, the
-				visitor has not asked for reduced motion, Save-Data is off, and the
-				device is not a coarse pointer mobile device.
+				The homepage uses local scripts only. JavaScript is scoped to project
+				card rendering, requestAnimationFrame-batched scroll progress, reveal
+				states, navigation behavior, and accessible contact form validation.
 			</p>
 
 			<h2>The image rule</h2>
@@ -77,9 +76,9 @@
 
 			<h2>The current tradeoff</h2>
 			<p>
-				The portfolio is intentionally static, but it still uses two rich
-				motion libraries for one visual moment. That is why the libraries are
-				gated and lazy instead of treated as part of the critical path.
+				The portfolio is intentionally static, but it still uses JavaScript to
+				render project cards from structured data. That keeps the markup easier
+				to update, while the script stays small enough to read and audit.
 			</p>
 
 			<h2>The next improvement</h2>

@@ -45,7 +45,7 @@
 		<article class="note-article">
 			<p class="notes-eyebrow">Engineering note</p>
 			<h1>How this portfolio keeps performance honest.</h1>
-			<p class="note-meta">Performance budget · ~2 min read</p>
+			<p class="note-meta">Performance budget · ~3 min read</p>
 
 			<p>
 				A portfolio should feel polished, but it should also load quickly and
@@ -87,6 +87,20 @@
 				The next useful step is deployed Lighthouse evidence for the homepage
 				and case-study pages, plus a small visual regression pass on mobile.
 				That would make the quality bar measurable outside a local machine.
+			</p>
+
+			<h2>Evidence workflow</h2>
+			<p>
+				Local checks protect the structure before deploy: JavaScript syntax,
+				static budgets, image attributes, contact-form accessibility, and
+				internal link integrity. Deploy-preview checks should then verify the
+				homepage, work index, each case study, notes, sitemap, and robots file.
+			</p>
+			<p>
+				Lighthouse scores should be captured only from a real deploy URL and
+				recorded with the date, URL, viewport mode, and any known limitations.
+				If a score is not captured yet, the site should say that plainly rather
+				than presenting a target as a result.
 			</p>
 
 			<p class="notes-back">

@@ -77,6 +77,10 @@ lazy motion loading, scroll safety, contact-form accessibility, and local link i
 The link check verifies internal page links, fragments, static assets, CSS
 references, and project-card links before changes reach GitHub Pages.
 
+Deploy-preview evidence should be captured separately with the real preview URL,
+date, viewport mode, and tool used. Do not publish Lighthouse or performance
+claims unless the result has actually been captured.
+
 ## Deployment
 
 Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to

@@ -39,6 +39,10 @@ function getAttributes(tag) {
 	);
 }
 
+function getRelTokens(attrs) {
+	return (attrs.rel || '').trim().split(/\s+/).filter(Boolean);
+}
+
 function pageUrl(relativePath) {
 	if (relativePath === 'index.html') return `${siteOrigin}/`;
 	if (relativePath.endsWith('/index.html')) {
@@ -97,7 +101,7 @@ function collectHtmlUrls(urls) {
 
 			Array.from(html.matchAll(/<([a-z][a-z0-9:-]*)\b[^>]*>/gi), ([tag, tagName]) => {
 				const attrs = getAttributes(tag);
-				const relTokens = attrs.rel?.split(/\s+/) || [];
+				const relTokens = getRelTokens(attrs);
 
 				if (tagName.toLowerCase() === 'link' && relTokens.includes('preconnect')) return;
 

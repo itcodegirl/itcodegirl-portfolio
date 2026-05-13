@@ -16,6 +16,17 @@ const pageFiles = [
 	'work/codeherway/index.html',
 ];
 
+const canonicalPages = [
+	'index.html',
+	'notes/index.html',
+	'notes/site-performance.html',
+	'notes/why-vanilla.html',
+	'work/index.html',
+	'work/aura-weather/index.html',
+	'work/ceo-os/index.html',
+	'work/codeherway/index.html',
+];
+
 const cssFiles = [
 	'css/styles.css',
 	'css/hero.css',
@@ -190,11 +201,45 @@ function checkContactAccessibility() {
 	assert(appJs.includes('validateContactFields'), 'Contact form should validate fields before submitting.');
 }
 
+function getCanonicalUrl(relativePath) {
+	if (relativePath === 'index.html') return 'https://itcodegirl.com/';
+	if (relativePath.endsWith('/index.html')) {
+		return `https://itcodegirl.com/${relativePath.replace(/index\.html$/, '')}`;
+	}
+
+	return `https://itcodegirl.com/${relativePath}`;
+}
+
+function checkDiscoveryMetadata() {
+	assert(fs.existsSync(path.join(rootDir, 'robots.txt')), 'robots.txt is missing.');
+	assert(fs.existsSync(path.join(rootDir, 'sitemap.xml')), 'sitemap.xml is missing.');
+
+	const robots = readFile('robots.txt');
+	const sitemap = readFile('sitemap.xml');
+
+	assert(
+		robots.includes('Sitemap: https://itcodegirl.com/sitemap.xml'),
+		'robots.txt should point crawlers to the sitemap.',
+	);
+
+	canonicalPages.forEach((relativePath) => {
+		const canonicalUrl = getCanonicalUrl(relativePath);
+		const html = readFile(relativePath);
+
+		assert(
+			html.includes(`<link rel="canonical" href="${canonicalUrl}">`),
+			`${relativePath} should include canonical URL ${canonicalUrl}.`,
+		);
+		assert(sitemap.includes(`<loc>${canonicalUrl}</loc>`), `sitemap.xml should include ${canonicalUrl}.`);
+	});
+}
+
 checkRequiredFiles();
 checkBudgets();
 checkScriptLoading();
 checkImages();
 checkContactAccessibility();
+checkDiscoveryMetadata();
 
 if (failures.length) {
 	console.error('Static site quality check failed:');

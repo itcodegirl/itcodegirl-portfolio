@@ -52,6 +52,66 @@
 	max-width: 720px;
 }
 
+.directory-featured-cue,
+.case-proof-strip {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 10px;
+	width: fit-content;
+	max-width: min(100%, 760px);
+	margin-top: 22px;
+	padding: 10px 14px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.04);
+	color: rgba(255, 255, 255, 0.74);
+	font-size: 0.86rem;
+	line-height: 1.45;
+}
+
+.directory-featured-label {
+	font-size: 0.72rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: rgba(216, 180, 254, 0.88);
+	font-weight: 600;
+}
+
+.directory-featured-cue strong {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.case-proof-strip {
+	list-style: none;
+	padding: 0;
+}
+
+.case-proof-strip li,
+.work-card-proof li {
+	display: inline-flex;
+	align-items: center;
+	min-height: 34px;
+	padding: 7px 11px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	background: rgba(255, 255, 255, 0.04);
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 0.78rem;
+	font-weight: 500;
+	line-height: 1.35;
+}
+
+.case-proof-strip li::before,
+.work-card-proof li::before {
+	content: "";
+	width: 5px;
+	height: 5px;
+	margin-right: 8px;
+	border-radius: 50%;
+	background: rgba(192, 132, 252, 0.78);
+}
+
 .case-meta-list,
 .directory-meta-list {
 	display: grid;
@@ -380,6 +440,29 @@
 	transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
 
+.work-card--featured {
+	background:
+		linear-gradient(135deg, rgba(var(--accent-rgb), 0.12), rgba(13, 148, 136, 0.06)),
+		rgba(255, 255, 255, 0.04);
+	border-color: rgba(var(--accent-rgb), 0.35);
+	box-shadow: 0 22px 64px rgba(0, 0, 0, 0.3);
+}
+
+.work-card-badge {
+	display: inline-flex;
+	align-items: center;
+	width: fit-content;
+	min-height: 28px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	background: rgba(var(--accent-rgb), 0.18);
+	border: 1px solid rgba(var(--accent-rgb), 0.32);
+	color: #f4e8ff;
+	font-size: 0.72rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
 .work-card:hover,
 .work-card:focus-visible {
 	transform: translateY(-6px);
@@ -402,6 +485,15 @@
 .work-card p {
 	line-height: 1.65;
 	color: rgba(255, 255, 255, 0.68);
+}
+
+.work-card-proof {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .back-link {
@@ -459,6 +551,12 @@
 	.case-meta-list,
 	.directory-meta-list {
 		padding: 20px;
+	}
+
+	.directory-featured-cue,
+	.case-proof-strip {
+		border-radius: 18px;
+		padding: 10px 12px;
 	}
 
 	.case-visual {

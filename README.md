@@ -40,6 +40,8 @@ External libraries are loaded from a CDN and used only where they are needed.
 ├── js/
 │   ├── app.js              # page bootstrapping, scroll, WebGL, contact form
 │   └── projects.js         # selected work data + rendering
+├── scripts/
+│   └── check-static-site.mjs # static performance/accessibility guardrails
 ├── assets/
 │   ├── images/             # portrait + project images
 │   ├── headshot.{png,webp}
@@ -53,15 +55,24 @@ Project screenshots used by the Selected Work cards are stored in
 
 ## Running locally
 
-The site is fully static. Serve it with any static server, for example:
+The site is fully static. Serve it with any static server, such as VS Code
+Live Server, and visit the local URL it provides. A local server is recommended
+because the WebGL portrait loads a texture asynchronously and the `file://`
+protocol blocks it.
+
+## Quality checks
+
+There is no build step, but the repo does include lightweight checks that fit a
+static site:
 
 ```bash
-python3 -m http.server 8000
-# then visit http://localhost:8000
+node --check js/app.js
+node --check js/projects.js
+node scripts/check-static-site.mjs
 ```
 
-A local server is recommended because the WebGL portrait loads a texture
-asynchronously and the `file://` protocol blocks it.
+The static check protects JavaScript/CSS budgets, asset weight, image attributes,
+lazy motion loading, scroll safety, and contact-form accessibility.
 
 ## Deployment
 
@@ -82,6 +93,7 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 Short writeups live under `/notes/`. Linked from the homepage footer.
 
 - `/notes/why-vanilla.html` — why this site is vanilla JS instead of React.
+- `/notes/site-performance.html` — how the portfolio keeps performance honest.
 
 ## Case study structure
 

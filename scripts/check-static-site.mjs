@@ -201,6 +201,21 @@ function checkContactAccessibility() {
 	assert(appJs.includes('validateContactFields'), 'Contact form should validate fields before submitting.');
 }
 
+function checkNavigationStructure() {
+	canonicalPages.forEach((relativePath) => {
+		const html = readFile(relativePath);
+
+		assert(
+			html.includes('<header class="nav nav-show">'),
+			`${relativePath} should use the shared fixed navigation wrapper.`,
+		);
+		assert(
+			html.includes('<nav aria-label="Primary navigation">'),
+			`${relativePath} should keep primary navigation labelled without duplicating the nav wrapper class.`,
+		);
+	});
+}
+
 function getCanonicalUrl(relativePath) {
 	if (relativePath === 'index.html') return 'https://itcodegirl.com/';
 	if (relativePath.endsWith('/index.html')) {
@@ -239,6 +254,7 @@ checkBudgets();
 checkScriptLoading();
 checkImages();
 checkContactAccessibility();
+checkNavigationStructure();
 checkDiscoveryMetadata();
 
 if (failures.length) {

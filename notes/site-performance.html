@@ -14,12 +14,10 @@
 
 	<title>How this portfolio keeps performance honest | Jenna Zawaski</title>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link
-		href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap"
-		rel="stylesheet">
+	<link rel="preload" href="../assets/fonts/inter-latin-300-600.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="../assets/fonts/playfair-display-latin-600-700.woff2" as="font" type="font/woff2" crossorigin>
 
+	<link rel="stylesheet" href="../css/fonts.css">
 	<link rel="stylesheet" href="../css/styles.css">
 	<link rel="stylesheet" href="./notes.css">
 </head>
@@ -70,6 +68,13 @@
 				The homepage uses local scripts only. JavaScript is scoped to project
 				card rendering, frame-batched scroll progress, reveal
 				states, navigation behavior, and active section highlighting.
+			</p>
+
+			<h2>The font rule</h2>
+			<p>
+				Typography is served from local WOFF2 files instead of Google Fonts
+				runtime requests. The site keeps the same Inter and Playfair Display
+				identity while reducing third-party dependency during page load.
 			</p>
 
 			<h2>The image rule</h2>

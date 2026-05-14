@@ -107,7 +107,7 @@ function checkCommonPage(page) {
 
 function checkHome(html) {
 	assert(html.includes('id="projectsGrid"'), 'index.html should keep the selected work mount point.');
-	assert(html.includes('id="contactForm"'), 'index.html should keep the contact form.');
+	assert(html.includes('aria-label="Direct contact links"'), 'index.html should keep the direct contact link group.');
 	assert(html.includes('fetchpriority="high"'), 'index.html should keep the hero image prioritized.');
 }
 
@@ -121,8 +121,18 @@ function checkWorkIndex(html) {
 
 function checkCaseStudy(file, html) {
 	const normalizedHtml = normalizedText(html);
+	const projectSpecificSections = {
+		'work/codeherway/index.html': ['Learning Friction', 'Beginner Momentum Decisions'],
+		'work/ceo-os/index.html': ['Founder Workflow Friction', 'Focus and Capture Decisions'],
+		'work/aura-weather/index.html': ['Weather Data Trust Problem', 'Scannability Decisions'],
+	};
 
-	['Problem', 'Key UX Decisions', 'Accessibility Considerations', 'Performance Considerations', 'What I Would Improve Next'].forEach((sectionLabel) => {
+	[
+		...(projectSpecificSections[file] || []),
+		'Accessibility Considerations',
+		'Performance Considerations',
+		'What I Would Improve Next',
+	].forEach((sectionLabel) => {
 		assert(normalizedHtml.includes(normalizedText(sectionLabel)), `${file} should keep the ${sectionLabel} section.`);
 	});
 

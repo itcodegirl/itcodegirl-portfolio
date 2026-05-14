@@ -138,27 +138,31 @@
 			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
 		</figure>
 
-		<section class="case-lens" aria-labelledby="codeherway-lens-title">
+		<section class="case-lens case-lens--learning" aria-labelledby="learning-lens-title">
 			<div class="case-lens-copy">
-				<p class="case-kicker">Product lens</p>
-				<h2 id="codeherway-lens-title">Learner progress, feedback, and persistence.</h2>
-				<p>CodeHerWay is framed around beginner clarity: guided steps, visible progress, quiz feedback, and account-backed state that makes the learning flow feel like a real product.</p>
+				<p class="case-kicker">Learning product lens</p>
+				<h2 id="learning-lens-title">The core challenge was keeping beginners moving without overwhelming them.</h2>
+				<p>
+					CodeHerWay needed to feel structured, encouraging, and honest. I designed the interface around guided lessons,
+					visible progress, quiz feedback, and XP / streak logic so learners could understand what to do next and feel
+					momentum without confusing completion with mastery.
+				</p>
 			</div>
-			<div class="case-lens-grid">
+			<div class="case-lens-grid" aria-label="CodeHerWay product focus">
 				<article>
-					<span>01</span>
-					<h3>Learner Flow</h3>
-					<p>Structured lessons and next steps reduce the scattered-resource problem for beginners.</p>
+					<span aria-hidden="true">01</span>
+					<h3>Guided learning</h3>
+					<p>Lessons are organized around a clear next step instead of dumping content at once.</p>
 				</article>
 				<article>
-					<span>02</span>
-					<h3>Feedback States</h3>
-					<p>Quiz review, progress, XP, and streak logic make product state visible without overstating mastery.</p>
+					<span aria-hidden="true">02</span>
+					<h3>Feedback loops</h3>
+					<p>Quiz feedback helps learners understand mistakes immediately.</p>
 				</article>
 				<article>
-					<span>03</span>
-					<h3>Persisted Progress</h3>
-					<p>Supabase auth and saved progress connect the interface to real user behavior.</p>
+					<span aria-hidden="true">03</span>
+					<h3>Motivation system</h3>
+					<p>XP and streaks reward consistency while keeping mastery claims honest.</p>
 				</article>
 			</div>
 		</section>
@@ -168,15 +172,13 @@
 				<h2>Evidence Snapshot</h2>
 				<div class="evidence-snapshot-grid">
 					<article class="evidence-snapshot-item">
-						<h3>What I built</h3>
+						<h3>Learner flow built</h3>
 						<ul>
-							<li>React learning platform UI</li>
-							<li>Guided lesson flow</li>
-							<li>Quiz feedback states</li>
-							<li>Persisted progress behavior</li>
-							<li>XP / streak motivation logic</li>
-							<li>Supabase-backed auth and data integration</li>
-							<li>Responsive learner-facing interface</li>
+							<li>Guided lessons</li>
+							<li>Quiz feedback</li>
+							<li>Persisted progress</li>
+							<li>XP / streak logic</li>
+							<li>Supabase-backed learner data</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
@@ -245,7 +247,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Problem</h2>
+				<h2>Learning Friction</h2>
 				<div>
 					<p>Beginners can lose momentum when learning resources are scattered, next steps are unclear, or progress feels invisible. The product needed to feel supportive without hiding the technical rigor of learning HTML, CSS, JavaScript, and React.</p>
 					<p class="case-note"><strong>Still to validate:</strong> real learner retention, completion friction, and where beginners most often need intervention should be measured before making outcome claims.</p>
@@ -264,7 +266,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Goals</h2>
+				<h2>Learner Experience Goals</h2>
 				<div>
 					<ul>
 						<li>Make the first learning path clear and guided.</li>
@@ -283,7 +285,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Key UX Decisions</h2>
+				<h2>Beginner Momentum Decisions</h2>
 				<div>
 					<ul>
 						<li>Guided course flow with visible navigation so learners know where they are and what comes next.</li>
@@ -295,7 +297,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Engineering Decisions</h2>
+				<h2>Learning Platform Engineering</h2>
 				<div>
 					<ul>
 						<li>React and Vite support a modular lesson platform while preserving fast local iteration.</li>
@@ -307,7 +309,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Decision Receipts</h2>
+				<h2>Motivation Tradeoffs</h2>
 				<div>
 					<ul class="decision-receipts">
 						<li>

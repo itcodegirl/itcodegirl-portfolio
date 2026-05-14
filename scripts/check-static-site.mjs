@@ -161,7 +161,6 @@ function checkScriptLoading() {
 	assert(appJs.includes('{ passive: true }'), 'Scroll listener should stay passive.');
 	assert(appJs.includes('prefersReducedMotion'), 'Decorative reveals must honor prefers-reduced-motion.');
 	assert(appJs.includes('setupRevealObserver'), 'Reveal states should stay behind a small local observer.');
-	assert(appJs.includes('validateContactFields'), 'Contact form validation should stay in the local script.');
 	assert(!/https?:\/\//.test(appJs), 'js/app.js should not load remote scripts or assets.');
 	assert(!/createElement\(["']script["']\)/.test(appJs), 'Portfolio page script should not create runtime script tags.');
 }
@@ -197,14 +196,14 @@ function checkContactAccessibility() {
 	const styles = readFile('css/styles.css');
 	const appJs = readFile('js/app.js');
 
-	['contactName', 'contactEmail', 'contactMessage'].forEach((fieldId) => {
-		assert(homeHtml.includes(`${fieldId}Error`), `${fieldId} should reference a field-specific error message.`);
-	});
-
-	assert(homeHtml.includes('aria-live="polite"'), 'Contact errors/status should announce politely.');
-	assert(styles.includes('.field-error'), 'Contact field errors need visible styling.');
-	assert(styles.includes('[aria-invalid="true"]'), 'Invalid fields need an explicit visual state.');
-	assert(appJs.includes('validateContactFields'), 'Contact form should validate fields before submitting.');
+	assert(!homeHtml.includes('<form'), 'Homepage contact should use direct links rather than a form.');
+	assert(homeHtml.includes('href="mailto:itcodegirl@gmail.com"'), 'Contact section should include a direct email link.');
+	assert(homeHtml.includes('https://www.linkedin.com/in/jennazawaski'), 'Contact section should include a LinkedIn link.');
+	assert(homeHtml.includes('https://github.com/itcodegirl'), 'Contact section should include a GitHub link.');
+	assert(homeHtml.includes('assets/JennaZawaski-Resume.pdf'), 'Contact section should include the resume link.');
+	assert(homeHtml.includes('aria-label="Direct contact links"'), 'Direct contact links should have an accessible group label.');
+	assert(styles.includes('.contact-link'), 'Direct contact links need visible styling.');
+	assert(!appJs.includes('contactForm'), 'Contact form JavaScript should not ship when the form is removed.');
 }
 
 function checkNavigationStructure() {

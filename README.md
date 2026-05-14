@@ -19,11 +19,10 @@ points visitors to the real product work it represents.
 
 ## Stack
 
-- HTML5 (semantic landmarks, labeled form patterns)
+- HTML5 (semantic landmarks, accessible link patterns)
 - CSS3 (custom properties, responsive design)
 - JavaScript (vanilla, modular by file)
 - Google Fonts (Inter, Playfair Display)
-- [Formspree](https://formspree.io/) for contact form delivery
 
 Subtle transitions and reveal states are treated as progressive enhancement.
 The primary story is UX-focused frontend product work with clear evidence.
@@ -39,7 +38,7 @@ The primary story is UX-focused frontend product work with clear evidence.
 |   |-- hero.css                # hero section + static portrait styles
 |   `-- projects.css            # selected work cards
 |-- js/
-|   |-- app.js                  # page bootstrapping, scroll, contact form
+|   |-- app.js                  # page bootstrapping, scroll, reveal, navigation
 |   `-- projects.js             # selected work data + rendering
 |-- scripts/
 |   `-- check-static-site.mjs   # static performance and structure guardrails
@@ -124,8 +123,7 @@ node scripts/check-lighthouse-result.mjs --help
 ```
 
 The static check protects JavaScript/CSS budgets, asset weight, image attributes,
-local script loading, scroll and reveal behavior, contact-form accessibility,
-and local link
+local script loading, scroll and reveal behavior, direct-contact links, and local link
 integrity.
 The link check verifies internal page links, fragments, static assets, CSS
 references, and project-card links before changes reach GitHub Pages.
@@ -160,7 +158,7 @@ Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 - User preferences keep non-essential effects and reveal-on-scroll
   transitions optional.
 - `forced-colors` is respected.
-- Form fields are labeled and the form status is announced via `aria-live`.
+- Contact options are direct links for email, LinkedIn, GitHub, and resume access.
 
 ## Engineering notes
 

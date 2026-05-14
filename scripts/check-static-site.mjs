@@ -28,6 +28,7 @@ const canonicalPages = [
 ];
 
 const cssFiles = [
+	'css/fonts.css',
 	'css/styles.css',
 	'css/hero.css',
 	'css/projects.css',
@@ -55,6 +56,11 @@ const assetBudgets = [
 		label: 'SVG icon',
 		match: /\.svg$/i,
 		maxKb: 20,
+	},
+	{
+		label: 'font asset',
+		match: /\.woff2$/i,
+		maxKb: 80,
 	},
 ];
 
@@ -118,6 +124,13 @@ function checkRequiredFiles() {
 	[...pageFiles, ...cssFiles, ...jsFiles].forEach((relativePath) => {
 		assert(fs.existsSync(path.join(rootDir, relativePath)), `${relativePath} is missing.`);
 	});
+
+	[
+		'assets/fonts/inter-latin-300-600.woff2',
+		'assets/fonts/playfair-display-latin-600-700.woff2',
+	].forEach((relativePath) => {
+		assert(fs.existsSync(path.join(rootDir, relativePath)), `${relativePath} is missing.`);
+	});
 }
 
 function checkBudgets() {
@@ -154,6 +167,9 @@ function checkScriptLoading() {
 			!html.includes('href="https://cdn.jsdelivr.net"'),
 			`${relativePath} should not preconnect to jsdelivr because remote runtime scripts are not part of this portfolio.`,
 		);
+		assert(!html.includes('fonts.googleapis.com'), `${relativePath} should not load Google Fonts CSS.`);
+		assert(!html.includes('fonts.gstatic.com'), `${relativePath} should not preconnect to Google font assets.`);
+		assert(html.includes('fonts.css'), `${relativePath} should load the self-hosted font stylesheet.`);
 	});
 
 	const appJs = readFile('js/app.js');

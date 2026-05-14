@@ -22,7 +22,7 @@ points visitors to the real product work it represents.
 - HTML5 (semantic landmarks, accessible link patterns)
 - CSS3 (custom properties, responsive design)
 - JavaScript (vanilla, modular by file)
-- Google Fonts (Inter, Playfair Display)
+- Self-hosted WOFF2 fonts (Inter, Playfair Display)
 
 Subtle transitions and reveal states are treated as progressive enhancement.
 The primary story is UX-focused frontend product work with clear evidence.
@@ -34,6 +34,7 @@ The primary story is UX-focused frontend product work with clear evidence.
 |-- index.html                  # main page
 |-- 404.html                    # 404 page
 |-- css/
+|   |-- fonts.css               # local Inter + Playfair Display font faces
 |   |-- styles.css              # base, layout, components, responsive
 |   |-- hero.css                # hero section + static portrait styles
 |   `-- projects.css            # selected work cards
@@ -55,6 +56,7 @@ The primary story is UX-focused frontend product work with clear evidence.
 |   `-- work.css                # work and case study styling
 |-- assets/
 |   |-- images/                 # portrait + project images
+|   |-- fonts/                  # self-hosted WOFF2 font assets
 |   |-- evidence/               # dated reports and screenshots, when captured
 |   |-- headshot.{png,webp}
 |   |-- favicon.svg

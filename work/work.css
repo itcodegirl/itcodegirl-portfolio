@@ -270,6 +270,10 @@
 	line-height: 1.08;
 	letter-spacing: 0;
 	margin-bottom: 18px;
+	background: linear-gradient(90deg, #ffffff, #d7d7d7);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .case-lens-copy p {

@@ -132,27 +132,31 @@
 			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
 		</figure>
 
-		<section class="case-lens" aria-labelledby="aura-weather-lens-title">
+		<section class="case-lens case-lens--data" aria-labelledby="data-lens-title">
 			<div class="case-lens-copy">
-				<p class="case-kicker">Product lens</p>
-				<h2 id="aura-weather-lens-title">Weather data that stays scannable and honest.</h2>
-				<p>Aura Weather is framed around quick decisions and data trust: readable conditions, resilient API states, and clear unavailable-data handling instead of polished but misleading fallbacks.</p>
+				<p class="case-kicker">Data trust lens</p>
+				<h2 id="data-lens-title">The core challenge was making weather data fast to scan without pretending missing data exists.</h2>
+				<p>
+					Aura Weather needed to answer the user’s immediate question quickly while staying honest about provider limits.
+					I designed the interface around current conditions, hourly trends, loading states, unavailable states, and API
+					boundaries so missing values remain visible instead of being converted into misleading zeros.
+				</p>
 			</div>
-			<div class="case-lens-grid">
+			<div class="case-lens-grid" aria-label="Aura Weather product focus">
 				<article>
-					<span>01</span>
-					<h3>Fast Scan</h3>
-					<p>Current conditions, rain guidance, and hourly changes are organized for quick mobile review.</p>
+					<span aria-hidden="true">01</span>
+					<h3>Fast scanning</h3>
+					<p>Current conditions, rain guidance, and hourly trends get visual priority.</p>
 				</article>
 				<article>
-					<span>02</span>
-					<h3>API States</h3>
-					<p>Loading, error, delayed, and unavailable states keep provider behavior visible.</p>
+					<span aria-hidden="true">02</span>
+					<h3>Missing-data honesty</h3>
+					<p>Unavailable provider values are shown as unavailable instead of fake fallback numbers.</p>
 				</article>
 				<article>
-					<span>03</span>
-					<h3>Data Trust</h3>
-					<p>Missing values are labelled directly instead of being converted into fake zero readings.</p>
+					<span aria-hidden="true">03</span>
+					<h3>API resilience</h3>
+					<p>Separate data requests prevent secondary provider issues from blocking the whole experience.</p>
 				</article>
 			</div>
 		</section>

@@ -231,7 +231,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Problem</h2>
+				<h2>Weather Data Trust Problem</h2>
 				<div>
 					<p>Weather apps can become visually busy while still failing at the basic question: what does the user need to know right now? A second issue is data trust. When APIs return partial or missing values, the interface must not silently display fake readings.</p>
 					<p class="case-note"><strong>Still to validate:</strong> real user behavior around saved cities, location permissions, and which weather panels people use most often.</p>
@@ -250,7 +250,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Goals</h2>
+				<h2>Fast-Scanning Goals</h2>
 				<div>
 					<ul>
 						<li>Make the current day understandable quickly without burying the answer in decoration.</li>
@@ -269,7 +269,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Key UX Decisions</h2>
+				<h2>Scannability Decisions</h2>
 				<div>
 					<ul>
 						<li>Start with a usable fallback forecast instead of blocking the first load on geolocation permission.</li>
@@ -281,7 +281,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Engineering Decisions</h2>
+				<h2>API Resilience Decisions</h2>
 				<div>
 					<ul>
 						<li>Separate forecast, supplemental data, and climate archive requests so secondary API problems do not block the core forecast.</li>
@@ -293,7 +293,7 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Decision Receipts</h2>
+				<h2>Missing-Data Tradeoffs</h2>
 				<div>
 					<ul class="decision-receipts">
 						<li>

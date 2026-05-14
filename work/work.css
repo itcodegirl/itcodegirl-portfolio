@@ -6,6 +6,39 @@
 
 .work-main {
 	padding-top: 110px;
+	--case-accent: var(--accent);
+	--case-accent-rgb: var(--accent-rgb);
+	--case-accent-soft: rgba(var(--accent-rgb), 0.14);
+}
+
+.case-page {
+	--case-accent: var(--accent);
+	--case-accent-rgb: var(--accent-rgb);
+	--case-accent-soft: rgba(var(--accent-rgb), 0.14);
+}
+
+.case-page--learning {
+	--accent: #c084fc;
+	--accent-rgb: 192, 132, 252;
+	--case-accent: #c084fc;
+	--case-accent-rgb: 192, 132, 252;
+	--case-accent-soft: rgba(192, 132, 252, 0.14);
+}
+
+.case-page--workflow {
+	--accent: #5eead4;
+	--accent-rgb: 94, 234, 212;
+	--case-accent: #5eead4;
+	--case-accent-rgb: 94, 234, 212;
+	--case-accent-soft: rgba(94, 234, 212, 0.12);
+}
+
+.case-page--data {
+	--accent: #93c5fd;
+	--accent-rgb: 147, 197, 253;
+	--case-accent: #93c5fd;
+	--case-accent-rgb: 147, 197, 253;
+	--case-accent-soft: rgba(147, 197, 253, 0.12);
 }
 
 .work-main section {
@@ -28,7 +61,7 @@
 	font-size: 0.78rem;
 	letter-spacing: 0.14em;
 	text-transform: uppercase;
-	color: #d8b4fe;
+	color: var(--case-accent);
 }
 
 .case-hero h1,
@@ -74,7 +107,7 @@
 	font-size: 0.72rem;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: rgba(216, 180, 254, 0.88);
+	color: var(--case-accent);
 	font-weight: 600;
 }
 
@@ -109,7 +142,7 @@
 	height: 5px;
 	margin-right: 8px;
 	border-radius: 50%;
-	background: rgba(192, 132, 252, 0.78);
+	background: var(--case-accent);
 }
 
 .case-meta-list,
@@ -129,7 +162,7 @@
 	font-size: 0.72rem;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: rgba(216, 180, 254, 0.88);
+	color: var(--case-accent);
 }
 
 .case-meta-list dd,
@@ -220,6 +253,65 @@
 	text-align: center;
 }
 
+.case-lens {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+	gap: 32px;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 48px 60px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.case-lens-copy h2 {
+	font-family: 'Playfair Display', serif;
+	font-size: 2.4rem;
+	line-height: 1.08;
+	letter-spacing: 0;
+	margin-bottom: 18px;
+}
+
+.case-lens-copy p {
+	color: rgba(255, 255, 255, 0.72);
+	line-height: 1.75;
+}
+
+.case-lens-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.case-lens-grid article {
+	padding: 18px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 14px;
+	background:
+		linear-gradient(180deg, var(--case-accent-soft), rgba(255, 255, 255, 0.035)),
+		rgba(255, 255, 255, 0.035);
+}
+
+.case-lens-grid span {
+	display: inline-flex;
+	margin-bottom: 18px;
+	font-family: 'Courier New', monospace;
+	font-size: 0.78rem;
+	font-weight: 700;
+	color: var(--case-accent);
+}
+
+.case-lens-grid h3 {
+	margin-bottom: 10px;
+	font-size: 1rem;
+}
+
+.case-lens-grid p {
+	color: rgba(255, 255, 255, 0.68);
+	font-size: 0.9rem;
+	line-height: 1.6;
+}
+
 .case-content,
 .work-directory {
 	padding-top: 60px;
@@ -266,7 +358,7 @@
 .case-note {
 	margin-top: 18px;
 	padding: 16px 18px;
-	border-left: 2px solid rgba(var(--accent-rgb), 0.55);
+	border-left: 2px solid rgba(var(--case-accent-rgb), 0.55);
 	background: rgba(255, 255, 255, 0.04);
 	border-radius: 0 12px 12px 0;
 }
@@ -295,7 +387,7 @@
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: rgba(216, 180, 254, 0.9);
+	color: var(--case-accent);
 }
 
 .decision-receipts p,
@@ -325,7 +417,7 @@
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: rgba(216, 180, 254, 0.9);
+	color: var(--case-accent);
 }
 
 .evidence-snapshot-item ul {
@@ -465,7 +557,7 @@
 	font-weight: 600;
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
-	color: rgba(216, 180, 254, 0.86);
+	color: var(--case-accent);
 }
 
 .case-study-nav-link strong {
@@ -496,6 +588,17 @@
 
 	.work-card-grid {
 		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 900px) {
+	.case-lens {
+		grid-template-columns: 1fr;
+		padding: 40px 32px;
+	}
+
+	.case-lens-grid {
+		grid-template-columns: 1fr;
 	}
 }
 
@@ -548,6 +651,16 @@
 
 	.case-study-nav {
 		width: calc(100% - 40px);
+	}
+}
+
+@media (max-width: 600px) {
+	.case-lens {
+		padding: 34px 20px;
+	}
+
+	.case-lens-copy h2 {
+		font-size: 2rem;
 	}
 }
 

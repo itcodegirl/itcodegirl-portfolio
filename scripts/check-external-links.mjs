@@ -161,11 +161,6 @@ async function fetchWithTimeout(url, method) {
 async function checkUrl({ url, sources }) {
 	const hostname = new URL(url).hostname;
 
-	if (hostname === 'formspree.io' && sources.some((source) => source.includes('form action'))) {
-		warnings.push(`${url} is a form endpoint; live GET/HEAD health is skipped.`);
-		return;
-	}
-
 	try {
 		let response = await fetchWithTimeout(url, 'HEAD');
 

@@ -41,7 +41,7 @@ const projects = [
 			{
 				kind: "live",
 				label: "Live demo",
-				url: "https://codeherway-education-platform.netlify.app/",
+				url: "https://education-platform-plum.vercel.app/",
 				ariaLabel: "Live demo for CodeHerWay Education Platform",
 			},
 			{

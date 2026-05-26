@@ -481,7 +481,7 @@ section h2::after {
 .skill-card:hover {
 	background: rgba(255, 255, 255, 0.06);
 	border-color: rgba(255, 255, 255, 0.2);
-	transform: translateX(5px);
+	transform: translateY(-4px);
 }
 
 .skill-card:hover::before {

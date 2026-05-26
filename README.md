@@ -69,28 +69,25 @@ Project screenshots used by the Selected Work cards are stored in
 
 ## Evidence Layer
 
-The portfolio is designed to show proof, not only claims. Project cards
-summarize ownership, product value, implementation work, challenge areas, and
-proof currently available. Case studies include Evidence Snapshots so reviewers
-can quickly see what was built, what was hard, what changed because of product
-and engineering decisions, and what can be verified in a short review.
+The portfolio leads with the engineering behind each project, not only claims.
+Project cards and case studies surface owned work in concrete terms — CodeHerWay's
+hardened reward engine (dedupe + retry/reconciliation), CEO OS's repository-pattern
+data layer (versioned storage, optimistic concurrency, corruption recovery, offline
+replay), and Aura's end-to-end nullish-rejection data contracts and QA pyramid —
+alongside an Evidence Snapshot that shows what was built, what was hard, and what a
+reviewer can verify in a short visit.
 
-Quality checks are documented honestly. If a report, screenshot, accessibility
-scan, or user-flow capture does not exist yet, it should be marked as planned
-evidence or needs capture instead of being presented as completed proof.
-
-Future evidence includes Lighthouse reports, axe accessibility scans,
-responsive screenshots, key user-flow captures, repo structure screenshots, and
-dated QA checks.
+Where a capture does not exist yet (a deployed Lighthouse report, an exported axe
+scan, a user-flow clip), it is marked as planned rather than presented as completed
+proof. The checklist below tracks those remaining captures.
 
 ## Evidence Capture Checklist
 
-- [ ] Capture Lighthouse mobile and desktop reports
-- [ ] Capture axe accessibility scan
+- [ ] Capture deployed Lighthouse mobile and desktop reports
+- [ ] Export axe accessibility scan results (axe already runs in CI for CEO OS and Aura)
 - [ ] Capture responsive screenshots for mobile/tablet/desktop
 - [ ] Capture key flow screenshots for CodeHerWay
-- [ ] Capture repo structure screenshot
-- [ ] Add short interaction clip for flagship flow
+- [ ] Add short interaction clip for the flagship learner flow
 - [ ] Add dates for last verified QA checks
 
 ## Running locally

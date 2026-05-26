@@ -258,3 +258,56 @@ body {
 	position: relative;
 	overflow: hidden;
 }
+
+/* ── Hero entrance animation ───────────────────────────────────────────────
+   Staggered fade-up for hero content elements. Gated inside
+   prefers-reduced-motion: no-preference so users who opt out of motion
+   see the content immediately at full opacity with no delay.
+
+   animation-fill-mode: both  →  elements start at the "from" state
+   during the delay period so nothing flashes in before its turn.
+
+   Easing: cubic-bezier(0.22, 1, 0.36, 1) is an expressive deceleration
+   curve — starts fast, settles gently. Feels intentional, not mechanical.
+   ──────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes hero-fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(16px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.availability-badge {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+	}
+
+	.hero-content > h1 {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+	}
+
+	/* hero-sub appears right after h1 in the DOM (correct order post-fix) */
+	.hero-sub {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.27s both;
+	}
+
+	/* Direct-child p only — avoids targeting paragraphs nested inside
+	   .mobile-trust-snapshot which is hidden on desktop but in the DOM. */
+	.hero-content > p:not(.hero-sub) {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.34s both;
+	}
+
+	.hero-actions {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+	}
+
+	/* Hero image side: comes in slightly offset from the text cascade,
+	   slightly slower duration for a weightier feel. */
+	.hero-image {
+		animation: hero-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+	}
+}

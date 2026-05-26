@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="Aura Weather case study by Jenna Zawaski: weather dashboard UX, resilient API handling, performance, current status, and next iteration.">
+	<meta name="description" content="Aura Weather case study by Jenna Zawaski: a React 19 weather dashboard that is really a study in defensive client-side data handling — end-to-end nullish-rejection contracts, independent multi-API fetch lifecycles, and a QA suite that locks the trust contract.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/aura-weather/">
@@ -13,7 +13,7 @@
 
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="Aura Weather Case Study | Jenna Zawaski">
-	<meta property="og:description" content="A same-domain case study for Aura Weather, a responsive weather dashboard with resilient API states.">
+	<meta property="og:description" content="A responsive weather dashboard built around defensive data handling: resilient multi-API states and honest treatment of missing provider data.">
 	<meta property="og:url" content="https://itcodegirl.com/work/aura-weather/">
 	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 	<meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 	<meta property="og:image:alt" content="Aura Weather interface screenshot">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Aura Weather Case Study | Jenna Zawaski">
-	<meta name="twitter:description" content="UX, API resilience, performance, and next-iteration notes for Aura Weather.">
+	<meta name="twitter:description" content="Defensive data handling, multi-API resilience, and QA breadth for Aura Weather.">
 	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 
 	<title>Aura Weather Case Study | Jenna Zawaski</title>
@@ -100,8 +100,16 @@
 				<p class="case-eyebrow">Case study</p>
 				<h1 id="case-title">Aura Weather</h1>
 				<p class="case-summary">
-					A responsive weather dashboard designed for quick decisions: glance, understand the day, and move on. The strongest product story is trust: missing provider data is shown as unavailable instead of being coerced into fake zero values.
+					Yes, it is a weather app — the most common portfolio project there is. It is also a study in defensive
+					client-side data handling. The product answers "what is the day like?" at a glance; the engineering makes
+					sure that when a provider returns partial, delayed, or missing data, the UI shows it as <em>unavailable</em>
+					instead of coercing it into a confident, fake zero.
 				</p>
+				<ul class="case-proof-strip" aria-label="Aura Weather engineering proof points">
+					<li>End-to-end nullish-rejection contracts</li>
+					<li>Independent multi-API fetch lifecycles</li>
+					<li>Unit, E2E, visual, and Lighthouse in CI</li>
+				</ul>
 				<div class="case-links" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noopener noreferrer">GitHub repo</a>
@@ -110,19 +118,19 @@
 			<dl class="case-meta-list" aria-label="Project summary">
 				<div>
 					<dt>Project type</dt>
-					<dd>Weather dashboard and data-trust frontend project</dd>
+					<dd>Weather dashboard and client-side data-trust project</dd>
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>React, Vite, JavaScript, plain CSS, Open-Meteo APIs</dd>
+					<dd>React 19, Vite, plain CSS, Lucide icons, Open-Meteo + NOAA/NWS APIs (frontend-only, no UI framework)</dd>
 				</div>
 				<div>
 					<dt>Primary focus</dt>
-					<dd>Scannable hierarchy, resilient async states, mobile usability, and honest data fallbacks</dd>
+					<dd>Defensive data handling, resilient multi-API composition, and QA breadth that locks the trust contract</dd>
 				</div>
 				<div>
 					<dt>Last verified</dt>
-					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending.</dd>
 				</div>
 			</dl>
 		</section>
@@ -135,11 +143,12 @@
 		<section class="case-lens case-lens--data" aria-labelledby="data-lens-title">
 			<div class="case-lens-copy">
 				<p class="case-kicker">Data trust lens</p>
-				<h2 id="data-lens-title">The core challenge was making weather data fast to scan without pretending missing data exists.</h2>
+				<h2 id="data-lens-title">The core challenge was making weather data fast to scan without ever pretending missing data exists.</h2>
 				<p>
-					Aura Weather needed to answer the user’s immediate question quickly while staying honest about provider limits.
-					I designed the interface around current conditions, hourly trends, loading states, unavailable states, and API
-					boundaries so missing values remain visible instead of being converted into misleading zeros.
+					Aura answers the user's immediate question quickly while staying honest about provider limits. Three
+					weather sources are composed with independent fetch lifecycles, every value is run through a
+					nullish-rejection contract at the API boundary, and missing readings stay visible as unavailable rather
+					than collapsing into misleading zeros.
 				</p>
 			</div>
 			<div class="case-lens-grid" aria-label="Aura Weather product focus">
@@ -150,13 +159,13 @@
 				</article>
 				<article>
 					<span aria-hidden="true">02</span>
-					<h3>Missing-data honesty</h3>
-					<p>Unavailable provider values are shown as unavailable instead of fake fallback numbers.</p>
+					<h3>Nullish-rejection contracts</h3>
+					<p>Strict numeric handling at the boundary keeps null values null instead of fake zeros.</p>
 				</article>
 				<article>
 					<span aria-hidden="true">03</span>
-					<h3>API resilience</h3>
-					<p>Separate data requests prevent secondary provider issues from blocking the whole experience.</p>
+					<h3>Independent fetch lifecycles</h3>
+					<p>Separate requests stop one slow provider from blocking the whole experience.</p>
 				</article>
 			</div>
 		</section>
@@ -166,69 +175,59 @@
 				<h2>Evidence Snapshot</h2>
 				<div class="evidence-snapshot-grid">
 					<article class="evidence-snapshot-item">
-						<h3>Data experience built</h3>
+						<h3>What I built</h3>
 						<ul>
-							<li>Current weather summary</li>
-							<li>Hourly forecast hierarchy</li>
-							<li>City search</li>
-							<li>Saved-location behavior</li>
-							<li>Loading/error/unavailable states</li>
-							<li>API data normalization</li>
+							<li>Current conditions, hourly outlook, rain guidance, and risk signals</li>
+							<li>7-day forecast with expandable day detail (UV, wind, sunrise/sunset)</li>
+							<li>Abortable, keyboard-friendly city search combobox</li>
+							<li>Saved + startup cities and historical archive comparison</li>
+							<li>NOAA/NWS severe-alert coverage</li>
+						</ul>
+					</article>
+					<article class="evidence-snapshot-item">
+						<h3>The engineering that matters</h3>
+						<ul>
+							<li>End-to-end nullish-rejection data contracts</li>
+							<li>Multi-API composition with independent fetch lifecycles</li>
+							<li>GPS resolved to a friendly place label, not a generic tag</li>
+							<li>Offline last-known restore without faking freshness</li>
+							<li>F/C toggle handled client-side without refetching</li>
+							<li>PWA shell installed after a first successful production visit</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What was hard</h3>
 						<ul>
 							<li>Keeping weather information readable without hiding useful detail</li>
-							<li>Representing missing provider data honestly instead of showing fake zero values</li>
+							<li>Representing missing provider data honestly instead of as fake zeros</li>
 							<li>Making dense forecast content usable on small screens</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Key decisions</h3>
+						<h3>QA breadth</h3>
 						<ul>
-							<li>Prioritized the current summary, rain guidance, and hourly trend</li>
-							<li>Separated provider data requests so one missing source does not block the whole UI</li>
-							<li>Used explicit unavailable states for missing data</li>
-							<li>Kept mobile controls touch-friendly for dense timelines</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>What changed because of those decisions</h3>
-						<ul>
-							<li>The interface became easier to scan quickly</li>
-							<li>The project demonstrates a trust decision around missing data</li>
-							<li>The case study focuses on resilient frontend behavior, not only visual polish</li>
+							<li>Unit, integration, and E2E (Playwright + axe) coverage</li>
+							<li>Visual regression and Lighthouse budgets in CI</li>
+							<li>An internal audit caught a class of missing-data stability bugs</li>
+							<li>Each fix was locked with a regression test so the class can't return</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What to verify in 90 seconds</h3>
 						<ul>
-							<li>Open the live demo</li>
-							<li>Review current conditions and hourly forecast hierarchy</li>
-							<li>Try city search or saved-location behavior</li>
-							<li>Inspect responsive layout</li>
-							<li>Review the GitHub repo and case study notes</li>
+							<li>Open the live demo and search a city by keyboard alone</li>
+							<li>Expand a forecast day for UV, wind, and sunrise/sunset</li>
+							<li>Find a value rendered as unavailable rather than a fake 0</li>
+							<li>Read an unsupported-region alert message</li>
+							<li>Resize to mobile and re-scan the hierarchy</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Current proof available</h3>
+						<h3>Honest limits</h3>
 						<ul>
-							<li>Live demo</li>
-							<li>GitHub repo</li>
-							<li>Case study</li>
-							<li>QA notes</li>
-							<li>Last verified date</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>Proof still needed</h3>
-						<ul>
-							<li>Needs capture: Lighthouse report screenshot</li>
-							<li>Needs capture: axe accessibility scan screenshot</li>
-							<li>Needs capture: Responsive screen captures</li>
-							<li>Needs capture: API state screenshots</li>
-							<li>Needs capture: Repo structure screenshot</li>
+							<li>This is a frontend sample, not a full production weather platform</li>
+							<li>Deployed Lighthouse field numbers are not captured yet</li>
+							<li>Reverse-geocoding edge cases for raw coordinates remain</li>
 						</ul>
 					</article>
 				</div>
@@ -237,7 +236,7 @@
 			<div class="case-section">
 				<h2>Weather Data Trust Problem</h2>
 				<div>
-					<p>Weather apps can become visually busy while still failing at the basic question: what does the user need to know right now? A second issue is data trust. When APIs return partial or missing values, the interface must not silently display fake readings.</p>
+					<p>Weather apps can become visually busy while still failing at the basic question: what does the user need to know right now? A second, deeper issue is data trust. When APIs return partial or missing values, the interface must not silently display fake readings that the user will act on.</p>
 					<p class="case-note"><strong>Still to validate:</strong> real user behavior around saved cities, location permissions, and which weather panels people use most often.</p>
 				</div>
 			</div>
@@ -268,7 +267,7 @@
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>I built the frontend experience: dashboard layout, city search, saved-location behavior, weather API orchestration, data normalization, missing-data rendering, responsive CSS, interface states, and the QA coverage around the trust contract.</p>
+					<p>Sole frontend engineer. I built the dashboard layout, the keyboard combobox search, saved- and startup-location behavior, the weather API orchestration across three sources, the nullish-rejection data contracts, missing-data rendering, responsive CSS in plain stylesheets, the interface states, and the full QA suite that locks the trust contract.</p>
 				</div>
 			</div>
 
@@ -285,13 +284,14 @@
 			</div>
 
 			<div class="case-section">
-				<h2>API Resilience Decisions</h2>
+				<h2>Resilient Data Engineering</h2>
 				<div>
 					<ul>
-						<li>Separate forecast, supplemental data, and climate archive requests so secondary API problems do not block the core forecast.</li>
-						<li>Normalize provider data at the API boundary with strict numeric handling so null values stay null.</li>
-						<li>Cache last-known forecasts with freshness limits for offline or provider-failure recovery.</li>
-						<li>Keep CSS co-located with components in the app project so dashboard surfaces remain maintainable as they evolve.</li>
+						<li><strong>Independent fetch lifecycles.</strong> Forecast, supplemental data, and the climate archive are requested separately, so a secondary provider problem never blocks the core forecast.</li>
+						<li><strong>Nullish-rejection at the boundary.</strong> Provider data is normalized with strict numeric handling so a missing value stays <code>null</code> end to end and is rendered as unavailable, never as <code>0</code>.</li>
+						<li><strong>Last-known recovery.</strong> Forecasts are cached with freshness limits so an offline start can restore the last-known view without presenting stale data as fresh.</li>
+						<li><strong>Audit-and-lock.</strong> An internal audit surfaced a class of stability bugs in how partial provider responses flowed through the UI; each fix shipped with a regression test, so the same bug class cannot quietly return.</li>
+						<li><strong>Co-located CSS.</strong> Styles live with their components in plain CSS so dashboard surfaces stay maintainable as they evolve — no UI framework required.</li>
 					</ul>
 				</div>
 			</div>
@@ -306,11 +306,11 @@
 						</li>
 						<li>
 							<span>Decision</span>
-							<p>Normalize values at the API boundary and render unavailable data explicitly instead of forcing fallback zeros.</p>
+							<p>Normalize values at the API boundary with a nullish-rejection contract and render unavailable data explicitly instead of forcing fallback zeros.</p>
 						</li>
 						<li>
 							<span>Tradeoff</span>
-							<p>The interface stays more trustworthy, but the UI has to carry more clear empty and unsupported states.</p>
+							<p>The interface stays trustworthy, but the UI has to carry more clear empty and unsupported states — and the QA suite has to lock that contract so it can't regress.</p>
 						</li>
 					</ul>
 				</div>
@@ -320,10 +320,11 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
-						<li>City search uses keyboard-friendly combobox and listbox behavior.</li>
+						<li><strong>Automated in CI:</strong> Playwright runs <code>axe</code> against the app's primary states as part of the end-to-end suite.</li>
+						<li>City search uses keyboard-friendly combobox and listbox behavior with an abortable request lifecycle.</li>
 						<li>Loading, refresh, error, and missing-data states use live status messaging where it helps.</li>
-						<li>Missing values include assistive text such as no data available instead of relying only on an em dash.</li>
-						<li>Preference-aware effects and mobile touch target work are marked for continued interface QA.</li>
+						<li>Missing values include assistive text such as "no data available" instead of relying only on an em dash.</li>
+						<li>Preference-aware effects and mobile touch-target work are marked for continued interface QA.</li>
 					</ul>
 				</div>
 			</div>
@@ -332,9 +333,9 @@
 				<h2>Performance Considerations</h2>
 				<div>
 					<ul>
-						<li>Core forecast content loads before lower-priority supplemental panels.</li>
-						<li>Lazy panels and deferred mounting reduce the amount of work needed for the first useful screen.</li>
-						<li>Unit toggles are handled client-side so changing F/C does not trigger unnecessary provider requests.</li>
+						<li><strong>Lighthouse budgets run in CI</strong> alongside the test suite, so regressions in the budgeted metrics are caught before merge.</li>
+						<li>Core forecast content loads before lower-priority supplemental panels; lazy panels and deferred mounting cut the work for the first useful screen.</li>
+						<li>Unit toggles are handled client-side, so changing F/C does not trigger unnecessary provider requests.</li>
 						<li>Service worker support is limited to the app shell; live weather data remains a network truth source.</li>
 					</ul>
 				</div>
@@ -344,8 +345,8 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
-						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
+						<li><strong>The signature story:</strong> an internal audit caught a class of stability bugs around partial and missing provider data; each was fixed and then locked with a regression test, so the trust contract cannot silently regress.</li>
+						<li><strong>Test pyramid:</strong> unit and integration tests, end-to-end coverage with Playwright + axe, visual regression, and Lighthouse budgets — the breadth is deliberate for a data-driven UI.</li>
 						<li><strong>Evidence standard:</strong> missing-data behavior is described as a trust decision without inventing reliability metrics.</li>
 						<li><strong>Still to validate:</strong> fresh production Lighthouse profiling, reverse-geocoding edge cases, and saved-city behavior with real users.</li>
 					</ul>
@@ -355,14 +356,14 @@
 			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
-					<p>Aura Weather is a working portfolio project with real API integration, resilient loading/error behavior, and documented limitations. It should not be described as a full production weather platform.</p>
+					<p>Aura Weather is a working portfolio project with real multi-API integration, resilient loading/error behavior, defensive data contracts, and documented limitations. It should not be described as a full production weather platform.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>What I Learned</h2>
 				<div>
-					<p>Data products need honest absence states as much as polished success states. Keeping null, unavailable, and delayed provider responses visible makes the interface more trustworthy than a cleaner-looking screen with misleading fallback values.</p>
+					<p>Data products need honest absence states as much as polished success states. Keeping null, unavailable, and delayed provider responses visible makes the interface more trustworthy than a cleaner-looking screen with misleading fallback values — and a regression test is what keeps that honesty from eroding over time.</p>
 				</div>
 			</div>
 
@@ -370,7 +371,7 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Refine image and paint-cost tuning after fresh Lighthouse profiling on production.</li>
+						<li>Capture deployed Lighthouse field numbers, then tune image and paint cost from real data.</li>
 						<li>Improve reverse-geocoding for raw device coordinates.</li>
 						<li>Revisit saved-city sync if the project needs account-level trust rather than lightweight optional sync.</li>
 						<li>Use product analytics or user testing to decide which panels deserve the most visual priority.</li>

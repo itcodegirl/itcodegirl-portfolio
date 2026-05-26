@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: UX decisions, engineering focus, performance, current status, and next iteration.">
+	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: a React + Supabase learning product with a hardened reward engine (dedupe, retry/reconciliation), a feature-gated cross-device backend, and honest progress semantics.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/codeherway/">
@@ -13,7 +13,7 @@
 
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
-	<meta property="og:description" content="A same-domain case study for CodeHerWay, a learning platform for women entering tech.">
+	<meta property="og:description" content="A same-domain case study for CodeHerWay, a learning platform for women entering tech, built on real auth, data, and a hardened reward engine.">
 	<meta property="og:url" content="https://itcodegirl.com/work/codeherway/">
 	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 	<meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 	<meta property="og:image:alt" content="CodeHerWay dashboard screenshot">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="CodeHerWay Education Platform Case Study | Jenna Zawaski">
-	<meta name="twitter:description" content="UX, engineering, performance, and next-iteration notes for CodeHerWay.">
+	<meta name="twitter:description" content="UX, reward-engine engineering, accessibility, and next-iteration notes for CodeHerWay.">
 	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 
 	<title>CodeHerWay Education Platform Case Study | Jenna Zawaski</title>
@@ -100,12 +100,12 @@
 				<p class="case-eyebrow">Case study</p>
 				<h1 id="case-title">CodeHerWay Education Platform</h1>
 				<p class="case-summary">
-					A frontend-focused learning platform for women entering tech, built around structured lessons, quizzes, visible progress, and a calm beginner experience. The project is strongest as a product-minded education platform with real auth, data, and quality-gate concerns in scope.
+					A frontend-focused learning platform for women entering tech — structured lessons, quizzes, visible progress, and a calm beginner experience. Behind the calm surface is real product engineering: Supabase auth and data, a hardened reward engine with deduplication and retry/reconciliation, and honest progress semantics that never confuse motivation with verified mastery.
 				</p>
 				<ul class="case-proof-strip" aria-label="CodeHerWay proof points">
-					<li>React + Supabase product work</li>
-					<li>Accessible learning UI</li>
-					<li>Documented QA notes</li>
+					<li>React + Supabase auth and data</li>
+					<li>Hardened reward engine (dedupe + retry)</li>
+					<li>Playwright smoke + accessibility coverage</li>
 				</ul>
 				<div class="case-links" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://codeherway-platform.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
@@ -120,15 +120,15 @@
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>React, Vite, Supabase, JavaScript, CSS</dd>
+					<dd>React, Vite, Supabase, PostgreSQL, JavaScript, deployed on Vercel</dd>
 				</div>
 				<div>
 					<dt>Proof points</dt>
-					<dd>Auth, progress persistence, quizzes, rewards, accessible UI, async states, and documented QA notes.</dd>
+					<dd>Auth, progress persistence with retry/replay, quizzes, a hardened reward engine, accessible UI, async states, and Playwright smoke coverage.</dd>
 				</div>
 				<div>
 					<dt>Last verified</dt>
-					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending.</dd>
 				</div>
 			</dl>
 		</section>
@@ -141,11 +141,12 @@
 		<section class="case-lens case-lens--learning" aria-labelledby="learning-lens-title">
 			<div class="case-lens-copy">
 				<p class="case-kicker">Learning product lens</p>
-				<h2 id="learning-lens-title">The core challenge was keeping beginners moving without overwhelming them.</h2>
+				<h2 id="learning-lens-title">The core challenge was keeping beginners moving without overwhelming them — or overstating what they've mastered.</h2>
 				<p>
 					CodeHerWay needed to feel structured, encouraging, and honest. I designed the interface around guided lessons,
 					visible progress, quiz feedback, and XP / streak logic so learners could understand what to do next and feel
-					momentum without confusing completion with mastery.
+					momentum without confusing completion with mastery. The reward engine that drives that momentum is hardened
+					against the failure modes that make progress systems untrustworthy: double-counting, lost writes, and silent sync failures.
 				</p>
 			</div>
 			<div class="case-lens-grid" aria-label="CodeHerWay product focus">
@@ -161,8 +162,8 @@
 				</article>
 				<article>
 					<span aria-hidden="true">03</span>
-					<h3>Motivation system</h3>
-					<p>XP and streaks reward consistency while keeping mastery claims honest.</p>
+					<h3>Trustworthy rewards</h3>
+					<p>XP and streaks reward consistency, with dedupe and retry so the count stays honest.</p>
 				</article>
 			</div>
 		</section>
@@ -172,75 +173,56 @@
 				<h2>Evidence Snapshot</h2>
 				<div class="evidence-snapshot-grid">
 					<article class="evidence-snapshot-item">
-						<h3>Learner flow built</h3>
+						<h3>What I built</h3>
 						<ul>
-							<li>Guided lessons</li>
-							<li>Quiz feedback</li>
-							<li>Persisted progress</li>
-							<li>XP / streak logic</li>
-							<li>Supabase-backed learner data</li>
+							<li>Course browsing and lesson UI for HTML, CSS, JavaScript, and React tracks</li>
+							<li>Supabase auth and learner data</li>
+							<li>Progress save/reload with same-browser retry/replay</li>
+							<li>Quiz feedback, bookmarks, and lesson notes</li>
+							<li>Mobile learning flow with sticky nav and a tools sheet</li>
+						</ul>
+					</article>
+					<article class="evidence-snapshot-item">
+						<h3>The engineering that matters</h3>
+						<ul>
+							<li>Unified reward engine: lesson/quiz XP, streaks, and challenge-completion dedupe</li>
+							<li>Local reward-event processing with retry/reconciliation and sync-failure visibility</li>
+							<li>Feature-gated Supabase reward backend for future cross-device idempotency</li>
+							<li>Atomic award RPC + migrations, behind a flag until duplicate-award flows are verified</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What was hard</h3>
 						<ul>
 							<li>Balancing beginner-friendly UX with real product logic</li>
-							<li>Making progress and reward feedback feel motivating without overwhelming the learner</li>
-							<li>Keeping UI states understandable across loading, feedback, saved progress, and incomplete flows</li>
-							<li>Connecting product behavior to clear frontend state instead of static page content</li>
+							<li>Making rewards motivating without overwhelming the learner</li>
+							<li>Keeping reward counts honest across retries, replays, and sync failures</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Key decisions</h3>
+						<h3>Honest semantics</h3>
 						<ul>
-							<li>Used guided flows instead of dumping all content at once</li>
-							<li>Added visible progress so learners understand where they are</li>
-							<li>Used quiz feedback to reinforce learning immediately</li>
-							<li>Added XP / streak logic to reward consistency</li>
-							<li>Kept the interface calm and readable for beginners</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>What changed because of those decisions</h3>
-						<ul>
-							<li>The project became more like a real learning product than a static tutorial site</li>
-							<li>The UI communicates progress, feedback, and motivation</li>
-							<li>The case study shows product thinking, not only visual execution</li>
-							<li>The frontend work demonstrates state-driven product behavior</li>
+							<li>XP and streaks signal consistency, not verified mastery</li>
+							<li>The Progress Summary PDF reflects app progress and is explicitly not a credential</li>
+							<li>Cross-device awards stay off until the backend path is verified</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What to verify in 90 seconds</h3>
 						<ul>
-							<li>Open the live demo</li>
-							<li>Start or review a lesson flow</li>
-							<li>Trigger quiz feedback</li>
-							<li>Check progress or reward behavior</li>
-							<li>Inspect responsive layout</li>
-							<li>Review the GitHub repo structure</li>
-							<li>Read the case study decision notes</li>
+							<li>Open the live demo and start a lesson flow</li>
+							<li>Trigger quiz feedback and watch progress update</li>
+							<li>Reload mid-flow to confirm progress persists</li>
+							<li>Inspect the responsive mobile learning layout</li>
+							<li>Skim the repo's reward-engine and Supabase service modules</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Current proof available</h3>
+						<h3>Honest limits</h3>
 						<ul>
-							<li>Live demo</li>
-							<li>GitHub repo</li>
-							<li>Case study</li>
-							<li>QA notes</li>
-							<li>Last verified date</li>
-							<li>Feature ownership summary</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>Proof still needed</h3>
-						<ul>
-							<li>Needs capture: Lighthouse report screenshot</li>
-							<li>Needs capture: axe accessibility scan screenshot</li>
-							<li>Needs capture: Responsive screen captures</li>
-							<li>Needs capture: Key user-flow screenshots</li>
-							<li>Needs capture: Repo structure screenshot</li>
-							<li>Planned evidence: Short interaction clip or GIF of lesson to quiz to feedback to progress</li>
+							<li>Cross-device progress is single-device today; multi-device sync is scaffolded but gated</li>
+							<li>Authenticated flows still need a configured staging backend for full validation</li>
+							<li>Deployed Lighthouse field numbers are not captured yet</li>
 						</ul>
 					</article>
 				</div>
@@ -280,7 +262,7 @@
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>I own the product end to end: frontend architecture, learning and quiz UI, progress tracking, the XP and streak reward engine, Supabase authentication/data integration, and the portfolio documentation around product quality and current limits.</p>
+					<p>I own the product end to end: frontend architecture, learning and quiz UI, progress tracking with retry/replay, the unified XP and streak reward engine, the feature-gated Supabase reward backend (migrations, atomic award RPC, and a service wrapper that preserves local fallback), Supabase authentication/data integration, the Playwright smoke suite, and the portfolio documentation around product quality and current limits.</p>
 				</div>
 			</div>
 
@@ -297,13 +279,14 @@
 			</div>
 
 			<div class="case-section">
-				<h2>Learning Platform Engineering</h2>
+				<h2>Reward Engine Engineering</h2>
 				<div>
 					<ul>
-						<li>React and Vite support a modular lesson platform while preserving fast local iteration.</li>
-						<li>Supabase provides an authentication and database path for real user progress instead of hardcoded demo state.</li>
-						<li>Learning, reward, route, and sync behaviors are covered by focused tests so reliability work is visible to reviewers.</li>
-						<li>Server-mediated workflows stay behind Netlify functions rather than exposing sensitive keys in the browser.</li>
+						<li><strong>Unified reward engine.</strong> Lesson-completion XP, quiz-retry XP, and activity-based streaks flow through one engine, with challenge-completion deduplication so a single achievement can't be counted twice.</li>
+						<li><strong>Local-first with reconciliation.</strong> Reward events are processed locally with retry/reconciliation evidence and diagnostics, and sync failures are made visible instead of swallowed.</li>
+						<li><strong>Feature-gated cross-device path.</strong> A Supabase reward backend is scaffolded for future cross-device idempotency — reward-event migrations, an atomic award RPC, and a frontend service wrapper that preserves local fallback. The flag stays off until migrations run and authenticated duplicate-award flows are verified.</li>
+						<li><strong>Quiz inventory under audit.</strong> Active quiz coverage for all four tracks is complete; quiz variant groups and legacy orphan quizzes are classified and monitored by an audit so the content surface stays trustworthy.</li>
+						<li><strong>Server-mediated workflows</strong> stay behind functions rather than exposing sensitive keys in the browser.</li>
 					</ul>
 				</div>
 			</div>
@@ -318,7 +301,7 @@
 						</li>
 						<li>
 							<span>Decision</span>
-							<p>XP and streaks reward consistency, while quiz review remains the place for learning feedback.</p>
+							<p>XP and streaks reward consistency through a deduplicated, retry-safe engine, while quiz review remains the place for learning feedback and the progress PDF is labelled as not a credential.</p>
 						</li>
 						<li>
 							<span>Tradeoff</span>
@@ -332,6 +315,7 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
+						<li><strong>Covered by the smoke suite:</strong> Playwright includes an accessibility check alongside landing, auth, visual-snapshot, and first-lesson preview entry coverage.</li>
 						<li>Keyboard navigation and focus handling are treated as product behavior, especially in lessons, dialogs, and panels.</li>
 						<li>Quiz and progress interactions use clearer semantic relationships and user-facing status copy.</li>
 						<li>Feedback states are kept purposeful so the interface supports learning rather than distracting from it.</li>
@@ -345,7 +329,7 @@
 					<ul>
 						<li>The project uses explicit local and CI checks to keep regressions visible.</li>
 						<li>Route and lesson surfaces are structured so future performance work can target specific product areas instead of a single global bundle.</li>
-						<li>Next iteration includes deeper Lighthouse reporting and continued CSS modularization to reduce global surface area.</li>
+						<li>Next iteration includes deployed Lighthouse reporting and continued CSS modularization to reduce global surface area — captured from a real URL, not asserted as a target.</li>
 					</ul>
 				</div>
 			</div>
@@ -354,9 +338,9 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
-						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
-						<li><strong>Evidence standard:</strong> accessibility and performance content is framed as considerations and next work, not as unmeasured outcome claims.</li>
+						<li><strong>Public smoke coverage:</strong> a Playwright suite exercises landing, auth, accessibility, visual snapshots, and first-lesson preview entry on the live deployment.</li>
+						<li><strong>Reward integrity:</strong> local retry/reconciliation evidence and dedupe behavior are the focus of reward-engine testing, with sync-failure states surfaced rather than hidden.</li>
+						<li><strong>Evidence standard:</strong> accessibility and performance content is framed as considerations and next work, not as unmeasured outcome claims; the cross-device backend is described as gated, not done.</li>
 						<li><strong>Still to validate:</strong> authenticated learner flows against a configured staging backend and fresh Lighthouse reporting.</li>
 					</ul>
 				</div>
@@ -365,14 +349,14 @@
 			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
-					<p>CodeHerWay is an active portfolio product and learning-platform build. It demonstrates real product architecture and quality practices, but it should be presented honestly as a stabilized project still moving toward production readiness.</p>
+					<p>CodeHerWay is an active portfolio product and learning-platform build. It demonstrates real product architecture, a hardened reward engine, and quality practices, but it should be presented honestly as a stabilized project still moving toward full production readiness.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>What I Learned</h2>
 				<div>
-					<p>The strongest education-product evidence comes from connecting the learner-facing interface to real state rules: auth, progress, quiz review, and recovery paths. The next level is validating which of those choices actually helps beginners continue.</p>
+					<p>The strongest education-product evidence comes from connecting the learner-facing interface to real state rules: auth, progress, quiz review, reward integrity, and recovery paths. The next level is validating which of those choices actually helps beginners continue — and lifting the cross-device gate once duplicate-award flows are proven.</p>
 				</div>
 			</div>
 
@@ -380,8 +364,8 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Validate authenticated learner flows against a configured staging backend.</li>
-						<li>Add stronger Lighthouse reporting and performance budgets.</li>
+						<li>Validate authenticated learner flows against a configured staging backend, then lift the cross-device reward gate.</li>
+						<li>Add deployed Lighthouse reporting and performance budgets.</li>
 						<li>Refine onboarding analytics around drop-off and lesson completion friction.</li>
 						<li>Continue reducing global CSS and clarifying shared UI primitives.</li>
 					</ul>

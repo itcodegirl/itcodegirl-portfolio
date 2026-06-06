@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="CodeHerWay CEO OS case study by Jenna Zawaski: founder workflow UX, local-first engineering, performance, current status, and next iteration.">
+	<meta name="description" content="CodeHerWay CEO OS case study by Jenna Zawaski: a local-first founder dashboard built on a repository-pattern data layer with versioned storage, optimistic concurrency, corruption recovery, an offline write queue, and axe + bundle budgets in CI.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/ceo-os/">
@@ -13,7 +13,7 @@
 
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="CodeHerWay CEO OS Case Study | Jenna Zawaski">
-	<meta property="og:description" content="A same-domain case study for CodeHerWay CEO OS, a calm founder workflow dashboard.">
+	<meta property="og:description" content="A local-first founder dashboard built around client-side data integrity: versioned storage, optimistic concurrency, corruption recovery, and an offline write queue.">
 	<meta property="og:url" content="https://itcodegirl.com/work/ceo-os/">
 	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/ceo-os-dashboard.webp">
 	<meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 	<meta property="og:image:alt" content="CodeHerWay CEO OS dashboard screenshot">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="CodeHerWay CEO OS Case Study | Jenna Zawaski">
-	<meta name="twitter:description" content="UX, local-first engineering, performance, and next-iteration notes for CodeHerWay CEO OS.">
+	<meta name="twitter:description" content="Local-first data-integrity engineering, accessibility automation, and performance budgets for CodeHerWay CEO OS.">
 	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/ceo-os-dashboard.webp">
 
 	<title>CodeHerWay CEO OS Case Study | Jenna Zawaski</title>
@@ -100,8 +100,13 @@
 				<p class="case-eyebrow">Case study</p>
 				<h1 id="case-title">CodeHerWay CEO OS</h1>
 				<p class="case-summary">
-					A local-first founder command center for focus, capture, private journaling, opportunities, content planning, weekly execution, and structured chief-of-staff workflows. The product is framed as a calm operating system, not a finished SaaS.
+					A local-first founder command center for focus, capture, journaling, opportunities, content planning, weekly execution, and chief-of-staff workflows — built in React 19 to demonstrate product-minded frontend <em>systems</em> work, not just feature output. The hard part is invisible: a data layer that stays trustworthy through reloads, stale writes, corrupted storage, and offline gaps.
 				</p>
+				<ul class="case-proof-strip" aria-label="CEO OS engineering proof points">
+					<li>Repository pattern across 8 domains</li>
+					<li>Versioned local storage with migrations</li>
+					<li>axe + bundle budgets in CI</li>
+				</ul>
 				<div class="case-links" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://codeherway-ceo-os.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl/codeherway-ceo-os" target="_blank" rel="noopener noreferrer">GitHub repo</a>
@@ -115,15 +120,15 @@
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>React, Vite, React Router, Local Storage, Supabase upgrade path</dd>
+					<dd>React 19, Vite, React Router, versioned localStorage, Supabase upgrade path</dd>
 				</div>
 				<div>
 					<dt>Primary focus</dt>
-					<dd>Calm execution, local-first resilience, and clear persistence trust cues</dd>
+					<dd>Client-side data integrity: versioned persistence, optimistic concurrency, corruption recovery, and offline replay</dd>
 				</div>
 				<div>
 					<dt>Last verified</dt>
-					<dd><time datetime="2026-05-12">May 12, 2026</time> with static page, asset, landmark, and console smoke checks.</dd>
+					<dd><time datetime="2026-05-12">May 12, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending.</dd>
 				</div>
 			</dl>
 		</section>
@@ -136,23 +141,24 @@
 		<section class="case-lens case-lens--workflow" aria-labelledby="workflow-lens-title">
 			<div class="case-lens-copy">
 				<p class="case-kicker">Founder workflow lens</p>
-				<h2 id="workflow-lens-title">The core challenge was turning scattered founder work into a calm execution system.</h2>
+				<h2 id="workflow-lens-title">The core challenge was turning scattered founder work into a calm execution system — without faking the data layer underneath it.</h2>
 				<p>
 					CEO OS needed to help a solo founder move between priorities, opportunities, planning, and capture without
-					feeling buried in dashboard noise. I focused on a clear Focus Home, route-based workspaces, local persistence,
-					and honest source-status cues so the product felt usable before full cloud sync existed.
+					feeling buried in dashboard noise. The product surface is calm on purpose; the engineering underneath treats
+					local data as something that can be reloaded, edited in two tabs, corrupted, or written while offline — and
+					handles each of those cases explicitly instead of hoping they don't happen.
 				</p>
 			</div>
 			<div class="case-lens-grid" aria-label="CEO OS product focus">
 				<article>
 					<span aria-hidden="true">01</span>
 					<h3>Focus Home</h3>
-					<p>Surfaces the work that needs attention now instead of treating everything as equal.</p>
+					<p>Ranks the next smallest action across priorities, blockers, reminders, journal signals, opportunities, and drafts.</p>
 				</article>
 				<article>
 					<span aria-hidden="true">02</span>
-					<h3>Local-first trust</h3>
-					<p>Source-state copy explains what is local, paused, offline, or synced.</p>
+					<h3>Honest persistence</h3>
+					<p>Source-state copy explains what is local, paused, offline, or synced — never a fake "saved to cloud".</p>
 				</article>
 				<article>
 					<span aria-hidden="true">03</span>
@@ -167,69 +173,59 @@
 				<h2>Evidence Snapshot</h2>
 				<div class="evidence-snapshot-grid">
 					<article class="evidence-snapshot-item">
-						<h3>Founder workflow built</h3>
+						<h3>What I built</h3>
 						<ul>
-							<li>Focus Home</li>
-							<li>Opportunity tracker</li>
-							<li>Weekly planning</li>
-							<li>Local persistence</li>
-							<li>Source-status cues</li>
-							<li>Workspace routes</li>
+							<li>Focus Home command center</li>
+							<li>Capture, Journal, Weekly Brief</li>
+							<li>Opportunities relationship pipeline</li>
+							<li>Chief of Staff output catalogue</li>
+							<li>Eight workflow domains on one data contract</li>
+						</ul>
+					</article>
+					<article class="evidence-snapshot-item">
+						<h3>The engineering that matters</h3>
+						<ul>
+							<li>Repository pattern across 8 domains</li>
+							<li>Versioned-envelope storage + migration registry</li>
+							<li>Optimistic concurrency with a typed StaleRecordError</li>
+							<li>Corruption preservation, not silent loss</li>
+							<li>Offline write queue with stop-on-first-failure</li>
+							<li>AI proxy with deterministic fallback</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What was hard</h3>
 						<ul>
-							<li>Making local-first data feel trustworthy before a full cloud sync path exists</li>
-							<li>Keeping founder workflow information scannable instead of dashboard-heavy</li>
-							<li>Separating the current local behavior from the Supabase upgrade path</li>
+							<li>Making local-first data trustworthy before a cloud sync path exists</li>
+							<li>Keeping 8 domains on one contract without behavior drift</li>
+							<li>Surfacing concurrency, corruption, and offline failures to the user honestly</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Key decisions</h3>
+						<h3>Quality gates in CI</h3>
 						<ul>
-							<li>Centered the product around a Focus Home instead of a generic dashboard</li>
-							<li>Used explicit Local only, Offline, Synced, and paused states where relevant</li>
-							<li>Kept the interface quiet so priorities and next actions stay readable</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>What changed because of those decisions</h3>
-						<ul>
-							<li>The project reads as a realistic workflow tool instead of a static product concept</li>
-							<li>The case study shows the trust boundary between local persistence and future sync</li>
-							<li>The interface gives reviewers concrete routes, states, and workflows to inspect</li>
+							<li>axe-core scans every primary route (WCAG A/AA + best-practice)</li>
+							<li>Serious or critical a11y violations fail the build</li>
+							<li>Per-route bundle budgets with a trend-regression check</li>
+							<li>Release-governed baseline refresh</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>What to verify in 90 seconds</h3>
 						<ul>
-							<li>Open the live demo</li>
-							<li>Move between workspace routes</li>
-							<li>Review Focus Home and weekly planning behavior</li>
-							<li>Check local persistence cues</li>
-							<li>Inspect responsive layout</li>
-							<li>Review the GitHub repo and case study notes</li>
+							<li>Open the live demo and move between workspace routes</li>
+							<li>Edit one record in two tabs to trigger stale-write handling</li>
+							<li>Reload mid-capture to see the brain-dump rehydrate</li>
+							<li>Watch the "Pending sync" cue appear only with queued writes</li>
+							<li>Skim the repo's repository and lib modules</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>Current proof available</h3>
+						<h3>Honest limits</h3>
 						<ul>
-							<li>Live demo</li>
-							<li>GitHub repo</li>
-							<li>Case study</li>
-							<li>QA notes</li>
-							<li>Last verified date</li>
-						</ul>
-					</article>
-					<article class="evidence-snapshot-item">
-						<h3>Proof still needed</h3>
-						<ul>
-							<li>Needs capture: Lighthouse report screenshot</li>
-							<li>Needs capture: axe accessibility scan screenshot</li>
-							<li>Needs capture: Responsive screen captures</li>
-							<li>Needs capture: Key workflow screenshots</li>
-							<li>Needs capture: Repo structure screenshot</li>
+							<li>Multi-user Supabase sync is built but feature-gated — off until authenticated duplicate-write flows are verified</li>
+							<li>The demonstrated surface is single-user and local-first</li>
+							<li>Deployed Lighthouse field numbers are not captured yet</li>
 						</ul>
 					</article>
 				</div>
@@ -269,7 +265,7 @@
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>I designed and built the dashboard, workspace routes, local persistence model, founder workflow views, source-status language, and the structured guidance flow. I also hardened the project with route refresh, stale-record, autosave, and mobile navigation coverage.</p>
+					<p>Sole designer and engineer. I own the dashboard, the eight workflow domains, the repository-pattern data layer, the versioned storage and migration registry, the optimistic-concurrency and corruption-recovery behavior, the offline write queue, the AI proxy, the source-status language, and the CI gates for accessibility and bundle size.</p>
 				</div>
 			</div>
 
@@ -277,22 +273,24 @@
 				<h2>Focus and Capture Decisions</h2>
 				<div>
 					<ul>
-						<li>Focus Home acts as the command center instead of a generic dashboard.</li>
-						<li>Support modes, reminders, and next-move guidance are designed to reduce cognitive load.</li>
-						<li>Capture and Journal prioritize quick input and autosave confidence instead of complex configuration.</li>
+						<li>Focus Home acts as the command center instead of a generic dashboard, ranking the next smallest action rather than listing everything equally.</li>
+						<li>Support modes, reminders, and next-move guidance are designed to reduce cognitive load, including an explicit "I'm overwhelmed" reset.</li>
+						<li>Capture rehydrates an in-progress brain-dump from localStorage after a reload, and Journal autosaves on a debounce — quick input with recovery confidence instead of complex configuration.</li>
 						<li>Persistence language stays explicit when work is local, synced, paused, or failed.</li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="case-section">
-				<h2>Local-First Engineering</h2>
+				<h2>Frontend Systems Engineering</h2>
 				<div>
 					<ul>
-						<li>Local-first storage keeps the app usable without accounts or credentials.</li>
-						<li>Repository modules own normalization, persistence, and transport so pages do not need to know where data lives.</li>
-						<li>Route metadata, navigation labels, and shell metadata share one source to reduce product drift.</li>
-						<li>The guided workflow uses a proxy path with fallback behavior instead of assuming every backend service is final.</li>
+						<li><strong>Repository pattern across 8 domains.</strong> Opportunities, content, weekly brief, settings, chief, capture, journal, and reminders share one contract: normalize, read/write from the active source (local or Supabase), then emit cross-tab events for lightweight synchronization. Pages never need to know where data lives.</li>
+						<li><strong>Versioned-envelope storage.</strong> Each domain declares a schema version; writes are wrapped as <code>{ schemaVersion, domain, model, data }</code>, and an envelope whose domain doesn't match the read site is rejected — closing the "wrong key swap" failure mode. A forward-compat migration registry lifts older payloads transparently.</li>
+						<li><strong>Optimistic concurrency for local CRUD.</strong> Records stamp <code>updatedAt</code> and reject stale saves with a typed <code>StaleRecordError</code>; the edit surface shows a friendly conflict message and refreshes the row under the open modal, so closing it reveals the current data.</li>
+						<li><strong>Corruption preservation, not silent loss.</strong> When a JSON parse fails, the corrupt blob is preserved under a timestamped key and a non-blocking banner tells the user — instead of quietly wiping their work.</li>
+						<li><strong>Offline write queue.</strong> Recoverable backend failures enqueue a FIFO-trimmed replay batch with stop-on-first-failure semantics and attempt counters; the topbar shows "Pending sync" only when writes are actually waiting to replay.</li>
+						<li><strong>AI proxy with safe failure.</strong> The Chief-of-Staff proxy handles abort and timeout, normalizes tool-like and plain-text model outputs, and falls back to a deterministic action plan labelled as such — never a blank panel.</li>
 					</ul>
 				</div>
 			</div>
@@ -307,11 +305,11 @@
 						</li>
 						<li>
 							<span>Decision</span>
-							<p>Local-first persistence keeps the product usable while source-state copy explains what is local, paused, or synced.</p>
+							<p>Ship a hardened local-first layer — versioned envelopes, optimistic concurrency, corruption recovery, and an offline replay queue — while source-state copy explains what is local, paused, or synced.</p>
 						</li>
 						<li>
 							<span>Tradeoff</span>
-							<p>The product demonstrates real workflow design, but multi-user sync remains an upgrade path rather than a finished claim.</p>
+							<p>The product demonstrates production-grade data-integrity engineering, but multi-user Supabase sync stays a feature-gated upgrade path until authenticated duplicate-write flows are verified.</p>
 						</li>
 					</ul>
 				</div>
@@ -321,6 +319,7 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
+						<li><strong>Automated in CI:</strong> <code>@axe-core/playwright</code> scans every primary route against WCAG 2.0/2.1 A and AA plus best-practice rules, and serious or critical violations fail the build.</li>
 						<li>The app shell includes skip-link and focus-restoration behavior for routed workflows.</li>
 						<li>Focus modes and data rows are built to support keyboard interaction.</li>
 						<li>Save, loading, error, and source states use clear status and alert copy where appropriate.</li>
@@ -333,9 +332,9 @@
 				<h2>Performance Considerations</h2>
 				<div>
 					<ul>
-						<li>Route performance budgets are part of the project's quality story.</li>
-						<li>Telemetry diagnostics and heavy detail are split away from the first Chief of Staff route bundle.</li>
-						<li>The current app is optimized for portfolio review and workflow reliability; deeper production profiling would be a next iteration.</li>
+						<li><strong>Per-route bundle budgets run in CI</strong>, paired with a trend-regression check and a release-governed baseline refresh, so a route can't quietly get heavier between releases.</li>
+						<li>Telemetry diagnostics and heavy detail are code-split away from the first Chief of Staff route bundle.</li>
+						<li>Budgets guard bundle weight today; deployed Lighthouse field profiling is the honest next step, not a captured result yet.</li>
 					</ul>
 				</div>
 			</div>
@@ -344,10 +343,10 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Measured on May 12, 2026:</strong> the PR-branch static smoke test returned HTTP 200 for this page on desktop and mobile, with no console/page errors and no completed broken images.</li>
-						<li><strong>Accessibility smoke check:</strong> one H1, skip link, main landmark, and labelled navigation were present in both tested viewports.</li>
-						<li><strong>Evidence standard:</strong> the page separates local-first behavior from the Supabase upgrade path instead of presenting unfinished cloud sync as complete.</li>
-						<li><strong>Still to validate:</strong> authenticated multi-user flows, concurrent updates, and guided-workflow fallback telemetry in a production-like environment.</li>
+						<li><strong>What's covered:</strong> the data-resilience behaviors are the test focus — stale-write rejection, envelope/domain-mismatch rejection, migration lift of older payloads, offline-queue replay order, and corruption-banner surfacing.</li>
+						<li><strong>Automated gates:</strong> axe-core accessibility scans and per-route bundle budgets both run in CI; serious/critical a11y violations or budget regressions fail the build.</li>
+						<li><strong>Evidence standard:</strong> local-first behavior is kept separate from the Supabase upgrade path, so unfinished cloud sync is never presented as complete.</li>
+						<li><strong>Still to validate:</strong> authenticated multi-user flows, concurrent cross-device updates, and guided-workflow fallback telemetry in a production-like environment.</li>
 					</ul>
 				</div>
 			</div>
@@ -355,14 +354,14 @@
 			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
-					<p>The project is a working portfolio-grade founder workflow system with local-first behavior and a Supabase upgrade path. It is not positioned as a complete multi-user SaaS product yet.</p>
+					<p>The project is a working portfolio-grade founder workflow system with hardened local-first behavior and a feature-gated Supabase upgrade path. It is not positioned as a complete multi-user SaaS product yet.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>What I Learned</h2>
 				<div>
-					<p>For productivity tools, trust comes from reducing ambiguity: where the work is saved, what needs attention, and what action is realistic next. The product feels stronger when the interface names those states plainly instead of hiding them behind dashboard polish.</p>
+					<p>For productivity tools, trust comes from reducing ambiguity: where the work is saved, what needs attention, and what action is realistic next. The product feels stronger when the interface — and the data layer behind it — names those states plainly instead of hiding failure behind dashboard polish.</p>
 				</div>
 			</div>
 
@@ -370,10 +369,10 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Complete authenticated multi-user UX review across the Supabase persistence path.</li>
+						<li>Complete authenticated multi-user UX review across the Supabase persistence path, then lift the feature gate.</li>
 						<li>Broaden integration coverage for concurrent updates across domains.</li>
 						<li>Add structured telemetry around guidance fallback and accepted next-step suggestions.</li>
-						<li>Refresh screenshot and walkthrough assets after each major UI iteration.</li>
+						<li>Capture deployed Lighthouse field numbers and refresh screenshot/walkthrough assets after each major UI iteration.</li>
 					</ul>
 				</div>
 			</div>

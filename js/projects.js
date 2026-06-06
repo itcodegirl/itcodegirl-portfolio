@@ -12,25 +12,25 @@ const projects = [
 		id: "codeherway",
 		number: "01",
 		title: "CodeHerWay Education Platform",
-		tagline: "Flagship React product for learner-focused UX, persisted progress, quizzes, and rewards.",
+		tagline: "Flagship React + Supabase learning product with a hardened, dedupe-safe reward engine.",
 		status: "Flagship project",
 		featured: true,
-		meta: "React / Supabase / Learner UX",
+		meta: "React / Supabase / Reward engine",
 		description:
-			"Flagship React product interface with Supabase auth, persisted progress, quiz feedback states, and XP / streak logic.",
+			"React + Supabase learning platform with auth, progress save/replay, quiz feedback, and a unified reward engine hardened with deduplication and retry/reconciliation.",
 		productValue:
 			"Helps beginners move through lessons, quizzes, saved progress, and rewards in one guided learner-focused flow.",
 		built:
-			"React product UI, Supabase auth, guided lesson flow, persisted progress, quiz feedback states, and XP / streak logic.",
+			"React product UI, Supabase auth and data, progress save/reload with retry/replay, quiz feedback, and a unified XP / streak / challenge reward engine with dedupe plus a feature-gated cross-device backend.",
 		challenge:
-			"Balancing beginner-friendly UX with real product logic across loading, feedback, saved progress, and incomplete learner flows.",
+			"Keeping reward counts honest across retries, replays, and sync failures while keeping the beginner experience calm and unintimidating.",
 		proofAvailable: [
-			"React product UI",
-			"Supabase auth",
-			"Persisted progress",
+			"Hardened reward engine (dedupe + retry)",
+			"Supabase auth and data",
+			"Progress save / replay",
 			"Quiz feedback states",
-			"XP / streak logic",
-			"Learner-focused UX",
+			"Feature-gated cross-device backend",
+			"Playwright smoke + a11y coverage",
 			"Case study with decision notes",
 		],
 		image: "assets/images/projects/codeherway-dashboard.webp",
@@ -62,27 +62,28 @@ const projects = [
 		id: "ceo",
 		number: "02",
 		title: "CodeHerWay CEO OS",
-		tagline: "Founder dashboard for tracking priorities, opportunities, and weekly execution.",
+		tagline: "Local-first founder OS built on a repository-pattern data layer with versioned storage.",
 		cardClass: "ceo-os",
 		description:
-			"React founder dashboard with scannable priorities, opportunity tracking, weekly planning, and local-first product state.",
+			"React 19 founder dashboard with a repository pattern across 8 domains, versioned-envelope storage with migrations, optimistic concurrency, and an offline write queue.",
 		productValue:
 			"Helps a solo founder see what needs attention now without scattering key decisions across unrelated tools.",
 		built:
-			"Focus Home, opportunity tracker, weekly planning views, workspace routing, persisted local state, and explicit source-status cues.",
+			"Focus Home, opportunity pipeline, weekly planning, Chief-of-Staff AI workflows, and a hardened local-first data layer: versioned storage, typed stale-write conflicts, corruption recovery, and offline replay.",
 		challenge:
-			"Making local-first data feel trustworthy while keeping a dense product workflow calm, readable, and easy to resume.",
+			"Making local-first data trustworthy through reloads, stale writes, corrupted storage, and offline gaps without making the workflow feel heavy.",
 		proofAvailable: [
-			"Live demo",
-			"Source code",
-			"Case study",
-			"QA notes",
-			"Last verified date",
+			"Repository pattern across 8 domains",
+			"Versioned storage + migration registry",
+			"Optimistic concurrency (typed errors)",
+			"Corruption recovery + offline write queue",
+			"axe + bundle budgets in CI",
+			"Live demo, source code, case study",
 		],
 		image: "assets/images/projects/ceo-os-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay CEO OS dashboard interface screenshot",
-		tech: ["React", "React Router", "Local Storage", "JavaScript"],
+		tech: ["React 19", "React Router", "Vite", "localStorage"],
 		links: [
 			{
 				kind: "live",
@@ -108,26 +109,27 @@ const projects = [
 		id: "aura",
 		number: "03",
 		title: "Aura Weather",
-		tagline: "Responsive weather app focused on clear hierarchy and quick scanning.",
+		tagline: "A weather dashboard that's really a defensive client-side data-handling showcase.",
 		description:
-			"Responsive frontend weather dashboard centered on quick scanning, resilient API states, and honest handling of missing data.",
+			"React 19 weather dashboard with end-to-end nullish-rejection data contracts, multi-API composition with independent fetch lifecycles, and honest missing-data states.",
 		productValue:
 			"Helps people check current conditions and forecast context quickly before making daily decisions.",
 		built:
-			"Responsive forecast interface, city search, API data handling, loading states, unavailable states, and mobile layout behavior.",
+			"Forecast UI with expandable days, an abortable keyboard combobox search, multi-API orchestration across three sources, nullish-rejection contracts, offline last-known restore, and a PWA shell.",
 		challenge:
-			"Keeping weather data readable while representing delayed or missing provider values clearly and accessibly.",
+			"Representing partial or missing provider data honestly, never as fake zeros, and locking that contract with tests so the same bug class cannot regress.",
 		proofAvailable: [
-			"Live demo",
-			"Source code",
-			"Case study",
-			"QA notes",
-			"Last verified date",
+			"End-to-end nullish-rejection contracts",
+			"Independent multi-API fetch lifecycles",
+			"Unit + E2E (Playwright + axe)",
+			"Visual regression + Lighthouse budgets",
+			"Offline last-known restore",
+			"Live demo, source code, case study",
 		],
 		image: "assets/images/projects/aura-weather-interface.webp",
 		imagePosition: "top center",
 		imageAlt: "Aura Weather app interface screenshot",
-		tech: ["JavaScript", "HTML5", "CSS", "REST API"],
+		tech: ["React", "Vite", "JavaScript", "CSS"],
 		links: [
 			{
 				kind: "live",

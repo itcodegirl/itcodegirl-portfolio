@@ -84,7 +84,7 @@ body {
 
 /* Programmatic focus from the skip link — keep a visible indicator */
 #main-content:focus-visible {
-	outline: 2px solid #c084fc;
+	outline: 2px solid var(--focus-ring);
 	outline-offset: 4px;
 	border-radius: 8px;
 }
@@ -481,7 +481,7 @@ section h2::after {
 .skill-card:hover {
 	background: rgba(255, 255, 255, 0.06);
 	border-color: rgba(255, 255, 255, 0.2);
-	transform: translateX(5px);
+	transform: translateY(-4px);
 }
 
 .skill-card:hover::before {
@@ -1360,7 +1360,7 @@ section h2::after {
 
 a:focus-visible,
 button:focus-visible {
-	outline: 2px solid #c084fc;
+	outline: 2px solid var(--focus-ring);
 	outline-offset: 4px;
 	border-radius: 8px;
 }
@@ -1417,7 +1417,8 @@ button:focus-visible {
 	}
 
 	a:focus-visible,
-	button:focus-visible {
+	button:focus-visible,
+	#main-content:focus-visible {
 		outline-color: Highlight;
 	}
 }

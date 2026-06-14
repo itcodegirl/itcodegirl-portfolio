@@ -71,7 +71,7 @@ Project screenshots used by the Selected Work cards are stored in
 
 The portfolio leads with the engineering behind each project, not only claims.
 Project cards and case studies surface owned work in concrete terms — CodeHerWay's
-hardened reward engine (dedupe + retry/reconciliation), CEO OS's repository-pattern
+hardened progress engine (dedupe + retry/reconciliation), CEO OS's repository-pattern
 data layer (versioned storage, optimistic concurrency, corruption recovery, offline
 replay), and Aura's end-to-end nullish-rejection data contracts and QA pyramid —
 alongside an Evidence Snapshot that shows what was built, what was hard, and what a

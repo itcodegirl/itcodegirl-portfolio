@@ -12,20 +12,20 @@ const projects = [
 		id: "codeherway",
 		number: "01",
 		title: "CodeHerWay Education Platform",
-		tagline: "Flagship React + Supabase learning product with a hardened, dedupe-safe reward engine.",
+		tagline: "Flagship React + Supabase learning product with a hardened, dedupe-safe progress engine.",
 		status: "Flagship project",
 		featured: true,
-		meta: "React / Supabase / Reward engine",
+		meta: "React / Supabase / Progress engine",
 		description:
-			"React + Supabase learning platform with auth, progress save/replay, quiz feedback, and a unified reward engine hardened with deduplication and retry/reconciliation.",
+			"React + Supabase learning platform with auth, progress save/replay, quiz feedback, and a unified progress engine hardened with deduplication and retry/reconciliation.",
 		productValue:
-			"Helps beginners move through lessons, quizzes, saved progress, and rewards in one guided learner-focused flow.",
+			"Helps beginners move through lessons, hands-on practice, quizzes, and saved progress in one guided learner-focused flow.",
 		built:
-			"React product UI, Supabase auth and data, progress save/reload with retry/replay, quiz feedback, and a unified XP / streak / challenge reward engine with dedupe plus a feature-gated cross-device backend.",
+			"React product UI, Supabase auth and data, progress save/reload with retry/replay, quiz feedback, and a unified progress engine that records completed lessons, practice, and challenges with dedupe — plus a feature-gated cross-device backend.",
 		challenge:
-			"Keeping reward counts honest across retries, replays, and sync failures while keeping the beginner experience calm and unintimidating.",
+			"Keeping completed-work counts honest across retries, replays, and sync failures while keeping the beginner experience calm and unintimidating.",
 		proofAvailable: [
-			"Hardened reward engine (dedupe + retry)",
+			"Hardened progress engine (dedupe + retry)",
 			"Supabase auth and data",
 			"Progress save / replay",
 			"Quiz feedback states",

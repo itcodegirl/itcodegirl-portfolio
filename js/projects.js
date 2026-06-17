@@ -17,7 +17,7 @@ const projects = [
 		featured: true,
 		meta: "React / Supabase / Reward engine",
 		description:
-			"React + Supabase learning platform with auth, progress save/replay, quiz feedback, and a unified reward engine hardened with deduplication and retry/reconciliation.",
+			"React 19 + TypeScript learning platform with Supabase auth and data, 22 courses, 170 modules, 922 lessons on a custom v2 schema, AI companion (Ada), and a unified reward engine with deduplication and retry/reconciliation.",
 		productValue:
 			"Helps beginners move through lessons, quizzes, saved progress, and rewards in one guided learner-focused flow.",
 		built:
@@ -36,7 +36,7 @@ const projects = [
 		image: "assets/images/projects/codeherway-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay Education Platform landing and account creation interface screenshot",
-		tech: ["React", "Supabase", "PostgreSQL", "JavaScript", "Vite"],
+		tech: ["React 19", "TypeScript", "Vite", "Supabase", "PostgreSQL"],
 		links: [
 			{
 				kind: "live",

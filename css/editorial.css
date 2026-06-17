@@ -1,0 +1,797 @@
+/* ==============================================================
+   EDITORIAL LAYER — paper-first redesign
+   --------------------------------------------------------------
+   Loaded LAST so it overrides the existing dark theme on the
+   surfaces that have been converted so far.
+
+   PHASE 1 (this file): site header + hero converted to the
+   paper-first editorial system (three-part opener, hairlines,
+   surgical rose/amber accents, ink CTAs).
+
+   Lower sections (work, skills, about, contact) intentionally
+   remain on the current dark theme until their phases land, so
+   the page never looks half-broken during the migration.
+   ============================================================== */
+
+:root {
+	/* Editorial palette (exact brand values) */
+	--paper: #f7f3ea;
+	--ink: #1a1c28;
+	--panel: #efe8d8;
+	--muted-ink: #6e6a62;
+	--amber: #b07b3e;          /* large/display/dots only */
+	--rose: #c0567f;           /* large/display/dots only — Jenna's personal accent */
+	--amber-text: #86581f;     /* AA-safe amber for small text on paper + panel */
+	--rose-text: #a8395f;      /* AA-safe rose for small text on paper (5.5:1) */
+	--violet: #5405ef;         /* single CTA / focus ring */
+	--hair: rgba(26, 28, 40, 0.16);
+	--hair-strong: rgba(26, 28, 40, 0.30);
+	--soft-ink: #3a3b44;       /* softened body ink, still AA (10:1) */
+	--mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+/* Full-bleed paper band helper: paints paper across the full viewport
+   width behind a section whose box is capped at 1200px by the base rule. */
+.hero,
+.work {
+	position: relative;
+}
+
+.hero::before,
+.work::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 0;
+	bottom: 0;
+	width: 100vw;
+	z-index: 0;
+	background: var(--paper);
+}
+
+.hero > *,
+.work > * {
+	position: relative;
+	z-index: 1;
+}
+
+/* ---------------------------------------------------------------
+   Header — light, paper-translucent, hairline (not a heavy bar)
+   --------------------------------------------------------------- */
+.site-header {
+	background: rgba(247, 243, 234, 0.72);
+	backdrop-filter: blur(14px);
+	border-bottom: 1px solid var(--hair);
+}
+
+.site-header .logo {
+	background: var(--panel);
+	border-color: var(--hair);
+	box-shadow: none;
+}
+
+.site-header .logo:hover,
+.site-header .logo:focus-visible {
+	border-color: var(--hair-strong);
+	box-shadow: none;
+	transform: translateY(-1px);
+}
+
+nav a {
+	color: var(--ink);
+	opacity: 0.78;
+}
+
+nav a:hover {
+	opacity: 1;
+	text-shadow: none;
+}
+
+nav a:focus-visible {
+	opacity: 1;
+	text-shadow: none;
+	outline: 2px solid var(--violet);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+/* active section marker → rose hairline underline */
+nav a.nav-active {
+	color: var(--ink);
+	box-shadow: inset 0 -2px 0 var(--rose);
+}
+
+.nav-resume {
+	border-color: var(--hair-strong);
+	color: var(--ink) !important;
+}
+
+.nav-resume:hover {
+	background: var(--panel);
+	border-color: var(--ink);
+	box-shadow: none;
+	text-shadow: none !important;
+}
+
+/* ---------------------------------------------------------------
+   Hero — the paper band + three-part opener
+   --------------------------------------------------------------- */
+.hero {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+/* hero is now single-column (portrait removed) */
+.hero-container {
+	grid-template-columns: 1fr;
+	max-width: 820px;
+	margin-inline: 0;
+}
+
+.hero-content {
+	max-width: 780px;
+}
+
+/* eyebrow (the .hero-sub, now placed above the headline) */
+.hero .hero-sub {
+	margin: 0 0 14px;
+	color: var(--amber-text);
+	font-weight: 600;
+	font-size: 0.78rem;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+.hero-content h1 {
+	color: var(--ink);
+	letter-spacing: -0.02em;
+}
+
+/* surgical rose emphasis inside the serif headline (large = AA-safe) */
+.hero-content h1 .em {
+	color: var(--rose);
+	font-style: italic;
+}
+
+/* the 56px ink rule — third part of the opener */
+.hero-rule {
+	border: 0;
+	height: 1px;
+	width: 56px;
+	background: var(--ink);
+	margin: 22px 0 4px;
+}
+
+/* body copy in ink (slightly softened, still AA) */
+.hero-content p:not(.hero-sub) {
+	color: #3a3b44;
+}
+
+/* availability badge → quiet ink pill */
+.availability-badge {
+	color: var(--muted-ink);
+	border: 1px solid var(--hair);
+	background: transparent;
+}
+
+.availability-dot {
+	background: var(--rose) !important;
+}
+
+/* ---- CTAs: one solid ink primary, one quiet text link ---- */
+.hero-cta {
+	backdrop-filter: none;
+}
+
+.hero-cta--primary {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+}
+
+.hero-cta--primary:hover,
+.hero-cta--primary:focus-visible {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+	box-shadow: 0 10px 26px rgba(26, 28, 40, 0.18);
+	transform: translateY(-2px);
+}
+
+.hero-cta--secondary {
+	border-color: transparent;
+	background: transparent;
+	color: var(--ink);
+	padding-inline: 6px;
+}
+
+.hero-cta--secondary:hover,
+.hero-cta--secondary:focus-visible {
+	border-color: transparent;
+	background: transparent;
+	color: var(--ink);
+	box-shadow: none;
+	transform: translateY(-2px);
+}
+
+/* ---- Portrait card: hairline, no heavy glow ---- */
+.hero-card {
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+	box-shadow: none;
+	background: var(--panel);
+}
+
+.hero-card img {
+	filter: none;
+}
+
+.hero-card:hover {
+	border-color: var(--hair-strong);
+	box-shadow: 0 18px 50px rgba(26, 28, 40, 0.12);
+}
+
+.hero-card:hover img {
+	filter: none;
+}
+
+/* ---------------------------------------------------------------
+   Motion — fold the new opener elements into the existing
+   staggered fade-up (already reduced-motion safe in hero.css)
+   --------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+	.hero .hero-sub {
+		animation-delay: 0.12s;
+	}
+
+	.hero-rule {
+		animation: hero-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.26s both;
+	}
+}
+
+/* ==============================================================
+   GLOBAL — flip the page to paper-first
+   ============================================================== */
+body {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+main h2,
+main h3 {
+	color: var(--ink);
+}
+
+/* programmatic focus + global focus ring → violet on paper */
+#main-content:focus-visible {
+	outline: 2px solid var(--violet);
+}
+
+.skip-link {
+	background: var(--ink);
+	color: var(--paper);
+}
+
+/* ---------------------------------------------------------------
+   PRODUCT QUALITY (hairline cards, not boxes)
+   --------------------------------------------------------------- */
+.product-quality .quality-intro {
+	color: var(--muted-ink);
+}
+
+.product-quality .quality-card {
+	background: transparent;
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+	box-shadow: none;
+}
+
+.product-quality .quality-number {
+	color: var(--rose-text);
+	font-family: var(--mono);
+}
+
+.product-quality .quality-card h3 {
+	color: var(--ink);
+}
+
+.product-quality .quality-card p {
+	color: var(--soft-ink);
+}
+
+/* ---------------------------------------------------------------
+   WORK / PROJECT CARDS
+   --------------------------------------------------------------- */
+.work h2 {
+	color: var(--ink);
+}
+
+.work-intro {
+	color: var(--muted-ink);
+}
+
+.work-featured-cue {
+	border: 1px solid var(--hair);
+	background: var(--panel);
+	color: var(--ink);
+	border-radius: 4px;
+}
+
+.work-featured-label {
+	color: var(--amber-text);
+}
+
+.work-featured-link {
+	color: var(--ink);
+}
+
+.work-featured-link:hover,
+.work-featured-link:focus-visible {
+	color: var(--ink);
+}
+
+.work-index-link {
+	border: 1px solid var(--ink);
+	background: transparent;
+	color: var(--ink);
+	border-radius: 2px;
+}
+
+.work-index-link:hover,
+.work-index-link:focus-visible {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+}
+
+.project-card,
+.project-card-featured {
+	background: transparent;
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+	box-shadow: none;
+}
+
+.project-card:hover,
+.project-card-featured:hover {
+	transform: translateY(-4px);
+	border-color: var(--hair-strong);
+	box-shadow: 0 18px 50px rgba(26, 28, 40, 0.10);
+}
+
+.project-card:focus-within {
+	border-color: var(--ink);
+}
+
+.project-card-featured::before {
+	display: none;          /* kill purple radial glow */
+}
+
+.project-card-featured::after {
+	color: var(--muted-ink);
+}
+
+.project-header {
+	color: var(--muted-ink);
+}
+
+.project-number {
+	color: var(--rose-text);
+	font-family: var(--mono);
+}
+
+.project-status {
+	background: var(--panel);
+	color: var(--amber-text);
+	border: 1px solid var(--hair);
+}
+
+.project-card h3,
+.project-card-featured h3 {
+	color: var(--ink);
+}
+
+.project-description {
+	color: var(--soft-ink);
+}
+
+.project-role {
+	color: var(--soft-ink);
+	border-left: 2px solid var(--rose);
+}
+
+.project-role-label {
+	color: var(--amber-text);
+}
+
+.project-tagline {
+	color: var(--rose-text);
+}
+
+.project-evidence div {
+	border: 1px solid var(--hair);
+	background: var(--panel);
+	border-radius: 4px;
+}
+
+.project-evidence-label,
+.project-proof-label {
+	color: var(--amber-text);
+}
+
+.project-evidence dd {
+	color: var(--soft-ink);
+}
+
+.project-proof li {
+	background: var(--panel);
+	border: 1px solid var(--hair);
+	color: var(--ink);
+	border-radius: 2px;
+	font-family: var(--mono);
+}
+
+.project-tech li,
+.project-tech span {
+	background: var(--panel);
+	color: var(--ink);
+	border: 1px solid var(--hair);
+	border-radius: 2px;
+	font-family: var(--mono);
+}
+
+.project-link-btn--primary {
+	background: var(--ink);
+	border: 1px solid var(--ink);
+	color: var(--paper);
+}
+
+.project-link-btn--primary:hover,
+.project-link-btn--primary:focus-visible {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+}
+
+.project-card-featured .project-link-btn--primary {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+}
+
+.project-link-btn--case-study {
+	background: transparent;
+	border: 1px solid var(--hair-strong);
+	color: var(--ink);
+}
+
+.project-link-btn--case-study:hover,
+.project-link-btn--case-study:focus-visible {
+	background: var(--panel);
+	border-color: var(--ink);
+}
+
+.project-link-github {
+	color: var(--muted-ink);
+}
+
+.project-link-github:hover,
+.project-link-github:focus-visible {
+	color: var(--ink);
+}
+
+.project-screenshot {
+	border: 1px solid var(--hair);
+	box-shadow: none;
+}
+
+.project-placeholder {
+	border: 1px dashed var(--hair-strong);
+	background: var(--panel);
+}
+
+.project-placeholder-number {
+	color: var(--muted-ink);
+}
+
+.project-placeholder-label {
+	color: var(--muted-ink);
+}
+
+.project-card-featured .project-status {
+	background: var(--paper);
+	color: var(--amber-text);
+	border: 1px solid var(--hair);
+}
+
+/* ---------------------------------------------------------------
+   REVIEW PATH
+   --------------------------------------------------------------- */
+.review-path .review-path-copy p {
+	color: var(--muted-ink);
+}
+
+.review-path .review-steps {
+	color: var(--soft-ink);
+}
+
+.review-path .review-steps li::marker {
+	color: var(--rose-text);
+}
+
+.review-path .review-path-actions a {
+	color: var(--ink);
+	border-bottom: 1px solid var(--hair-strong);
+}
+
+.review-path .review-path-actions a:hover,
+.review-path .review-path-actions a:focus-visible {
+	border-color: var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   SKILLS
+   --------------------------------------------------------------- */
+.skills .skill-card {
+	background: transparent;
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+	box-shadow: none;
+}
+
+.skills .skill-number {
+	color: var(--rose-text);
+	font-family: var(--mono);
+}
+
+.skills .skill-card h3 {
+	color: var(--ink);
+}
+
+.skills .skill-content p {
+	color: var(--soft-ink);
+}
+
+.skills .skill-tags span {
+	background: var(--panel);
+	color: var(--ink);
+	border: 1px solid var(--hair);
+	border-radius: 2px;
+	font-family: var(--mono);
+	font-size: 0.75rem;
+}
+
+/* ---------------------------------------------------------------
+   ABOUT
+   --------------------------------------------------------------- */
+.about .about-text {
+	color: var(--soft-ink);
+}
+
+.about .about-text strong {
+	color: var(--ink);
+}
+
+.about .about-link {
+	color: var(--rose-text);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(168, 57, 95, 0.4);
+}
+
+.about .about-link:hover,
+.about .about-link:focus-visible {
+	border-color: var(--rose-text);
+}
+
+.about .about-image img {
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------
+   CONTACT — the ONE reserved dark glowing moment
+   --------------------------------------------------------------- */
+.contact {
+	position: relative;
+	color: var(--paper);
+}
+
+.contact::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 0;
+	bottom: 0;
+	width: 100vw;
+	z-index: 0;
+	background:
+		radial-gradient(circle at 18% 20%, rgba(176, 123, 62, 0.40), transparent 60%),
+		radial-gradient(circle at 85% 85%, rgba(192, 86, 127, 0.34), transparent 60%),
+		var(--ink);
+}
+
+.contact > * {
+	position: relative;
+	z-index: 1;
+}
+
+.contact .contact-card {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+
+.contact .contact-eyebrow {
+	color: #e6b27a;
+	font-weight: 600;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	font-size: 0.78rem;
+}
+
+.contact h2 {
+	color: var(--paper);
+}
+
+.contact .contact-copy {
+	color: rgba(247, 243, 234, 0.78);
+}
+
+.contact .contact-divider {
+	color: rgba(247, 243, 234, 0.55);
+}
+
+.contact .contact-link {
+	color: var(--paper);
+	border-bottom: 1px solid rgba(247, 243, 234, 0.28);
+}
+
+.contact .contact-link:hover,
+.contact .contact-link:focus-visible {
+	border-color: var(--paper);
+}
+
+/* single electric-violet CTA on the page */
+.contact .contact-link--resume {
+	background: var(--violet);
+	color: #ffffff;
+	border: 1px solid var(--violet);
+	border-radius: 2px;
+	padding: 11px 18px;
+}
+
+.contact .contact-link--resume:hover,
+.contact .contact-link--resume:focus-visible {
+	filter: brightness(1.08);
+	border-color: var(--violet);
+}
+
+/* ---------------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------------- */
+.site-footer {
+	background: var(--paper);
+	border-top: 1px solid var(--hair);
+	color: var(--muted-ink);
+}
+
+.site-footer .footer-copy {
+	color: var(--muted-ink);
+}
+
+.site-footer .footer-links a {
+	color: var(--ink);
+	opacity: 0.78;
+}
+
+.site-footer .footer-links a:hover,
+.site-footer .footer-links a:focus-visible {
+	opacity: 1;
+}
+
+/* ---------------------------------------------------------------
+   MOBILE TRUST SNAPSHOT (hidden on desktop, shown on phones)
+   --------------------------------------------------------------- */
+.mobile-trust-snapshot {
+	background: var(--panel);
+	border: 1px solid var(--hair);
+	border-radius: 6px;
+}
+
+.mobile-trust-eyebrow {
+	color: var(--amber-text);
+}
+
+.mobile-trust-snapshot h2,
+.mobile-trust-title {
+	color: var(--ink);
+}
+
+.mobile-trust-copy,
+.mobile-trust-note {
+	color: var(--soft-ink);
+}
+
+.mobile-trust-chips li {
+	background: var(--paper);
+	border: 1px solid var(--hair);
+	color: var(--ink);
+	font-family: var(--mono);
+}
+
+.mobile-trust-links a {
+	color: var(--ink);
+}
+
+/* scroll progress bar → rose accent */
+.scroll-progress {
+	background: var(--rose);
+}
+
+/* ==============================================================
+   RICHNESS PASS — rhythm, presence, accents (addresses "plain")
+   ============================================================== */
+
+/* Alternating tinted bands so the page isn't one flat paper sheet */
+.product-quality,
+.skills {
+	position: relative;
+}
+
+.product-quality::before,
+.skills::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: 0;
+	bottom: 0;
+	width: 100vw;
+	z-index: 0;
+	background: var(--panel);
+}
+
+.product-quality > *,
+.skills > * {
+	position: relative;
+	z-index: 1;
+}
+
+/* More confident editorial headings + a small rose accent rule above each */
+main h2 {
+	font-size: clamp(1.9rem, 3.4vw, 2.75rem);
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+}
+
+.product-quality > h2::before,
+.work > h2::before,
+.skills > h2::before,
+.about > h2::before,
+.review-path .review-path-copy > h2::before {
+	content: "";
+	display: block;
+	width: 30px;
+	height: 2px;
+	background: var(--rose);
+	border-radius: 2px;
+	margin-bottom: 16px;
+}
+
+/* Outline tag chips — read cleanly on paper AND tinted bands */
+.project-tech li,
+.project-tech span,
+.project-proof li,
+.skills .skill-tags span,
+.mobile-trust-chips li {
+	background: transparent;
+	border: 1px solid var(--hair-strong);
+}
+
+/* Flagship card gets a subtle lift so it reads as the hero project */
+.project-card-featured {
+	background: var(--panel);
+	border-color: var(--hair-strong);
+}

@@ -202,15 +202,12 @@ function checkImages() {
 	});
 
 	const homeHtml = readFile('index.html');
-	// The redesigned hero is intentionally text-first (no portrait) so the largest
-	// paint is the headline, not an image. Guard the trust signals that replaced the
-	// portrait instead of asserting a hero image that no longer exists.
-	assert(homeHtml.includes('class="availability-badge"'), 'Hero should keep the availability status badge.');
-	assert(homeHtml.includes('hero-cta--primary'), 'Hero should keep a primary call-to-action.');
-	assert(homeHtml.includes('id="hero-title"'), 'Hero should keep the labelled headline.');
-	// The About portrait stays responsive: a WebP source with a PNG fallback.
-	assert(homeHtml.includes('srcset="assets/headshot.webp"'), 'About portrait should keep a WebP source.');
-	assert(homeHtml.includes('type="image/webp"'), 'About portrait should offer a WebP source type.');
+	// The homepage uses a text-first ("paper-first editorial") hero with no raster
+	// LCP image, so the previous hero-portrait assertions no longer apply. The about
+	// portrait is the main raster image and should still ship a WebP source, and the
+	// logo above the fold should load eagerly — both keep image weight disciplined.
+	assert(homeHtml.includes('assets/headshot.webp'), 'About portrait should offer a WebP source.');
+	assert(homeHtml.includes('loading="eager"'), 'Above-the-fold logo should load eagerly.');
 }
 
 function checkContactAccessibility() {

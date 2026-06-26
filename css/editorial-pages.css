@@ -1,0 +1,424 @@
+/* ==============================================================
+   EDITORIAL LAYER — sub-pages (work index, case studies, notes)
+   --------------------------------------------------------------
+   Loaded LAST on every sub-page so it converts the dark base
+   (css/styles.css + work/work.css + notes/notes.css) to the same
+   paper-first editorial system the homepage uses. Keeping it as a
+   single override layer mirrors css/editorial.css and leaves the
+   dark base untouched (and reusable) underneath.
+
+   Two mechanisms work together:
+   1. Redefine the shared design tokens to paper values — any rule
+      that already reads var(--text-primary), var(--border-subtle),
+      etc. adapts automatically.
+   2. Explicit overrides for the hardcoded dark values
+      (rgba(255,255,255,…), white, gradient-clipped headings, the
+      light per-page accents) that tokens can't reach.
+   ============================================================== */
+
+:root {
+	/* Editorial palette (matches css/editorial.css exactly) */
+	--paper: #f7f3ea;
+	--ink: #1a1c28;
+	--panel: #efe8d8;
+	--muted-ink: #6e6a62;
+	--amber-text: #86581f;     /* AA-safe label accent on paper + panel */
+	--rose: #c0567f;           /* personal accent — dots, rules, markers */
+	--rose-text: #a8395f;      /* AA-safe rose for small text on paper */
+	--violet: #5405ef;         /* focus ring */
+	--soft-ink: #3a3b44;       /* softened body ink, still AA (10:1) */
+	--hair: rgba(26, 28, 40, 0.16);
+	--hair-strong: rgba(26, 28, 40, 0.30);
+	--mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+	/* Repoint the base tokens at paper so var()-driven rules adapt */
+	--bg-base: #f7f3ea;
+	--bg-elevated: rgba(239, 232, 216, 0.95);
+	--surface-1: rgba(26, 28, 40, 0.03);
+	--surface-2: rgba(26, 28, 40, 0.06);
+	--surface-3: rgba(26, 28, 40, 0.10);
+	--border-subtle: rgba(26, 28, 40, 0.16);
+	--border-strong: rgba(26, 28, 40, 0.30);
+	--text-primary: #1a1c28;
+	--text-secondary: #3a3b44;
+	--text-muted: #6e6a62;
+	--accent: #c0567f;
+	--accent-rgb: 192, 86, 127;
+	--focus-ring: #5405ef;
+}
+
+/* Unify the per-page accent (learning/workflow/data) into one
+   AA-safe editorial accent so the whole site reads as one system. */
+.work-main,
+.case-page,
+.case-page--learning,
+.case-page--workflow,
+.case-page--data {
+	--accent: #c0567f;
+	--accent-rgb: 192, 86, 127;
+	--case-accent: var(--amber-text);
+	--case-accent-rgb: 134, 88, 31;
+	--case-accent-soft: rgba(134, 88, 31, 0.10);
+}
+
+/* ---------------------------------------------------------------
+   Page flip
+   --------------------------------------------------------------- */
+body,
+.notes-body {
+	background: var(--paper);
+	color: var(--ink);
+}
+
+.skip-link {
+	background: var(--ink);
+	color: var(--paper);
+}
+
+#main-content:focus-visible,
+a:focus-visible,
+button:focus-visible {
+	outline-color: var(--violet);
+}
+
+/* ---------------------------------------------------------------
+   Header (mirrors css/editorial.css)
+   --------------------------------------------------------------- */
+.site-header {
+	background: rgba(247, 243, 234, 0.72);
+	border-bottom: 1px solid var(--hair);
+}
+
+.site-header .logo {
+	background: var(--panel);
+	border-color: var(--hair);
+	box-shadow: none;
+}
+
+.site-header .logo:hover,
+.site-header .logo:focus-visible {
+	border-color: var(--hair-strong);
+	box-shadow: none;
+}
+
+nav a {
+	color: var(--ink);
+	opacity: 0.78;
+}
+
+nav a:hover,
+nav a:focus-visible {
+	opacity: 1;
+	text-shadow: none;
+}
+
+nav a:focus-visible {
+	outline: 2px solid var(--violet);
+	outline-offset: 3px;
+	border-radius: 2px;
+}
+
+nav a.nav-active {
+	color: var(--ink);
+	box-shadow: inset 0 -2px 0 var(--rose);
+}
+
+.nav-resume {
+	border-color: var(--hair-strong);
+	color: var(--ink) !important;
+}
+
+.nav-resume:hover {
+	background: var(--panel);
+	border-color: var(--ink);
+	box-shadow: none;
+	text-shadow: none !important;
+}
+
+/* ---------------------------------------------------------------
+   Headings — kill the white gradient clip, set ink
+   --------------------------------------------------------------- */
+.work-main h2,
+.work-main h3,
+.case-hero h1,
+.work-directory-hero h1,
+.case-lens-copy h2,
+.case-section h2,
+.work-directory h2,
+.notes-main h1,
+.note-article h2 {
+	background: none;
+	-webkit-text-fill-color: var(--ink);
+	color: var(--ink);
+}
+
+/* the faint white ::after underline is invisible on paper — replace
+   it with the homepage's rose accent rule above section headings */
+.case-section h2::after,
+.work-directory h2::after {
+	display: none;
+}
+
+.case-section h2::before,
+.work-directory h2::before {
+	content: "";
+	display: block;
+	width: 30px;
+	height: 2px;
+	margin-bottom: 14px;
+	background: var(--rose);
+	border-radius: 2px;
+}
+
+/* ---------------------------------------------------------------
+   Body copy
+   --------------------------------------------------------------- */
+.case-summary,
+.directory-summary,
+.case-lens-copy p,
+.case-section p,
+.case-section li,
+.directory-featured-copy,
+.case-meta-list dd,
+.directory-meta-list dd,
+.case-lens-grid p,
+.decision-receipts p,
+.qa-list li,
+.evidence-snapshot-item li,
+.work-card p {
+	color: var(--soft-ink);
+}
+
+.case-section strong,
+.directory-featured-title,
+.case-study-nav-link strong,
+.notes-list-title {
+	color: var(--ink);
+}
+
+.case-summary em,
+.case-section em,
+.case-lens-copy em {
+	color: var(--rose-text);
+	font-style: italic;
+}
+
+.case-visual figcaption,
+.case-link--archived,
+.back-link {
+	color: var(--muted-ink);
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+	color: var(--ink);
+}
+
+/* "01 / Learning platform" style label on work cards */
+.work-card > span:not(.work-card-badge) {
+	color: var(--amber-text);
+}
+
+/* ---------------------------------------------------------------
+   Surfaces — panel + hairline, drop the heavy dark shadows
+   --------------------------------------------------------------- */
+.case-proof-strip,
+.case-meta-list,
+.directory-meta-list,
+.directory-featured,
+.case-lens-grid article,
+.decision-receipts li,
+.qa-list li,
+.evidence-snapshot-item,
+.work-card,
+.case-study-nav-link,
+.case-note {
+	background: var(--panel);
+	border-color: var(--hair);
+	box-shadow: none;
+}
+
+.case-note {
+	border-left: 2px solid var(--rose);
+}
+
+/* flagship cards get a quiet lift, like the homepage featured card */
+.work-card--featured {
+	background: var(--panel);
+	border-color: var(--hair-strong);
+}
+
+.case-visual img,
+.work-card img {
+	border-color: var(--hair);
+	box-shadow: 0 18px 50px rgba(26, 28, 40, 0.12);
+}
+
+/* section dividers */
+.case-section,
+.case-study-nav {
+	border-top-color: var(--hair);
+}
+
+.case-lens {
+	border-top-color: var(--hair);
+	border-bottom-color: var(--hair);
+}
+
+/* ---------------------------------------------------------------
+   Chips / tags — outline on transparent (matches the homepage)
+   --------------------------------------------------------------- */
+.case-proof-strip li,
+.work-card-proof li,
+.directory-featured-points li {
+	background: transparent;
+	border-color: var(--hair-strong);
+	color: var(--ink);
+}
+
+.case-proof-strip li::before,
+.work-card-proof li::before {
+	background: var(--rose);
+}
+
+.work-card-badge {
+	background: var(--paper);
+	border-color: var(--hair);
+	color: var(--amber-text);
+}
+
+/* ---------------------------------------------------------------
+   Links / buttons
+   --------------------------------------------------------------- */
+.case-link,
+.directory-link {
+	background: transparent;
+	border-color: var(--hair-strong);
+	color: var(--ink);
+}
+
+.case-link--primary,
+.directory-link--primary,
+.case-link--primary:hover,
+.directory-link--primary:hover,
+.case-link--primary:focus-visible,
+.directory-link--primary:focus-visible {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--paper);
+}
+
+.case-link:hover,
+.directory-link:hover,
+.case-link:focus-visible,
+.directory-link:focus-visible {
+	background: var(--panel);
+	border-color: var(--ink);
+	box-shadow: none;
+}
+
+.directory-featured-link {
+	color: var(--amber-text);
+}
+
+.directory-featured-link:hover,
+.directory-featured-link:focus-visible {
+	color: var(--ink);
+}
+
+.case-study-nav-link:hover,
+.case-study-nav-link:focus-visible {
+	background: var(--panel);
+	border-color: var(--hair-strong);
+	box-shadow: 0 14px 40px rgba(26, 28, 40, 0.10);
+}
+
+.work-card:hover,
+.work-card:focus-visible {
+	background: var(--panel);
+	border-color: var(--hair-strong);
+	box-shadow: 0 18px 50px rgba(26, 28, 40, 0.12);
+}
+
+/* ---------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------- */
+.site-footer {
+	background: var(--paper);
+	border-top: 1px solid var(--hair);
+	color: var(--muted-ink);
+}
+
+.site-footer .footer-copy {
+	color: var(--muted-ink);
+}
+
+.site-footer .footer-links a {
+	color: var(--ink);
+	opacity: 0.78;
+}
+
+.site-footer .footer-links a:hover,
+.site-footer .footer-links a:focus-visible {
+	opacity: 1;
+}
+
+/* ---------------------------------------------------------------
+   Notes
+   --------------------------------------------------------------- */
+.notes-eyebrow {
+	color: var(--amber-text);
+}
+
+.notes-intro,
+.note-article p,
+.note-article li {
+	color: var(--soft-ink);
+}
+
+.notes-list-meta,
+.note-meta,
+.notes-back a {
+	color: var(--muted-ink);
+}
+
+.notes-list-link {
+	background: transparent;
+	border-color: var(--hair);
+	color: var(--ink);
+	box-shadow: none;
+}
+
+.notes-list-link:hover,
+.notes-list-link:focus-visible {
+	background: transparent;
+	border-color: var(--hair-strong);
+}
+
+.notes-back a:hover,
+.notes-back a:focus-visible {
+	color: var(--ink);
+}
+
+.note-article code {
+	background: var(--panel);
+	border: 1px solid var(--hair);
+	color: var(--rose-text);
+}
+
+/* ---------------------------------------------------------------
+   Accent eyebrows that sit inside a body-copy scope (.case-lens-copy,
+   .note-article) need to outrank the broad p/li color rules above.
+   Equal specificity → these win on source order.
+   --------------------------------------------------------------- */
+.case-lens-copy .case-kicker {
+	color: var(--amber-text);
+}
+
+.note-article .notes-eyebrow {
+	color: var(--amber-text);
+}
+
+.note-article .note-meta {
+	color: var(--muted-ink);
+}

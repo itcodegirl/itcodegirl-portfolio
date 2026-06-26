@@ -260,6 +260,11 @@ body {
 
 main h2,
 main h3 {
+	/* the dark base clips a white gradient into these headings
+	   (-webkit-text-fill-color: transparent); reset it so the ink
+	   color actually shows on paper instead of near-white text. */
+	background: none;
+	-webkit-text-fill-color: var(--ink);
 	color: var(--ink);
 }
 
@@ -481,6 +486,12 @@ main h3 {
 	color: var(--ink);
 }
 
+/* the featured card sits on a panel surface where muted-ink dips below
+   AA (4.41:1) — darken its quiet "View code" link to clear the bar */
+.project-card-featured .project-link-github {
+	color: var(--soft-ink);
+}
+
 .project-screenshot {
 	border: 1px solid var(--hair);
 	box-shadow: none;
@@ -512,7 +523,9 @@ main h3 {
 	color: var(--muted-ink);
 }
 
-.review-path .review-steps {
+.review-path .review-steps,
+.review-path .review-steps li {
+	/* the dark base colors these list items white — unreadable on paper */
 	color: var(--soft-ink);
 }
 
@@ -521,12 +534,15 @@ main h3 {
 }
 
 .review-path .review-path-actions a {
+	/* override the dark base's purple pill → clean editorial outline button */
+	background: transparent;
+	border: 1px solid var(--hair-strong);
 	color: var(--ink);
-	border-bottom: 1px solid var(--hair-strong);
 }
 
 .review-path .review-path-actions a:hover,
 .review-path .review-path-actions a:focus-visible {
+	background: var(--panel);
 	border-color: var(--ink);
 }
 
@@ -632,6 +648,9 @@ main h3 {
 }
 
 .contact h2 {
+	/* contact sits on the reserved dark band — keep this heading light */
+	background: none;
+	-webkit-text-fill-color: var(--paper);
 	color: var(--paper);
 }
 
@@ -706,6 +725,8 @@ main h3 {
 
 .mobile-trust-snapshot h2,
 .mobile-trust-title {
+	background: none;
+	-webkit-text-fill-color: var(--ink);
 	color: var(--ink);
 }
 

@@ -108,9 +108,7 @@ function checkCommonPage(page) {
 function checkHome(html) {
 	assert(html.includes('id="projectsGrid"'), 'index.html should keep the selected work mount point.');
 	assert(html.includes('aria-label="Direct contact links"'), 'index.html should keep the direct contact link group.');
-	// The hero is text-first (no portrait); guard the badge and primary CTA instead.
-	assert(html.includes('class="availability-badge"'), 'index.html should keep the hero availability badge.');
-	assert(html.includes('hero-cta--primary'), 'index.html should keep the hero primary call-to-action.');
+	assert(html.includes('class="mobile-trust-snapshot"'), 'index.html should keep the recruiter snapshot in the text-first hero.');
 }
 
 function checkWorkIndex(html) {

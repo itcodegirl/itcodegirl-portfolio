@@ -1,7 +1,7 @@
 # itcodegirl-portfolio
 
 Personal portfolio for Jenna Zawaski, a UX-focused frontend developer building
-polished, accessible product interfaces with real product behavior.
+accessible, product-ready interfaces with real app behavior.
 
 Live site: https://itcodegirl.com
 
@@ -16,6 +16,20 @@ The portfolio demonstrates frontend craft through the site itself
 (layout, UX clarity, accessible interface patterns, responsive behavior, and
 performance discipline) and
 points visitors to the real product work it represents.
+
+## Reviewer quick start
+
+For a fast read of the work behind this portfolio:
+
+1. Open the homepage and follow the **90-Second Review Path** section.
+2. Start with the flagship case study: [`/work/codeherway/`](work/codeherway/) —
+   a React + Supabase learning platform with a deduplicated, retry-safe progress
+   and learning-state system.
+3. Then skim [`/work/ceo-os/`](work/ceo-os/) (local-first data integrity) and
+   [`/work/aura-weather/`](work/aura-weather/) (defensive multi-API data handling).
+4. Each case study leads with an **Evidence Snapshot** and a *What to verify in
+   90 seconds* list, and is explicit about what is portfolio-ready vs. not yet
+   production-grade.
 
 ## Stack
 
@@ -71,7 +85,7 @@ Project screenshots used by the Selected Work cards are stored in
 
 The portfolio leads with the engineering behind each project, not only claims.
 Project cards and case studies surface owned work in concrete terms — CodeHerWay's
-hardened reward engine (dedupe + retry/reconciliation), CEO OS's repository-pattern
+deduplicated, retry-safe progress and learning-state system (dedupe + retry/reconciliation), CEO OS's repository-pattern
 data layer (versioned storage, optimistic concurrency, corruption recovery, offline
 replay), and Aura's end-to-end nullish-rejection data contracts and QA pyramid —
 alongside an Evidence Snapshot that shows what was built, what was hard, and what a
@@ -149,6 +163,18 @@ targets should not be described as passing scores without attached reports.
 
 Deployed via GitHub Pages from `main`. The `CNAME` file maps the site to
 `itcodegirl.com`.
+
+## GitHub repository metadata
+
+Recommended sidebar metadata for the GitHub repo so the project reads clearly in
+search and on the profile (apply via the repo **About** panel or
+`gh repo edit`):
+
+- **Description:** Personal portfolio for Jenna Zawaski, a UX-focused frontend
+  developer building accessible, product-minded frontend interfaces and case studies.
+- **Website:** https://itcodegirl.com
+- **Topics:** `portfolio`, `frontend`, `html`, `css`, `javascript`,
+  `accessibility`, `ux`, `case-studies`, `performance`, `github-pages`
 
 ## Accessibility and interface checks
 

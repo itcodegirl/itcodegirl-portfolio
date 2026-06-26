@@ -108,7 +108,7 @@ function checkCommonPage(page) {
 function checkHome(html) {
 	assert(html.includes('id="projectsGrid"'), 'index.html should keep the selected work mount point.');
 	assert(html.includes('aria-label="Direct contact links"'), 'index.html should keep the direct contact link group.');
-	assert(html.includes('fetchpriority="high"'), 'index.html should keep the hero image prioritized.');
+	assert(html.includes('class="mobile-trust-snapshot"'), 'index.html should keep the recruiter snapshot in the text-first hero.');
 }
 
 function checkWorkIndex(html) {

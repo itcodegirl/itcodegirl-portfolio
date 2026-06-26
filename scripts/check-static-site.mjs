@@ -202,9 +202,12 @@ function checkImages() {
 	});
 
 	const homeHtml = readFile('index.html');
-	assert(homeHtml.includes('fetchpriority="high"'), 'Hero portrait should keep fetchpriority="high".');
-	assert(homeHtml.includes('type="image/avif"'), 'Hero portrait should offer AVIF source.');
-	assert(homeHtml.includes('srcset="assets/images/Jenna_robot_420.webp'), 'Hero portrait should keep responsive WebP source.');
+	// The homepage uses a text-first ("paper-first editorial") hero with no raster
+	// LCP image, so the previous hero-portrait assertions no longer apply. The about
+	// portrait is the main raster image and should still ship a WebP source, and the
+	// logo above the fold should load eagerly — both keep image weight disciplined.
+	assert(homeHtml.includes('assets/headshot.webp'), 'About portrait should offer a WebP source.');
+	assert(homeHtml.includes('loading="eager"'), 'Above-the-fold logo should load eagerly.');
 }
 
 function checkContactAccessibility() {

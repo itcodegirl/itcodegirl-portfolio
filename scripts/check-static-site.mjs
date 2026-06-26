@@ -202,9 +202,15 @@ function checkImages() {
 	});
 
 	const homeHtml = readFile('index.html');
-	assert(homeHtml.includes('fetchpriority="high"'), 'Hero portrait should keep fetchpriority="high".');
-	assert(homeHtml.includes('type="image/avif"'), 'Hero portrait should offer AVIF source.');
-	assert(homeHtml.includes('srcset="assets/images/Jenna_robot_420.webp'), 'Hero portrait should keep responsive WebP source.');
+	// The redesigned hero is intentionally text-first (no portrait) so the largest
+	// paint is the headline, not an image. Guard the trust signals that replaced the
+	// portrait instead of asserting a hero image that no longer exists.
+	assert(homeHtml.includes('class="availability-badge"'), 'Hero should keep the availability status badge.');
+	assert(homeHtml.includes('hero-cta--primary'), 'Hero should keep a primary call-to-action.');
+	assert(homeHtml.includes('id="hero-title"'), 'Hero should keep the labelled headline.');
+	// The About portrait stays responsive: a WebP source with a PNG fallback.
+	assert(homeHtml.includes('srcset="assets/headshot.webp"'), 'About portrait should keep a WebP source.');
+	assert(homeHtml.includes('type="image/webp"'), 'About portrait should offer a WebP source type.');
 }
 
 function checkContactAccessibility() {

@@ -12,20 +12,22 @@ const projects = [
 		id: "codeherway",
 		number: "01",
 		title: "CodeHerWay Education Platform",
-		tagline: "Flagship React + Supabase learning product with a hardened, dedupe-safe reward engine.",
+		tagline: "Flagship React + Supabase learning platform with a deduplicated, retry-safe progress and learning-state system.",
 		status: "Flagship project",
 		featured: true,
-		meta: "React / Supabase / Reward engine",
+		meta: "React / Supabase / Learning platform",
+		role:
+			"Founder and sole frontend engineer — product architecture, learning and quiz UI, the progress/learning-state system, and Supabase auth and data.",
 		description:
-			"React 19 + TypeScript learning platform with Supabase auth and data, 22 courses, 170 modules, 922 lessons on a custom v2 schema, AI companion (Ada), and a unified reward engine with deduplication and retry/reconciliation.",
+			"React 19 + TypeScript learning platform with Supabase auth and data, 22 courses, 170 modules, 922 lessons on a custom v2 schema, AI companion (Ada), and a deduplicated, retry-safe progress and learning-state system.",
 		productValue:
-			"Helps beginners move through lessons, quizzes, saved progress, and rewards in one guided learner-focused flow.",
+			"Helps beginners move from structured lessons to quiz feedback, saved progress, and visible proof of learning.",
 		built:
-			"React product UI, Supabase auth and data, progress save/reload with retry/replay, quiz feedback, and a unified XP / streak / challenge reward engine with dedupe plus a feature-gated cross-device backend.",
+			"React product UI, Supabase auth and data, progress save/reload with retry/replay, quiz feedback, and a deduplicated progress and learning-state system plus a feature-gated cross-device backend.",
 		challenge:
-			"Keeping reward counts honest across retries, replays, and sync failures while keeping the beginner experience calm and unintimidating.",
+			"Keeping progress counts honest across retries, replays, and sync failures while keeping the beginner experience calm and beginner-safe.",
 		proofAvailable: [
-			"Hardened reward engine (dedupe + retry)",
+			"Deduplicated, retry-safe progress system",
 			"Supabase auth and data",
 			"Progress save / replay",
 			"Quiz feedback states",
@@ -63,7 +65,10 @@ const projects = [
 		number: "02",
 		title: "CodeHerWay CEO OS",
 		tagline: "Local-first founder OS built on a repository-pattern data layer with versioned storage.",
+		status: "Portfolio project",
 		cardClass: "ceo-os",
+		role:
+			"Sole designer and engineer — dashboard, the 8-domain repository data layer, and the local-first resilience behavior.",
 		description:
 			"React 19 founder dashboard with a repository pattern across 8 domains, versioned-envelope storage with migrations, optimistic concurrency, and an offline write queue.",
 		productValue:
@@ -110,6 +115,9 @@ const projects = [
 		number: "03",
 		title: "Aura Weather",
 		tagline: "A weather dashboard that's really a defensive client-side data-handling showcase.",
+		status: "Portfolio project",
+		role:
+			"Sole frontend engineer — dashboard UI, multi-API orchestration, nullish-rejection data contracts, and the QA suite.",
 		description:
 			"React 19 weather dashboard with end-to-end nullish-rejection data contracts, multi-API composition with independent fetch lifecycles, and honest missing-data states.",
 		productValue:

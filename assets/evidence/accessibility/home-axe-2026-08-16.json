@@ -1,0 +1,67 @@
+{
+	"capture": {
+		"surface": "home",
+		"route": "/",
+		"date": "2026-08-16",
+		"commit": "captured from the itcodegirl-portfolio PR branch claude/portfolio-polish-audit-fqppde working tree, published together with the contrast and ARIA fixes in the same PR",
+		"method": "@axe-core/playwright against the repository static files served locally (identical bytes to the GitHub Pages deploy of this commit)",
+		"viewportWidth": 1280,
+		"ruleTags": [
+			"wcag2a",
+			"wcag2aa",
+			"wcag21a",
+			"wcag21aa",
+			"best-practice"
+		],
+		"axeVersion": "4.13.0"
+	},
+	"violations": [],
+	"incomplete": [
+		{
+			"id": "color-contrast",
+			"impact": "serious",
+			"description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+			"nodeCount": 17
+		}
+	],
+	"passes": [
+		"aria-allowed-attr",
+		"aria-conditional-attr",
+		"aria-hidden-body",
+		"aria-hidden-focus",
+		"aria-prohibited-attr",
+		"aria-valid-attr-value",
+		"aria-valid-attr",
+		"bypass",
+		"color-contrast",
+		"definition-list",
+		"dlitem",
+		"document-title",
+		"duplicate-id-aria",
+		"empty-heading",
+		"heading-order",
+		"html-has-lang",
+		"html-lang-valid",
+		"image-alt",
+		"image-redundant-alt",
+		"landmark-banner-is-top-level",
+		"landmark-contentinfo-is-top-level",
+		"landmark-main-is-top-level",
+		"landmark-no-duplicate-banner",
+		"landmark-no-duplicate-contentinfo",
+		"landmark-no-duplicate-main",
+		"landmark-one-main",
+		"landmark-unique",
+		"link-name",
+		"list",
+		"listitem",
+		"meta-viewport-large",
+		"meta-viewport",
+		"nested-interactive",
+		"page-has-heading-one",
+		"presentation-role-conflict",
+		"region",
+		"skip-link",
+		"tabindex"
+	]
+}

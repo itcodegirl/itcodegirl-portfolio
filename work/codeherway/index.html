@@ -109,7 +109,7 @@
 					<li>Deduplicated, retry-safe progress system</li>
 					<li>Playwright smoke + accessibility coverage</li>
 				</ul>
-				<div class="case-links" aria-label="Project links">
+				<div class="case-links" role="group" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://codeherway-platform.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub profile</a>
 					<a class="case-link case-link--archived" href="https://codeherway-reward-engine-case-study.netlify.app/" target="_blank" rel="noopener noreferrer">Archived write-up</a>
@@ -160,7 +160,7 @@
 					hardened against the failure modes that make progress untrustworthy: double-counting, lost writes, and silent sync failures.
 				</p>
 			</div>
-			<div class="case-lens-grid" aria-label="CodeHerWay product focus">
+			<div class="case-lens-grid" role="group" aria-label="CodeHerWay product focus">
 				<article>
 					<span aria-hidden="true">01</span>
 					<h3>Guided learning</h3>
@@ -339,6 +339,7 @@
 				<div>
 					<ul>
 						<li><strong>Covered by the smoke suite:</strong> Playwright includes an accessibility check alongside landing, auth, visual-snapshot, and first-lesson preview entry coverage.</li>
+					<li><strong>Captured evidence:</strong> this case-study page scans clean with axe — <a href="/assets/evidence/accessibility/codeherway-axe-2026-08-16.md">0 violations, WCAG A/AA + best practice, August 16, 2026</a>.</li>
 						<li>Keyboard navigation and focus handling are treated as product behavior, especially in lessons, dialogs, and panels.</li>
 						<li>Quiz and progress interactions use clearer semantic relationships and user-facing status copy.</li>
 						<li>Feedback states are kept purposeful so the interface supports learning rather than distracting from it.</li>

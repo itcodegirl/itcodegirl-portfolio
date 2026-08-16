@@ -102,8 +102,13 @@ proof. The checklist below tracks those remaining captures.
 
 ## Evidence Capture Checklist
 
-- [ ] Capture deployed Lighthouse mobile and desktop reports
-- [ ] Export axe accessibility scan results (axe already runs in CI for CEO OS and Aura)
+- [ ] Capture deployed Lighthouse mobile and desktop reports (the manual
+      `Lighthouse evidence` workflow needs a human dispatch from the Actions tab)
+- [x] Export axe scan results for every portfolio surface
+      (2026-08-16, `assets/evidence/accessibility/`)
+- [x] Export one axe run of Aura's CI accessibility gate
+      (2026-08-16, `assets/evidence/accessibility/aura-weather-app-axe-2026-08-16.md`)
+- [ ] Export a CEO OS axe run the same way
 - [ ] Capture responsive screenshots for mobile/tablet/desktop
 - [ ] Capture key flow screenshots for CodeHerWay
 - [ ] Add short interaction clip for the flagship learner flow

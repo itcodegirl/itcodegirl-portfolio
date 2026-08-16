@@ -101,13 +101,15 @@ button:focus-visible {
 	box-shadow: none;
 }
 
-nav a {
+/* Scoped to the header nav: a bare `nav a` opacity here also dims the
+   case-study cross-navigation labels below AA contrast (axe: 3.27 vs 4.5). */
+.site-header .nav a {
 	color: var(--ink);
 	opacity: 0.78;
 }
 
-nav a:hover,
-nav a:focus-visible {
+.site-header .nav a:hover,
+.site-header .nav a:focus-visible {
 	opacity: 1;
 	text-shadow: none;
 }

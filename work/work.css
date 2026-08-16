@@ -276,6 +276,19 @@
 	background: rgba(255, 255, 255, 0.035);
 }
 
+/* In-page jump to the Evidence Snapshot verify list; dashed border signals
+   same-page navigation rather than an external destination. */
+.case-link--jump {
+	border-style: dashed;
+	background: transparent;
+}
+
+/* Keep anchored evidence targets clear of the fixed header. */
+.evidence-snapshot,
+#verify-90 {
+	scroll-margin-top: 110px;
+}
+
 .case-link:hover,
 .directory-link:hover,
 .case-link:focus-visible,

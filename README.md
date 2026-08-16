@@ -28,8 +28,8 @@ For a fast read of the work behind this portfolio:
 3. Then skim [`/work/ceo-os/`](work/ceo-os/) (local-first data integrity) and
    [`/work/aura-weather/`](work/aura-weather/) (defensive multi-API data handling).
 4. Each case study leads with an **Evidence Snapshot** and a *What to verify in
-   90 seconds* list, and is explicit about what is portfolio-ready vs. not yet
-   production-grade.
+   90 seconds* list — jump-linked from the case-study header — and is explicit
+   about what is portfolio-ready vs. not yet production-grade.
 
 Code access: [CEO OS](https://github.com/itcodegirl/ceo-os) and
 [Aura Weather](https://github.com/itcodegirl/aura-weather) are public

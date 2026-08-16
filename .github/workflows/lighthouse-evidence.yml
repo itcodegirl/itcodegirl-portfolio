@@ -38,6 +38,9 @@ jobs:
         run: node scripts/check-lighthouse-result.mjs lighthouse-result.json
 
       - name: Upload Lighthouse evidence
+        # Upload even when the budget check fails — a failing capture is still
+        # evidence, and without the report the failure cannot be diagnosed.
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-result

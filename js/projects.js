@@ -35,6 +35,8 @@ const projects = [
 			"Playwright smoke + a11y coverage",
 			"Case study with decision notes",
 		],
+		codeAccess:
+			"Platform code lives in a private repository — a code walkthrough is available on request. Public code for CEO OS and Aura Weather is linked below.",
 		image: "assets/images/projects/codeherway-dashboard.webp",
 		imagePosition: "top center",
 		imageAlt: "CodeHerWay Education Platform landing and account creation interface screenshot",
@@ -51,12 +53,6 @@ const projects = [
 				label: "Case study",
 				url: "/work/codeherway/",
 				ariaLabel: "Case study for CodeHerWay Education Platform",
-			},
-			{
-				kind: "code",
-				label: "View code",
-				url: "https://github.com/itcodegirl/education_platform",
-				ariaLabel: "View code for CodeHerWay Education Platform",
 			},
 		],
 	},
@@ -105,7 +101,7 @@ const projects = [
 			{
 				kind: "code",
 				label: "View code",
-				url: "https://github.com/itcodegirl/codeherway-ceo-os",
+				url: "https://github.com/itcodegirl/ceo-os",
 				ariaLabel: "View code for CodeHerWay CEO OS",
 			},
 		],
@@ -221,6 +217,7 @@ function createProjectEvidenceList(project) {
 		["Product value", project.productValue],
 		["What I built", project.built],
 		["UX / engineering challenge", project.challenge],
+		["Code access", project.codeAccess],
 	].filter(([, text]) => Boolean(text));
 
 	if (!evidenceItems.length) return null;

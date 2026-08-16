@@ -111,7 +111,7 @@
 					<li>Independent multi-API fetch lifecycles</li>
 					<li>Unit, E2E, visual, and Lighthouse in CI</li>
 				</ul>
-				<div class="case-links" aria-label="Project links">
+				<div class="case-links" role="group" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
 					<a class="case-link" href="https://github.com/itcodegirl/aura-weather" target="_blank" rel="noopener noreferrer">GitHub repo</a>
 					<a class="case-link case-link--jump" href="#verify-90">What to verify in 90 seconds <span aria-hidden="true">↓</span></a>
@@ -157,7 +157,7 @@
 					than collapsing into misleading zeros.
 				</p>
 			</div>
-			<div class="case-lens-grid" aria-label="Aura Weather product focus">
+			<div class="case-lens-grid" role="group" aria-label="Aura Weather product focus">
 				<article>
 					<span aria-hidden="true">01</span>
 					<h3>Fast scanning</h3>
@@ -327,6 +327,7 @@
 				<div>
 					<ul>
 						<li><strong>Automated in CI:</strong> Playwright runs <code>axe</code> against the app's primary states as part of the end-to-end suite.</li>
+					<li><strong>Captured evidence:</strong> one exported run of that CI gate — <a href="/assets/evidence/accessibility/aura-weather-app-axe-2026-08-16.md">app demo state, 0 violations, WCAG A/AA, August 16, 2026</a> — plus a clean <a href="/assets/evidence/accessibility/aura-weather-axe-2026-08-16.md">axe export for this case-study page</a>.</li>
 						<li>City search uses keyboard-friendly combobox and listbox behavior with an abortable request lifecycle.</li>
 						<li>Loading, refresh, error, and missing-data states use live status messaging where it helps.</li>
 						<li>Missing values include assistive text such as "no data available" instead of relying only on an em dash.</li>

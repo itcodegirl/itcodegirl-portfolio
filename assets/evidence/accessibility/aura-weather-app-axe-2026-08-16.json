@@ -1,0 +1,69 @@
+{
+	"capture": {
+		"surface": "aura-weather-app",
+		"route": "/?mock=missing (portfolio demo state, no live providers)",
+		"date": "2026-08-16",
+		"sourceRepo": "itcodegirl/aura-weather",
+		"sourceCommit": "52913cf08916481db83ab9f2c167a88a64c410ff",
+		"method": "Local run of the same @axe-core/playwright check Aura gates in CI (e2e/missing-data.spec.js), against the production Vite build served by vite preview",
+		"viewportWidth": 1280,
+		"ruleTags": [
+			"wcag2a",
+			"wcag2aa"
+		],
+		"axeVersion": "4.11.3"
+	},
+	"summary": {
+		"violations": 0,
+		"bySeverity": {
+			"critical": 0,
+			"serious": 0,
+			"moderate": 0,
+			"minor": 0
+		},
+		"passCount": 26
+	},
+	"violations": [],
+	"incomplete": [
+		{
+			"id": "aria-prohibited-attr",
+			"impact": "serious",
+			"description": "Ensure ARIA attributes are not prohibited for an element's role",
+			"nodeCount": 4
+		},
+		{
+			"id": "color-contrast",
+			"impact": "serious",
+			"description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+			"nodeCount": 106
+		}
+	],
+	"passes": [
+		"aria-allowed-attr",
+		"aria-conditional-attr",
+		"aria-deprecated-role",
+		"aria-hidden-body",
+		"aria-hidden-focus",
+		"aria-prohibited-attr",
+		"aria-required-attr",
+		"aria-roles",
+		"aria-valid-attr-value",
+		"aria-valid-attr",
+		"button-name",
+		"bypass",
+		"document-title",
+		"duplicate-id-aria",
+		"form-field-multiple-labels",
+		"html-has-lang",
+		"html-lang-valid",
+		"label",
+		"link-name",
+		"list",
+		"listitem",
+		"meta-viewport",
+		"nested-interactive",
+		"role-img-alt",
+		"summary-name",
+		"svg-img-alt"
+	]
+}

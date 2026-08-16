@@ -632,6 +632,9 @@
 	border-radius: 14px;
 	background: rgba(255, 255, 255, 0.04);
 	color: inherit;
+	/* Full opacity: the base `nav a` 0.8 dims the accent eyebrow below AA
+	   contrast on the paper theme (axe color-contrast, 4.5:1 required). */
+	opacity: 1;
 	text-decoration: none;
 	transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }

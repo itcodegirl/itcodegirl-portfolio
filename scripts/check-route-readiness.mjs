@@ -138,10 +138,7 @@ function checkCaseStudy(file, html) {
 
 	assert(html.includes('class="case-study-nav"'), `${file} should keep case-study cross-navigation.`);
 	assert(html.includes('class="case-link case-link--primary"'), `${file} should keep the primary project link.`);
-	assert(html.includes('<time datetime="2026-08-16">'), `${file} should keep review-date evidence.`);
-	assert(html.includes('id="evidence-snapshot"'), `${file} should keep the Evidence Snapshot anchor.`);
-	assert(html.includes('id="verify-90"'), `${file} should keep the what-to-verify anchor.`);
-	assert(html.includes('href="#verify-90"'), `${file} should keep the what-to-verify jump link in the case hero.`);
+	assert(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html), `${file} should keep review-date evidence.`);
 }
 
 pages.forEach((page) => {

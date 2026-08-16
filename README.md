@@ -31,6 +31,11 @@ For a fast read of the work behind this portfolio:
    90 seconds* list — jump-linked from the case-study header — and is explicit
    about what is portfolio-ready vs. not yet production-grade.
 
+Code access: [CEO OS](https://github.com/itcodegirl/ceo-os) and
+[Aura Weather](https://github.com/itcodegirl/aura-weather) are public
+repositories. The CodeHerWay platform code is in a private repository — a code
+walkthrough is available on request via the contact links on the site.
+
 ## Stack
 
 - HTML5 (semantic landmarks, accessible link patterns)

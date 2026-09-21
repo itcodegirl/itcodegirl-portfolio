@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="Aura Weather case study by Jenna Zawaski: a React 19 weather dashboard that is really a study in defensive client-side data handling — end-to-end nullish-rejection contracts, independent multi-API fetch lifecycles, and a QA suite that locks the trust contract.">
+	<meta name="description" content="Aura Weather case study by Jenna Zawaski: how I directed coding agents through a severe-weather alerts milestone using written operating rules, human decision gates, live NWS data, and verification that reports its own limits.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/aura-weather/">
@@ -13,7 +13,7 @@
 
 	<meta property="og:type" content="article">
 	<meta property="og:title" content="Aura Weather Case Study | Jenna Zawaski">
-	<meta property="og:description" content="A responsive weather dashboard built around defensive data handling: resilient multi-API states and honest treatment of missing provider data.">
+	<meta property="og:description" content="Directing coding agents through a severe-weather alerts milestone: written operating rules, human decision gates, and decisions measured against live NWS data.">
 	<meta property="og:url" content="https://itcodegirl.com/work/aura-weather/">
 	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 	<meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 	<meta property="og:image:alt" content="Aura Weather interface screenshot">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="Aura Weather Case Study | Jenna Zawaski">
-	<meta name="twitter:description" content="Defensive data handling, multi-API resilience, and QA breadth for Aura Weather.">
+	<meta name="twitter:description" content="Operating rules, decision gates, and measured verification for an agent-delivered alerts milestone.">
 	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp">
 
 	<title>Aura Weather Case Study | Jenna Zawaski</title>
@@ -63,9 +63,9 @@
 					"@type": "CreativeWork",
 					"name": "Aura Weather Case Study",
 					"url": "https://itcodegirl.com/work/aura-weather/",
-					"description": "Case study for a responsive weather dashboard with resilient API states and honest data fallbacks.",
+					"description": "Case study of a severe-weather alerts milestone delivered by coding agents under written operating rules, with human decision gates and measured verification.",
 					"image": "https://itcodegirl.com/assets/images/projects/aura-weather-interface.webp",
-					"dateModified": "2026-08-16",
+					"dateModified": "2026-09-21",
 					"creator": {
 						"@type": "Person",
 						"name": "Jenna Zawaski"
@@ -101,15 +101,15 @@
 				<p class="case-eyebrow">Case study</p>
 				<h1 id="case-title">Aura Weather</h1>
 				<p class="case-summary">
-					Yes, it is a weather app — the most common portfolio project there is. It is also a study in defensive
-					client-side data handling. The product answers "what is the day like?" at a glance; the engineering makes
-					sure that when a provider returns partial, delayed, or missing data, the UI shows it as <em>unavailable</em>
-					instead of coercing it into a confident, fake zero.
+					A weather dashboard built on one rule: missing data is shown as missing, never as a confident zero. This
+					case study covers what came after that rule was in place. I directed coding agents through a
+					severe-weather alerts milestone, where a wrong answer is a safety problem, using written operating rules,
+					decisions I kept for myself, and verification that says what it did not prove.
 				</p>
 				<ul class="case-proof-strip" aria-label="Aura Weather engineering proof points">
-					<li>End-to-end nullish-rejection contracts</li>
-					<li>Independent multi-API fetch lifecycles</li>
-					<li>Unit, E2E, visual, and Lighthouse in CI</li>
+					<li>Written operating rules for coding agents</li>
+					<li>Decisions measured against live NWS data</li>
+					<li>Verification that reports its own limits</li>
 				</ul>
 				<div class="case-links" role="group" aria-label="Project links">
 					<a class="case-link case-link--primary" href="https://aura-weather-platform.netlify.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
@@ -120,15 +120,15 @@
 			<dl class="case-meta-list" aria-label="Project summary">
 				<div>
 					<dt>Project type</dt>
-					<dd>Weather dashboard and client-side data-trust project</dd>
+					<dd>Weather dashboard, and a working example of agent-delivered product work under human direction</dd>
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>React 19, Vite, plain CSS, Lucide icons, Open-Meteo + NOAA/NWS APIs (frontend-only, no UI framework)</dd>
+					<dd>React 19, Vite 8, plain CSS, Leaflet, Lucide icons, Open-Meteo + NOAA/NWS APIs. JavaScript/JSX, no UI framework. An optional rain-alert feature uses Supabase.</dd>
 				</div>
 				<div>
-					<dt>Primary focus</dt>
-					<dd>Defensive data handling, resilient multi-API composition, and QA breadth that locks the trust contract</dd>
+					<dt>My role</dt>
+					<dd>Product direction, agent operating rules, every design and scope decision, review and merge of each pull request</dd>
 				</div>
 				<div>
 					<dt>Status</dt>
@@ -136,42 +136,41 @@
 				</div>
 				<div>
 					<dt>Last verified</dt>
-					<dd><time datetime="2026-08-16">August 16, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending.</dd>
+					<dd><time datetime="2026-09-21">September 21, 2026</time> — claims re-checked against the Aura repository's merged pull requests; static, link, and route-readiness checks pass. No adoption or field-performance data exists yet.</dd>
 				</div>
 			</dl>
 		</section>
 
 		<figure class="case-visual">
 			<img src="/assets/images/projects/aura-weather-interface.webp" srcset="/assets/images/projects/aura-weather-interface-640.webp 640w, /assets/images/projects/aura-weather-interface-960.webp 960w, /assets/images/projects/aura-weather-interface.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="Aura Weather current conditions and environmental exposure interface" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
-			<figcaption>Captured from the public live demo on May 12, 2026.</figcaption>
+			<figcaption>Captured from the public live demo on May 12, 2026, before the September 2026 interface redesign. A current capture is pending.</figcaption>
 		</figure>
 
-		<section class="case-lens case-lens--data" aria-labelledby="data-lens-title">
+		<section class="case-lens case-lens--data" aria-labelledby="delivery-lens-title">
 			<div class="case-lens-copy">
-				<p class="case-kicker">Data trust lens</p>
-				<h2 id="data-lens-title">The core challenge was making weather data fast to scan without ever pretending missing data exists.</h2>
+				<p class="case-kicker">Agent delivery lens</p>
+				<h2 id="delivery-lens-title">The work was getting a safety-critical feature built by coding agents without letting them decide what the product should say.</h2>
 				<p>
-					Aura answers the user's immediate question quickly while staying honest about provider limits. Three
-					weather sources are composed with independent fetch lifecycles, every value is run through a
-					nullish-rejection contract at the API boundary, and missing readings stay visible as unavailable rather
-					than collapsing into misleading zeros.
+					An agent can normalise a field, write the tests, and open a pull request. It should not choose the word a
+					person reads during a tornado warning. Aura's repository separates those two kinds of work in writing,
+					and the alerts milestone shows the separation holding under real tickets.
 				</p>
 			</div>
-			<div class="case-lens-grid" role="group" aria-label="Aura Weather product focus">
+			<div class="case-lens-grid" role="group" aria-label="How the alerts milestone was delivered">
 				<article>
 					<span aria-hidden="true">01</span>
-					<h3>Fast scanning</h3>
-					<p>Current conditions, rain guidance, and hourly trends get visual priority.</p>
+					<h3>Rules before code</h3>
+					<p>A repository instruction file sets the data-trust contract, the risky files, and a hard stop at the open pull request.</p>
 				</article>
 				<article>
 					<span aria-hidden="true">02</span>
-					<h3>Nullish-rejection contracts</h3>
-					<p>Strict numeric handling at the boundary keeps null values null instead of fake zeros.</p>
+					<h3>Human decision gates</h3>
+					<p>Wording, severity labels, and visual treatment are mine. Agents report the question and stop.</p>
 				</article>
 				<article>
 					<span aria-hidden="true">03</span>
-					<h3>Independent fetch lifecycles</h3>
-					<p>Separate requests stop one slow provider from blocking the whole experience.</p>
+					<h3>Evidence over assertion</h3>
+					<p>Each fix is checked against recorded live payloads, then reverted by hand to see which tests actually fail.</p>
 				</article>
 			</div>
 		</section>
@@ -181,59 +180,63 @@
 				<h2>Evidence Snapshot</h2>
 				<div class="evidence-snapshot-grid">
 					<article class="evidence-snapshot-item">
-						<h3>What I built</h3>
+						<h3>What shipped</h3>
 						<ul>
-							<li>Current conditions, hourly outlook, rain guidance, and risk signals</li>
-							<li>7-day forecast with expandable day detail (UV, wind, sunrise/sunset)</li>
-							<li>Abortable, keyboard-friendly city search combobox</li>
-							<li>Saved + startup cities and historical archive comparison</li>
-							<li>NOAA/NWS severe-alert coverage</li>
+							<li>Drills and test messages no longer render as live hazards</li>
+							<li>The NWS protective-action text appears on the alert card</li>
+							<li>Alerted area and a recommended-response chip</li>
+							<li>Alerts stay until the hazard ends, not until the message expires</li>
+							<li>"Starts within…" and "In effect now" phrasing</li>
+							<li>A warning's own outline drawn on the radar map</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>The engineering that matters</h3>
+						<h3>How the work was run</h3>
 						<ul>
-							<li>End-to-end nullish-rejection data contracts</li>
-							<li>Multi-API composition with independent fetch lifecycles</li>
-							<li>GPS resolved to a friendly place label, not a generic tag</li>
-							<li>Offline last-known restore without faking freshness</li>
-							<li>F/C toggle handled client-side without refetching</li>
-							<li>PWA shell installed after a first successful production visit</li>
+							<li>Competitive audit, then a remediation plan, then one ticket per pull request</li>
+							<li>Each risky file changed alone in its own commit</li>
+							<li>Every pull request states scope, checks run, checks not run, and what was left out</li>
+							<li>Agents stop at the open pull request; I review and merge</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>What was hard</h3>
+						<h3>Decisions I made</h3>
 						<ul>
-							<li>Keeping weather information readable without hiding useful detail</li>
-							<li>Representing missing provider data honestly instead of as fake zeros</li>
-							<li>Making dense forecast content usable on small screens</li>
+							<li>A five-rung severity ladder: Minimal, Low, Moderate, High, Severe</li>
+							<li>The exact wording of every response chip</li>
+							<li>Lead time shown in buckets, never as a countdown</li>
+							<li>Fixing the hazard-end bug in its own pull request before building on it</li>
+							<li>Removing visual-regression baselines, and saying what that cost</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
-						<h3>QA breadth</h3>
+						<h3>What the live feed showed</h3>
 						<ul>
-							<li>Unit, integration, and E2E (Playwright + axe) coverage</li>
-							<li>Visual regression and Lighthouse budgets in CI</li>
-							<li>An internal audit caught a class of missing-data stability bugs</li>
-							<li>Each fix was locked with a regression test so the class can't return</li>
+							<li>243 active NWS alerts sampled on September 18, 2026</li>
+							<li>Hazard end differed from message expiry on 184</li>
+							<li>99 had a message expiry earlier than their own onset</li>
+							<li>8 upcoming alerts were being dropped from the card</li>
+							<li>Onset differed from issue time on 169</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item" id="verify-90">
 						<h3>What to verify in 90 seconds</h3>
 						<ul>
-							<li>Open the live demo and search a city by keyboard alone</li>
-							<li>Expand a forecast day for UV, wind, and sunrise/sunset</li>
-							<li>Find a value rendered as unavailable rather than a fake 0</li>
-							<li>Read an unsupported-region alert message</li>
-							<li>Resize to mobile and re-scan the hierarchy</li>
+							<li>Read <a href="https://github.com/itcodegirl/aura-weather/blob/main/AGENTS.md" target="_blank" rel="noopener noreferrer">AGENTS.md</a>, the rules the agents work under</li>
+							<li>Open <a href="https://github.com/itcodegirl/aura-weather/pull/235" target="_blank" rel="noopener noreferrer">pull request 235</a> and read "Negative controls"</li>
+							<li>Open <a href="https://github.com/itcodegirl/aura-weather/pull/230" target="_blank" rel="noopener noreferrer">pull request 230</a> and read "Deliberately not here"</li>
+							<li>Load the <a href="https://aura-weather-platform.netlify.app/?mock=missing" target="_blank" rel="noopener noreferrer">missing-data demo</a> and find a value shown as unavailable instead of 0</li>
+							<li>Search a city in the live demo using the keyboard alone</li>
 						</ul>
 					</article>
 					<article class="evidence-snapshot-item">
 						<h3>Honest limits</h3>
 						<ul>
-							<li>This is a frontend sample, not a full production weather platform</li>
-							<li>Deployed Lighthouse field numbers are not captured yet</li>
-							<li>Reverse-geocoding edge cases for raw coordinates remain</li>
+							<li>No adoption, usage, or user-research data exists for this project</li>
+							<li>The feed figures come from a single-day sample, reported in the pull requests</li>
+							<li>A screenshot of a live warning in production has not been captured yet</li>
+							<li>NWS alerts cover the United States only</li>
+							<li>This is a portfolio project, not a production weather platform</li>
 						</ul>
 					</article>
 				</div>
@@ -242,38 +245,62 @@
 			<div class="case-section">
 				<h2>Weather Data Trust Problem</h2>
 				<div>
-					<p>Weather apps can become visually busy while still failing at the basic question: what does the user need to know right now? A second, deeper issue is data trust. When APIs return partial or missing values, the interface must not silently display fake readings that the user will act on.</p>
-					<p class="case-note"><strong>Still to validate:</strong> real user behavior around saved cities, location permissions, and which weather panels people use most often.</p>
+					<p>This is the backstory the alerts work stands on. Weather providers return <code>null</code> for individual readings more often than demos suggest, and JavaScript turns <code>Number(null)</code> into <code>0</code>. Aura was rendering missing humidity as "0%" and missing pressure as "0 hPa". The fix became a data-trust contract: a missing reading stays <code>null</code> from the API boundary to the screen, renders as unavailable, and is announced to assistive technology as "no data available".</p>
+					<p>A later audit found the contract still leaking in three places, because individual modules had wrapped the shared helper in local versions with looser behavior. The full write-up, including the claims I got wrong along the way, is in the repository's <a href="https://github.com/itcodegirl/aura-weather/blob/main/docs/case-study.md" target="_blank" rel="noopener noreferrer">trust contract case study</a>.</p>
+					<p>That contract is now the first section of the agents' operating rules. Alerts raise the stakes: a dropped warning is a false all-clear.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
-				<h2>Users</h2>
+				<h2>The Alert Problem</h2>
 				<div>
-					<ul>
-						<li>People who want a fast, readable weather snapshot before making daily decisions.</li>
-						<li>Mobile users scanning current conditions, hourly changes, rain guidance, and alerts.</li>
-						<li>Technical reviewers evaluating async data handling, API boundaries, and fallback states.</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="case-section">
-				<h2>Fast-Scanning Goals</h2>
-				<div>
-					<ul>
-						<li>Make the current day understandable quickly without burying the answer in decoration.</li>
-						<li>Keep forecast, air quality, alerts, and climate context resilient when one source is slow or unavailable.</li>
-						<li>Represent missing data as missing, never as a confident zero.</li>
-						<li>Keep the responsive layout useful from desktop down to small mobile screens.</li>
-					</ul>
+					<p>A competitive audit against The Weather Channel, AccuWeather, and MyRadar produced one finding that outranked the rest. Aura's alert card showed the event name, a headline, a priority, and an expiry. The NWS description was normalised and read by no component. The NWS instruction, the text that says what to do, was never normalised at all. A Severe Thunderstorm Warning rendered without "seek shelter".</p>
+					<p>The same narrow projection caused a second defect. The CAP <code>status</code> field was not read, so a drill published on the same endpoint as real alerts rendered as an active hazard. A test message was live in the national feed when this was measured.</p>
+					<p>The milestone that followed added no new provider, no new dependency, and no layout redesign. It made the card use what NWS already sends.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>Sole frontend engineer. I built the dashboard layout, the keyboard combobox search, saved- and startup-location behavior, the weather API orchestration across three sources, the nullish-rejection data contracts, missing-data rendering, responsive CSS in plain stylesheets, the interface states, and the full QA suite that locks the trust contract.</p>
+					<p>I set the product direction, wrote the agent operating rules, made every design and scope decision, and reviewed and merged each pull request. Coding agents implemented under those rules.</p>
+					<p>In practice that meant commissioning the audit, approving the remediation plan and its ticket order, answering each question the agents escalated, reading every pull request including the parts flagged as going beyond the ticket, and deciding what merged.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Operating Rules</h2>
+				<div>
+					<p>The rules live in the repository, so every agent session starts from the same contract.</p>
+					<ul>
+						<li><strong>Data trust is a product contract.</strong> Missing provider data renders as unavailable. It never becomes 0, dry, calm, or coordinates (0,0).</li>
+						<li><strong>Architecture has a direction.</strong> Components, then hooks, then API and services, then pure domain code. Components never fetch.</li>
+						<li><strong>Risky files are named.</strong> The provider normaliser, the request-lifecycle hook, and the large layout surfaces get extra caution and their own commits.</li>
+						<li><strong>Design decisions are not delegated.</strong> Agents may audit the interface and document what they find. If a change needs design judgment, they report it and stop.</li>
+						<li><strong>Old documents are history until they match the code.</strong> Claims are re-checked against current source before they are repeated.</li>
+						<li><strong>Hard stop at the open pull request.</strong> No merging, no auto-merge, no merging on green checks.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Decision Gates</h2>
+				<div>
+					<p>The rules were tested by the first implementation ticket. The milestone spec proposed a response chip. The agent shipped the protective-action text and left the chip out, because mapping CAP response codes to words a person reads is a vocabulary decision the rules reserve for me. I approved the wording, and the next pull request transcribed it rather than choosing it: "Take shelter", "Evacuate", "Avoid the area", "Monitor conditions", and four more. Unknown codes render no chip.</p>
+					<ul class="decision-receipts">
+						<li>
+							<span>Constraint</span>
+							<p>An alert's onset on a long-fuse product is a forecaster's judgment that gets revised as the event approaches. In the sample, no upcoming onset was under an hour away.</p>
+						</li>
+						<li>
+							<span>Decision</span>
+							<p>Show lead time in buckets such as "Starts within 12 hours". Never print a countdown.</p>
+						</li>
+						<li>
+							<span>Tradeoff</span>
+							<p>The card is less precise than competitors that show minutes. It also never displays two significant figures of confidence on a number that will be reissued before it arrives.</p>
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -281,43 +308,46 @@
 				<h2>Scannability Decisions</h2>
 				<div>
 					<ul>
-						<li>Start with a usable fallback forecast instead of blocking the first load on geolocation permission.</li>
-						<li>Prioritize the hero summary, rain guidance, and hourly trend for fast scanning.</li>
-						<li>Use labelled unsupported or unavailable states instead of vague failure copy.</li>
-						<li>Add touch-friendly mobile sample controls for dense timelines that would otherwise rely on hover.</li>
+						<li>The protective instruction renders inline and the longer description sits behind a disclosure. Sampled instructions had a 163-character median against 548 for descriptions, and the actionable one should not need a click.</li>
+						<li>A missing instruction renders nothing. It was absent on about 40% of sampled alerts, but present on all 14 with an urgency of "Immediate", so an "unavailable" line would have fired almost only on small-craft advisories.</li>
+						<li>The response chip is deliberately not styled as a severity badge. One says how bad, the other says what to do, and a test asserts they never share a class.</li>
+						<li>County-level alerts that NWS ships without an outline get a caption on the map, so an alert on the card never sits beside an empty map with no reason given.</li>
+						<li>The alert outline draws beneath the location marker in its own map pane, so "does it cover me?" stays answerable.</li>
 					</ul>
 				</div>
 			</div>
 
 			<div class="case-section">
-				<h2>Resilient Data Engineering</h2>
+				<h2>What the Live Feed Showed</h2>
+				<div>
+					<p>NWS publishes two end times that answer different questions. <code>expires</code> is when the message must be reissued. <code>ends</code> is when the hazard is forecast to be over. Aura had normalised the first under a name that promised the second, and both the card and the offline-restore path believed the name.</p>
+					<p>The agent found this while scouting the next ticket against live data, and I split it into its own pull request ahead of that ticket. One recorded Beach Hazards Statement had an onset of 05:00, a message expiry of 05:30, and a hazard end of 15:00. Under the old rule it vanished from the card for nine and a half hours, the hours it mattered most.</p>
+					<p>The fix resolves one shared rule for both paths, so the card and the restore logic cannot drift apart again. Where NWS sends no hazard end, the old behavior is kept exactly, so no alert gets a shorter window than it had.</p>
+					<p class="case-note"><strong>Source of these figures:</strong> measurements taken by the implementing agent against <code>api.weather.gov/alerts/active</code> on September 18, 2026 and reported in the pull requests. They are a single-day sample, not a monitored metric.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Verification That Reports Its Limits</h2>
+				<div>
+					<ul class="qa-list">
+						<li><strong>Recorded live payloads.</strong> Real NWS alert responses are committed as fixtures, and the domain tests run against them rather than against invented shapes.</li>
+						<li><strong>Negative controls by hand.</strong> After each fix, the change is reverted to see which new tests fail. The hazard-end pull request reports that reverting the card fails only 1 of its 4 new render tests, and names which tests prove the fix and which only pin the contract.</li>
+						<li><strong>Checks not run are named.</strong> When the agent's container could not run the pinned browser build, the pull request said so and deferred to CI instead of reporting a local pass.</li>
+						<li><strong>No existing test modified.</strong> Pull requests 234 through 237 each report zero deletions across tracked test files. New behavior arrived as new tests.</li>
+						<li><strong>Suite size at the last milestone pull request:</strong> 1,156 unit checks and 371 render checks passing on September 18, 2026.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Where the Process Caught Itself</h2>
 				<div>
 					<ul>
-						<li><strong>Independent fetch lifecycles.</strong> Forecast, supplemental data, and the climate archive are requested separately, so a secondary provider problem never blocks the core forecast.</li>
-						<li><strong>Nullish-rejection at the boundary.</strong> Provider data is normalized with strict numeric handling so a missing value stays <code>null</code> end to end and is rendered as unavailable, never as <code>0</code>.</li>
-						<li><strong>Last-known recovery.</strong> Forecasts are cached with freshness limits so an offline start can restore the last-known view without presenting stale data as fresh.</li>
-						<li><strong>Audit-and-lock.</strong> An internal audit surfaced a class of stability bugs in how partial provider responses flowed through the UI; each fix shipped with a regression test, so the same bug class cannot quietly return.</li>
-						<li><strong>Co-located CSS.</strong> Styles live with their components in plain CSS so dashboard surfaces stay maintainable as they evolve — no UI framework required.</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="case-section">
-				<h2>Missing-Data Tradeoffs</h2>
-				<div>
-					<ul class="decision-receipts">
-						<li>
-							<span>Constraint</span>
-							<p>Weather data can be partial, delayed, or unavailable from individual provider endpoints.</p>
-						</li>
-						<li>
-							<span>Decision</span>
-							<p>Normalize values at the API boundary with a nullish-rejection contract and render unavailable data explicitly instead of forcing fallback zeros.</p>
-						</li>
-						<li>
-							<span>Tradeoff</span>
-							<p>The interface stays trustworthy, but the UI has to carry more clear empty and unsupported states — and the QA suite has to lock that contract so it can't regress.</p>
-						</li>
+						<li><strong>A spec corrected by data.</strong> The spec said each newline in NWS text should become a paragraph. NWS hard-wraps at about 70 columns, so that rule cut a live warning after "stay away from" and stranded "windows." on its own line. 116 of 122 sampled instructions carried wrap newlines. The rule changed.</li>
+						<li><strong>Stale claims dropped.</strong> Before recording my severity-ladder decision, the agent re-read the source and found two claims in the spec that were no longer true. Both were corrected in place with citations instead of being repeated.</li>
+						<li><strong>An adversarial review of the agent's own commits</strong> found two defects before merge, including a cached alert that would have read "In effect now" for a hazard still hours away.</li>
+						<li><strong>A mutation that broke nothing.</strong> Removing a geometry type guard failed no tests, which meant a multi-part alert could have reached the map as if its first piece were the whole alert. A test now pins the guard.</li>
 					</ul>
 				</div>
 			</div>
@@ -326,12 +356,11 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
-						<li><strong>Automated in CI:</strong> Playwright runs <code>axe</code> against the app's primary states as part of the end-to-end suite.</li>
-					<li><strong>Captured evidence:</strong> one exported run of that CI gate — <a href="/assets/evidence/accessibility/aura-weather-app-axe-2026-08-16.md">app demo state, 0 violations, WCAG A/AA, August 16, 2026</a> — plus a clean <a href="/assets/evidence/accessibility/aura-weather-axe-2026-08-16.md">axe export for this case-study page</a>.</li>
-						<li>City search uses keyboard-friendly combobox and listbox behavior with an abortable request lifecycle.</li>
-						<li>Loading, refresh, error, and missing-data states use live status messaging where it helps.</li>
-						<li>Missing values include assistive text such as "no data available" instead of relying only on an em dash.</li>
-						<li>Preference-aware effects and mobile touch-target work are marked for continued interface QA.</li>
+						<li><strong>Automated in CI:</strong> Playwright runs <code>axe</code> against the live dashboard and the missing-data state as part of the end-to-end suite.</li>
+						<li><strong>Captured evidence:</strong> one exported run of that gate — <a href="/assets/evidence/accessibility/aura-weather-app-axe-2026-08-16.md">app demo state, 0 violations, WCAG A/AA, August 16, 2026</a> — plus an <a href="/assets/evidence/accessibility/aura-weather-axe-2026-08-16.md">axe export for an earlier version of this case-study page</a>.</li>
+						<li>The alert additions introduce no new live regions. The response chip carries an <code>aria-label</code> naming the field, such as "Recommended response: Avoid the area".</li>
+						<li>Missing values are announced as "no data available" instead of relying on an em dash.</li>
+						<li><strong>What automation missed:</strong> axe passed clean while every row of the seven-day forecast hid its data from screen readers, because an <code>aria-label</code> on the row button replaced its contents. Automated checks prove the absence of known violations. They do not prove the page makes sense read aloud.</li>
 					</ul>
 				</div>
 			</div>
@@ -340,22 +369,10 @@
 				<h2>Performance Considerations</h2>
 				<div>
 					<ul>
-						<li><strong>Lighthouse budgets run in CI</strong> alongside the test suite, so regressions in the budgeted metrics are caught before merge.</li>
-						<li>Core forecast content loads before lower-priority supplemental panels; lazy panels and deferred mounting cut the work for the first useful screen.</li>
-						<li>Unit toggles are handled client-side, so changing F/C does not trigger unnecessary provider requests.</li>
-						<li>Service worker support is limited to the app shell; live weather data remains a network truth source.</li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="case-section">
-				<h2>QA Notes</h2>
-				<div>
-					<ul class="qa-list">
-						<li><strong>The signature story:</strong> an internal audit caught a class of stability bugs around partial and missing provider data; each was fixed and then locked with a regression test, so the trust contract cannot silently regress.</li>
-						<li><strong>Test pyramid:</strong> unit and integration tests, end-to-end coverage with Playwright + axe, visual regression, and Lighthouse budgets — the breadth is deliberate for a data-driven UI.</li>
-						<li><strong>Evidence standard:</strong> missing-data behavior is described as a trust decision without inventing reliability metrics.</li>
-						<li><strong>Still to validate:</strong> fresh production Lighthouse profiling, reverse-geocoding edge cases, and saved-city behavior with real users.</li>
+						<li><strong>Lighthouse budgets run in CI</strong> alongside the test suite.</li>
+						<li>One lab run reported during the milestone scored performance 99 against a budget of 85 and accessibility 100 against a budget of 95. That is a single lab result, not field data.</li>
+						<li>The milestone was scoped to add no dependency. The alert outline reuses the existing Leaflet map, which loads lazily.</li>
+						<li>Changing °F/°C is handled client-side and does not refetch forecast or archive data.</li>
 					</ul>
 				</div>
 			</div>
@@ -363,14 +380,15 @@
 			<div class="case-section">
 				<h2>Current Status</h2>
 				<div>
-					<p>Aura Weather is a working portfolio project with real multi-API integration, resilient loading/error behavior, defensive data contracts, and documented limitations. It should not be described as a full production weather platform.</p>
+					<p>The alerts milestone is merged to main. Its last open item is a screenshot of a real warning rendered in production, which has to wait for a real warning. The interface has since been redesigned, and follow-up fixes from a later audit are in review. Aura remains a portfolio project and should not be described as a production weather platform.</p>
 				</div>
 			</div>
 
 			<div class="case-section">
 				<h2>What I Learned</h2>
 				<div>
-					<p>Data products need honest absence states as much as polished success states. Keeping null, unavailable, and delayed provider responses visible makes the interface more trustworthy than a cleaner-looking screen with misleading fallback values — and a regression test is what keeps that honesty from eroding over time.</p>
+					<p>Agents are most useful when the rules say what they may not decide. The pull request I value most from this milestone is the one where the agent declined to ship a feature the spec asked for, because the wording was mine to choose.</p>
+					<p>I also learned to read a verification section for what it admits. "Four new tests pass" tells me little. "Reverting the fix fails one of the four, and here is why" tells me what is actually protected.</p>
 				</div>
 			</div>
 
@@ -378,10 +396,11 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Capture deployed Lighthouse field numbers, then tune image and paint cost from real data.</li>
-						<li>Improve reverse-geocoding for raw device coordinates.</li>
-						<li>Revisit saved-city sync if the project needs account-level trust rather than lightweight optional sync.</li>
-						<li>Use product analytics or user testing to decide which panels deserve the most visual priority.</li>
+						<li>Capture a live warning in production and replace the hero screenshot with the current interface.</li>
+						<li>Re-measure the feed figures on more than one day, across different weather regimes.</li>
+						<li>Add basic product analytics or user testing, so the outcome section can report behavior instead of test counts.</li>
+						<li>Draw county-level alerts from NWS zone geometry, which the milestone deliberately deferred.</li>
+						<li>Split the request-lifecycle hook, the largest file in the project and one that grew during the resilience work.</li>
 					</ul>
 				</div>
 			</div>

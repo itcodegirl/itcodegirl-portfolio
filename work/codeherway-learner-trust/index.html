@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<meta name="description" content="CodeHerWay learner-trust case study by Jenna Zawaski: three fixes that made the platform keep its promises. Successful saves stay saved, placeholder quizzes stop recording scores, and the code editor stops loading on the first visit.">
+	<meta name="author" content="Jenna Zawaski">
+	<meta name="robots" content="index, follow">
+	<link rel="canonical" href="https://itcodegirl.com/work/codeherway-learner-trust/">
+	<meta name="theme-color" content="#f7f3ea">
+	<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
+	<meta property="og:description" content="Three changes that made CodeHerWay keep its promises about saved progress, meaningful checkpoints, and a lighter first visit.">
+	<meta property="og:url" content="https://itcodegirl.com/work/codeherway-learner-trust/">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp">
+	<meta property="og:image:width" content="1200">
+	<meta property="og:image:height" content="802">
+	<meta property="og:image:alt" content="CodeHerWay lesson workspace screenshot">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
+	<meta name="twitter:description" content="Save reliability, honest assessment, and a lighter first visit for CodeHerWay.">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp">
+
+	<title>CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski</title>
+
+	<link rel="preload" href="/assets/fonts/inter-latin-300-600.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="preload" href="/assets/fonts/playfair-display-latin-600-700.woff2" as="font" type="font/woff2" crossorigin>
+	<link rel="stylesheet" href="/css/fonts.css">
+	<link rel="stylesheet" href="/css/styles.css">
+	<link rel="stylesheet" href="/work/work.css">
+	<link rel="stylesheet" href="/css/editorial-pages.css">
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "BreadcrumbList",
+					"itemListElement": [
+						{
+							"@type": "ListItem",
+							"position": 1,
+							"name": "Home",
+							"item": "https://itcodegirl.com/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 2,
+							"name": "Case Studies",
+							"item": "https://itcodegirl.com/work/"
+						},
+						{
+							"@type": "ListItem",
+							"position": 3,
+							"name": "CodeHerWay: Building a Platform Learners Can Trust",
+							"item": "https://itcodegirl.com/work/codeherway-learner-trust/"
+						}
+					]
+				},
+				{
+					"@type": "CreativeWork",
+					"name": "CodeHerWay: Building a Platform Learners Can Trust",
+					"url": "https://itcodegirl.com/work/codeherway-learner-trust/",
+					"description": "Case study of three changes that made a coding education platform keep its promises about saved progress, assessment, and first-visit payload.",
+					"image": "https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp",
+					"dateModified": "2026-09-21",
+					"creator": {
+						"@type": "Person",
+						"name": "Jenna Zawaski"
+					}
+				}
+			]
+		}
+	</script>
+</head>
+
+<body>
+	<a class="skip-link" href="#main-content">Skip to main content</a>
+
+	<header class="site-header nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="/" aria-label="ItCodeGirl home">
+				<img src="/assets/images/itcodegirl-logo.webp" alt="" width="118" height="46" loading="eager" decoding="async">
+			</a>
+			<nav class="nav" aria-label="Primary navigation">
+				<a href="/work/" class="nav-active" aria-current="page">Work</a>
+				<a href="/#skills">Skills</a>
+				<a href="/#about">About</a>
+				<a href="/#contact">Contact</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+	<main id="main-content" class="work-main case-page case-page--learning" tabindex="-1">
+		<section class="case-hero" aria-labelledby="case-title">
+			<div>
+				<a class="back-link" href="/work/">Back to all case studies</a>
+				<p class="case-eyebrow">Case study</p>
+				<h1 id="case-title">CodeHerWay: Building a coding education platform learners can trust</h1>
+				<p class="case-summary">
+					CodeHerWay brings lessons, quizzes, coding challenges, notes, and review tools into one place. Making
+					those features available was only part of the work. The harder question was whether learners could trust
+					what the platform told them: that their work was saved, that a checkpoint reflected understanding, and
+					that opening the platform would not load tools they had not chosen to use. This case study follows three
+					changes that made those promises more dependable.
+				</p>
+				<ul class="case-proof-strip" aria-label="Learner-trust proof points">
+					<li>A successful save can no longer be undone by an older queued write</li>
+					<li>139 placeholder checkpoints withheld instead of scored</li>
+					<li>Entry dependency graph cut from 1,019 kB to 109 kB gzip</li>
+				</ul>
+				<div class="case-links" role="group" aria-label="Project links">
+					<a class="case-link case-link--primary" href="https://codeherway-platform.vercel.app/" target="_blank" rel="noopener noreferrer">Live demo</a>
+					<a class="case-link" href="/work/codeherway/">Platform overview</a>
+				</div>
+			</div>
+			<dl class="case-meta-list" aria-label="Project summary">
+				<div>
+					<dt>Project type</dt>
+					<dd>Self-paced web-development learning platform for women entering tech</dd>
+				</div>
+				<div>
+					<dt>Stack</dt>
+					<dd>React, TypeScript, Vite, Supabase, and Vercel</dd>
+				</div>
+				<div>
+					<dt>My role</dt>
+					<dd>Designer and builder. I owned delivery of all three changes and made the decision to withhold the generated quizzes. Implementation was AI-assisted where noted below.</dd>
+				</div>
+				<div>
+					<dt>Status</dt>
+					<dd>Pre-launch. Deployed and in active development, with production-readiness work still open. There are no learners yet, so there are no adoption or learning-outcome results.</dd>
+				</div>
+				<div>
+					<dt>Code access</dt>
+					<dd>Private repository. Pull request numbers below refer to it, and a code walkthrough is available on request.</dd>
+				</div>
+				<div>
+					<dt>Last verified</dt>
+					<dd><time datetime="2026-09-21">September 21, 2026</time> — every figure on this page was re-checked against the merged pull requests it cites.</dd>
+				</div>
+			</dl>
+		</section>
+
+		<figure class="case-visual">
+			<img src="/assets/images/projects/codeherway-lesson-workspace.webp" srcset="/assets/images/projects/codeherway-lesson-workspace-640.webp 640w, /assets/images/projects/codeherway-lesson-workspace-960.webp 960w, /assets/images/projects/codeherway-lesson-workspace.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay lesson workspace showing the Git and PRs course navigation, the six lesson steps, and the save and mark-complete controls" width="1200" height="802" loading="eager" decoding="async" fetchpriority="high">
+			<figcaption>Current product, captured signed in on September 21, 2026: the lesson "Snapshots, Not Diffs" in the Git &amp; PRs track. The workspace puts the objectives, lesson sequence, and save controls together.</figcaption>
+		</figure>
+
+		<section class="case-lens case-lens--learning" aria-labelledby="trust-lens-title">
+			<div class="case-lens-copy">
+				<p class="case-kicker">Learner trust lens</p>
+				<h2 id="trust-lens-title">For a beginner, completing a lesson, answering a question, or saving a bookmark should produce a result she can believe.</h2>
+				<p>
+					Three places in CodeHerWay fell short of that. Each one was a mismatch between what the interface
+					implied and what the code underneath actually did. The work stayed inside the existing architecture:
+					reproduce a specific failure, repair the path that caused it, and confirm the tests could detect the
+					original defect.
+				</p>
+			</div>
+			<div class="case-lens-grid" role="group" aria-label="The three promises">
+				<article>
+					<span aria-hidden="true">01</span>
+					<h3>Saved means saved</h3>
+					<p>A failed save could stay queued and later undo a newer successful action.</p>
+				</article>
+				<article>
+					<span aria-hidden="true">02</span>
+					<h3>A checkpoint means something</h3>
+					<p>Template-generated quizzes could reward recognizing an answer pattern without testing the lesson.</p>
+				</article>
+				<article>
+					<span aria-hidden="true">03</span>
+					<h3>The first visit loads what you chose</h3>
+					<p>Opening the platform downloaded the code editor's dependency graph, although the editor was meant to load later.</p>
+				</article>
+			</div>
+		</section>
+
+		<section class="case-content" aria-label="CodeHerWay learner-trust case study details">
+			<div class="case-section evidence-snapshot" id="evidence-snapshot">
+				<h2>Evidence Snapshot</h2>
+				<div class="evidence-snapshot-grid">
+					<article class="evidence-snapshot-item">
+						<h3>What shipped</h3>
+						<ul>
+							<li>A confirmed successful save retires older conflicting queued writes for the same record</li>
+							<li>Generated placeholder checkpoints are withheld and excluded from quiz-coverage reporting</li>
+							<li>Vite's shared preload helper moved to its own chunk, removing Monaco from the entry graph</li>
+						</ul>
+					</article>
+					<article class="evidence-snapshot-item">
+						<h3>Where the numbers come from</h3>
+						<ul>
+							<li>Every figure is quoted from the verification section of a merged pull request</li>
+							<li>They are dated build and audit measurements, not monitored metrics</li>
+							<li>The quiz counts were not independently recounted from the question source for this page</li>
+						</ul>
+					</article>
+					<article class="evidence-snapshot-item">
+						<h3>Honest limits</h3>
+						<ul>
+							<li>No completion, retention, or learning-outcome data exists yet</li>
+							<li>The save fixes are verified by automated tests; the offline flow was not run by hand</li>
+							<li>The payload reduction is not a measured load-time improvement</li>
+							<li>The repository is private, so the pull requests cannot be opened from this page</li>
+						</ul>
+					</article>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>1. Make a Successful Save Stay Saved</h2>
+				<div>
+					<p>Consider a learner who unmarks a lesson while her connection is unreliable. That request fails, so the platform queues it for retry. She then marks the lesson complete again, and this save succeeds. Before the fix, reconnecting could replay the old removal and erase the completion. The interface had confirmed an action that a stale background operation could later reverse. Bookmarks had the same failure pattern.</p>
+					<p>The repair clears obsolete queued writes after a newer write for the same record succeeds. It first covered direct progress writes (pull request 1020, August 17, 2026), then extended to the lesson-page buttons, which save through a different path (pull request 1211, September 17, 2026).</p>
+					<ul class="decision-receipts">
+						<li>
+							<span>Constraint</span>
+							<p>On a failed save, the queued item is the retry. Dropping it would lose the write entirely, which is the opposite data loss and just as bad.</p>
+						</li>
+						<li>
+							<span>Decision</span>
+							<p>Keep the retry system. Clear queued work only after a confirmed success, and only for the same record, identified by the queue's own resource keys.</p>
+						</li>
+						<li>
+							<span>Tradeoff</span>
+							<p>Clearing the whole queue would have been simpler, but it could discard unrelated work that still needed to sync. Precision cost more code and more tests.</p>
+						</li>
+					</ul>
+					<p>The important detail was deciding which operations were actually obsolete. A lesson bookmark and a concept bookmark inside that lesson are separate records, so clearing one must not discard the other, and there is a test for that refusal. Older lesson-key spellings that a browser might still hold also had to be matched.</p>
+					<p>The original reproduction failed before the first repair and passed afterward. For the second repair, each production change was reverted in place to confirm its tests failed without it. One revert initially passed, which exposed an untested line; a test was added and the revert then failed as it should.</p>
+					<figure class="case-visual">
+						<img src="/assets/images/projects/codeherway-progress-snapshot.webp" srcset="/assets/images/projects/codeherway-progress-snapshot-640.webp 640w, /assets/images/projects/codeherway-progress-snapshot-960.webp 960w, /assets/images/projects/codeherway-progress-snapshot.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay progress snapshot with lessons saved, current state, review due, and a recommended next step" width="1200" height="802" loading="lazy" decoding="async">
+						<figcaption>Current product context: the progress snapshot shows saved reading progress and a recommended next step. It shows what learners depend on; it does not reproduce the historical reconnect failure.</figcaption>
+					</figure>
+					<p class="case-note"><strong>What this does and does not promise:</strong> covered progress and bookmark writes can recover in the same browser without an obsolete queued operation undoing a later successful save. That is verified in automated tests against the real write queue. The reconnect flow was not exercised by hand, and this is not a claim of universal offline or cross-device recovery.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>2. Protect Mastery Evidence From Generated Quizzes</h2>
+				<div>
+					<p><strong>"I'd rather show no checkpoint than record a false one."</strong></p>
+					<p>I withheld the generated checkpoints because a quiz that can be passed by recognizing an answer pattern still produces a score. The submission path treated that score as ordinary quiz evidence, and the platform used quiz scores as a signal of mastery.</p>
+					<p>The affected banks covered Next.js, React + TypeScript, and TypeScript Foundations. Their templates lacked the lesson-specific context needed to write plausible wrong answers. I did not think rewriting those templates would fix what the quizzes measured, even if it made the coverage report look better. Changing the label was also not enough: calling a quiz "generated" changes what the learner is told, but the score and review-card write path did not distinguish those banks from authored ones.</p>
+					<p>So the checkpoint is withheld until authored questions exist. That accepts visible gaps in the assessment experience and a smaller reported inventory, in exchange for keeping those checkpoints out of the normal score and review-card paths.</p>
+					<p>The decision is enforced where the quiz would render. The layout checks the bank's own "generated" marker and omits the whole checkpoint, heading included. Because the quiz never mounts, its submission handler cannot run. The gate reads the marker rather than a course list, so a checkpoint returns lesson by lesson as an authored bank replaces a generated one.</p>
+					<ul class="decision-receipts">
+						<li>
+							<span>Before</span>
+							<p>The quiz audit counted 316 lessons across 8 courses as having active quiz coverage, and reported that coverage as complete.</p>
+						</li>
+						<li>
+							<span>After</span>
+							<p>177 lessons across 5 courses. 139 generated checkpoints and their 417 template questions are reported separately as withheld placeholders.</p>
+						</li>
+						<li>
+							<span>Not claimed</span>
+							<p>These counts describe the assessment inventory, not learner achievement. No quiz questions or saved learner records were deleted. The 417 questions are unchanged.</p>
+						</li>
+					</ul>
+					<p>A database check recorded the same day found no score or review-card rows matching any generated quiz. The outcome was preventive: a path that could record misleading evidence was blocked before anyone used it. The audit finding was closed on that basis, with the closure note stating plainly that the three courses still do not have authored quizzes. Writing those questions is tracked separately as curriculum work (pull requests 1218 and 1222, September 17, 2026).</p>
+					<figure class="case-visual">
+						<img src="/assets/images/projects/codeherway-learning-transcript.webp" srcset="/assets/images/projects/codeherway-learning-transcript-640.webp 640w, /assets/images/projects/codeherway-learning-transcript-960.webp 960w, /assets/images/projects/codeherway-learning-transcript.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay learning transcript separating reading progress, recall checks, application proof, and review health" width="1200" height="802" loading="lazy" decoding="async">
+						<figcaption>Current product, September 21, 2026: the learning transcript separates four kinds of learning evidence. The displayed values are one account's state, not a before-and-after capture of this change.</figcaption>
+					</figure>
+					<p class="case-note"><strong>Remaining limitation:</strong> the quiz submission hook still writes scores and queues review cards without checking the generated marker. The rendering gate is the current protection. A future surface that mounts a generated bank and submits through that hook could reintroduce the problem, so a check in the write path itself is an open engineering follow-up.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>3. Load the Editor When the Learner Needs It</h2>
+				<div>
+					<p>CodeHerWay includes an in-browser coding environment, but a visitor should not need its full editor payload just to open the platform.</p>
+					<p>An investigation into a small bundle-headroom item found something much larger. Vite's shared preload helper, which every chunk with a dynamic import depends on, had been placed inside a Monaco language chunk. Because the app entry needed that helper, it pulled in the editor's dependency graph with it.</p>
+					<p>The existing budget check did not reveal the cost. It measured the assets referenced by the entry HTML, while the extra dependencies arrived through static imports between JavaScript chunks. The check reported about 109 kB while the real figure was over 1,000 kB.</p>
+					<ul class="decision-receipts">
+						<li>
+							<span>Before</span>
+							<p>Entry dependency graph: 1,019.42 kB gzip JavaScript across 13 chunks, 7 of them Monaco.</p>
+						</li>
+						<li>
+							<span>After</span>
+							<p>109.10 kB across 7 chunks, none of them Monaco. The fix was one rule in the build configuration that gives the helper its own 0.66 kB chunk.</p>
+						</li>
+						<li>
+							<span>Not claimed</span>
+							<p>That is about 89.3% less gzip JavaScript in the measured entry graph. It is a payload reduction, not a measured 89.3% improvement in loading time.</p>
+						</li>
+					</ul>
+					<p>The small configuration change depended on a larger investigative step: checking what the dependency graph actually contained instead of accepting a passing budget result (pull request 880, July 26, 2026).</p>
+					<figure class="case-visual">
+						<img src="/assets/images/projects/codeherway-code-editor.webp" srcset="/assets/images/projects/codeherway-code-editor-640.webp 640w, /assets/images/projects/codeherway-code-editor-960.webp 960w, /assets/images/projects/codeherway-code-editor.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay JavaScript challenge with a code editor, preview pane, and Run Tests control" width="1200" height="802" loading="lazy" decoding="async">
+						<figcaption>Current product: the "Personalized Theme Console" challenge opens the editor beside its preview and five test checks. The capture shows the starter state; no solution was added. The payload comparison above comes from the pull request, not this screenshot.</figcaption>
+					</figure>
+					<p class="case-note"><strong>Left open:</strong> strengthening the budget check to walk static imports from the entry was deferred as a separate decision, because it changes what CI measures. The fix removed the observed problem. It did not make every similar regression impossible.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>My Role</h2>
+				<div>
+					<p>I am CodeHerWay's designer and builder, and the pull requests described here were opened and merged under my account.</p>
+					<ul>
+						<li><strong>Save reliability.</strong> I owned delivery of the save-queue fixes across direct writes and lesson-page actions. The work preserved the existing retry system while preventing older queued operations from undoing newer successful saves.</li>
+						<li><strong>Assessment.</strong> Withholding the generated quizzes was my decision, for the reasons given in that chapter.</li>
+						<li><strong>Editor loading.</strong> I owned delivery of the Monaco loading fix, with AI-assisted implementation. The work traced an unexpected dependency from the app entry to the editor and isolated Vite's shared preload helper.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Results</h2>
+				<div>
+					<ul>
+						<li>Newer successful lesson and bookmark saves supersede older conflicting queued writes.</li>
+						<li>Generated placeholder checkpoints are withheld, which prevents submissions through those surfaces, and are excluded from quiz-coverage reporting.</li>
+						<li>The measured initial JavaScript dependency graph is substantially smaller, with Monaco removed from it.</li>
+					</ul>
+					<p>These results support a case for stronger implementation and more accurate product promises. They do not demonstrate higher completion rates, better retention, or improved learning outcomes.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Accessibility Considerations</h2>
+				<div>
+					<p>None of the three changes altered keyboard, focus, or screen-reader behavior, and this page makes no new accessibility claim. One detail is relevant: a withheld checkpoint is removed together with its eyebrow and heading, so no empty section is left in the page. The platform's accessibility coverage is described on the <a href="/work/codeherway/">platform overview</a>.</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>Performance Considerations</h2>
+				<div>
+					<ul>
+						<li>The entry-graph figures are build measurements taken on July 26, 2026. Later work has changed the bundle, so they describe that fix, not today's build.</li>
+						<li>No Lighthouse or field data is reported here. Browser performance under consistent device and network conditions has not been captured.</li>
+						<li>The first save-queue change adds one local-storage read and a filter on the success path of a write that has already made a network round trip.</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>What the Work Revealed</h2>
+				<div>
+					<p>A passing check is useful only when it measures the behavior that matters. The save queue needed tests spanning a failure, a later success, and a replay. Quiz assessment needed to protect the meaning of a recorded score, not only the accuracy of a coverage report. Performance measurement needed to account for dependencies beyond the assets listed in the HTML.</p>
+					<p>The common lesson was to make the product claim concrete enough to challenge. Can a successful save be undone? Can a quiz be passed without understanding? Does the first page really defer the editor?</p>
+				</div>
+			</div>
+
+			<div class="case-section">
+				<h2>What I Would Improve Next</h2>
+				<div>
+					<ul>
+						<li>Replace the withheld placeholder questions with authored assessments.</li>
+						<li>Protect quiz writes in the submission path, independent of which surface renders the bank.</li>
+						<li>Strengthen the bundle budget check so it walks static imports from the entry.</li>
+						<li>Run the offline and reconnect save flow by hand, then observe real learners using it.</li>
+						<li>Capture browser performance under consistent device and network conditions.</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<nav class="case-study-nav" aria-label="More case studies">
+			<a href="/work/codeherway/" class="case-study-nav-link">
+				<span>Platform overview</span>
+				<strong>CodeHerWay Education Platform</strong>
+			</a>
+			<a href="/work/" class="case-study-nav-link">
+				<span>All case studies</span>
+				<strong>Return to work index</strong>
+			</a>
+		</nav>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="/work/">Work</a>
+				<a href="/notes/">Notes</a>
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

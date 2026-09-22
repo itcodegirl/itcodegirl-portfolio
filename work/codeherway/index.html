@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: a React 19 + TypeScript + Supabase learning platform for women in tech — 22 courses, 170 modules, 922 lessons, custom v2 content schema, AI companion, and a deduplicated, retry-safe progress and learning-state system.">
+	<meta name="description" content="CodeHerWay Education Platform case study by Jenna Zawaski: a React 19 + TypeScript + Supabase learning platform for women in tech — 26 courses, 184 modules, 1,035 lessons, custom v2 content schema, AI companion, and a deduplicated, retry-safe progress and learning-state system.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/codeherway/">
@@ -65,7 +65,7 @@
 					"url": "https://itcodegirl.com/work/codeherway/",
 					"description": "Case study for a frontend-focused learning platform for women entering tech.",
 					"image": "https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp",
-					"dateModified": "2026-08-16",
+					"dateModified": "2026-09-21",
 					"creator": {
 						"@type": "Person",
 						"name": "Jenna Zawaski"
@@ -105,7 +105,7 @@
 				</p>
 				<ul class="case-proof-strip" aria-label="CodeHerWay proof points">
 					<li>React 19 + TypeScript + Supabase auth and data</li>
-					<li>22 courses · 170 modules · 922 lessons on custom v2 schema</li>
+					<li>26 courses · 184 modules · 1,035 lessons on custom v2 schema</li>
 					<li>Deduplicated, retry-safe progress system</li>
 					<li>Playwright smoke + accessibility coverage</li>
 				</ul>
@@ -139,7 +139,7 @@
 				</div>
 				<div>
 					<dt>Last verified</dt>
-					<dd><time datetime="2026-08-16">August 16, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending.</dd>
+					<dd><time datetime="2026-08-16">August 16, 2026</time> — static, link, and route-readiness checks pass; deployed field profiling is still pending. Curriculum counts and quiz-coverage wording were corrected on September 21, 2026.</dd>
 				</div>
 			</dl>
 		</section>
@@ -191,7 +191,7 @@
 							<li>Progress save/reload with same-browser retry/replay</li>
 							<li>Quiz feedback, bookmarks, and lesson notes</li>
 							<li>Mobile learning flow with sticky nav and a tools sheet</li>
-							<li>Custom v2 lesson content schema — 22 courses, 170 modules, 922 lessons shipped</li>
+							<li>Custom v2 lesson content schema — 26 courses, 184 modules, 1,035 lessons shipped</li>
 							<li>Ada AI companion — standalone Next.js app on the Anthropic API with usage-cap enforcement</li>
 						</ul>
 					</article>
@@ -308,7 +308,8 @@
 						<li><strong>Unified progress system.</strong> Completed lessons, quiz outcomes, and practice activity flow through one learning-state engine, with deduplication so a single completion can't be counted twice.</li>
 						<li><strong>Local-first with reconciliation.</strong> Progress events are processed locally with retry/reconciliation evidence and diagnostics, and sync failures are made visible instead of swallowed.</li>
 						<li><strong>Feature-gated cross-device path.</strong> A Supabase learning-state backend is scaffolded for future cross-device idempotency — progress migrations, an atomic progress-update RPC, and a frontend service wrapper that preserves local fallback. The flag stays off until migrations run and authenticated duplicate-write flows are verified.</li>
-						<li><strong>Quiz inventory under audit.</strong> Active quiz coverage for all four tracks is complete; quiz variant groups and legacy orphan quizzes are classified and monitored by an audit so the content surface stays trustworthy.</li>
+						<li><strong>Quiz inventory under audit.</strong> Authored quiz coverage is complete for the five courses the audit expects it from. Template-generated checkpoints in three further courses are withheld until authored questions exist; quiz variant groups and legacy orphan quizzes are classified and monitored by an audit so the content surface stays trustworthy.</li>
+						<li><strong>Found and fixed since this page was first written.</strong> In August and September 2026, two paths were repaired where an older queued write could undo a newer successful save. The reproduction, the fix, and its limits are in the <a href="/work/codeherway-learner-trust/">learner-trust case study</a>.</li>
 						<li><strong>Server-mediated workflows</strong> stay behind functions rather than exposing sensitive keys in the browser.</li>
 					</ul>
 				</div>
@@ -402,6 +403,10 @@
 			<a href="/work/" class="case-study-nav-link">
 				<span>All case studies</span>
 				<strong>Return to work index</strong>
+			</a>
+			<a href="/work/codeherway-learner-trust/" class="case-study-nav-link">
+				<span>Deep dive</span>
+				<strong>A Platform Learners Can Trust</strong>
 			</a>
 			<a href="/work/ceo-os/" class="case-study-nav-link">
 				<span>Next case study</span>

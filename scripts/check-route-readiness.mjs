@@ -14,6 +14,7 @@ const pages = [
 	{ file: 'work/aura-weather/index.html', canonical: 'https://itcodegirl.com/work/aura-weather/', type: 'case-study' },
 	{ file: 'work/ceo-os/index.html', canonical: 'https://itcodegirl.com/work/ceo-os/', type: 'case-study' },
 	{ file: 'work/codeherway/index.html', canonical: 'https://itcodegirl.com/work/codeherway/', type: 'case-study' },
+	{ file: 'work/codeherway-learner-trust/index.html', canonical: 'https://itcodegirl.com/work/codeherway-learner-trust/', type: 'case-study' },
 ];
 
 function readFile(relativePath) {
@@ -112,11 +113,11 @@ function checkHome(html) {
 }
 
 function checkWorkIndex(html) {
-	['/work/codeherway/', '/work/ceo-os/', '/work/aura-weather/'].forEach((href) => {
+	['/work/codeherway/', '/work/codeherway-learner-trust/', '/work/ceo-os/', '/work/aura-weather/'].forEach((href) => {
 		assert(html.includes(`href="${href}"`), `work/index.html should link to ${href}.`);
 	});
 
-	assert(countMatches(html, /class="[^"]*\bwork-card\b/g) >= 3, 'work/index.html should keep at least three case-study cards.');
+	assert(countMatches(html, /class="[^"]*\bwork-card\b/g) >= 4, 'work/index.html should keep at least four case-study cards.');
 }
 
 function checkCaseStudy(file, html) {

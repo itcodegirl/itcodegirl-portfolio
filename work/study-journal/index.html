@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="A notebook-centered React study tool with deliberate card creation, linked source passages, visible autosave, and recovery for unsaved writing.">
+    <meta name="author" content="Jenna Zawaski">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://itcodegirl.com/work/study-journal/">
+    <meta name="theme-color" content="#f7f3ea">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Study Journal: Keep the notebook at the center of learning. | Jenna Zawaski">
+    <meta property="og:description" content="A notebook-centered React study tool with deliberate card creation, linked source passages, visible autosave, and recovery for unsaved writing.">
+    <meta property="og:url" content="https://itcodegirl.com/work/study-journal/">
+    <meta name="twitter:card" content="summary">
+    <title>Study Journal: Keep the notebook at the center of learning. | Jenna Zawaski</title>
+    <link rel="preload" href="/assets/fonts/inter-latin-300-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/playfair-display-latin-600-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/work/work.css">
+    <link rel="stylesheet" href="/css/editorial-pages.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "Study Journal: Keep the notebook at the center of learning.", "url": "https://itcodegirl.com/work/study-journal/", "description": "A notebook-centered React study tool with deliberate card creation, linked source passages, visible autosave, and recovery for unsaved writing.", "dateModified": "2026-11-04", "creator": {"@type": "Person", "name": "Jenna Zawaski"}}</script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+	<header class="site-header nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="/" aria-label="ItCodeGirl home">
+				<img src="/assets/images/itcodegirl-logo.webp" alt="" width="118" height="46" loading="eager" decoding="async">
+			</a>
+			<nav class="nav" aria-label="Primary navigation">
+				<a href="/work/" class="nav-active" aria-current="page">Work</a>
+				<a href="/#skills">Skills</a>
+				<a href="/#about">About</a>
+				<a href="/#contact">Contact</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+
+    <main id="main-content" class="work-main case-page" tabindex="-1">
+        <section class="case-hero" aria-labelledby="case-title">
+            <div>
+                <a class="back-link" href="/work/">Back to all case studies</a>
+                <p class="case-eyebrow">Case study / Study Journal</p>
+                <h1 id="case-title">Keep the notebook at the center of learning.</h1>
+                <p class="case-summary">Reading a note and choosing what to practice are different actions. Study Journal keeps writing in the foreground, then lets the learner deliberately turn a passage into a card, question, or idea. The first phase follows one complete flow: open a topic, write, save, reload, and return to the source of a study object.</p>
+                <ul class="case-proof-strip" aria-label="Implementation evidence">
+                    <li>Explicit creation of study objects</li><li>Serialized autosave and recovery</li><li>76 local unit/component tests passed</li>
+                </ul>
+                <div class="case-links" role="group" aria-label="Project links">
+                    <a class="case-link case-link--primary" href="https://github.com/itcodegirl/study-journal" target="_blank" rel="noopener noreferrer">View Study Journal code</a>
+                    <a class="case-link" href="#evidence-snapshot">Evidence Snapshot</a>
+                </div>
+            </div>
+            <dl class="case-meta-list" aria-label="Project summary">
+                <div><dt>Project type</dt><dd>Personal portfolio project</dd></div>
+                <div><dt>Stack</dt><dd>React, TypeScript, Tiptap, Vite, localStorage</dd></div>
+                <div><dt>My role</dt><dd>Product and frontend implementation, developed with AI assistance. The linked source separates implemented behavior from future work.</dd></div>
+                <div><dt>Status</dt><dd>Phase 1 prototype. Single-browser storage; no accounts, cross-device sync, or review interface yet.</dd></div>
+                <div><dt>Source reviewed</dt><dd><time datetime="2026-11-04">November 4, 2026</time>, revision <a href="https://github.com/itcodegirl/study-journal/commit/237abe2421bb63836208e80ef39c824620fa1ac7" target="_blank" rel="noopener noreferrer">237abe2</a>.</dd></div>
+            </dl>
+        </section>
+        <section class="case-content" aria-label="Study Journal case study details">
+            <div class="case-section evidence-snapshot" id="evidence-snapshot">
+                <h2>Evidence Snapshot</h2>
+                <div><p>The public source contains the editor, autosave controller, repository interfaces, and a Playwright study-flow specification. On November 4, 2026, typecheck, lint, all 76 unit/component tests, and the production build passed locally. The browser flow is specified across desktop, laptop, and mobile projects; no passing hosted CI run or production deployment is claimed here.</p></div>
+            </div>
+            <div class="case-section"><h2>Problem and Users</h2><div><p>This project is for a learner who needs room to explain a concept in her own words, while keeping useful passages available for later practice. Automatically converting every note into a card would make the tool decide what matters before the learner has made that choice.</p><p>The goal for Phase 1 was a small, complete learning workflow, rather than a dashboard of unfinished study features.</p></div></div>
+            <div class="case-section"><h2>Key Product Decisions</h2><div><p>Notes never become cards automatically. A learner selects a passage, opens a composer, fills in the required fields, and presses Save. The card, question, or idea keeps its journal-entry and topic identifiers, plus source text and section when created from a selection.</p><p>The notebook takes priority when space is tight. The study context sits in a rail on larger screens and moves into a sheet on smaller screens. A source control brings the learner back to the passage; if that text has been edited away, the interface says so instead of guessing.</p></div></div>
+            <div class="case-section"><h2>Engineering Decisions</h2><div><p>An 800 ms debounce keeps autosave quiet while the learner writes. A framework-independent controller serializes saves and tracks revisions, so a save completing in the background cannot mark newer writing as saved. A failed save retains the draft and attempts a separate session-storage recovery copy.</p><p>Repository interfaces keep storage out of the components. The current adapters use localStorage; a future backend would need its own implementation. That boundary is preparation for another adapter, not evidence that sync already exists.</p><p>The scheduler and focus-trap work were ported from CodeHerWay with tests. The <a href="https://github.com/itcodegirl/study-journal/blob/237abe2421bb63836208e80ef39c824620fa1ac7/docs/CODEHERWAY-REUSE-AUDIT.md" target="_blank" rel="noopener noreferrer">reuse audit</a> distinguishes those ports from adapted patterns and the features deliberately left out.</p></div></div>
+            <div class="case-section"><h2>Accessibility Considerations</h2><div><p>The implementation includes labeled editors, keyboard toolbar navigation, focus trapping and restoration for overlays, and failure announcements. Test source covers focus behavior and the study flow. These checks do not establish WCAG conformance or replace assistive-technology testing.</p></div></div>
+            <div class="case-section"><h2>Performance Considerations</h2><div><p>The verified production build emitted an 820.69 kB JavaScript entry chunk (258.61 kB gzip). The editor is a substantial part of the first load. Code splitting is still deferred; there is no measured browser-speed improvement to report.</p></div></div>
+            <div class="case-section"><h2>Current Status and Limits</h2><div><p>The source and local checks support the Phase 1 implementation. Storage belongs to this browser, and recovery is best effort. There is no account sync, global search, or review screen. No learner-outcome data is reported. Development is AI-assisted; the linked code and checks make the implementation reviewable.</p></div></div>
+            <div class="case-section"><h2>What I Would Improve Next</h2><div><ul><li>Test the writing and recovery flow with learners, including failed storage writes.</li><li>Run and retain browser-flow results across the configured screen sizes.</li><li>Reduce the editor cost before expanding the product surface.</li><li>Design a backend adapter and conflict behavior before promising cross-device access.</li></ul></div></div>
+            <div class="case-section"><h2>Inspect the Source</h2><div><p>These links pin the evidence to the revision reviewed for this page.</p><ul><li><a href="https://github.com/itcodegirl/study-journal/blob/237abe2421bb63836208e80ef39c824620fa1ac7/README.md" target="_blank" rel="noopener noreferrer">README and scope</a></li><li><a href="https://github.com/itcodegirl/study-journal/blob/237abe2421bb63836208e80ef39c824620fa1ac7/src/features/journal/autosave/autosaveController.test.ts" target="_blank" rel="noopener noreferrer">Autosave controller and tests</a></li><li><a href="https://github.com/itcodegirl/study-journal/blob/237abe2421bb63836208e80ef39c824620fa1ac7/src/features/journal/data/journalRecovery.ts" target="_blank" rel="noopener noreferrer">Recovery behavior</a></li><li><a href="https://github.com/itcodegirl/study-journal/blob/237abe2421bb63836208e80ef39c824620fa1ac7/tests/e2e/study-journal.spec.ts" target="_blank" rel="noopener noreferrer">Browser-flow specification</a></li></ul></div></div>
+        </section>
+        <nav class="case-study-nav" aria-label="More case studies">
+            <a href="/work/cinova/" class="case-study-nav-link"><span>Another project</span><strong>Cinova</strong></a>
+            <a href="/work/" class="case-study-nav-link"><span>All case studies</span><strong>Return to work index</strong></a>
+        </nav>
+    </main>
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="/work/">Work</a>
+				<a href="/notes/">Notes</a>
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

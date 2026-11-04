@@ -14,6 +14,9 @@ const pageFiles = [
 	'work/aura-weather/index.html',
 	'work/ceo-os/index.html',
 	'work/codeherway/index.html',
+	'work/codeherway-learner-trust/index.html',
+	'work/study-journal/index.html',
+	'work/cinova/index.html',
 ];
 
 const canonicalPages = [
@@ -25,6 +28,9 @@ const canonicalPages = [
 	'work/aura-weather/index.html',
 	'work/ceo-os/index.html',
 	'work/codeherway/index.html',
+	'work/codeherway-learner-trust/index.html',
+	'work/study-journal/index.html',
+	'work/cinova/index.html',
 ];
 
 const cssFiles = [

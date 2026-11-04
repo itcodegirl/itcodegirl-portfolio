@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="A vanilla JavaScript movie and TV browser with bounded API retries, recoverable loading states, a local watchlist, and testable failure paths.">
+    <meta name="author" content="Jenna Zawaski">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://itcodegirl.com/work/cinova/">
+    <meta name="theme-color" content="#f7f3ea">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Cinova: Make API failures part of the browsing experience. | Jenna Zawaski">
+    <meta property="og:description" content="A vanilla JavaScript movie and TV browser with bounded API retries, recoverable loading states, a local watchlist, and testable failure paths.">
+    <meta property="og:url" content="https://itcodegirl.com/work/cinova/">
+    <meta name="twitter:card" content="summary">
+    <title>Cinova: Make API failures part of the browsing experience. | Jenna Zawaski</title>
+    <link rel="preload" href="/assets/fonts/inter-latin-300-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/playfair-display-latin-600-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/fonts.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/work/work.css">
+    <link rel="stylesheet" href="/css/editorial-pages.css">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CreativeWork", "name": "Cinova: Make API failures part of the browsing experience.", "url": "https://itcodegirl.com/work/cinova/", "description": "A vanilla JavaScript movie and TV browser with bounded API retries, recoverable loading states, a local watchlist, and testable failure paths.", "dateModified": "2026-11-04", "creator": {"@type": "Person", "name": "Jenna Zawaski"}}</script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+	<header class="site-header nav-show">
+		<div class="nav-inner">
+			<a class="logo" href="/" aria-label="ItCodeGirl home">
+				<img src="/assets/images/itcodegirl-logo.webp" alt="" width="118" height="46" loading="eager" decoding="async">
+			</a>
+			<nav class="nav" aria-label="Primary navigation">
+				<a href="/work/" class="nav-active" aria-current="page">Work</a>
+				<a href="/#skills">Skills</a>
+				<a href="/#about">About</a>
+				<a href="/#contact">Contact</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" class="nav-resume" download aria-label="Download Jenna Zawaski resume PDF">Resume</a>
+			</nav>
+		</div>
+	</header>
+
+
+    <main id="main-content" class="work-main case-page" tabindex="-1">
+        <section class="case-hero" aria-labelledby="case-title">
+            <div>
+                <a class="back-link" href="/work/">Back to all case studies</a>
+                <p class="case-eyebrow">Case study / Cinova</p>
+                <h1 id="case-title">Make API failures part of the browsing experience.</h1>
+                <p class="case-summary">A movie browser is easy to judge when every request succeeds. Cinova also has to explain a failed setup request, a missing poster, or a search that can be retried. This project pairs the browsing interface with explicit recovery paths, using small JavaScript modules and controlled API fixtures for repeatable tests.</p>
+                <ul class="case-proof-strip" aria-label="Implementation evidence">
+                    <li>Bounded rate-limit retries</li><li>Section-specific recovery</li><li>Public source and browser-test specifications</li>
+                </ul>
+                <div class="case-links" role="group" aria-label="Project links">
+                    <a class="case-link case-link--primary" href="https://github.com/itcodegirl/Cinova" target="_blank" rel="noopener noreferrer">View Cinova code</a>
+                    <a class="case-link" href="#evidence-snapshot">Evidence Snapshot</a>
+                </div>
+            </div>
+            <dl class="case-meta-list" aria-label="Project summary">
+                <div><dt>Project type</dt><dd>Personal portfolio project</dd></div>
+                <div><dt>Stack</dt><dd>HTML, CSS, JavaScript, TMDB API, Playwright</dd></div>
+                <div><dt>My role</dt><dd>Product and frontend implementation, developed with AI assistance. The linked source separates implemented behavior from future work.</dd></div>
+                <div><dt>Status</dt><dd>Personal portfolio project. The live-data workflow requires a TMDB Read Access Token. Local checks use controlled fixtures for API behavior.</dd></div>
+                <div><dt>Source reviewed</dt><dd><time datetime="2026-11-04">November 4, 2026</time>, revision <a href="https://github.com/itcodegirl/Cinova/commit/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6" target="_blank" rel="noopener noreferrer">c3fa595</a>.</dd></div>
+            </dl>
+        </section>
+        <section class="case-content" aria-label="Cinova case study details">
+            <div class="case-section evidence-snapshot" id="evidence-snapshot">
+                <h2>Evidence Snapshot</h2>
+                <div><p>The public source separates API access, rendering, modal behavior, state, and watchlist controls. On November 4, 2026, static checks, JavaScript typecheck, and all four encoding-helper unit tests passed locally. The repository includes a GitHub Actions workflow for its full check and Playwright suite. The browser specifications use mocked TMDB responses; they are not proof of a live provider session.</p></div>
+            </div>
+            <div class="case-section"><h2>Problem and Users</h2><div><p>Cinova is for someone browsing movies and television, searching for a title, opening details, and keeping a watchlist. The interaction should remain understandable when the provider is slow or temporarily unavailable.</p><p>The goal was to give failures a place in the interface, so a person can retry the affected task without restarting the whole browsing session.</p></div></div>
+            <div class="case-section"><h2>Key Product Decisions</h2><div><p>Setup validates the token and loads genres before opening the browsing flow. A transient setup failure offers a retry. The featured title, individual sections, and search results also have their own retry controls, so one failed section does not require refreshing everything.</p><p>Watchlist buttons expose their saved state through aria-pressed and update their accessible labels when a title is added or removed. Browser history supports navigation between views. Empty search guidance and touch-target changes are visible in the source history.</p></div></div>
+            <div class="case-section"><h2>Engineering Decisions</h2><div><p>The API module applies a request timeout through AbortController. Rate-limit responses have a bounded retry loop and honor a usable Retry-After header. Successful responses can be cached using normalized endpoint and parameter keys, with an explicit refresh path.</p><p>Independent rendering and watchlist modules keep UI updates separate from the request boundary. Resilience specifications simulate failures in the hero, a section, and search, then assert recovery through the matching control. Another test passes an unsafe poster path and checks that the interface falls back instead of rendering the unsafe image.</p><p>The personal watchlist persists in browser storage. This is a local convenience, not an account-backed service or a promise of cross-device persistence.</p></div></div>
+            <div class="case-section"><h2>Accessibility Considerations</h2><div><p>The source includes labeled search, dialog semantics, setup-error announcements, trailer titles, and reduced-motion support. The axe specification checks serious and critical findings and disables color-contrast. That leaves contrast and other findings outside its gate; it is not a comprehensive accessibility audit or a WCAG compliance claim.</p></div></div>
+            <div class="case-section"><h2>Performance Considerations</h2><div><p>The API cache and parallel section loading reduce repeated work in the implementation. Their impact on real browsing speed has not been measured here. The static interface avoids a framework runtime, while poster and trailer loading still depend on external services.</p></div></div>
+            <div class="case-section"><h2>Current Status and Limits</h2><div><p>The implementation and test specifications are public. A real TMDB session needs a valid token, and mocked tests cannot verify provider availability or the full live-data experience. No usage or conversion results are reported. Development is AI-assisted; the source links below expose the behavior behind the case study.</p></div></div>
+            <div class="case-section"><h2>What I Would Improve Next</h2><div><ul><li>Review color contrast and remaining axe findings instead of relying on the current severity gate.</li><li>Verify the full browsing and recovery flow against the live provider.</li><li>Measure loading behavior on slower devices and connections.</li><li>Review browser-stored token handling before treating this as a production service.</li></ul></div></div>
+            <div class="case-section"><h2>Inspect the Source</h2><div><p>These links pin the evidence to the revision reviewed for this page.</p><ul><li><a href="https://github.com/itcodegirl/Cinova/blob/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6/README.md" target="_blank" rel="noopener noreferrer">README and setup</a></li><li><a href="https://github.com/itcodegirl/Cinova/blob/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6/assets/js/api.js" target="_blank" rel="noopener noreferrer">API timeout, retries, and caching</a></li><li><a href="https://github.com/itcodegirl/Cinova/blob/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6/tests/resilience.spec.js" target="_blank" rel="noopener noreferrer">Resilience specifications</a></li><li><a href="https://github.com/itcodegirl/Cinova/blob/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6/tests/a11y.spec.js" target="_blank" rel="noopener noreferrer">Accessibility gate and exclusions</a></li><li><a href="https://github.com/itcodegirl/Cinova/blob/c3fa5952a0bb8fa4e01d33c1aa293e9ba66f9ae6/.github/workflows/checks.yml" target="_blank" rel="noopener noreferrer">CI workflow</a></li></ul></div></div>
+        </section>
+        <nav class="case-study-nav" aria-label="More case studies">
+            <a href="/work/study-journal/" class="case-study-nav-link"><span>Another project</span><strong>Study Journal</strong></a>
+            <a href="/work/" class="case-study-nav-link"><span>All case studies</span><strong>Return to work index</strong></a>
+        </nav>
+    </main>
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<p class="footer-copy">© 2026 Jenna Zawaski</p>
+			<nav class="footer-links" aria-label="Footer navigation">
+				<a href="/work/">Work</a>
+				<a href="/notes/">Notes</a>
+				<a href="https://github.com/itcodegirl" target="_blank" rel="noopener noreferrer">GitHub</a>
+				<a href="https://www.linkedin.com/in/jennazawaski" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href="/assets/JennaZawaski-Resume.pdf" download>Resume</a>
+			</nav>
+		</div>
+	</footer>
+</body>
+
+</html>

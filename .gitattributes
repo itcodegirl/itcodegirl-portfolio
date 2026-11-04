@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Keep PDF contents binary when inspecting or transporting portfolio changes.
+*.pdf binary

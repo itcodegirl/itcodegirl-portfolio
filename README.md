@@ -25,9 +25,13 @@ For a fast read of the work behind this portfolio:
 2. Start with the flagship case study: [`/work/codeherway/`](work/codeherway/) —
    a React + Supabase learning platform with a deduplicated, retry-safe progress
    and learning-state system.
-3. Then skim [`/work/ceo-os/`](work/ceo-os/) (local-first data integrity) and
+3. Review the additional source-linked studies: [`/work/study-journal/`](work/study-journal/)
+   (notebook workflow and autosave) and [`/work/cinova/`](work/cinova/)
+   (API failure and recovery states). These pages distinguish local checks from
+   hosted CI, deployment, and user outcomes.
+4. Then skim [`/work/ceo-os/`](work/ceo-os/) (local-first data integrity) and
    [`/work/aura-weather/`](work/aura-weather/) (defensive multi-API data handling).
-4. Each case study leads with an **Evidence Snapshot** and a *What to verify in
+5. Each case study leads with an **Evidence Snapshot** and a *What to verify in
    90 seconds* list — jump-linked from the case-study header — and is explicit
    about what is portfolio-ready vs. not yet production-grade.
 
@@ -72,6 +76,8 @@ The primary story is UX-focused frontend product work with clear evidence.
 |   |-- codeherway/             # flagship product case study
 |   |-- ceo-os/                 # founder workflow case study
 |   |-- aura-weather/           # weather app case study
+|   |-- study-journal/          # notebook and autosave case study
+|   |-- cinova/                 # API recovery case study
 |   `-- work.css                # work and case study styling
 |-- assets/
 |   |-- images/                 # portrait + project images
@@ -235,3 +241,8 @@ invented numbers.
   available.
 - Continue tightening LCP image weight, responsive images, font loading, and
   static quality checks.
+
+## Asset and case-study verification (November 4, 2026)
+
+See [the verification record](assets/evidence/portfolio-repair-2026-11-04.md) for
+the repaired résumé destinations, source revisions, and missing original captures.

@@ -15,14 +15,14 @@
 	<meta property="og:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
 	<meta property="og:description" content="Three changes that made CodeHerWay keep its promises about saved progress, meaningful checkpoints, and a lighter first visit.">
 	<meta property="og:url" content="https://itcodegirl.com/work/codeherway-learner-trust/">
-	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="802">
-	<meta property="og:image:alt" content="CodeHerWay lesson workspace screenshot">
+	<meta property="og:image:height" content="750">
+	<meta property="og:image:alt" content="CodeHerWay landing page and account-creation form">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
 	<meta name="twitter:description" content="Save reliability, honest assessment, and a lighter first visit for CodeHerWay.">
-	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
 
 	<title>CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski</title>
 
@@ -64,7 +64,7 @@
 					"name": "CodeHerWay: Building a Platform Learners Can Trust",
 					"url": "https://itcodegirl.com/work/codeherway-learner-trust/",
 					"description": "Case study of three changes that made a coding education platform keep its promises about saved progress, assessment, and first-visit payload.",
-					"image": "https://itcodegirl.com/assets/images/projects/codeherway-lesson-workspace.webp",
+					"image": "https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp",
 					"dateModified": "2026-09-21",
 					"creator": {
 						"@type": "Person",
@@ -146,9 +146,9 @@
 		</section>
 
 		<figure class="case-visual">
-			<img src="/assets/images/projects/codeherway-lesson-workspace.webp" srcset="/assets/images/projects/codeherway-lesson-workspace-640.webp 640w, /assets/images/projects/codeherway-lesson-workspace-960.webp 960w, /assets/images/projects/codeherway-lesson-workspace.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay lesson workspace showing the Git and PRs course navigation, the six lesson steps, and the save and mark-complete controls" width="1200" height="802" loading="eager" decoding="async" fetchpriority="high">
-			<figcaption>Current product, captured signed in on September 21, 2026: the lesson "Snapshots, Not Diffs" in the Git &amp; PRs track. The workspace puts the objectives, lesson sequence, and save controls together.</figcaption>
-		</figure>
+            <img src="/assets/images/projects/codeherway-dashboard.webp" srcset="/assets/images/projects/codeherway-dashboard-640.webp 640w, /assets/images/projects/codeherway-dashboard-960.webp 960w, /assets/images/projects/codeherway-dashboard.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay landing page and account-creation form" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
+            <figcaption>Existing CodeHerWay landing and account-creation capture. Product context only: this is not a before-and-after demonstration of the three fixes. Signed-in flow captures are still needed.</figcaption>
+        </figure>
 
 		<section class="case-lens case-lens--learning" aria-labelledby="trust-lens-title">
 			<div class="case-lens-copy">
@@ -204,6 +204,7 @@
 						<h3>Honest limits</h3>
 						<ul>
 							<li>No completion, retention, or learning-outcome data exists yet</li>
+                            <li>Signed-in flow screenshots are not available on this page</li>
 							<li>The save fixes are verified by automated tests; the offline flow was not run by hand</li>
 							<li>The payload reduction is not a measured load-time improvement</li>
 							<li>The repository is private, so the pull requests cannot be opened from this page</li>
@@ -233,10 +234,7 @@
 					</ul>
 					<p>The important detail was deciding which operations were actually obsolete. A lesson bookmark and a concept bookmark inside that lesson are separate records, so clearing one must not discard the other, and there is a test for that refusal. Older lesson-key spellings that a browser might still hold also had to be matched.</p>
 					<p>The original reproduction failed before the first repair and passed afterward. For the second repair, each production change was reverted in place to confirm its tests failed without it. One revert initially passed, which exposed an untested line; a test was added and the revert then failed as it should.</p>
-					<figure class="case-visual">
-						<img src="/assets/images/projects/codeherway-progress-snapshot.webp" srcset="/assets/images/projects/codeherway-progress-snapshot-640.webp 640w, /assets/images/projects/codeherway-progress-snapshot-960.webp 960w, /assets/images/projects/codeherway-progress-snapshot.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay progress snapshot with lessons saved, current state, review due, and a recommended next step" width="1200" height="802" loading="lazy" decoding="async">
-						<figcaption>Current product context: the progress snapshot shows saved reading progress and a recommended next step. It shows what learners depend on; it does not reproduce the historical reconnect failure.</figcaption>
-					</figure>
+
 					<p class="case-note"><strong>What this does and does not promise:</strong> covered progress and bookmark writes can recover in the same browser without an obsolete queued operation undoing a later successful save. That is verified in automated tests against the real write queue. The reconnect flow was not exercised by hand, and this is not a claim of universal offline or cross-device recovery.</p>
 				</div>
 			</div>
@@ -264,10 +262,7 @@
 						</li>
 					</ul>
 					<p>A database check recorded the same day found no score or review-card rows matching any generated quiz. The outcome was preventive: a path that could record misleading evidence was blocked before anyone used it. The audit finding was closed on that basis, with the closure note stating plainly that the three courses still do not have authored quizzes. Writing those questions is tracked separately as curriculum work (pull requests 1218 and 1222, September 17, 2026).</p>
-					<figure class="case-visual">
-						<img src="/assets/images/projects/codeherway-learning-transcript.webp" srcset="/assets/images/projects/codeherway-learning-transcript-640.webp 640w, /assets/images/projects/codeherway-learning-transcript-960.webp 960w, /assets/images/projects/codeherway-learning-transcript.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay learning transcript separating reading progress, recall checks, application proof, and review health" width="1200" height="802" loading="lazy" decoding="async">
-						<figcaption>Current product, September 21, 2026: the learning transcript separates four kinds of learning evidence. The displayed values are one account's state, not a before-and-after capture of this change.</figcaption>
-					</figure>
+
 					<p class="case-note"><strong>Remaining limitation:</strong> the quiz submission hook still writes scores and queues review cards without checking the generated marker. The rendering gate is the current protection. A future surface that mounts a generated bank and submits through that hook could reintroduce the problem, so a check in the write path itself is an open engineering follow-up.</p>
 				</div>
 			</div>
@@ -293,10 +288,7 @@
 						</li>
 					</ul>
 					<p>The small configuration change depended on a larger investigative step: checking what the dependency graph actually contained instead of accepting a passing budget result (pull request 880, July 26, 2026).</p>
-					<figure class="case-visual">
-						<img src="/assets/images/projects/codeherway-code-editor.webp" srcset="/assets/images/projects/codeherway-code-editor-640.webp 640w, /assets/images/projects/codeherway-code-editor-960.webp 960w, /assets/images/projects/codeherway-code-editor.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay JavaScript challenge with a code editor, preview pane, and Run Tests control" width="1200" height="802" loading="lazy" decoding="async">
-						<figcaption>Current product: the "Personalized Theme Console" challenge opens the editor beside its preview and five test checks. The capture shows the starter state; no solution was added. The payload comparison above comes from the pull request, not this screenshot.</figcaption>
-					</figure>
+
 					<p class="case-note"><strong>Left open:</strong> strengthening the budget check to walk static imports from the entry was deferred as a separate decision, because it changes what CI measures. The fix removed the observed problem. It did not make every similar regression impossible.</p>
 				</div>
 			</div>

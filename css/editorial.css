@@ -816,3 +816,87 @@ main h2 {
 	background: var(--panel);
 	border-color: var(--hair-strong);
 }
+
+/* Homepage opening: role first, followed immediately by project evidence.
+   Scoped overrides retain the existing editorial tokens and lower-page styles. */
+.hero:first-of-type {
+	min-height: auto;
+	padding-block: calc(var(--header-height) + 48px) 56px;
+}
+.hero-container {
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+	max-width: none;
+	gap: clamp(32px, 4vw, 56px);
+	align-items: center;
+	text-align: start;
+}
+.hero-content { max-width: none; min-width: 0; }
+.hero .hero-content h1 {
+	font-size: clamp(2.5rem, 4.3vw, 3.8rem);
+	line-height: 1.1;
+	letter-spacing: -0.035em;
+	margin-block: 22px;
+}
+.hero .hero-sub {
+	font-size: 0.7rem;
+	line-height: 1.7;
+	letter-spacing: 0.1em;
+	margin-block: 24px 0;
+}
+.hero .hero-intro { font-size: 1.05rem; line-height: 1.75; max-width: 50ch; }
+.hero .hero-stack { font-size: 0.78rem; line-height: 1.8; color: var(--soft-ink); margin-top: 24px; }
+.hero .hero-actions { justify-content: flex-start; gap: 12px; }
+.hero .hero-cta { padding: 13px 18px; min-height: 48px; }
+.hero .hero-cta:focus-visible,
+.hero .opening-link:focus-visible { outline: 3px solid var(--violet); outline-offset: 4px; }
+.hero .mobile-trust-snapshot {
+	display: block;
+	min-width: 0;
+	margin: 0;
+	padding: 24px;
+	text-align: start;
+	background: var(--panel);
+	border: 1px solid var(--hair);
+	border-radius: 4px;
+}
+.hero .opening-eyebrow {
+	margin: 0 0 12px;
+	color: var(--amber-text);
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+.hero .mobile-trust-snapshot h2 {
+	font-size: 2rem;
+	line-height: 1.15;
+	margin: 0 0 8px;
+}
+.hero .mobile-trust-snapshot h2::after { content: none; }
+.hero .opening-summary { font-size: 0.9rem; line-height: 1.6; color: var(--soft-ink); margin: 0; }
+.opening-preview { margin-block: 20px; }
+.opening-preview img { display: block; width: 100%; height: auto; border: 1px solid var(--hair); border-radius: 3px; }
+.opening-preview figcaption { margin-top: 6px; font-size: 0.68rem; line-height: 1.6; color: var(--soft-ink); }
+.hero .opening-role { margin: 0 0 8px; color: var(--rose-text); font-size: 0.76rem; font-weight: 600; }
+.hero .opening-built,
+.hero .opening-challenge { color: var(--soft-ink); font-size: 0.86rem; line-height: 1.65; margin: 0 0 14px; }
+.opening-link { display: inline-block; padding-block: 8px; color: var(--ink); font-size: 0.86rem; font-weight: 600; text-decoration: underline; text-underline-offset: 4px; }
+.opening-link:hover { color: var(--rose-text); }
+.opening-link:active { color: var(--ink); }
+@media (max-width: 900px) {
+	.hero:first-of-type { padding-block: calc(var(--header-height) + 32px) 40px; }
+	.hero-container { grid-template-columns: 1fr; gap: 32px; }
+	.hero .hero-content h1 { font-size: clamp(2.3rem, 6.5vw, 3.5rem); max-width: 19ch; }
+	.hero-content p { margin-inline: 0; }
+	.hero .mobile-trust-snapshot { max-width: 640px; }
+}
+@media (max-width: 600px) {
+	.hero:first-of-type { padding-block: calc(var(--header-height) + 24px) 32px; }
+	.hero .hero-content h1 { font-size: clamp(2rem, 8vw, 2.8rem); }
+	.hero .mobile-trust-snapshot { padding: 20px; }
+	.hero .hero-sub { letter-spacing: 0.06em; }
+}
+@media (forced-colors: active) {
+	.hero .hero-cta--primary { border: 1px solid ButtonText; }
+	.hero .opening-link { color: LinkText; }
+}

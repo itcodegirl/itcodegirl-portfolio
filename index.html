@@ -33,11 +33,13 @@
 
 	<script defer src="./js/projects.js"></script>
 	<script defer src="./js/app.js"></script>
+	<script defer src="./js/player-one.js"></script>
 
 	<link rel="stylesheet" href="./css/fonts.css">
 	<link rel="stylesheet" href="./css/styles.css">
 	<link rel="stylesheet" href="./css/hero.css">
 	<link rel="stylesheet" href="./css/projects.css">
+	<link rel="stylesheet" href="./css/player-one.css">
 	<link rel="stylesheet" href="./css/editorial.css">
 
 	<script type="application/ld+json">
@@ -75,7 +77,7 @@
 	</script>
 </head>
 
-<body>
+<body class="home-player-one">
 	<a class="skip-link" href="#main-content">Skip to main content</a>
 
 	<div class="scroll-progress" aria-hidden="true"></div>
@@ -85,6 +87,7 @@
 			<a class="logo" href="#main-content" aria-label="ItCodeGirl home">
 				<img src="assets/images/itcodegirl-logo.webp" alt="" width="118" height="46" loading="eager" decoding="async">
 			</a>
+			<span class="player-tag">Player 1</span>
 			<nav class="nav" aria-label="Primary navigation">
 				<a href="#work" data-mobile-nav="primary">Work</a>
 				<a href="#skills" data-mobile-nav="secondary">Skills</a>
@@ -110,16 +113,40 @@
 					</div>
 					<p class="hero-stack">React · TypeScript · CSS · Supabase · Playwright</p>
 				</div>
+				<figure class="hero-portrait">
+					<div class="hero-portrait-split">
+						<img src="assets/headshot.webp" alt="Jenna Zawaski, smiling, with long dark hair and glasses" width="800" height="1000" loading="eager" fetchpriority="high" decoding="async">
+						<span class="hero-portrait-overlay" aria-hidden="true">
+							<img src="assets/headshot.webp" alt="" width="800" height="1000" loading="eager" decoding="async">
+							<span class="hero-portrait-wash"></span>
+							<span class="hero-portrait-dots"></span>
+						</span>
+						<span class="hero-portrait-divider" aria-hidden="true"></span>
+						<span class="hero-portrait-label hero-portrait-label--left">Systems &amp; structure</span>
+						<span class="hero-portrait-label hero-portrait-label--right">Psychology &amp; interaction</span>
+						<input class="hero-portrait-range" type="range" min="0" max="100" value="50" aria-label="Slide between the halftone and photo portrait">
+					</div>
+					<figcaption>Jenna Zawaski · Frontend developer · Chicago</figcaption>
+				</figure>
+			</div>
+		</section>
+
+		<div class="skills-ticker-clip">
+			<div class="skills-ticker">
+				<p class="visually-hidden">Skills are listed in full under Skills below.</p>
+				<div class="skills-ticker-track" aria-hidden="true">
+					<span data-ticker-line>HTML5 · CSS3 · JavaScript (ES6+) · React · Responsive Design · UX Clarity · Interaction States · Product Flows · Semantic HTML · Focus states · Form labels · Preference-aware UI · Git · GitHub · Vite · Netlify · Supabase · Playwright ·</span>
+				</div>
+			</div>
+		</div>
+
+		<section class="hero-snapshot">
+			<div class="hero-container">
 				<aside class="mobile-trust-snapshot" aria-labelledby="featured-project-title">
 					<p class="opening-eyebrow">Selected project / 01</p>
 					<h2 id="featured-project-title">CodeHerWay</h2>
 					<p class="opening-summary">A coding education platform for women in tech.</p>
-					<figure class="opening-preview">
-						<img src="assets/images/projects/codeherway-dashboard-640.webp" srcset="assets/images/projects/codeherway-dashboard-640.webp 640w, assets/images/projects/codeherway-dashboard-960.webp 960w" sizes="(max-width: 900px) calc(100vw - 80px), 440px" alt="CodeHerWay landing page and account creation interface" width="800" height="450" loading="eager" decoding="async">
-						<figcaption>Platform landing and account creation</figcaption>
-					</figure>
 					<p class="opening-role">Founder &amp; sole frontend engineer</p>
-					<p class="opening-built">I built the learning and quiz UI, saved progress, and Supabase authentication and data integration.</p>
 					<p class="opening-challenge"><strong>The engineering challenge:</strong> keeping progress accurate across retries, replays, and sync failures.</p>
 					<a class="opening-link" href="work/codeherway/">Read the CodeHerWay case study <span aria-hidden="true">↗</span></a>
 				</aside>
@@ -127,6 +154,7 @@
 		</section>
 
 		<section class="work" id="work" aria-labelledby="work-title">
+			<p class="level-chip">Level 01</p>
 			<h2 id="work-title">Selected Work</h2>
 			<p class="work-intro">
 				Explore the learning platform, founder workspace, and weather dashboard I built. Each project connects interface decisions to the frontend engineering behind them.
@@ -135,7 +163,33 @@
 			<div class="work-grid" id="projectsGrid"></div>
 		</section>
 
+		<section class="agent-lens" aria-labelledby="agent-lens-title">
+			<div class="agent-lens-inner">
+				<p class="agent-lens-eyebrow">Agent delivery lens</p>
+				<h2 id="agent-lens-title">The work was getting a safety-critical feature built by coding agents without letting them decide what the product should say.</h2>
+				<div class="agent-lens-grid">
+					<article>
+						<span aria-hidden="true">01</span>
+						<h3>Rules before code</h3>
+						<p>A repository instruction file sets the data-trust contract, the risky files, and a hard stop at the open pull request.</p>
+					</article>
+					<article>
+						<span aria-hidden="true">02</span>
+						<h3>Human decision gates</h3>
+						<p>Wording, severity labels, and visual treatment are mine. Agents report the question and stop.</p>
+					</article>
+					<article>
+						<span aria-hidden="true">03</span>
+						<h3>Evidence over assertion</h3>
+						<p>Each fix is checked against recorded live payloads, then reverted by hand to see which tests actually fail.</p>
+					</article>
+				</div>
+				<a class="agent-lens-link" href="work/aura-weather/">Read the Aura Weather case study <span aria-hidden="true">→</span></a>
+			</div>
+		</section>
+
 		<section class="product-quality" aria-labelledby="product-quality-title">
+			<p class="level-chip">Level 02</p>
 			<h2 id="product-quality-title">Frontend Product Quality</h2>
 			<p class="quality-intro">
 				I focus on clear user flows, responsive layouts, feedback states, accessibility-minded decisions, and lightweight frontend implementation that keeps product behavior easy to understand and maintain.
@@ -166,6 +220,7 @@
 
 		<section class="review-path" aria-labelledby="review-path-title">
 			<div class="review-path-copy">
+				<p class="level-chip">Level 03</p>
 				<h2 id="review-path-title">90-Second Review Path</h2>
 				<p>
 					Hiring managers should not have to hunt. Start with the flagship project, verify the live flow, scan the case study, then check the repo and quality notes.
@@ -186,6 +241,7 @@
 		</section>
 
 		<section class="skills" id="skills" aria-labelledby="skills-title">
+			<p class="level-chip">Level 04</p>
 			<h2 id="skills-title">Skills</h2>
 
 			<div class="skills-grid">
@@ -272,6 +328,7 @@
 		</section>
 
 		<section class="about" id="about" aria-labelledby="about-title">
+			<p class="level-chip">Level 05</p>
 			<h2 id="about-title">About</h2>
 
 			<div class="about-container">

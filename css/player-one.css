@@ -3,8 +3,8 @@
  *
  * Loaded last on the homepage only. It keeps the Editorial tokens (cream paper,
  * Playfair display type, amber and rose accents) and changes layout and weight:
- * a yellow HUD bar, a split hero portrait, level markers, chunky card frames,
- * and a centred contact close. Case-study pages are untouched.
+ * a yellow HUD bar, a split hero portrait, chunky card frames, and a centred
+ * contact close. Case-study pages are untouched.
  */
 
 .home-player-one {
@@ -36,20 +36,6 @@
 
 .home-player-one .nav-inner {
 	gap: 16px;
-}
-
-.home-player-one .player-tag {
-	display: inline-flex;
-	align-items: center;
-	padding: 5px 10px;
-	border-radius: 6px;
-	background: var(--po-ink);
-	color: var(--po-amber);
-	font-family: var(--po-mono);
-	font-size: 0.72rem;
-	font-weight: 700;
-	letter-spacing: 0.08em;
-	text-transform: uppercase;
 }
 
 .home-player-one .nav a,
@@ -327,23 +313,6 @@
 	}
 }
 
-/* ---------- Level markers ---------- */
-
-.home-player-one .level-chip {
-	display: inline-block;
-	margin-bottom: 18px;
-	padding: 6px 12px;
-	border-radius: 6px;
-	background: var(--po-ink);
-	color: var(--po-amber);
-	font-family: var(--po-mono);
-	font-size: 0.78rem;
-	font-weight: 700;
-	letter-spacing: 0.1em;
-	text-transform: uppercase;
-	transform: rotate(-2deg);
-}
-
 .home-player-one .work h2 .em,
 .home-player-one .skills h2 .em,
 .home-player-one .about h2 .em {
@@ -419,18 +388,6 @@
 
 .home-player-one .project-card > *:last-child {
 	margin-bottom: 28px;
-}
-
-.home-player-one .project-tech li,
-.home-player-one .project-proof li {
-	border: 2px solid var(--po-ink);
-	border-radius: 999px;
-	background: var(--po-amber);
-}
-
-.home-player-one .project-role {
-	padding-left: 14px;
-	border-left: 5px solid var(--po-violet);
 }
 
 /* ---------- Agent delivery band ---------- */
@@ -701,14 +658,6 @@
 	border: 0;
 }
 
-/* The HUD tag is a desktop flourish; the mobile bar needs its width for nav. */
-
-@media (max-width: 900px) {
-	.home-player-one .player-tag {
-		display: none;
-	}
-}
-
 @media (max-width: 760px) {
 	.home-player-one .nav-inner {
 		flex-wrap: wrap;
@@ -749,61 +698,6 @@
 	}
 }
 
-/* ---------- Selected project pointer under the hero ---------- */
-
-.home-player-one .hero-snapshot .hero-container {
-	display: block;
-	padding-top: 56px;
-	padding-bottom: 0;
-}
-
-.home-player-one .mobile-trust-snapshot {
-	display: block;
-	max-width: 640px;
-	padding: 24px 28px;
-	border: 3px solid var(--po-ink);
-	border-radius: 18px;
-	background: var(--po-card);
-	box-shadow: 9px 9px 0 var(--po-ink);
-}
-
-/* ---------- Product quality ---------- */
-
-.home-player-one .quality-card {
-	padding: 26px;
-	border: 3px solid var(--po-ink);
-	border-radius: 16px;
-	background: var(--po-card);
-	box-shadow: 7px 7px 0 var(--po-panel);
-}
-
-.home-player-one .quality-number {
-	font-family: var(--po-mono);
-	font-weight: 700;
-	color: var(--po-rose-text);
-}
-
-/* ---------- Review path ---------- */
-
-.home-player-one .review-steps li::marker {
-	color: var(--po-rose-text);
-	font-weight: 700;
-}
-
-.home-player-one .review-path-actions a {
-	display: inline-flex;
-	align-items: center;
-	min-height: 48px;
-	padding: 0 18px;
-	border: 3px solid var(--po-ink);
-	border-radius: 14px;
-	background: var(--po-card);
-	box-shadow: 4px 4px 0 var(--po-ink);
-	color: var(--po-ink);
-	font-weight: 700;
-	text-decoration: none;
-}
-
 /* ---------- About ---------- */
 
 .home-player-one .about-image {
@@ -831,7 +725,6 @@
 
 @media (max-width: 600px) {
 	.home-player-one .about-content,
-	.home-player-one .mobile-trust-snapshot,
 	.home-player-one .quality-card {
 		box-shadow: 6px 6px 0 var(--po-ink);
 	}
@@ -887,62 +780,14 @@
 	pointer-events: none;
 }
 
-/* ---------- Selected project pointer: spacing and rhythm ---------- */
-
-.home-player-one .hero-snapshot {
-	padding-top: 0;
-	padding-bottom: 0;
-}
-
-.home-player-one .hero-snapshot .hero-container {
-	padding-top: 48px;
-	padding-bottom: 0;
-}
-
-.home-player-one .mobile-trust-snapshot {
-	max-width: none;
-}
-
-.home-player-one .mobile-trust-snapshot .opening-eyebrow {
-	margin: 0;
-}
-
-.home-player-one .mobile-trust-snapshot h2 {
-	margin: 6px 0 0;
-}
-
-.home-player-one .mobile-trust-snapshot .opening-summary {
-	margin: 14px 0 0;
-}
-
-.home-player-one .mobile-trust-snapshot .opening-role {
-	margin: 18px 0 0;
-	padding-left: 14px;
-	border-left: 5px solid var(--po-violet);
-}
-
-.home-player-one .mobile-trust-snapshot .opening-challenge {
-	margin: 14px 0 0;
-}
-
-.home-player-one .mobile-trust-snapshot .opening-link {
-	display: inline-flex;
-	gap: 6px;
-	margin-top: 20px;
-}
-
 .home-player-one .work {
 	padding-top: 72px;
 }
 
-/* Headline weight and HUD tag placement, matched to the approved prototype. */
+/* Headline weight, matched to the approved prototype. */
 
 .home-player-one .hero-content h1 {
 	font-size: clamp(2.7rem, 5.6vw, 5.2rem);
-}
-
-.home-player-one .player-tag {
-	margin-right: auto;
 }
 
 /*
@@ -1032,49 +877,251 @@
 	}
 }
 
-/*
- * `.review-path .review-path-copy p` in editorial.css recolours any paragraph
- * inside that block, which greys out the Level 03 chip. Win it back.
- */
+/* ---------- Work card: match the approved prototype ---------- */
 
-.home-player-one .review-path .review-path-copy p.level-chip {
-	color: var(--po-amber);
-	-webkit-text-fill-color: var(--po-amber);
+.home-player-one .project-card h3 {
+	margin-top: 22px;
+	font-family: "Playfair Display", Georgia, serif;
+	font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+	font-weight: 900;
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--po-ink);
 }
 
-/*
- * The snapshot card now sits outside .hero, so editorial's `.hero .opening-*`
- * treatments no longer reach it. Restore the hierarchy on its new container.
- */
-
-.home-player-one .mobile-trust-snapshot .opening-eyebrow {
-	color: var(--po-amber-text);
-	font-family: var(--po-mono);
-	font-size: 0.72rem;
-	font-weight: 700;
-	letter-spacing: 0.12em;
-	text-transform: uppercase;
-}
-
-.home-player-one .mobile-trust-snapshot .opening-summary {
+.home-player-one .project-description {
+	margin-top: 12px;
+	max-width: 62ch;
 	color: var(--po-soft);
 	font-size: 1rem;
 	line-height: 1.65;
 }
 
-.home-player-one .mobile-trust-snapshot .opening-role {
-	color: var(--po-rose-text);
-	font-size: 0.8rem;
-	font-weight: 600;
+.home-player-one .project-role {
+	margin-top: 20px;
+	padding-left: 14px;
+	border-left: 5px solid var(--po-violet);
+	color: var(--po-soft);
+	font-size: 0.95rem;
+	line-height: 1.6;
 }
 
-.home-player-one .mobile-trust-snapshot .opening-built,
-.home-player-one .mobile-trust-snapshot .opening-challenge {
+.home-player-one .project-role-label {
+	display: block;
+	margin-bottom: 2px;
+	color: var(--po-rose-text);
+	font-family: var(--po-mono);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.home-player-one .project-proof-group {
+	margin-top: 20px;
+}
+
+.home-player-one .project-proof,
+.home-player-one .project-tech {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+	padding: 0;
+	list-style: none;
+}
+
+.home-player-one .project-proof li {
+	padding: 4px 12px;
+	border: 2px solid var(--po-ink);
+	border-radius: 999px;
+	background: var(--po-amber);
+	color: var(--po-ink);
+	font-family: inherit;
+	font-size: 0.78rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.home-player-one .project-tech li {
+	padding: 4px 12px;
+	border: 2px solid var(--po-line);
+	border-radius: 999px;
+	background: var(--po-paper);
+	color: var(--po-ink);
+	font-family: var(--po-mono);
+	font-size: 0.76rem;
+	font-weight: 500;
+	line-height: 1.4;
+}
+
+.home-player-one .project-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: center;
+	margin-top: 24px;
+}
+
+.home-player-one .project-links a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 46px;
+	padding: 0 18px;
+	border: 3px solid var(--po-ink);
+	border-radius: 14px;
+	background: var(--po-card);
+	box-shadow: 4px 4px 0 var(--po-ink);
+	color: var(--po-ink);
+	font-weight: 700;
+	font-size: 0.9rem;
+	text-decoration: none;
+}
+
+.home-player-one .project-links a:first-child {
+	background: var(--po-violet);
+	border-color: var(--po-violet);
+	color: #fff;
+}
+
+.home-player-one .project-links a.project-link-github {
+	border-color: transparent;
+	box-shadow: none;
+	background: transparent;
+	padding: 0 8px;
+	text-decoration: underline;
+	text-underline-offset: 4px;
+	color: var(--po-soft);
+}
+
+/* ---------- Frontend Product Quality: same card language as the work grid ---------- */
+
+.home-player-one .quality-grid {
+	gap: 28px;
+}
+
+.home-player-one .quality-card {
+	display: flex;
+	flex-direction: column;
+	padding: 26px;
+	border: 3px solid var(--po-ink);
+	border-radius: 16px;
+	background: var(--po-card);
+	box-shadow: 8px 8px 0 var(--po-ink);
+}
+
+.home-player-one .quality-card:nth-of-type(1) {
+	box-shadow: 8px 8px 0 var(--po-rose);
+}
+
+.home-player-one .quality-card:nth-of-type(2) {
+	box-shadow: 8px 8px 0 var(--po-amber);
+}
+
+.home-player-one .quality-card:nth-of-type(3) {
+	box-shadow: 8px 8px 0 var(--po-panel);
+}
+
+.home-player-one .quality-card:nth-of-type(4) {
+	box-shadow: 8px 8px 0 var(--po-violet);
+}
+
+.home-player-one .quality-number {
+	font-family: var(--po-mono);
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 1;
+	color: var(--po-rose-text);
+}
+
+.home-player-one .quality-card h3 {
+	margin-top: 14px;
+	font-family: "Playfair Display", Georgia, serif;
+	font-size: 1.35rem;
+	font-weight: 900;
+	line-height: 1.15;
+	color: var(--po-ink);
+}
+
+.home-player-one .quality-card p {
+	margin-top: 10px;
 	color: var(--po-soft);
 	font-size: 0.95rem;
 	line-height: 1.65;
 }
 
-.home-player-one .mobile-trust-snapshot .opening-challenge strong {
+/* ---------- 90-Second Review Path: a framed panel, not loose text ---------- */
+
+.home-player-one .review-steps {
+	padding: 28px 32px;
+	border: 3px solid var(--po-ink);
+	border-radius: 18px;
+	background: var(--po-card);
+	box-shadow: 9px 9px 0 var(--po-amber);
+	counter-reset: po-step;
+	list-style: none;
+}
+
+.home-player-one .review-steps li {
+	display: flex;
+	gap: 14px;
+	align-items: baseline;
+	padding: 10px 0;
+	border-bottom: 2px solid var(--po-line);
 	color: var(--po-ink);
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.home-player-one .review-steps li:last-child {
+	border-bottom: 0;
+}
+
+.home-player-one .review-steps li::before {
+	counter-increment: po-step;
+	content: counter(po-step, decimal-leading-zero);
+	flex: 0 0 auto;
+	font-family: var(--po-mono);
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: var(--po-rose-text);
+}
+
+.home-player-one .review-path-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin-top: 24px;
+}
+
+.home-player-one .review-path-actions a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 48px;
+	padding: 0 18px;
+	border: 3px solid var(--po-ink);
+	border-radius: 14px;
+	background: var(--po-card);
+	box-shadow: 4px 4px 0 var(--po-ink);
+	color: var(--po-ink);
+	font-weight: 700;
+	font-size: 0.9rem;
+	text-decoration: none;
+}
+
+.home-player-one .review-path-actions a:first-child {
+	background: var(--po-violet);
+	border-color: var(--po-violet);
+	color: #fff;
+}
+
+@media (max-width: 600px) {
+	.home-player-one .quality-card,
+	.home-player-one .review-steps {
+		box-shadow: 6px 6px 0 var(--po-ink);
+	}
+
+	.home-player-one .review-steps {
+		padding: 20px;
+	}
 }

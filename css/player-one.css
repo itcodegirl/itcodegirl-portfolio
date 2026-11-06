@@ -1,13 +1,10 @@
 /*
  * Player One homepage layer.
  *
- * Loaded on the homepage only. It keeps the Editorial tokens (cream paper,
+ * Loaded last on the homepage only. It keeps the Editorial tokens (cream paper,
  * Playfair display type, amber and rose accents) and changes layout and weight:
  * a yellow HUD bar, a split hero portrait, level markers, chunky card frames,
  * and a centred contact close. Case-study pages are untouched.
- *
- * editorial.css loads after this file, so every rule here is scoped to
- * .home-player-one to outrank it on specificity rather than on order.
  */
 
 .home-player-one {
@@ -78,6 +75,17 @@
 	display: none;
 }
 
+.home-player-one .nav-resume {
+	background: var(--po-violet);
+	border-color: var(--po-violet);
+	color: #fff;
+}
+
+.home-player-one .nav-resume:hover {
+	background: var(--po-ink);
+	border-color: var(--po-ink);
+}
+
 /* ---------- Hero ---------- */
 
 .home-player-one .hero-container {
@@ -140,7 +148,7 @@
 	font-weight: 700;
 }
 
-/* Split portrait: duotone on the left, photo on the right, dragged by a slider. */
+/* Split portrait: halftone on the left, photo on the right, dragged by a slider. */
 
 .home-player-one .hero-portrait {
 	position: relative;
@@ -743,8 +751,15 @@
 
 /* ---------- Selected project pointer under the hero ---------- */
 
+.home-player-one .hero-snapshot .hero-container {
+	display: block;
+	padding-top: 56px;
+	padding-bottom: 0;
+}
+
 .home-player-one .mobile-trust-snapshot {
 	display: block;
+	max-width: 640px;
 	padding: 24px 28px;
 	border: 3px solid var(--po-ink);
 	border-radius: 18px;
@@ -826,7 +841,7 @@
 	}
 }
 
-/* The band is full-bleed, and its heading must stay white on violet (7.9:1). */
+/* The band is full-bleed, and its heading must stay white on violet (8.6:1). */
 
 .home-player-one section.agent-lens {
 	width: 100vw;
@@ -845,7 +860,7 @@
 }
 
 /*
- * The left half of the hero portrait is a CSS duotone of the same photo, so
+ * The left half of the hero portrait is a CSS halftone of the same photo, so
  * the split needs one image rather than a second raster. Swapping in a real
  * halftone file later only means changing the overlay's src.
  */
@@ -880,9 +895,12 @@
 }
 
 .home-player-one .hero-snapshot .hero-container {
-	display: block;
 	padding-top: 48px;
 	padding-bottom: 0;
+}
+
+.home-player-one .mobile-trust-snapshot {
+	max-width: none;
 }
 
 .home-player-one .mobile-trust-snapshot .opening-eyebrow {
@@ -897,17 +915,12 @@
 	margin: 14px 0 0;
 }
 
-.home-player-one .mobile-trust-snapshot .opening-preview {
-	margin: 20px 0 0;
-}
-
 .home-player-one .mobile-trust-snapshot .opening-role {
 	margin: 18px 0 0;
 	padding-left: 14px;
 	border-left: 5px solid var(--po-violet);
 }
 
-.home-player-one .mobile-trust-snapshot .opening-built,
 .home-player-one .mobile-trust-snapshot .opening-challenge {
 	margin: 14px 0 0;
 }
@@ -933,11 +946,10 @@
 }
 
 /*
- * Cascade overrides. editorial.css loads after this file, so these three
- * need more than scoping: `main h2` sets -webkit-text-fill-color, which
- * `color` alone cannot beat; `.nav-resume` sets its colour with !important;
- * and `.nav a` outranks `.nav-resume`, so the resume pill needs the element
- * in the selector for its background to apply.
+ * Cascade overrides. This layer loads after editorial.css, which wins on
+ * equal specificity. Two declarations there need more than load order:
+ * `main h2` sets -webkit-text-fill-color, which `color` alone cannot beat,
+ * and `.nav-resume` sets its colour with !important.
  */
 
 .home-player-one section.agent-lens h2,
@@ -945,19 +957,16 @@
 	-webkit-text-fill-color: #fff;
 }
 
-.home-player-one .nav a.nav-resume {
-	background: var(--po-violet);
-	border-color: var(--po-violet);
+.home-player-one .nav-resume,
+.home-player-one .nav-resume:hover,
+.home-player-one .nav-resume:focus-visible {
 	color: #fff !important;
 	-webkit-text-fill-color: #fff;
 }
 
-.home-player-one .nav a.nav-resume:hover,
-.home-player-one .nav a.nav-resume:focus-visible {
+.home-player-one .nav-resume:hover {
 	background: var(--po-ink);
 	border-color: var(--po-ink);
-	color: #fff !important;
-	-webkit-text-fill-color: #fff;
 }
 
 .home-player-one .contact .contact-link {
@@ -971,12 +980,34 @@
 	-webkit-text-fill-color: #fff;
 }
 
+/* `.nav a` outranks `.nav-resume`, so the resume pill needs the element too. */
+
+.home-player-one .nav a.nav-resume {
+	background: var(--po-violet);
+	border-color: var(--po-violet);
+	color: #fff !important;
+	-webkit-text-fill-color: #fff;
+}
+
+.home-player-one .nav a.nav-resume:hover,
+.home-player-one .nav a.nav-resume:focus-visible {
+	background: var(--po-ink);
+	border-color: var(--po-ink);
+}
+
 /* The inherited heading underline sits off-centre once the card is centred. */
 
 .home-player-one .contact-card h2::after,
 .home-player-one .contact-card h2::before {
 	display: none;
 }
+
+.home-player-one .contact-divider {
+	max-width: 560px;
+	white-space: nowrap;
+}
+
+/* Scoped past `.contact .contact-divider`, which has equal specificity. */
 
 .home-player-one .contact .contact-divider {
 	max-width: 560px;
@@ -986,4 +1017,64 @@
 
 .home-player-one .contact .contact-copy {
 	color: rgba(247, 243, 234, 0.86);
+}
+
+/*
+ * styles.css keeps a fixed header height down to 600px, but this layer lets
+ * the nav wrap from 760px. Let the header size to its contents across that
+ * band so a second row cannot spill past the header background.
+ */
+
+@media (max-width: 760px) {
+	.home-player-one .site-header {
+		height: auto;
+		min-height: var(--header-height);
+	}
+}
+
+/*
+ * `.review-path .review-path-copy p` in editorial.css recolours any paragraph
+ * inside that block, which greys out the Level 03 chip. Win it back.
+ */
+
+.home-player-one .review-path .review-path-copy p.level-chip {
+	color: var(--po-amber);
+	-webkit-text-fill-color: var(--po-amber);
+}
+
+/*
+ * The snapshot card now sits outside .hero, so editorial's `.hero .opening-*`
+ * treatments no longer reach it. Restore the hierarchy on its new container.
+ */
+
+.home-player-one .mobile-trust-snapshot .opening-eyebrow {
+	color: var(--po-amber-text);
+	font-family: var(--po-mono);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-summary {
+	color: var(--po-soft);
+	font-size: 1rem;
+	line-height: 1.65;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-role {
+	color: var(--po-rose-text);
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-built,
+.home-player-one .mobile-trust-snapshot .opening-challenge {
+	color: var(--po-soft);
+	font-size: 0.95rem;
+	line-height: 1.65;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-challenge strong {
+	color: var(--po-ink);
 }

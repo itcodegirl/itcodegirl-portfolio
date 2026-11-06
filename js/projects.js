@@ -1,9 +1,9 @@
 // Selected work data + rendering.
 //
 // Each project is rendered as an article with a header (number + status),
-// optional screenshot OR placeholder, title, tagline, product value,
-// built-feature summary, UX/engineering challenge, proof available,
-// tech list, and links.
+// optional screenshot OR placeholder, title, one summary line, up to three
+// proof points, role, tech list, and links. The longer evidence (product
+// value, what was built, the challenge) lives in each case study.
 //
 // Link order is normalised on render: Live demo -> Case study -> Code.
 //
@@ -212,40 +212,16 @@ function createProjectLinks(links) {
 	return linksContainer;
 }
 
-function createProjectEvidenceList(project) {
-	const evidenceItems = [
-		["Product value", project.productValue],
-		["What I built", project.built],
-		["UX / engineering challenge", project.challenge],
-		["Code access", project.codeAccess],
-	].filter(([, text]) => Boolean(text));
-
-	if (!evidenceItems.length) return null;
-
-	const evidenceList = document.createElement("dl");
-	evidenceList.className = "project-evidence";
-
-	evidenceItems.forEach(([label, text]) => {
-		const group = document.createElement("div");
-		appendTextElement(group, "dt", "project-evidence-label", label);
-		appendTextElement(group, "dd", "", text);
-		evidenceList.appendChild(group);
-	});
-
-	return evidenceList;
-}
-
 function createProjectProofList(proofPoints, projectTitle) {
 	const proofGroup = document.createElement("div");
 	proofGroup.className = "project-proof-group";
-
-	appendTextElement(proofGroup, "p", "project-proof-label", "Proof Available");
 
 	const proofList = document.createElement("ul");
 	proofList.className = "project-proof";
 	proofList.setAttribute("aria-label", `Proof available for ${projectTitle}`);
 
-	proofPoints.forEach((point) => {
+	// Three chips read as proof; a dozen reads as a spec sheet.
+	proofPoints.slice(0, 3).forEach((point) => {
 		appendTextElement(proofList, "li", "", point);
 	});
 
@@ -314,10 +290,6 @@ function createProjectCard(project) {
 		.join(" ");
 	article.setAttribute("aria-labelledby", titleId);
 
-	if (project.meta) {
-		article.dataset.meta = project.meta;
-	}
-
 	const header = document.createElement("div");
 	header.className = "project-header";
 
@@ -348,16 +320,9 @@ function createProjectCard(project) {
 	const title = appendTextElement(article, "h3", "", project.title);
 	title.id = titleId;
 
-	if (project.tagline) {
-		appendTextElement(article, "p", "project-tagline", project.tagline);
-	}
-
-	appendTextElement(article, "p", "project-description", project.description);
-
-	const evidenceList = createProjectEvidenceList(project);
-	if (evidenceList) {
-		article.appendChild(evidenceList);
-	}
+	// One summary line per card. The tagline repeated the description, and the
+	// full evidence belongs in the case study, not stacked on the homepage.
+	appendTextElement(article, "p", "project-description", project.tagline || project.description);
 
 	if (project.proofAvailable) {
 		article.appendChild(createProjectProofList(project.proofAvailable, project.title));
@@ -367,7 +332,8 @@ function createProjectCard(project) {
 		const roleParagraph = document.createElement("p");
 		roleParagraph.className = "project-role";
 		appendTextElement(roleParagraph, "span", "project-role-label", "My role");
-		roleParagraph.append(` - ${project.role}`);
+		// The label is its own line now, so the inline dash is gone.
+		roleParagraph.append(project.role);
 		article.appendChild(roleParagraph);
 	}
 

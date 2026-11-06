@@ -886,3 +886,61 @@
 	mix-blend-mode: color;
 	pointer-events: none;
 }
+
+/* ---------- Selected project pointer: spacing and rhythm ---------- */
+
+.home-player-one .hero-snapshot {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.home-player-one .hero-snapshot .hero-container {
+	padding-top: 48px;
+	padding-bottom: 0;
+}
+
+.home-player-one .mobile-trust-snapshot {
+	max-width: none;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-eyebrow {
+	margin: 0;
+}
+
+.home-player-one .mobile-trust-snapshot h2 {
+	margin: 6px 0 0;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-summary {
+	margin: 14px 0 0;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-role {
+	margin: 18px 0 0;
+	padding-left: 14px;
+	border-left: 5px solid var(--po-violet);
+}
+
+.home-player-one .mobile-trust-snapshot .opening-challenge {
+	margin: 14px 0 0;
+}
+
+.home-player-one .mobile-trust-snapshot .opening-link {
+	display: inline-flex;
+	gap: 6px;
+	margin-top: 20px;
+}
+
+.home-player-one .work {
+	padding-top: 72px;
+}
+
+/* Headline weight and HUD tag placement, matched to the approved prototype. */
+
+.home-player-one .hero-content h1 {
+	font-size: clamp(2.7rem, 5.6vw, 5.2rem);
+}
+
+.home-player-one .player-tag {
+	margin-right: auto;
+}

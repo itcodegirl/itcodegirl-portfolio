@@ -1019,6 +1019,15 @@ section h2::after {
 		display: none;
 	}
 
+	/* Subpages (/work/, /notes/, case studies) carry no data-mobile-nav
+	   attributes, so hide the same two secondary links by href. Without
+	   this, five links overflow the flex-end nav and Work and Skills end
+	   up under the logo, unreachable. */
+	.site-header .nav a[href$="/#skills"],
+	.site-header .nav a[href$="/#about"] {
+		display: none;
+	}
+
 	.nav-resume {
 		padding: 10px 12px;
 	}
@@ -1422,4 +1431,3 @@ button:focus-visible {
 		outline-color: Highlight;
 	}
 }
-

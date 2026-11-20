@@ -8,3 +8,6 @@ Thumbs.db
 
 # Temp / local tools
 convert-to-webp.html
+
+# Local working files that must never be published (GitHub Pages serves every tracked file)
+resume-redesign/

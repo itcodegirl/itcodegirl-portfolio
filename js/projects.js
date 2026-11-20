@@ -17,7 +17,7 @@ const projects = [
 		featured: true,
 		meta: "React / Supabase / Learning platform",
 		role:
-			"Founder and sole frontend engineer — product architecture, learning and quiz UI, the progress/learning-state system, and Supabase auth and data.",
+			"Founder and frontend lead — product architecture, learning and quiz UI, the progress/learning-state system, and Supabase auth and data. Implementation is AI-assisted under my review and direction.",
 		description:
 			"React 19 + TypeScript learning platform with Supabase auth and data, 33 courses, 225 modules, 1,203 lessons on a custom v2 schema, AI companion (Ada), and a deduplicated, retry-safe progress and learning-state system.",
 		productValue:
@@ -64,7 +64,7 @@ const projects = [
 		status: "Portfolio project",
 		cardClass: "ceo-os",
 		role:
-			"Sole designer and engineer — dashboard, the 8-domain repository data layer, and the local-first resilience behavior.",
+			"Designer and frontend lead — dashboard, the 8-domain repository data layer, and the local-first resilience behavior. Implementation is AI-assisted under my review and direction.",
 		description:
 			"React 19 founder dashboard with a repository pattern across 8 domains, versioned-envelope storage with migrations, optimistic concurrency, and an offline write queue.",
 		productValue:
@@ -113,7 +113,7 @@ const projects = [
 		tagline: "A weather dashboard that's really a defensive client-side data-handling showcase.",
 		status: "Portfolio project",
 		role:
-			"Sole frontend engineer — dashboard UI, multi-API orchestration, nullish-rejection data contracts, and the QA suite.",
+			"Frontend lead — dashboard UI, multi-API orchestration, nullish-rejection data contracts, and the QA suite. Coding agents implemented under my rules, review and direction.",
 		description:
 			"React 19 weather dashboard with end-to-end nullish-rejection data contracts, multi-API composition with independent fetch lifecycles, and honest missing-data states.",
 		productValue:

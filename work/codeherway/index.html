@@ -339,7 +339,7 @@
 				<h2>Accessibility Considerations</h2>
 				<div>
 					<ul>
-						<li><strong>Covered by the smoke suite:</strong> Playwright includes an accessibility check alongside landing, auth, visual-snapshot, and first-lesson preview entry coverage.</li>
+						<li><strong>Covered by the smoke suite:</strong> Playwright's public smoke suite includes an accessibility check alongside auth, first-lesson preview entry, and responsive-layout, touch-target, and sticky-navigation coverage.</li>
 					<li><strong>Captured evidence:</strong> this case-study page scans clean with axe — <a href="/assets/evidence/accessibility/codeherway-axe-2026-08-16.md">0 violations, WCAG A/AA + best practice, August 16, 2026</a>.</li>
 						<li>Keyboard navigation and focus handling are treated as product behavior, especially in lessons, dialogs, and panels.</li>
 						<li>Quiz and progress interactions use clearer semantic relationships and user-facing status copy.</li>
@@ -363,7 +363,7 @@
 				<h2>QA Notes</h2>
 				<div>
 					<ul class="qa-list">
-						<li><strong>Public smoke coverage:</strong> a Playwright suite exercises landing, auth, accessibility, visual snapshots, and first-lesson preview entry on the live deployment.</li>
+						<li><strong>Public smoke coverage:</strong> a Playwright suite runs against a local dev server and exercises auth, accessibility, first-lesson preview entry, responsive layout, touch targets, and sticky navigation.</li>
 						<li><strong>Learning-state integrity:</strong> local retry/reconciliation evidence and dedupe behavior are the focus of progress-system testing, with sync-failure states surfaced rather than hidden.</li>
 						<li><strong>Evidence standard:</strong> accessibility and performance content is framed as considerations and next work, not as unmeasured outcome claims; the cross-device backend is described as gated, not done.</li>
 						<li><strong>Still to validate:</strong> authenticated learner flows against a configured staging backend and fresh Lighthouse reporting.</li>

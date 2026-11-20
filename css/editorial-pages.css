@@ -104,6 +104,11 @@ button:focus-visible {
 /* Scoped to the header nav: a bare `nav a` opacity here also dims the
    case-study cross-navigation labels below AA contrast (axe: 3.27 vs 4.5). */
 .site-header .nav a {
+	/* inline-flex + min-height gives each header link a 24px pointer target
+	   (WCAG 2.2 SC 2.5.8) without moving the header; text was 17-19px tall. */
+	display: inline-flex;
+	align-items: center;
+	min-height: 24px;
 	color: var(--ink);
 	opacity: 0.78;
 }

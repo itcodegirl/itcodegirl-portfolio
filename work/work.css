@@ -439,6 +439,10 @@
 	color: rgba(255, 255, 255, 0.92);
 }
 
+.case-section code {
+	overflow-wrap: anywhere;
+}
+
 .case-note {
 	margin-top: 18px;
 	padding: 16px 18px;
@@ -723,7 +727,9 @@
 	}
 
 	.case-section {
-		grid-template-columns: 1fr;
+		/* minmax(0, 1fr), not 1fr: a bare 1fr track has an auto minimum, so an
+		   unbreakable <code> URL widened the track past the viewport at 320px. */
+		grid-template-columns: minmax(0, 1fr);
 		gap: 24px;
 		padding-top: 34px;
 		padding-bottom: 34px;

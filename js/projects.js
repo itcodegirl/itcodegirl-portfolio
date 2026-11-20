@@ -19,7 +19,7 @@ const projects = [
 		role:
 			"Founder and sole frontend engineer — product architecture, learning and quiz UI, the progress/learning-state system, and Supabase auth and data.",
 		description:
-			"React 19 + TypeScript learning platform with Supabase auth and data, 22 courses, 170 modules, 922 lessons on a custom v2 schema, AI companion (Ada), and a deduplicated, retry-safe progress and learning-state system.",
+			"React 19 + TypeScript learning platform with Supabase auth and data, 33 courses, 225 modules, 1,203 lessons on a custom v2 schema, AI companion (Ada), and a deduplicated, retry-safe progress and learning-state system.",
 		productValue:
 			"Helps beginners move from structured lessons to quiz feedback, saved progress, and visible proof of learning.",
 		built:

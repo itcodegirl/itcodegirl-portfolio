@@ -325,6 +325,19 @@
 	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
 }
 
+.case-visual--natural img {
+	aspect-ratio: auto;
+}
+
+.case-visual.case-visual--inline {
+	max-width: none;
+	padding: 0;
+}
+
+.case-visual.case-visual--compact {
+	max-width: 687px;
+}
+
 .case-visual figcaption {
 	margin-top: 12px;
 	color: rgba(255, 255, 255, 0.56);

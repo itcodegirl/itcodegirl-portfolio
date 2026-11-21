@@ -19,7 +19,7 @@ const projects = [
 		role:
 			"Founder and frontend lead — product architecture, learning and quiz UI, the progress/learning-state system, and Supabase auth and data. Implementation is AI-assisted under my review and direction.",
 		description:
-			"React 19 + TypeScript learning platform with Supabase auth and data, 33 courses, 225 modules, 1,203 lessons on a custom v2 schema, AI companion (Ada), and a deduplicated, retry-safe progress and learning-state system.",
+			"React 19 + TypeScript learning platform with Supabase auth and data, a custom lesson schema, Vera lesson tutor (where enabled), and a deduplicated, retry-safe progress and learning-state system.",
 		productValue:
 			"Helps beginners move from structured lessons to quiz feedback, saved progress, and visible proof of learning.",
 		built:
@@ -37,9 +37,11 @@ const projects = [
 		],
 		codeAccess:
 			"Platform code lives in a private repository — a code walkthrough is available on request. Public code for CEO OS and Aura Weather is linked below.",
-		image: "assets/images/projects/codeherway-dashboard.webp",
+		image: "assets/images/projects/codeherway-landing.jpg",
+		imageWidth: 1200,
+		imageHeight: 709,
 		imagePosition: "top center",
-		imageAlt: "CodeHerWay Education Platform landing and account creation interface screenshot",
+		imageAlt: "CodeHerWay homepage with the HTML step selected in the interactive learning path",
 		tech: ["React 19", "TypeScript", "Vite", "Supabase", "PostgreSQL"],
 		links: [
 			{
@@ -130,9 +132,9 @@ const projects = [
 			"Offline last-known restore",
 			"Live demo, source code, case study",
 		],
-		image: "assets/images/projects/aura-weather-interface.webp",
+		image: "assets/images/projects/aura-weather-conditions.jpg",
 		imagePosition: "top center",
-		imageAlt: "Aura Weather app interface screenshot",
+		imageAlt: "Aura Weather current conditions with temperature, a historical comparison, and UV level",
 		tech: ["React", "Vite", "JavaScript", "CSS"],
 		links: [
 			{
@@ -252,8 +254,8 @@ function createScreenshot(project) {
 	if (project.imagePosition) {
 		img.style.setProperty("--project-image-position", project.imagePosition);
 	}
-	img.width = 800;
-	img.height = 450;
+	img.width = project.imageWidth ?? 800;
+	img.height = project.imageHeight ?? 450;
 	return img;
 }
 

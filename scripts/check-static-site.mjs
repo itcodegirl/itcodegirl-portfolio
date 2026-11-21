@@ -208,11 +208,9 @@ function checkImages() {
 	});
 
 	const homeHtml = readFile('index.html');
-	// The homepage uses a text-first ("paper-first editorial") hero with no raster
-	// LCP image, so the previous hero-portrait assertions no longer apply. The about
-	// portrait is the main raster image and should still ship a WebP source, and the
-	// logo above the fold should load eagerly — both keep image weight disciplined.
-	assert(homeHtml.includes('assets/headshot.webp'), 'About portrait should offer a WebP source.');
+	// The Player One hero uses a priority WebP portrait; the About portrait also
+	// offers a WebP source. Keep the above-the-fold assets eager and lightweight.
+	assert(/<img[^>]+src="assets\/headshot\.webp"[^>]+fetchpriority="high"/.test(homeHtml), 'Home hero should prioritize the WebP portrait.');
 	assert(homeHtml.includes('loading="eager"'), 'Above-the-fold logo should load eagerly.');
 }
 

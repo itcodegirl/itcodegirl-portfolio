@@ -15,6 +15,7 @@
 	--po-violet: #5405ef;
 	--po-rose: #e9c2d2;
 	--po-amber: #eddcb9;
+	--po-mint: #bddbd4;
 	--po-panel: #efe8d8;
 	--po-rose-text: #a8395f;
 	--po-amber-text: #86581f;
@@ -84,28 +85,30 @@
 }
 
 .home-player-one .hero-content h1 {
-	line-height: 1.08;
+	font-size: clamp(2.35rem, 4.5vw, 4.8rem);
+	line-height: 1.04;
 	letter-spacing: -0.04em;
 }
 
-.home-player-one .hero-content h1 .em {
-	display: inline-block;
-	padding: 0 0.14em;
-	border: 3px solid var(--po-ink);
-	border-radius: 0.14em;
-	background: var(--po-rose);
-	box-shadow: 0.06em 0.06em 0 var(--po-ink);
-	color: var(--po-ink);
-	font-style: italic;
-	transform: rotate(-2deg);
+.home-player-one .hero-focus {
+	display: block;
+	margin-top: 0.55em;
+	color: var(--po-violet);
+	font-family: var(--po-mono);
+	font-size: clamp(1rem, 2vw, 1.45rem);
+	font-weight: 700;
+	line-height: 1.4;
+	letter-spacing: 0;
+	-webkit-text-fill-color: var(--po-violet);
+	text-wrap: balance;
 }
 
 .home-player-one .hero-intro {
-	margin-top: 44px;
+	margin-top: 22px;
 }
 
 .home-player-one .hero-actions {
-	margin-top: 48px;
+	margin-top: 28px;
 	gap: 16px;
 }
 
@@ -270,47 +273,31 @@
 	text-transform: uppercase;
 }
 
-/* ---------- Skills ticker ---------- */
+/* ---------- Static skills strip ---------- */
 
 .home-player-one .skills-ticker-clip {
 	overflow: hidden;
 }
 
 .home-player-one .skills-ticker {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 6px 20px;
 	margin: 0 -12px;
-	padding: 14px 0;
-	overflow: hidden;
-	border-top: 3px solid var(--po-ink);
-	border-bottom: 3px solid var(--po-ink);
+	padding: 14px 24px;
+	border-block: 3px solid var(--po-ink);
 	background: var(--po-ink);
 	color: var(--po-amber-light);
-	white-space: nowrap;
 	transform: rotate(-1deg);
 }
 
-.home-player-one .skills-ticker-track {
-	display: inline-flex;
-}
-
-.home-player-one .skills-ticker-track span {
-	padding-right: 28px;
+.home-player-one .skills-ticker span {
 	font-family: var(--po-mono);
-	font-size: 0.95rem;
+	font-size: 0.9rem;
 	font-weight: 700;
 	letter-spacing: 0.06em;
 	text-transform: uppercase;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-	.home-player-one .skills-ticker-track {
-		animation: po-marquee 40s linear infinite;
-	}
-}
-
-@keyframes po-marquee {
-	to {
-		transform: translateX(-50%);
-	}
 }
 
 .home-player-one .work h2 .em,
@@ -384,6 +371,19 @@
 	border: 3px solid var(--po-ink);
 	border-radius: 12px;
 	overflow: hidden;
+}
+
+.home-player-one .project-card:not(.project-card-featured) .project-screenshot {
+	aspect-ratio: 16 / 10;
+	object-fit: contain;
+	object-position: center;
+	background: #1a1c28;
+}
+
+.home-player-one .project-card-featured .project-screenshot {
+	height: auto;
+	aspect-ratio: auto;
+	object-fit: contain;
 }
 
 .home-player-one .project-card > *:last-child {
@@ -638,7 +638,7 @@
 		box-shadow: 8px 8px 0 var(--po-violet);
 	}
 
-	.home-player-one .skills-ticker-track span {
+	.home-player-one .skills-ticker span {
 		font-size: 0.82rem;
 	}
 }
@@ -680,7 +680,7 @@
 
 @media (max-width: 760px) {
 	.home-player-one .hero-container {
-		padding-top: 150px;
+		padding-top: 86px;
 	}
 }
 
@@ -782,12 +782,6 @@
 
 .home-player-one .work {
 	padding-top: 72px;
-}
-
-/* Headline weight, matched to the approved prototype. */
-
-.home-player-one .hero-content h1 {
-	font-size: clamp(2.7rem, 5.6vw, 5.2rem);
 }
 
 /*
@@ -1019,11 +1013,11 @@
 }
 
 .home-player-one .quality-card:nth-of-type(3) {
-	box-shadow: 8px 8px 0 var(--po-panel);
+	box-shadow: 8px 8px 0 var(--po-mint);
 }
 
 .home-player-one .quality-card:nth-of-type(4) {
-	box-shadow: 8px 8px 0 var(--po-violet);
+	box-shadow: 8px 8px 0 #d8cce5;
 }
 
 .home-player-one .quality-number {
@@ -1124,4 +1118,28 @@
 	.home-player-one .review-steps {
 		padding: 20px;
 	}
+}
+
+.home-player-one .contact-services {
+	max-inline-size: 62ch;
+	margin: 24px auto;
+	text-align: start;
+}
+
+.home-player-one .contact-services h3 {
+	margin-block-end: 10px;
+}
+
+.home-player-one .contact-services ul {
+	padding-inline-start: 1.25em;
+}
+
+.home-player-one .contact-services li + li {
+	margin-block-start: 10px;
+}
+
+.home-player-one .contact-services a {
+	color: inherit;
+	text-decoration: underline;
+	text-underline-offset: 0.15em;
 }

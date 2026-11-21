@@ -31,6 +31,7 @@ jobs:
         run: |
           node --check js/app.js
           node --check js/projects.js
+          node --check js/player-one.js
 
       - name: Check static performance and accessibility guardrails
         run: node scripts/check-static-site.mjs

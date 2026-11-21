@@ -92,6 +92,20 @@ The primary story is UX-focused frontend product work with clear evidence.
 Project screenshots used by the Selected Work cards are stored in
 `assets/images/projects/`.
 
+## Resume source
+
+The site's PDF resume is generated from `scripts/build-resume.py`; the matching
+editable DOCX is stored in `assets/`. To rebuild both files, install
+`python-docx` and LibreOffice, then run:
+
+```bash
+python scripts/build-resume.py --variant general --outdir assets
+```
+
+The script also has a `rainfocus` variant for a job-specific application draft.
+Build that variant into a private output directory rather than the published
+site assets.
+
 ## Evidence Layer
 
 The portfolio leads with the engineering behind each project, not only claims.

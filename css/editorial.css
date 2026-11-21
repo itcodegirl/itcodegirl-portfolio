@@ -282,7 +282,9 @@ main h3 {
    PRODUCT QUALITY (hairline cards, not boxes)
    --------------------------------------------------------------- */
 .product-quality .quality-intro {
-	color: var(--muted-ink);
+	/* This section is painted on the panel band, where --muted-ink is
+	   4.41:1 (below AA). --soft-ink matches the cards below it. */
+	color: var(--soft-ink);
 }
 
 .product-quality .quality-card {

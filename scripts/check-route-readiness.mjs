@@ -15,6 +15,9 @@ const pages = [
 	{ file: 'work/ceo-os/index.html', canonical: 'https://itcodegirl.com/work/ceo-os/', type: 'case-study' },
 	{ file: 'work/codeherway/index.html', canonical: 'https://itcodegirl.com/work/codeherway/', type: 'case-study' },
 	{ file: 'work/codeherway-learner-trust/index.html', canonical: 'https://itcodegirl.com/work/codeherway-learner-trust/', type: 'case-study' },
+	{ file: 'work/codeherway-html-quiz/index.html', canonical: 'https://itcodegirl.com/work/codeherway-html-quiz/', type: 'case-study' },
+	{ file: 'work/codeherway-analytics-pilot/index.html', canonical: 'https://itcodegirl.com/work/codeherway-analytics-pilot/', type: 'case-study' },
+	{ file: 'work/codeherway-ai-interface-lab-release/index.html', canonical: 'https://itcodegirl.com/work/codeherway-ai-interface-lab-release/', type: 'case-study' },
 	{ file: 'work/study-journal/index.html', canonical: 'https://itcodegirl.com/work/study-journal/', type: 'case-study' },
 	{ file: 'work/cinova/index.html', canonical: 'https://itcodegirl.com/work/cinova/', type: 'case-study' },
 ];

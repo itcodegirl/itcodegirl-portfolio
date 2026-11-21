@@ -24,7 +24,10 @@ For a fast read of the work behind this portfolio:
 1. Open the homepage and follow the **90-Second Review Path** section.
 2. Start with the flagship case study: [`/work/codeherway/`](work/codeherway/) —
    a React + Supabase learning platform with a deduplicated, retry-safe progress
-   and learning-state system.
+   and learning-state system. Its Related Case Studies section links three
+   focused stories: the [first HTML quiz](work/codeherway-html-quiz/),
+   [analytics pilot](work/codeherway-analytics-pilot/), and
+   [AI Interface Lab release check](work/codeherway-ai-interface-lab-release/).
 3. Review the additional source-linked studies: [`/work/study-journal/`](work/study-journal/)
    (notebook workflow and autosave) and [`/work/cinova/`](work/cinova/)
    (API failure and recovery states). These pages distinguish local checks from

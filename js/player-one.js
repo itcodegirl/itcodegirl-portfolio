@@ -1,8 +1,4 @@
-/*
- * Player One homepage behaviour: the hero portrait split and the skills ticker.
- * Both are progressive — the page is complete and readable without them.
- */
-
+/* Player One portrait split: progressive enhancement. */
 function setupHeroPortraitSplit() {
 	const range = document.querySelector(".hero-portrait-range");
 	const overlay = document.querySelector(".hero-portrait-overlay");
@@ -20,16 +16,4 @@ function setupHeroPortraitSplit() {
 	applySplit();
 }
 
-function setupSkillsTicker() {
-	const track = document.querySelector(".skills-ticker-track");
-	const line = track && track.querySelector("[data-ticker-line]");
-
-	if (!track || !line) return;
-
-	const clone = line.cloneNode(true);
-	clone.removeAttribute("data-ticker-line");
-	track.appendChild(clone);
-}
-
 setupHeroPortraitSplit();
-setupSkillsTicker();

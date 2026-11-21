@@ -1,7 +1,7 @@
 # itcodegirl-portfolio
 
-Personal portfolio for Jenna Zawaski, a UX-focused frontend developer building
-accessible, product-ready interfaces with real app behavior.
+Personal portfolio for Jenna Zawaski, a frontend developer focused on accessible
+interfaces and AI-assisted product implementation with hands-on verification.
 
 Live site: https://itcodegirl.com
 
@@ -24,7 +24,10 @@ For a fast read of the work behind this portfolio:
 1. Open the homepage and follow the **90-Second Review Path** section.
 2. Start with the flagship case study: [`/work/codeherway/`](work/codeherway/) —
    a React + Supabase learning platform with a deduplicated, retry-safe progress
-   and learning-state system.
+   and learning-state system. Its Related Case Studies section links three
+   focused stories: the [first HTML quiz](work/codeherway-html-quiz/),
+   [analytics pilot](work/codeherway-analytics-pilot/), and
+   [AI Interface Lab release check](work/codeherway-ai-interface-lab-release/).
 3. Review the additional source-linked studies: [`/work/study-journal/`](work/study-journal/)
    (notebook workflow and autosave) and [`/work/cinova/`](work/cinova/)
    (API failure and recovery states). These pages distinguish local checks from
@@ -260,3 +263,14 @@ invented numbers.
 
 See [the verification record](assets/evidence/portfolio-repair-2026-11-04.md) for
 the repaired résumé destinations, source revisions, and missing original captures.
+
+## Local browser smoke
+
+From the repository root, set `CHROME_BIN` to the executable for a locally
+installed Chrome or Chromium, then run `node scripts/check-browser-smoke.mjs`
+with Node 22 or newer. The script starts a loopback-only server and a disposable
+browser profile; it does not contact the live portfolio. It checks 320px, 390px, and
+1440px layouts, reduced-motion and static-strip behavior, skip-link focus,
+keyboard operation of the portrait slider, project cards, and the contact link
+to the founder-workflow section. This does not replace Safari, screen-reader,
+Lighthouse, or signed-in CodeHerWay checks.

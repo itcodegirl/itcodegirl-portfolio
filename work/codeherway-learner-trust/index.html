@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-	<meta name="description" content="CodeHerWay learner-trust case study by Jenna Zawaski: three fixes that made the platform keep its promises. Successful saves stay saved, placeholder quizzes stop recording scores, and the code editor stops loading on the first visit.">
+	<meta name="description" content="CodeHerWay learner-trust case study by Jenna Zawaski: three fixes that made the platform keep its promises. Successful saves stay saved, template-generated placeholder quizzes were withheld instead of scored, and the code editor stops loading on the first visit.">
 	<meta name="author" content="Jenna Zawaski">
 	<meta name="robots" content="index, follow">
 	<link rel="canonical" href="https://itcodegirl.com/work/codeherway-learner-trust/">
@@ -15,14 +15,14 @@
 	<meta property="og:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
 	<meta property="og:description" content="Three changes that made CodeHerWay keep its promises about saved progress, meaningful checkpoints, and a lighter first visit.">
 	<meta property="og:url" content="https://itcodegirl.com/work/codeherway-learner-trust/">
-	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
+	<meta property="og:image" content="https://itcodegirl.com/assets/images/projects/codeherway-landing.jpg">
 	<meta property="og:image:width" content="1200">
-	<meta property="og:image:height" content="750">
-	<meta property="og:image:alt" content="CodeHerWay landing page and account-creation form">
+	<meta property="og:image:height" content="709">
+	<meta property="og:image:alt" content="CodeHerWay homepage with the HTML step selected in the interactive learning path">
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski">
 	<meta name="twitter:description" content="Save reliability, honest assessment, and a lighter first visit for CodeHerWay.">
-	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp">
+	<meta name="twitter:image" content="https://itcodegirl.com/assets/images/projects/codeherway-landing.jpg">
 
 	<title>CodeHerWay: Building a Platform Learners Can Trust | Jenna Zawaski</title>
 
@@ -64,7 +64,7 @@
 					"name": "CodeHerWay: Building a Platform Learners Can Trust",
 					"url": "https://itcodegirl.com/work/codeherway-learner-trust/",
 					"description": "Case study of three changes that made a coding education platform keep its promises about saved progress, assessment, and first-visit payload.",
-					"image": "https://itcodegirl.com/assets/images/projects/codeherway-dashboard.webp",
+					"image": "https://itcodegirl.com/assets/images/projects/codeherway-landing.jpg",
 					"dateModified": "2026-09-21",
 					"creator": {
 						"@type": "Person",
@@ -109,7 +109,7 @@
 				</p>
 				<ul class="case-proof-strip" aria-label="Learner-trust proof points">
 					<li>A successful save can no longer be undone by an older queued write</li>
-					<li>139 placeholder checkpoints withheld instead of scored</li>
+					<li>September 17, 2026: 139 template-generated placeholder quizzes withheld</li>
 					<li>Entry dependency graph cut from 1,019 kB to 109 kB gzip</li>
 				</ul>
 				<div class="case-links" role="group" aria-label="Project links">
@@ -128,7 +128,7 @@
 				</div>
 				<div>
 					<dt>My role</dt>
-					<dd>Designer and builder. I owned delivery of all three changes and made the decision to withhold the generated quizzes. Implementation was AI-assisted where noted below.</dd>
+					<dd>Founder and product lead. I owned the requirements, review, and acceptance for these changes, including the September 2026 decision to withhold template-generated placeholder quizzes. AI assisted implementation.</dd>
 				</div>
 				<div>
 					<dt>Status</dt>
@@ -145,9 +145,9 @@
 			</dl>
 		</section>
 
-		<figure class="case-visual">
-            <img src="/assets/images/projects/codeherway-dashboard.webp" srcset="/assets/images/projects/codeherway-dashboard-640.webp 640w, /assets/images/projects/codeherway-dashboard-960.webp 960w, /assets/images/projects/codeherway-dashboard.webp 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay landing page and account-creation form" width="1200" height="750" loading="eager" decoding="async" fetchpriority="high">
-            <figcaption>Existing CodeHerWay landing and account-creation capture. Product context only: this is not a before-and-after demonstration of the three fixes. Signed-in flow captures are still needed.</figcaption>
+		<figure class="case-visual case-visual--natural">
+            <img src="/assets/images/projects/codeherway-landing.jpg" srcset="/assets/images/projects/codeherway-landing-640.jpg 640w, /assets/images/projects/codeherway-landing-960.jpg 960w, /assets/images/projects/codeherway-landing.jpg 1200w" sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1024px) calc(100vw - 80px), 1080px" alt="CodeHerWay homepage with the HTML step selected in the interactive learning path" width="1200" height="709" loading="eager" decoding="async" fetchpriority="high">
+            <figcaption>The CodeHerWay homepage gives context for the project. This image does not show the three fixes or the signed-in learner flow.</figcaption>
         </figure>
 
 		<section class="case-lens case-lens--learning" aria-labelledby="trust-lens-title">
@@ -188,7 +188,7 @@
 						<h3>What shipped</h3>
 						<ul>
 							<li>A confirmed successful save retires older conflicting queued writes for the same record</li>
-							<li>Generated placeholder checkpoints are withheld and excluded from quiz-coverage reporting</li>
+							<li>The September 2026 release excluded template-generated placeholder quizzes from active coverage</li>
 							<li>Vite's shared preload helper moved to its own chunk, removing Monaco from the entry graph</li>
 						</ul>
 					</article>
@@ -240,13 +240,13 @@
 			</div>
 
 			<div class="case-section">
-				<h2>2. Protect Mastery Evidence From Generated Quizzes</h2>
+				<h2>2. Assessment quality decision: September 17, 2026</h2>
 				<div>
 					<p><strong>"I'd rather show no checkpoint than record a false one."</strong></p>
-					<p>I withheld the generated checkpoints because a quiz that can be passed by recognizing an answer pattern still produces a score. The submission path treated that score as ordinary quiz evidence, and the platform used quiz scores as a signal of mastery.</p>
-					<p>The affected banks covered Next.js, React + TypeScript, and TypeScript Foundations. Their templates lacked the lesson-specific context needed to write plausible wrong answers. I did not think rewriting those templates would fix what the quizzes measured, even if it made the coverage report look better. Changing the label was also not enough: calling a quiz "generated" changes what the learner is told, but the score and review-card write path did not distinguish those banks from authored ones.</p>
-					<p>So the checkpoint is withheld until authored questions exist. That accepts visible gaps in the assessment experience and a smaller reported inventory, in exchange for keeping those checkpoints out of the normal score and review-card paths.</p>
-					<p>The decision is enforced where the quiz would render. The layout checks the bank's own "generated" marker and omits the whole checkpoint, heading included. Because the quiz never mounts, its submission handler cannot run. The gate reads the marker rather than a course list, so a checkpoint returns lesson by lesson as an authored bank replaces a generated one.</p>
+					<p>I withheld the template-generated placeholder quizzes because a quiz that can be passed by recognizing an answer pattern still produces a score. The submission path treated that score as ordinary quiz evidence, and the platform used quiz scores as a signal of mastery.</p>
+					<p>The affected banks covered Next.js, Modern React + TypeScript, and TypeScript Foundations. Their templates lacked the lesson-specific context needed to write plausible wrong answers. I did not think rewriting those templates would fix what the quizzes measured, even if it made the coverage report look better. Changing the label was also not enough: calling a quiz "generated" changes what the learner is told, but the score and review-card write path did not distinguish those banks from authored ones.</p>
+					<p>At the time, I accepted fewer visible checkpoints and a smaller reported inventory rather than let placeholders enter the normal score and review-card paths.</p>
+					<p>The September change applied to individual quiz banks rather than disabling whole courses. Reviewed, authored replacements can qualify lesson by lesson when they replace a template-generated placeholder.</p>
 					<ul class="decision-receipts">
 						<li>
 							<span>Before</span>
@@ -254,16 +254,16 @@
 						</li>
 						<li>
 							<span>After</span>
-							<p>177 lessons across 5 courses. 139 generated checkpoints and their 417 template questions are reported separately as withheld placeholders.</p>
+							<p>The September 17, 2026 audit reported 177 lessons across five courses with active quiz coverage. It counted 139 withheld template-generated placeholder quizzes, containing 417 template questions, separately.</p>
 						</li>
 						<li>
 							<span>Not claimed</span>
-							<p>These counts describe the assessment inventory, not learner achievement. No quiz questions or saved learner records were deleted. The 417 questions are unchanged.</p>
+							<p>These figures describe the assessment inventory on that date. They do not describe current quiz coverage or learner achievement.</p>
 						</li>
 					</ul>
-					<p>A database check recorded the same day found no score or review-card rows matching any generated quiz. The outcome was preventive: a path that could record misleading evidence was blocked before anyone used it. The audit finding was closed on that basis, with the closure note stating plainly that the three courses still do not have authored quizzes. Writing those questions is tracked separately as curriculum work (pull requests 1218 and 1222, September 17, 2026).</p>
+					<p>A database check recorded the same day found no score or review-card rows matching any generated quiz. The outcome was preventive: a path that could record misleading evidence was blocked before anyone used it. That finding was closed on September 17, 2026. The current curriculum source contains authored replacement questions in all three courses; this case study does not verify current deployed coverage.</p>
 
-					<p class="case-note"><strong>Remaining limitation:</strong> the quiz submission hook still writes scores and queues review cards without checking the generated marker. The rendering gate is the current protection. A future surface that mounts a generated bank and submits through that hook could reintroduce the problem, so a check in the write path itself is an open engineering follow-up.</p>
+					<p class="case-note"><strong>Limit of the September verification:</strong> the evidence covered the learner-facing checkpoint, not every possible submission path.</p>
 				</div>
 			</div>
 
@@ -296,10 +296,10 @@
 			<div class="case-section">
 				<h2>My Role</h2>
 				<div>
-					<p>I am CodeHerWay's designer and builder, and the pull requests described here were opened and merged under my account.</p>
+					<p>I led these changes by defining what learners should see, translating requirements into implementation briefs, and evaluating test and browser evidence before deciding what was ready. AI assisted implementation; I owned the product decisions and acceptance criteria.</p>
 					<ul>
 						<li><strong>Save reliability.</strong> I owned delivery of the save-queue fixes across direct writes and lesson-page actions. The work preserved the existing retry system while preventing older queued operations from undoing newer successful saves.</li>
-						<li><strong>Assessment.</strong> Withholding the generated quizzes was my decision, for the reasons given in that chapter.</li>
+						<li><strong>Assessment.</strong> Withholding the template-generated placeholder quizzes was my decision, for the reasons given in that chapter.</li>
 						<li><strong>Editor loading.</strong> I owned delivery of the Monaco loading fix, with AI-assisted implementation. The work traced an unexpected dependency from the app entry to the editor and isolated Vite's shared preload helper.</li>
 					</ul>
 				</div>
@@ -310,7 +310,7 @@
 				<div>
 					<ul>
 						<li>Newer successful lesson and bookmark saves supersede older conflicting queued writes.</li>
-						<li>Generated placeholder checkpoints are withheld, which prevents submissions through those surfaces, and are excluded from quiz-coverage reporting.</li>
+						<li>In the September 2026 release, template-generated placeholder quizzes stopped appearing as active checkpoints or counting as active coverage.</li>
 						<li>The measured initial JavaScript dependency graph is substantially smaller, with Monaco removed from it.</li>
 					</ul>
 					<p>These results support a case for stronger implementation and more accurate product promises. They do not demonstrate higher completion rates, better retention, or improved learning outcomes.</p>
@@ -347,8 +347,8 @@
 				<h2>What I Would Improve Next</h2>
 				<div>
 					<ul>
-						<li>Replace the withheld placeholder questions with authored assessments.</li>
-						<li>Protect quiz writes in the submission path, independent of which surface renders the bank.</li>
+						<li>Verify current assessment coverage on the deployed platform lesson by lesson.</li>
+						<li>Verify that assessment quality rules also hold at submission, not just in the interface.</li>
 						<li>Strengthen the bundle budget check so it walks static imports from the entry.</li>
 						<li>Run the offline and reconnect save flow by hand, then observe real learners using it.</li>
 						<li>Capture browser performance under consistent device and network conditions.</li>
